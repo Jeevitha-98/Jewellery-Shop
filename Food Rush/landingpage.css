@@ -799,6 +799,7 @@
   justify-content:center;
   gap:30px;
   flex-wrap:wrap;
+  overflow: visible;
 }
 
 /* CARD */
@@ -830,12 +831,11 @@
 /* IMAGE */
 
 .food-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-
-  border-radius:18px;
-  margin-bottom:15px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
 }
 
 /* TEXT */
@@ -1185,6 +1185,16 @@
     font-size: 16px;
   }
 
+  .food-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .food-card img {
+    height: 180px;
+    width: 100%;
+  }
+}
   /* FLOATING IMAGES - HIDE ON MOBILE */
   .floating-food {
     display: none;
