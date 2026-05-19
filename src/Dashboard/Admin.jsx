@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function AdminDashboard() {
   const navigate = useNavigate();
 
-  // ================= AUTH PROTECTION =================
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -16,7 +16,7 @@ export default function AdminDashboard() {
     }
   }, []);
 
-  // ================= LOGOUT =================
+  
   const logout = () => {
     localStorage.clear();
     navigate("/login");
@@ -25,7 +25,7 @@ export default function AdminDashboard() {
   return (
     <div style={{ display: "flex", height: "100vh" }}>
 
-      {/* ================= SIDEBAR ================= */}
+      
       <div
         style={{
           width: "220px",
@@ -60,10 +60,10 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      {/* ================= MAIN CONTENT ================= */}
+      
       <div style={{ flex: 1, background: "#f3f4f6" }}>
 
-        {/* NAVBAR */}
+       
         <div
           style={{
             height: "60px",
@@ -80,7 +80,7 @@ export default function AdminDashboard() {
           <span>Role: Admin</span>
         </div>
 
-        {/* PAGE CONTENT */}
+       
         <div style={{ padding: "20px" }}>
           <h2>Welcome Admin 👋</h2>
           <p>Manage suppliers, vendors, and system settings here.</p>
