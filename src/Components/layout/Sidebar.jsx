@@ -5,7 +5,7 @@ export default function Sidebar({ isOpen }) {
   const navigate = useNavigate();
 
   const menu = [
-    { name: "Dashboard", path: "/supplier/dashboard" },
+    { name: "Dashboard", path: "/supplier/dashboard", endProp: true },
     { name: "Stock List", path: "/supplier/dashboard/stock-list" },
     { name: "Add Product", path: "/supplier/dashboard/add-product" },
     { name: "Vendor Request", path: "/supplier/dashboard/vendor-request" },
@@ -37,6 +37,8 @@ export default function Sidebar({ isOpen }) {
     letterSpacing: "0.05em",
     margin: "0 0 32px 8px",
     whiteSpace: "nowrap",
+    opacity: isOpen ? 1 : 0,
+    transition: "opacity 0.2s ease",
   };
 
   const navContainerStyle = {
@@ -76,59 +78,58 @@ export default function Sidebar({ isOpen }) {
   };
 
   return (
-    <div style={sidebarStyle}>
-      <h2 style={logoStyle}>Supplier Portal</h2>
+    <>
+      {/* Dynamic Hover Styles injected via a scoped style tag to protect active classes */}
+      <style>{`
+        .sidebar-link {
+          color: #94a3b8;
+          background-color: transparent;
+        }
+        .sidebar-link:hover:not(.active) {
+          color: #f1f5f9 !important;
+          background-color: #1e293b !important;
+        }
+        .sidebar-link.active {
+          color: #ffffff !important;
+          background-color: #1d4ed8 !important;
+          box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3) !important;
+        }
+        .logout-btn:hover {
+          background-color: rgba(239, 68, 68, 0.1) !important;
+          border-color: rgba(239, 68, 68, 0.2) !important;
+        }
+      `}</style>
 
-      <nav style={navContainerStyle}>
-        {menu.map((item, index) => (
-          <NavLink
-            key={index}
-            to={item.path}
-            style={({ isActive }) => ({
-              ...baseLinkStyle,
-              color: isActive ? "#ffffff" : "#94a3b8",
-              backgroundColor: isActive ? "#1d4ed8" : "transparent",
-              boxShadow: isActive ? "0 4px 12px rgba(29, 78, 216, 0.3)" : "none",
-            })}
-            onMouseOver={(e) => {
-              if (!e.currentTarget.classList.contains("active")) {
-                e.currentTarget.style.color = "#f1f5f9";
-                e.currentTarget.style.backgroundColor = "#1e293b";
-              }
-            }}
-            onMouseOut={(e) => {
-              if (!e.currentTarget.classList.contains("active")) {
-                e.currentTarget.style.color = "#94a3b8";
-                e.currentTarget.style.backgroundColor = "transparent";
-              }
+      <div style={sidebarStyle}>
+        <h2 style={logoStyle}>Supplier Portal</h2>
+
+        <nav style={navContainerStyle}>
+          {menu.map((item, index) => (
+            <NavLink
+              key={index}
+              to={item.path}
+              end={item.endProp}
+              className="sidebar-link"
+              style={baseLinkStyle}
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div style={{ marginTop: "auto", paddingTop: "16px", borderTop: "1px solid #1e293b", opacity: isOpen ? 1 : 0, transition: "opacity 0.2s ease" }}>
+          <button
+            className="logout-btn"
+            style={logoutButtonStyle}
+            onClick={() => {
+              localStorage.clear();
+              navigate("/login");
             }}
           >
-            {item.name}
-          </NavLink>
-        ))}
-      </nav>
-
-      <div style={{ marginTop: "auto", pt: "16px", borderTop: "1px solid #1e293b" }}>
-        <button
-          style={logoutButtonStyle}
-          onClick={() => {
-            localStorage.clear();
-            navigate("/login");
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
-            e.currentTarget.style.borderColor = "rgba(239, 68, 68, 0.2)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.borderColor = "transparent";
-          }}
-        >
-          Logout System
-        </button>
+            Logout System
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
-
-

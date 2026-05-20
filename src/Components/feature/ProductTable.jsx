@@ -26,8 +26,8 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
   const inlineBtnBase = {
     height: "36px",
     padding: "0 16px",
-    borderRadius: "8px",             // UPGRADED: Enhanced smooth corners
-    border: "1px solid transparent",  // UPGRADED: Structural boundary rule
+    borderRadius: "8px",             
+    border: "1px solid transparent",  
     fontSize: "13px",
     fontWeight: "600",
     display: "inline-flex",
@@ -36,7 +36,7 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
     cursor: "pointer",
     transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
     whiteSpace: "nowrap",
-    boxSizing: "border-box",          // UPGRADED: Prevent scale calculation overflow
+    boxSizing: "border-box",          
     boxShadow: "0 1px 2px rgba(0, 0, 0, 0.02)",
   };
 
@@ -72,18 +72,34 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <td style={{ ...cellStyle, fontWeight: "500", color: "#0f172a" }}>{p.name}</td>
+                <td style={{ ...cellStyle }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", boxSizing: "border-box" }}>
+                    <img 
+                      src={p.image || "https://unsplash.com"} 
+                      alt={p.name} 
+                      style={{ 
+                        width: "40px", 
+                        height: "40px", 
+                        borderRadius: "8px", 
+                        objectFit: "cover", 
+                        border: "1px solid #e2e8f0",
+                        backgroundColor: "#f8fafc"
+                      }} 
+                    />
+                    <span style={{ fontWeight: "500", color: "#0f172a" }}>{p.name}</span>
+                  </div>
+                </td>
+                
                 <td style={cellStyle}>{p.category}</td>
                 <td style={{ ...cellStyle, fontFamily: "monospace", color: "#475569" }}>{p.stock}</td>
                 <td style={{ ...cellStyle, fontWeight: "500" }}>₹{p.price}</td>
                 
-                {/* UPGRADED STATUS SECTION */}
                 <td style={cellStyle}>
                   <span
                     style={{
                       padding: "6px 14px",
-                      borderRadius: "8px",    // UPGRADED: Squared tag consistency
-                      border: "1px solid",    // UPGRADED: Added high contrast boundary lines
+                      borderRadius: "8px",    
+                      border: "1px solid",    
                       fontSize: "12px",
                       fontWeight: "600",
                       display: "inline-block",
@@ -97,11 +113,9 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
                   </span>
                 </td>
 
-                {/* UPGRADED ACTION PANEL */}
                 <td style={cellStyle}>
                   <div style={{ display: "flex", gap: "8px", alignItems: "center", boxSizing: "border-box" }}>
                     
-                    {/* View Button */}
                     <button 
                       onClick={() => onView(p)} 
                       style={{ 
@@ -122,7 +136,6 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
                       View
                     </button>
 
-                    {/* Edit Button */}
                     <button 
                       onClick={() => onEdit(p)} 
                       style={{ 
@@ -136,7 +149,6 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
                       Edit
                     </button>
 
-                    {/* Delete Button */}
                     <button 
                       onClick={() => onDelete(p.id)} 
                       style={{ 
@@ -175,4 +187,3 @@ export default function ProductTable({ products, onEdit, onDelete, onView }) {
     </div>
   );
 }
-

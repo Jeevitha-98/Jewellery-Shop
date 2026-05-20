@@ -43,7 +43,7 @@ export default function SupplierLayout() {
           width: "100%"
         }}
       >
-        <Navbar />
+        <Navbar toggleSidebar={() => setIsOpen(!isOpen)} isOpen={isOpen} />
 
         <div style={{ flex: 1, display: "flex", flexDirection: "column", width: "100%" }}>
           <Outlet />

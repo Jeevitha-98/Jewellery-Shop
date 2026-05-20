@@ -3,7 +3,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import Modal from "../../components/ui/Modal";
 import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
-import productsData from "../../data/dummyproducts";
+import { useInventory } from "../../Context/Inventorycontext";
 
 function ProductTable({ products, onEdit, onDelete, onView }) {
   const cellStyle = {
@@ -77,7 +77,24 @@ function ProductTable({ products, onEdit, onDelete, onView }) {
                 onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
                 onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
               >
-                <td style={{ ...cellStyle, fontWeight: "500", color: "#0f172a" }}>{p.name}</td>
+                <td style={cellStyle}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", boxSizing: "border-box" }}>
+                    <img 
+                      src={p.image || "https://unsplash.com"} 
+                      alt={p.name} 
+                      style={{ 
+                        width: "40px", 
+                        height: "40px", 
+                        borderRadius: "8px", 
+                        objectFit: "cover", 
+                        border: "1px solid #e2e8f0",
+                        backgroundColor: "#f8fafc"
+                      }} 
+                    />
+                    <span style={{ fontWeight: "500", color: "#0f172a" }}>{p.name}</span>
+                  </div>
+                </td>
+                
                 <td style={cellStyle}>{p.category}</td>
                 <td style={{ ...cellStyle, fontFamily: "monospace", color: "#475569" }}>{p.stock}</td>
                 <td style={{ ...cellStyle, fontWeight: "500" }}>₹{p.price}</td>
@@ -141,7 +158,8 @@ function ProductTable({ products, onEdit, onDelete, onView }) {
 }
 
 export default function StockList() {
-  const [products, setProducts] = useState([]);
+  const { products, setProducts } = useInventory();
+  
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
@@ -150,10 +168,6 @@ export default function StockList() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
-  useEffect(() => {
-    setProducts(productsData || []);
-  }, []);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -172,7 +186,22 @@ export default function StockList() {
     if (!selectedProduct?.id) return;
 
     setProducts((prev) =>
-      prev.map((p) => (p.id === selectedProduct.id ? selectedProduct : p))
+      prev.map((p) => {
+        if (p.id === selectedProduct.id) {
+          const updatedStock = Number(selectedProduct.stock);
+          let updatedStatus = "In Stock";
+          if (updatedStock === 0) updatedStatus = "Out of Stock";
+          else if (updatedStock <= 5) updatedStatus = "Low Stock";
+
+          return {
+            ...selectedProduct,
+            stock: updatedStock,
+            price: Number(selectedProduct.price),
+            status: updatedStatus
+          };
+        }
+        return p;
+      })
     );
 
     setIsOpen(false);
@@ -183,7 +212,9 @@ export default function StockList() {
     alert(`Product: ${product.name}\nCategory: ${product.category}\nStock: ${product.stock}\nPrice: ₹${product.price}`);
   };
 
-  const filteredProducts = products
+  const continuousCategories = Array.from(new Set((products || []).map((p) => p.category).filter(Boolean)));
+
+  const filteredProducts = (products || [])
     .filter((p) => (p?.name || "").toLowerCase().includes(search.toLowerCase()))
     .filter((p) => (category ? p?.category === category : true));
 
@@ -201,11 +232,12 @@ export default function StockList() {
         <p style={{ margin: "0 0 24px 0", fontSize: "14px", color: "#64748b" }}>Manage your products, stock levels, and inventory</p>
       </div>
 
+      {/* FILTER PANEL ROW CONTAINER */}
       <div 
         style={{
           display: "flex",
-          gap: "16px",
-          alignItems: "flex-end",
+          gap: "24px",
+          alignItems: "flex-end", 
           flexWrap: "wrap",
           width: "100%",
           boxSizing: "border-box",
@@ -213,26 +245,45 @@ export default function StockList() {
           padding: "24px",
           borderRadius: "12px",
           border: "1px solid #e2e8f0",
+          marginBottom: "24px"
         }}
       >
-        <div style={{ flex: 1, minWidth: "260px" }}>
-          <Input
-            label="Search Product"
+        {/* LEFT COLUMN: STANDARDIZED NATIVE INPUT BOX TO ENSURE BASELINE ALIGNMENT */}
+        <div style={{ flex: 1, minWidth: "260px", display: "flex", flexDirection: "column", gap: "6px" }}>
+          <label style={{ fontSize: "14px", fontWeight: "500", color: "#334155" }}>
+            Search Product
+          </label>
+          <input
+            type="text"
             placeholder="Search by name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={{ marginBottom: 0 }}
+            style={{
+              height: "40px",
+              width: "100%",
+              padding: "0 12px",
+              borderRadius: "8px",
+              border: "1px solid #cbd5e1",
+              outline: "none",
+              fontSize: "14px",
+              color: "#0f172a",
+              backgroundColor: "#ffffff",
+              boxSizing: "border-box"
+            }}
           />
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "16px" }}>
-          <label style={{ fontSize: "14px", fontWeight: "500", color: "#334155" }}>Category</label>
+        {/* RIGHT COLUMN: CATEGORY MENU */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px", width: "240px" }}>
+          <span style={{ fontSize: "14px", fontWeight: "500", color: "#334155", display: "block" }}>
+            Category
+          </span>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             style={{
               height: "40px",
-              minWidth: "200px",
+              width: "100%",
               padding: "0 12px",
               borderRadius: "8px",
               border: "1px solid #cbd5e1",
@@ -241,81 +292,78 @@ export default function StockList() {
               color: "#0f172a",
               backgroundColor: "#ffffff",
               cursor: "pointer",
-              boxSizing: "border-box",
+              boxSizing: "border-box"
             }}
           >
             <option value="">All Categories</option>
-            <option value="Food">Food</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Clothing">Clothing</option>
+            {continuousCategories.map((cat, idx) => (
+              <option key={idx} value={cat}>{cat}</option>
+            ))}
           </select>
         </div>
       </div>
 
-      <div style={{ width: "100%", marginTop: "16px" }}>
-        <ProductTable
-          products={currentProducts || []}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onView={handleView}
-        />
-      </div>
+      <ProductTable 
+        products={currentProducts} 
+        onEdit={handleEdit} 
+        onDelete={handleDelete} 
+        onView={handleView} 
+      />
 
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "24px" }}>
-        <Button
-          variant="secondary"
-          onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </Button>
-
-        <span style={{ fontSize: "14px", fontWeight: "600", color: "#475569" }}>
-          Page {currentPage} of {totalPages || 1}
-        </span>
-
-        <Button
-          variant="secondary"
-          onClick={() => setCurrentPage((p) => (p < totalPages ? p + 1 : p))}
-          disabled={currentPage >= totalPages}
-        >
-          Next
-        </Button>
-      </div>
-
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Edit Product Metrics">
-        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-          <Input
-            label="Product Name"
-            value={selectedProduct?.name || ""}
-            onChange={(e) => setSelectedProduct({ ...selectedProduct, name: e.target.value })}
-          />
-
-          <Input
-            label="Price (₹)"
-            type="number"
-            value={selectedProduct?.price || ""}
-            onChange={(e) => setSelectedProduct({ ...selectedProduct, price: e.target.value })}
-          />
-
-          <Input
-            label="Stock Quantity"
-            type="number"
-            value={selectedProduct?.stock || ""}
-            onChange={(e) => setSelectedProduct({ ...selectedProduct, stock: e.target.value })}
-          />
-
-          <div style={{ display: "flex", gap: "12px", marginTop: "16px", justifyContent: "flex-end" }}>
-            <Button onClick={() => setIsOpen(false)} variant="secondary" style={{ flex: 1 }}>
-              Cancel
-            </Button>
-            <Button onClick={handleUpdate} variant="primary" style={{ flex: 1 }}>
-              Update Stock
-            </Button>
-          </div>
+      {totalPages > 1 && (
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "12px", marginTop: "24px" }}>
+          <Button 
+            disabled={currentPage === 1} 
+            onClick={() => setCurrentPage((p) => p - 1)}
+            variant="secondary"
+          >
+            Previous
+          </Button>
+          <span style={{ fontSize: "14px", color: "#475569" }}>
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button 
+            disabled={currentPage === totalPages} 
+            onClick={() => setCurrentPage((p) => p + 1)}
+            variant="secondary"
+          >
+            Next
+          </Button>
         </div>
-      </Modal>
+      )}
+
+      {isOpen && selectedProduct && (
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Edit Product Matrix">
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px", padding: "4px 0" }}>
+            <Input
+              label="Product Name"
+              value={selectedProduct.name}
+              onChange={(e) => setSelectedProduct({ ...selectedProduct, name: e.target.value })}
+            />
+            <Input
+              label="Category"
+              value={selectedProduct.category}
+              onChange={(e) => setSelectedProduct({ ...selectedProduct, category: e.target.value })}
+            />
+            <Input
+              label="Price (₹)"
+              type="number"
+              value={selectedProduct.price}
+              onChange={(e) => setSelectedProduct({ ...selectedProduct, price: e.target.value })}
+            />
+            <Input
+              label="Stock Count"
+              type="number"
+              value={selectedProduct.stock}
+              onChange={(e) => setSelectedProduct({ ...selectedProduct, stock: e.target.value })}
+            />
+            <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "8px" }}>
+              <Button variant="secondary" onClick={() => setIsOpen(false)}>Cancel</Button>
+              <Button variant="primary" onClick={handleUpdate}>Save Modifications</Button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </PageContainer>
   );
 }
-

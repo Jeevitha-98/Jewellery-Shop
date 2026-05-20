@@ -1,26 +1,61 @@
-import React, { useState } from "react";
+import React from "react";
 import PageContainer from "../../components/layout/PageContainer";
 import Button from "../../components/ui/Button";
+import { useInventory } from "../../Context/Inventorycontext"; 
+import { toast } from "react-toastify";
 
 export default function VendorRequests() {
-  const initialRequests = [
-    { id: 1, vendorName: "John Traders", product: "Rice 50kg", quantity: 20, status: "Pending" },
-    { id: 2, vendorName: "Fresh Mart", product: "Wheat Bags", quantity: 15, status: "Pending" },
-    { id: 3, vendorName: "City Store", product: "Sugar", quantity: 10, status: "Pending" },
-  ];
-
-  const [requests, setRequests] = useState(initialRequests);
+  const { products, setProducts, vendorRequests, setVendorRequests } = useInventory();
 
   const handleAccept = (id) => {
-    setRequests((prev) =>
-      prev.map((req) => (req.id === id ? { ...req, status: "Accepted" } : req))
+    const request = vendorRequests.find((r) => r.id === id);
+    if (!request || request.status !== "Pending") return;
+
+    const productIndex = products.findIndex(
+      (p) => p.name.toLowerCase() === request.product.toLowerCase()
     );
+
+    if (productIndex === -1) {
+      toast.error(`Error: "${request.product}" does not exist in inventory.`);
+      return;
+    }
+
+    const targetProduct = products[productIndex];
+
+    if (targetProduct.stock < request.quantity) {
+      toast.error(`Insufficient stock! ${targetProduct.name} only has ${targetProduct.stock} units left.`);
+      return;
+    }
+
+    setProducts((prevProducts) =>
+      prevProducts.map((p) => {
+        if (p.id === targetProduct.id) {
+          const updatedStock = p.stock - request.quantity;
+          let updatedStatus = "In Stock";
+          if (updatedStock === 0) {
+            updatedStatus = "Out of Stock";
+          } else if (updatedStock <= 5) {
+            updatedStatus = "Low Stock";
+          }
+
+          return { ...p, stock: updatedStock, status: updatedStatus };
+        }
+        return p;
+      })
+    );
+
+    setVendorRequests((prevRequests) =>
+      prevRequests.map((req) => (req.id === id ? { ...req, status: "Accepted" } : req))
+    );
+
+    toast.success(`Request accepted! Dispatched ${request.quantity} units of ${targetProduct.name}.`);
   };
 
   const handleReject = (id) => {
-    setRequests((prev) =>
+    setVendorRequests((prev) =>
       prev.map((req) => (req.id === id ? { ...req, status: "Rejected" } : req))
     );
+    toast.info("Vendor request rejected.");
   };
 
   const headerStyle = {
@@ -98,64 +133,72 @@ export default function VendorRequests() {
             </thead>
 
             <tbody>
-              {requests.map((req) => (
-                <tr
-                  key={req.id}
-                  style={{ transition: "background 0.2s" }}
-                  onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
-                  onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-                >
-                  <td style={{ ...tdStyle, fontWeight: "500", color: "#0f172a" }}>{req.vendorName}</td>
-                  <td style={tdStyle}>{req.product}</td>
-                  <td style={{ ...tdStyle, fontFamily: "monospace", fontWeight: "500" }}>{req.quantity}</td>
-                  
-                  <td style={tdStyle}>
-                    <span
-                      style={{
-                        padding: "6px 12px",
-                        borderRadius: "9999px",
-                        fontWeight: "600",
-                        fontSize: "12px",
-                        display: "inline-block",
-                        background:
-                          req.status === "Accepted"
-                            ? "#dcfce7"
-                            : req.status === "Rejected"
-                            ? "#fee2e2"
-                            : "#fef9c3",
-                        color:
-                          req.status === "Accepted"
-                            ? "#15803d"
-                            : req.status === "Rejected"
-                            ? "#b91c1c"
-                            : "#a16207",
-                      }}
-                    >
-                      {req.status}
-                    </span>
-                  </td>
-
-                  <td style={tdStyle}>
-                    <div style={actionContainerStyle}>
-                      <Button
-                        variant="success"
-                        onClick={() => handleAccept(req.id)}
-                        disabled={req.status !== "Pending"}
+              {vendorRequests && vendorRequests.length > 0 ? (
+                vendorRequests.map((req) => (
+                  <tr
+                    key={req.id}
+                    style={{ transition: "background 0.2s" }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                  >
+                    <td style={{ ...tdStyle, fontWeight: "500", color: "#0f172a" }}>{req.vendorName}</td>
+                    <td style={tdStyle}>{req.product}</td>
+                    <td style={{ ...tdStyle, fontFamily: "monospace", fontWeight: "500" }}>{req.quantity}</td>
+                    
+                    <td style={tdStyle}>
+                      <span
+                        style={{
+                          padding: "6px 12px",
+                          borderRadius: "9999px",
+                          fontWeight: "600",
+                          fontSize: "12px",
+                          display: "inline-block",
+                          background:
+                            req.status === "Accepted"
+                              ? "#dcfce7"
+                              : req.status === "Rejected"
+                              ? "#fee2e2"
+                              : "#fef9c3",
+                          color:
+                            req.status === "Accepted"
+                              ? "#15803d"
+                              : req.status === "Rejected"
+                              ? "#b91c1c"
+                              : "#a16207",
+                        }}
                       >
-                        Accept
-                      </Button>
+                        {req.status}
+                      </span>
+                    </td>
 
-                      <Button
-                        variant="danger"
-                        onClick={() => handleReject(req.id)}
-                        disabled={req.status !== "Pending"}
-                      >
-                        Reject
-                      </Button>
-                    </div>
+                    <td style={tdStyle}>
+                      <div style={actionContainerStyle}>
+                        <Button
+                          variant="success"
+                          onClick={() => handleAccept(req.id)}
+                          disabled={req.status !== "Pending"}
+                        >
+                          Accept
+                        </Button>
+
+                        <Button
+                          variant="danger"
+                          onClick={() => handleReject(req.id)}
+                          disabled={req.status !== "Pending"}
+                        >
+                          Reject
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ ...tdStyle, textAlign: "center", color: "#64748b", padding: "32px" }}>
+                    No vendor requests found.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -163,4 +206,3 @@ export default function VendorRequests() {
     </PageContainer>
   );
 }
-

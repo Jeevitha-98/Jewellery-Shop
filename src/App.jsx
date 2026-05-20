@@ -938,6 +938,7 @@ const reducer = (state, action) => {
 export default App; */
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { InventoryProvider } from "./Context/Inventorycontext";
 
 import Login from "./Dashboard/Login";
 import SupplierLayout from "./Layout/SupplierLayout";
@@ -949,30 +950,30 @@ import VendorRequests from "./Pages/Supplier/VendorRequest";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
+    <InventoryProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/supplier/dashboard/*" element={<SupplierLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="stock-list" element={<StockList />} />
-          <Route path="add-product" element={<AddProduct />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="vendor-request" element={<VendorRequests />} />
-          <Route path="vendor-requests" element={<VendorRequests />} />
-        </Route>
+          <Route path="/supplier/dashboard/*" element={<SupplierLayout />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="stock-list" element={<StockList />} />
+            <Route path="add-product" element={<AddProduct />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="vendor-request" element={<VendorRequests />} />
+            <Route path="vendor-requests" element={<VendorRequests />} />
+          </Route>
 
-        <Route path="/Pages/Supplier/DashboardHome" element={<Navigate to="/supplier/dashboard" replace />} />
-        <Route path="/Pages/Supplier/StockList" element={<Navigate to="/supplier/dashboard/stock-list" replace />} />
-        <Route path="/Pages/Supplier/AddProduct" element={<Navigate to="/supplier/dashboard/add-product" replace />} />
-        <Route path="/Pages/Supplier/Profile" element={<Navigate to="/supplier/dashboard/profile" replace />} />
-        <Route path="/Pages/Supplier/VendorRequest" element={<Navigate to="/supplier/dashboard/vendor-requests" replace />} />
-       
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/Pages/Supplier/DashboardHome" element={<Navigate to="/supplier/dashboard" replace />} />
+          <Route path="/Pages/Supplier/StockList" element={<Navigate to="/supplier/dashboard/stock-list" replace />} />
+          <Route path="/Pages/Supplier/AddProduct" element={<Navigate to="/supplier/dashboard/add-product" replace />} />
+          <Route path="/Pages/Supplier/Profile" element={<Navigate to="/supplier/dashboard/profile" replace />} />
+          <Route path="/Pages/Supplier/VendorRequest" element={<Navigate to="/supplier/dashboard/vendor-requests" replace />} />
+         
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </InventoryProvider>
   );
 }
-
-

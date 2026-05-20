@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from "react";
 import PageContainer from "../../components/layout/PageContainer";
 import Card from "../../components/ui/Card";
-import productsData from "../../data/dummyproducts";
+import { useInventory } from "../../Context/Inventorycontext"; 
 
 export default function DashboardHome() {
-  const [products, setProducts] = useState([]);
+  const { products, vendorRequests } = useInventory();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setProducts(productsData || []);
       setLoading(false);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, []); // Static initial spinner sequence only to prevent component layout flicker
 
-  const spinnerStyle = {
-    width: "40px",
-    height: "40px",
-    border: "3px solid #cbd5e1",
-    borderTop: "3px solid #2563eb",
-    borderRadius: "50%",
-    animation: "spin 1s linear infinite",
-  };
+  // LIVE EXTRACTION: Runs smoothly on every background mutation cycle
+  const safeProducts = products || [];
+
+  const totalProducts = safeProducts.length;
+
+  const totalStock = safeProducts.reduce(
+    (sum, item) => sum + Number(item?.stock || 0),
+    0
+  );
+
+  const lowStock = safeProducts.filter(
+    (p) => Number(p?.stock || 0) < 5
+  ).length;
+
+  const pendingRequestsCount = (vendorRequests || []).filter(
+    (r) => r.status === "Pending"
+  ).length;
+
+  const stats = [
+    { title: "Total Products", value: totalProducts, icon: "📦" },
+    { title: "Overall Stock", value: totalStock.toLocaleString("en-IN"), icon: "📊" },
+    { title: "Low Stock Items", value: lowStock, icon: "⚠️" },
+    { title: "Pending Requests", value: pendingRequestsCount, icon: "⏳" },
+  ];
 
   if (loading) {
     return (
@@ -37,24 +52,6 @@ export default function DashboardHome() {
       </PageContainer>
     );
   }
-
-  const totalProducts = products.length;
-
-  const totalStock = products.reduce(
-    (sum, item) => sum + Number(item?.stock || 0),
-    0
-  );
-
-  const lowStock = products.filter(
-    (p) => Number(p?.stock || 0) < 5
-  ).length;
-
-  const stats = [
-    { title: "Total Products", value: totalProducts, icon: "📦" },
-    { title: "Overall Stock", value: totalStock.toLocaleString("en-IN"), icon: "📊" },
-    { title: "Low Stock Items", value: lowStock, icon: "⚠️" },
-    { title: "Pending Requests", value: 8, icon: "⏳" },
-  ];
 
   return (
     <PageContainer>
@@ -88,3 +85,13 @@ export default function DashboardHome() {
     </PageContainer>
   );
 }
+
+const spinnerStyle = {
+  width: "40px",
+  height: "40px",
+  border: "3px solid #cbd5e1",
+  borderTop: "3px solid #2563eb",
+  borderRadius: "50%",
+  animation: "spin 1s linear infinite",
+};
+

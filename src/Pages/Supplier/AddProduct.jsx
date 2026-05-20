@@ -4,8 +4,12 @@ import Input from "../../components/ui/Input";
 import Button from "../../components/ui/Button";
 import Card from "../../components/ui/Card";
 import { toast } from "react-toastify";
+import { useInventory } from "../../Context/Inventorycontext"; // Import global context engine
 
 export default function AddProduct() {
+  // Use global shared state instead of local useState configuration
+  const { products, setProducts } = useInventory();
+
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -13,7 +17,8 @@ export default function AddProduct() {
     stock: "",
   });
 
-  const [products, setProducts] = useState([]);
+  // Local state to keep track of products added ONLY during the current active session
+  const [recentlyAdded, setRecentlyAdded] = useState([]);
 
   const handleChange = (e) => {
     setForm({
@@ -30,12 +35,69 @@ export default function AddProduct() {
       return;
     }
 
-    const newProduct = {
-      id: Date.now(),
-      ...form,
-    };
+    // Auto-calculate structural status strings to match your StockList table configurations
+    const currentStock = Number(form.stock);
+    let calculatedStatus = "In Stock";
+    if (currentStock === 0) {
+      calculatedStatus = "Out of Stock";
+    } else if (currentStock <= 5) {
+      calculatedStatus = "Low Stock";
+    }
 
-    setProducts([newProduct, ...products]);
+    const inputName = form.name.trim();
+    const inputPrice = Number(form.price);
+
+    // Check if product already exists in system storage to aggregate the count
+    const existingIndex = products.findIndex(
+      (p) => p.name.toLowerCase() === inputName.toLowerCase()
+    );
+
+    let updatedProducts = [...products];
+    let loggedItem = null;
+
+    if (existingIndex !== -1) {
+      // Product exists -> Accumulate stock levels and capture the updated object
+      const existingProduct = products[existingIndex];
+      const nextStockTotal = existingProduct.stock + currentStock;
+
+      let nextStatus = "In Stock";
+      if (nextStockTotal === 0) nextStatus = "Out of Stock";
+      else if (nextStockTotal <= 5) nextStatus = "Low Stock";
+
+      const updatedProduct = {
+        ...existingProduct,
+        stock: nextStockTotal,
+        price: inputPrice, 
+        status: nextStatus,
+      };
+
+      updatedProducts[existingIndex] = updatedProduct;
+      loggedItem = updatedProduct;
+    } else {
+      // Product is completely new -> Append fresh record entry node
+      const newProduct = {
+        id: Date.now(),
+        name: inputName,
+        category: form.category,
+        price: inputPrice,
+        stock: currentStock,
+        status: calculatedStatus,
+        image: "https://unsplash.com"
+      };
+
+      updatedProducts = [newProduct, ...updatedProducts];
+      loggedItem = newProduct;
+    }
+
+    // Commit changes securely to your global system state context tree
+    setProducts(updatedProducts);
+
+    // Track it locally inside session tracker state arrays
+    setRecentlyAdded((prev) => {
+      const filtered = prev.filter((item) => item.name.toLowerCase() !== inputName.toLowerCase());
+      return [loggedItem, ...filtered];
+    });
+
     toast.success("Product added successfully");
 
     setForm({
@@ -137,24 +199,91 @@ export default function AddProduct() {
           </form>
         </div>
 
-        {/* RIGHT COLUMN: RECENTLY ADDED */}
+        {/* RIGHT COLUMN: LIVE SYSTEM STOCK */}
         <div style={rightSideContainerStyle}>
+          {/* Section 1: All current global system products */}
           <h3 style={{ margin: "0 0 16px 0", fontSize: "18px", fontWeight: "600", color: "#0f172a" }}>
-            Recently Added
+            Current System Stock
           </h3>
           
-          {products.length > 0 ? (
-            <div style={listScrollStyle}>
+          {products && products.length > 0 ? (
+            <div style={{ ...listScrollStyle, marginBottom: "32px" }}>
               {products.map((p) => (
                 <Card
                   key={p.id}
                   title={`${p.category} • ${p.stock} Units`}
                   value={`₹${Number(p.price).toLocaleString("en-IN")}`}
                   icon={
-                    <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
-                      <span style={{ fontSize: "15px", fontWeight: "600", color: "#0f172a", display: "block" }}>
-                        {p.name}
-                      </span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", boxSizing: "border-box" }}>
+                      <img 
+                        src={p.image || "https://unsplash.com"} 
+                        alt={p.name} 
+                        style={{ 
+                          width: "40px", 
+                          height: "40px", 
+                          borderRadius: "8px", 
+                          objectFit: "cover", 
+                          border: "1px solid #e2e8f0",
+                          backgroundColor: "#f8fafc"
+                        }} 
+                      />
+                      <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                        <span style={{ fontSize: "15px", fontWeight: "600", color: "#0f172a", display: "block" }}>
+                          {p.name}
+                        </span>
+                      </div>
+                    </div>
+                  }
+                />
+              ))}
+            </div>
+          ) : (
+            <div 
+              style={{
+                border: "2px dashed #e2e8f0",
+                borderRadius: "12px",
+                padding: "40px",
+                textAlign: "center",
+                color: "#94a3b8",
+                fontSize: "14px",
+                marginBottom: "32px"
+              }}
+            >
+              No products found in system storage.
+            </div>
+          )}
+
+          {/* Section 2: Segregated list displaying items added during this current open operational session */}
+          <h3 style={{ margin: "0 0 16px 0", fontSize: "18px", fontWeight: "600", color: "#0f172a" }}>
+            Recently Added This Session
+          </h3>
+
+          {recentlyAdded.length > 0 ? (
+            <div style={listScrollStyle}>
+              {recentlyAdded.map((p) => (
+                <Card
+                  key={`session-${p.id}`}
+                  title={`${p.category} • Last Added State`}
+                  value={`₹${Number(p.price).toLocaleString("en-IN")}`}
+                  icon={
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", boxSizing: "border-box" }}>
+                      <img 
+                        src={p.image || "https://unsplash.com"} 
+                        alt={p.name} 
+                        style={{ 
+                          width: "40px", 
+                          height: "40px", 
+                          borderRadius: "8px", 
+                          objectFit: "cover", 
+                          border: "1px solid #e2e8f0",
+                          backgroundColor: "#f8fafc"
+                        }} 
+                      />
+                      <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                        <span style={{ fontSize: "15px", fontWeight: "600", color: "#0f172a", display: "block" }}>
+                          {p.name}
+                        </span>
+                      </div>
                     </div>
                   }
                 />

@@ -124,7 +124,6 @@ export default function Profile() {
         </div>
       </div>
 
-     
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Edit Profile Details">
         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
           <Input
@@ -157,7 +156,7 @@ export default function Profile() {
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
           />
 
-          <div style={{ display: "flex", gap: "12px", marginTop: "16px", justifyContext: "flex-end" }}>
+          <div style={{ display: "flex", gap: "12px", marginTop: "16px", justifyContent: "flex-end" }}>
             <Button onClick={() => setIsOpen(false)} variant="secondary" style={{ flex: 1 }}>
               Cancel
             </Button>
