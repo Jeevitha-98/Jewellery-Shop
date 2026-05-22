@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API = axios.create({
-  // Fixed: Forcing the communication path straight to your active server port channel
   baseURL: "http://localhost:8085", 
   headers: {
     "Content-Type": "application/json",
@@ -11,7 +10,7 @@ const API = axios.create({
 API.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    if (token && config.headers) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -19,4 +18,16 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";   
+    }
+    return Promise.reject(error);
+  }
+);
+
 export default API;
+

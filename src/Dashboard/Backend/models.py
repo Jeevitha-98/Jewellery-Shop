@@ -1,9 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from database import Base
 
-# ==============================================================================
-# USER MODEL (With duplicate-registry protection)
-# ==============================================================================
 if "users" not in Base.metadata.tables:
     class User(Base):
         __tablename__ = "users"
@@ -20,10 +17,6 @@ if "users" not in Base.metadata.tables:
 else:
     User = Base.metadata.tables["users"]
 
-
-# ==============================================================================
-# PRODUCT MODEL (With duplicate-registry protection)
-# ==============================================================================
 if "products" not in Base.metadata.tables:
     class Product(Base):
         __tablename__ = "products"
@@ -40,17 +33,18 @@ if "products" not in Base.metadata.tables:
 else:
     Product = Base.metadata.tables["products"]
 
+if "vendor_requests" not in Base.metadata.tables:
+    class VendorRequest(Base):
+        __tablename__ = "vendor_requests"
+        __table_args__ = {'extend_existing': True}
 
-# ==============================================================================
-# VENDOR REQUEST MODEL (With duplicate-registry protection)
-# ==================# Open models.py and make the bottom look exactly like this flat class structure:
-
-class VendorRequest(Base):
-    __tablename__ = "vendor_requests"
-    __table_args__ = {'extend_existing': True}  # Safely handles table overlaps
-
-    id = Column(Integer, primary_key=True, index=True)
-    vendor_id = Column(String(20), nullable=False)
-    quantity = Column(Integer, nullable=False)
-    status = Column(String(20), default="Pending")
-    supplier_id = Column(String(20), nullable=False)
+        id = Column(Integer, primary_key=True, index=True)
+        vendor_id = Column(String(20), nullable=False)
+        vendor_name = Column(String(100), nullable=True)
+        product_name = Column(String(100), nullable=False)
+        quantity = Column(Integer, nullable=False)
+        status = Column(String(20), default="Pending")
+        supplier_id = Column(String(20), nullable=False)
+        created_at = Column(String(30), nullable=True)
+else:
+    VendorRequest = Base.metadata.tables["vendor_requests"]

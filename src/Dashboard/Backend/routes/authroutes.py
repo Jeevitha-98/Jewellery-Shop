@@ -6,6 +6,7 @@ from models import User
 from schemas import RegisterSchema, LoginSchema
 from utils.jwt_handler import create_token
 
+
 router = APIRouter()
 
 

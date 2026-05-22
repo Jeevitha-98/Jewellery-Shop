@@ -1,17 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInventory } from "../../Context/Inventorycontext";
+import { useVendor } from "../../Context/Vendorcontext"; 
 import profileIconImage from "../../Assests/Profileicon Image.jpg"; 
 
-export default function Navbar() {
+export default function Navbar({ role = "supplier" }) {
   const navigate = useNavigate();
-  const { profile, systemActivities } = useInventory();
+  const isVendor = role.toLowerCase() === "vendor";
+  
+  const supplierContext = !isVendor ? useInventory() : {};
+  const vendorContext = isVendor ? useVendor() : {};
+  
+  const currentContext = isVendor ? vendorContext : supplierContext;
+  const { profile, activityLogs, systemActivities, pendingRequests, vendorRequests } = currentContext;
   
   const [showNotifications, setShowNotifications] = useState(false);
-  const [localLogs, setLocalLogs] = useState([]);
   const notificationRef = useRef(null);
 
-  // Close notifications dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (notificationRef.current && !notificationRef.current.contains(event.target)) {
@@ -22,31 +27,55 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // REAL-TIME AUTO SYNC FILTER: Read persistent local records to prevent folder file path decoupling issues
-  useEffect(() => {
-    const fetchStorageLogs = () => {
-      const saved = localStorage.getItem("supplier_activity_logs");
-      if (saved) {
-        setLocalLogs(JSON.parse(saved).slice(0, 4));
-      } else if (systemActivities) {
-        setLocalLogs(systemActivities.slice(0, 4));
-      }
-    };
-
-    fetchStorageLogs();
-    
-    // Auto-update notification bell drop-down data matrix values when menu dropdown gets clicked open
-    if (showNotifications) {
-      fetchStorageLogs();
-    }
-  }, [showNotifications, systemActivities]);
-
   const goProfile = () => {
-    navigate("/supplier/dashboard/profile");
+    if (isVendor) {
+      navigate("/vendor/dashboard/profile");
+    } else {
+      navigate("/supplier/dashboard/profile");
+    }
   };
 
-  // Automatically count how many pending critical actions exist inside the current log lines stream
-  const unreadCount = localLogs.filter(a => a && a.urgent).length;
+  const getRecentActivities = () => {
+    const list = [];
+    const logs = isVendor ? activityLogs : systemActivities;
+    const requests = isVendor ? pendingRequests : vendorRequests;
+    
+    if (logs && logs.length > 0) {
+      logs.forEach((act, index) => {
+        if (act) {
+          list.push({
+            id: act.id || `log-${index}`,
+            text: act.text || act.message,
+            time: act.time || act.timestamp || "Just now",
+            urgent: act.urgent || false
+          });
+        }
+      });
+    }
+    
+    if (requests && requests.length > 0) {
+      requests.forEach((req, index) => {
+        if (req) {
+          const isPending = req.status?.toLowerCase() === "pending";
+          if (!list.some(item => item.id === (req.id || `req-${index}`))) {
+            list.push({
+              id: req.id || `req-${index}`,
+              text: isVendor
+                ? (isPending ? `Your inbound product request for ${req.product} is pending review.` : `Product request update: '${req.status}'.`)
+                : (isPending ? `New order request from ${req.vendorName} for ${req.quantity} units of ${req.product}.` : `Order status for ${req.product} updated to '${req.status}'.`),
+              time: isPending ? "Action required" : "Completed",
+              urgent: isPending
+            });
+          }
+        }
+      });
+    }
+    
+    return list.slice(0, 4);
+  };
+
+  const recentActivities = getRecentActivities();
+  const unreadCount = recentActivities.filter(a => a.urgent).length;
 
   const containerStyle = {
     height: "64px",
@@ -160,7 +189,6 @@ export default function Navbar() {
     <div style={containerStyle}>
       <div style={actionGroupStyle}>
         
-        {/* NOTIFICATION BELL BLOCK BUTTON */}
         <div style={notificationWrapperStyle} ref={notificationRef}>
           <button 
             style={iconContainerStyle}
@@ -176,7 +204,6 @@ export default function Navbar() {
             {unreadCount > 0 && <span style={notificationDotStyle} />}
           </button>
 
-          {/* DYNAMIC POP-OVER MULTI-ATTRIBUTE DROPDOWN SELECTION WINDOW */}
           <div style={dropdownStyle}>
             <div style={dropdownHeaderStyle}>
               <span style={{ fontSize: "13px", fontWeight: "600", color: "#0f172a" }}>Recent Activities</span>
@@ -186,14 +213,13 @@ export default function Navbar() {
                 </span>
               )}
             </div>
-            
             <div style={{ maxHeight: "280px", overflowY: "auto" }}>
-              {localLogs.length === 0 ? (
+              {recentActivities.length === 0 ? (
                 <div style={{ padding: "24px", textAlign: "center", color: "#94a3b8", fontSize: "13px" }}>
                   No recent activities recorded.
                 </div>
               ) : (
-                localLogs.map((activity) => activity && (
+                recentActivities.map((activity) => activity && (
                   <div 
                     key={activity.id} 
                     style={{ 
@@ -202,30 +228,16 @@ export default function Navbar() {
                       backgroundColor: activity.urgent ? "#fff5f5" : "#ffffff",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "6px",
+                      gap: "4px",
                       textAlign: "left"
                     }}
                   >
-                    <p style={{ margin: 0, fontSize: "12px", color: "#1e293b", lineHeight: "1.45", fontWeight: "400" }}>
+                    <p style={{ margin: 0, fontSize: "12px", color: "#334155", lineHeight: "1.45", fontWeight: activity.urgent ? "500" : "400" }}>
                       {activity.text}
                     </p>
-                    
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "2px" }}>
-                      <span style={{ 
-                        fontSize: "9px", 
-                        fontWeight: "700", 
-                        backgroundColor: activity.urgent ? "#fee2e2" : "#eff6ff", 
-                        color: activity.urgent ? "#ef4444" : "#2563eb",
-                        padding: "1px 6px",
-                        borderRadius: "4px",
-                        textTransform: "uppercase"
-                      }}>
-                        {activity.badge || "System"}
-                      </span>
-                      <span style={{ fontSize: "11px", color: "#94a3b8", fontFamily: "monospace" }}>
-                        {activity.time}
-                      </span>
-                    </div>
+                    <span style={{ fontSize: "10px", color: activity.urgent ? "#dc2626" : "#94a3b8", fontWeight: "600" }}>
+                      {activity.time}
+                    </span>
                   </div>
                 ))
               )}
@@ -233,31 +245,22 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* METADATA BLOCK */}
         <div style={userMetaDataStyle}>
           <h4 style={businessNameStyle}>
-            {profile?.business_name || "Loading Supplier..."}
+            {profile?.business_name || (isVendor ? "Vendor Enterprise" : "Supplier Warehouse")}
           </h4>
           <p style={userIdStyle}>
-            {profile?.user_id ? `ID: ${profile.user_id}` : "Verifying access..."}
+            {profile?.user_id || localStorage.getItem("user_id") || (isVendor ? "VEN001" : "SUP001")}
           </p>
         </div>
 
-        {/* IMAGE PROFILE BADGE BUTTON */}
-        <img
-          src={profileIconImage}
-          onClick={goProfile}
+        <img 
+          src={profileIconImage} 
+          alt="Profile Badge" 
           style={profileBadgeStyle}
-          alt="User Profile"
-          title="Manage Account Profile"
-          onMouseOver={(e) => {
-            e.currentTarget.style.borderColor = "#2563eb";
-            e.currentTarget.style.transform = "scale(1.04)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.borderColor = "#e2e8f0";
-            e.currentTarget.style.transform = "scale(1)";
-          }}
+          onClick={goProfile}
+          onMouseOver={(e) => { e.currentTarget.style.borderColor = "#2563eb"; }}
+          onMouseOut={(e) => { e.currentTarget.style.borderColor = "#e2e8f0"; }}
         />
 
       </div>

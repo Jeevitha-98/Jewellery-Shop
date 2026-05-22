@@ -6,7 +6,6 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 import jwt
 
-# Dynamic path resolution to prevent 'MetaData instance' crashes
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from database import get_db
@@ -25,21 +24,33 @@ class VendorRequestStatusUpdate(BaseModel):
 
 router = APIRouter(prefix="/supplier", tags=["Supplier Operations"])
 
+# Inside src/Dashboard/Backend/routes/Supplier.py
 security = HTTPBearer()
-SECRET_KEY = "mysecretkey123"
+
+# Overriding directly to isolate path mismatches
+SECRET_KEY = "my_ultra_secure_super_long_secret_key_32_bytes_long!"
 ALGORITHM = "HS256"
 
 def get_current_supplier(credentials: HTTPAuthorizationCredentials = Depends(security)):
     token = credentials.credentials
     try:
+        # Decodes the token using the secure key signature directly
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id = payload.get("user_id")
         role = payload.get("role")
-        if user_id is None or role != "supplier":
+        
+        if user_id is None or role is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Malformed token payload")
+            
+        clean_role = str(role).strip().lower()
+        if clean_role != "supplier":
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Access denied")
-        return {"user_id": str(user_id), "role": str(role)}
-    except jwt.PyJWTError:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired session token")
+            
+        return {"user_id": str(user_id), "role": clean_role}
+    except jwt.PyJWTError as e:
+        # Logs the exact error message to the terminal to trace validation failures
+        print(f"--- JWT DECODE FAILURE TRACE: {str(e)} ---")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token signature")
 
 @router.get("/metrics")
 def get_supplier_metrics(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
@@ -133,26 +144,15 @@ async def add_product(name: str = Form(...), category: str = Form("General"), pr
         db.refresh(new_product)
         return {"id": int(new_product.id), "name": str(new_product.name), "category": str(new_product.category), "price": float(new_product.price), "stock": int(new_product.stock), "quantity": int(new_product.quantity), "image": str(new_product.image)}
 
-# ==============================================================================
-# FIXED VENDOR-REQUESTS ENDPOINT: MATED STRICLY TO ACTUAL MODELS.PY COLUMN KEYS
-# ==============================================================================
-# ==============================================================================
-# FIXED VENDOR-REQUESTS: ONLY KEEP THIS SINGLE ROUTE BLOCK IN SUPPLIER.PY
-# ==============================================================================
 @router.get("/vendor-requests")
 def get_vendor_requests(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
     try:
-        # Safer query execution
         requests = db.query(VendorRequest).filter(VendorRequest.supplier_id == current_user["user_id"]).all()
-        
         response_list = []
         for r in requests:
             if not r:
                 continue
-            
-            # Use safe .get() to pull data dynamically from the instance dictionary
             r_data = r.__dict__
-            
             v_id = str(r_data.get('vendor_id', 'Unknown ID'))
             v_name = str(r_data.get('vendor_name', f"Vendor ({v_id})"))
             p_name = str(r_data.get('product_name', 'Catalog Product'))
@@ -160,22 +160,22 @@ def get_vendor_requests(db: Session = Depends(get_db), current_user: dict = Depe
             stat = str(r_data.get('status', 'Pending'))
             
             response_list.append({
-                "id": int(r_data.get('id', 0)), 
-                "vendor_id": v_id,
-                "vendorId": v_id,
-                "vendor_name": v_name,
-                "vendorName": v_name, 
-                "product": p_name,    
-                "product_name": p_name,
-                "quantity": qty, 
+                "id": int(r_data.get('id', 0)),
+                "vendorName": v_name,
+                "product": p_name,
+                "quantity": qty,
                 "status": stat
             })
-            
         return response_list
-        
     except Exception as e:
-        # Logs the actual database mapping mismatch directly to your terminal screen safely
-        print(f"CRITICAL DATABASE ATTRIBUTE EXCEPTION MUTE: {str(e)}")
-        # Returns an empty array to prevent frontend loops, 500 crashes, or CORS blockages
-        return []
+        raise HTTPException(status_code=500, detail=str(e))
 
+@router.patch("/vendor-requests/{request_id}")
+def update_vendor_request_status(request_id: int, payload: VendorRequestStatusUpdate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
+    req = db.query(VendorRequest).filter(VendorRequest.id == request_id, VendorRequest.supplier_id == current_user["user_id"]).first()
+    if not req:
+        raise HTTPException(status_code=404, detail="Request log entry not found")
+        
+    req.status = payload.status
+    db.commit()
+    return {"status": True, "message": "Fulfillment entry status updated successfully"}

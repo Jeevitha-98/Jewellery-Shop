@@ -6,8 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from database import engine, Base
 import models
 
-# Safe modular package routing subfolder imports
-from routes import authroutes, Supplier
+from routes import authroutes, Supplier, Vendor
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -16,9 +15,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Supplier & Vendor System API", lifespan=lifespan)
 
-# ==============================================================================
-# BROADENED CORS POLICIES RULES GRID (Fixes the network error loop)
-# ==============================================================================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -28,17 +24,16 @@ app.add_middleware(
         "http://127.0.0.1:3000"
     ],
     allow_credentials=True,
-    allow_methods=["*"],  # Permits GET, POST, PUT, DELETE, PATCH actions natively
-    allow_headers=["*"],  # Permits Authorization token header strings safely
+    allow_methods=["*"],  
+    allow_headers=["*"],  
 )
 
-# Provision local static content uploads directories
 os.makedirs("uploads/products", exist_ok=True)
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-# Dynamic modular application router hook registries
 app.include_router(authroutes.router, prefix="/auth")
 app.include_router(Supplier.router)
+app.include_router(Vendor.router)
 
 @app.get("/")
 def root():

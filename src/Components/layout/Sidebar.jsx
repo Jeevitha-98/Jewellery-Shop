@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
-export default function Sidebar({ isOpen }) {
+export default function Sidebar({ isOpen, role = "supplier" }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menu = [
+  const supplierMenu = [
     { 
       name: "Dashboard", 
       path: "/supplier/dashboard", 
@@ -69,6 +69,65 @@ export default function Sidebar({ isOpen }) {
     },
   ];
 
+  const vendorMenu = [
+    { 
+      name: "Dashboard", 
+      path: "/vendor/dashboard", 
+      endProp: true,
+      icon: (isActive) => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+      )
+    },
+    { 
+      name: "Browse Products", 
+      path: "/vendor/dashboard/browse-products",
+      icon: (isActive) => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      )
+    },
+    { 
+      name: "My Orders", 
+      path: "/vendor/dashboard/my-orders",
+      icon: (isActive) => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      )
+    },
+    { 
+      name: "Request Product", 
+      path: "/vendor/dashboard/request-product",
+      icon: (isActive) => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      )
+    },
+    { 
+      name: "Profile", 
+      path: "/vendor/dashboard/profile",
+      icon: (isActive) => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      )
+    },
+  ];
+
+  const currentMenu = role.toLowerCase() === "vendor" ? vendorMenu : supplierMenu;
+  const portalName = role.toLowerCase() === "vendor" ? "Vendor Portal" : "Supplier Portal";
+
   const sidebarStyle = {
     position: "fixed",
     top: 0,
@@ -87,7 +146,6 @@ export default function Sidebar({ isOpen }) {
     borderRight: isOpen ? "1px solid #1e293b" : "none",
   };
 
-  // FIXED LOGO STYLE: Centered text alignment configuration
   const logoStyle = {
     fontSize: "22px",
     fontWeight: "800",
@@ -98,7 +156,7 @@ export default function Sidebar({ isOpen }) {
     opacity: isOpen ? 1 : 0,
     transition: "opacity 0.2s ease",
     display: "flex",
-    alignItems: "center",
+    alignIcon: "center",
     justifyContent: "center", 
     gap: "10px",
     width: "100%"
@@ -158,13 +216,12 @@ export default function Sidebar({ isOpen }) {
       `}</style>
 
       <div style={sidebarStyle}>
-        {/* UPDATED LOGO ELEMENT CONTAINER WITH HORIZONTAL CENTER ALIGNMENT */}
         <h2 style={logoStyle}>
-          <span style={{ color: "#2563eb", fontSize: "24px" }}>⚡</span> Supplier Portal
+          <span style={{ color: "#2563eb", fontSize: "24px" }}>⚡</span> {portalName}
         </h2>
 
         <nav style={navContainerStyle}>
-          {menu.map((item, index) => {
+          {currentMenu.map((item, index) => {
             const isActive = item.endProp 
               ? location.pathname === item.path 
               : location.pathname.startsWith(item.path);
