@@ -22,6 +22,17 @@ ALGORITHM = "HS256"
 class AdminOrderStatusUpdate(BaseModel):
     status: str
 
+# Added missing Pydantic schemas required to accept profile parameters from the request payload
+class ProfileUpdateRequest(BaseModel):
+    business_name: str
+    mobile: str
+    location: str | None = None
+    business_type: str | None = None
+
+class PasswordUpdateRequest(BaseModel):
+    old_password: str
+    new_password: str
+
 def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
     token = credentials.credentials
     try:
@@ -52,12 +63,16 @@ def get_admin_profile(db: Session = Depends(get_db), current_user: dict = Depend
             "business_name": "Master Administrator",
             "businessName": "Master Administrator",
             "name": "Master Administrator",
-            "uid": current_user["user_id"]
+            "uid": current_user["user_id"],
+            "location": "",
+            "business_type": ""
         }
         
     u_id = str(user.user_id) if user.user_id else "ADM001"
     mob = str(user.mobile) if user.mobile else ""
     b_name = str(user.business_name) if (user.business_name and str(user.business_name).strip() != "") else "System Admin"
+    loc = str(getattr(user, 'location', '')) if getattr(user, 'location', None) else ""
+    b_type = str(getattr(user, 'business_type', '')) if getattr(user, 'business_type', None) else ""
 
     return {
         "user_id": u_id,
@@ -66,8 +81,50 @@ def get_admin_profile(db: Session = Depends(get_db), current_user: dict = Depend
         "mobile": mob,
         "business_name": b_name,
         "businessName": b_name,
-        "name": b_name
+        "name": b_name,
+        "location": loc,
+        "business_type": b_type
     }
+
+# FIXED: Appended profile update target route to resolve frontend 404 connection drops
+@router.put("/profile/update")
+def update_admin_profile_data(
+    payload: ProfileUpdateRequest, 
+    db: Session = Depends(get_db), 
+    current_user: dict = Depends(get_current_admin)
+):
+    user = db.query(User).filter(User.user_id == current_user["user_id"]).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User target profile entity row index not found.")
+        
+    user.business_name = payload.business_name
+    user.mobile = payload.mobile
+    
+    if hasattr(user, 'location'):
+        user.location = payload.location
+    if hasattr(user, 'business_type'):
+        user.business_type = payload.business_type
+        
+    db.commit()
+    return {"status": True, "message": "Profile properties synced to MySQL ledger records successfully."}
+
+# FIXED: Appended profile password change target route to resolve frontend connection drops
+@router.put("/profile/password")
+def update_admin_password_credentials(
+    payload: PasswordUpdateRequest, 
+    db: Session = Depends(get_db), 
+    current_user: dict = Depends(get_current_admin)
+):
+    user = db.query(User).filter(User.user_id == current_user["user_id"]).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User target profile entity row index not found.")
+    
+    if user.password != payload.old_password:
+        raise HTTPException(status_code=400, detail="Verification failed: Incorrect current password.")
+        
+    user.password = payload.new_password
+    db.commit()
+    return {"status": True, "message": "Security key updated inside database successfully."}
 
 @router.get("/metrics")
 def get_admin_dashboard_metrics(db: Session = Depends(get_db), current_user: dict = Depends(get_current_admin)):
@@ -128,7 +185,6 @@ def get_all_vendor_orders(db: Session = Depends(get_db), current_user: dict = De
         supplier = db.query(User).filter(User.user_id == r.supplier_id).first()
         s_name = supplier.business_name if supplier else "Unknown Supplier"
         
-        # FIXED: Look up using 'user_id' to match your MySQL 'vendor_requests' table data mapping schema
         v_id = getattr(r, 'user_id', getattr(r, 'vendor_id', None))
         vendor = db.query(User).filter(User.user_id == v_id).first() if v_id else None
         v_name = vendor.business_name if vendor else f"Vendor ({v_id})"

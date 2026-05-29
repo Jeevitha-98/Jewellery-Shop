@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PageContainer from "../../components/layout/PageContainer";
-import Modal from "../../components/ui/Modal";
-import Input from "../../components/ui/Input";
-import Button from "../../components/ui/Button";
 import { useVendor } from "../../Context/Vendorcontext";
 import { vendorService } from "../../Services/vendorService";
 import { toast } from "react-toastify";
@@ -18,8 +15,16 @@ export default function Profile() {
     mobile: "",
   });
 
+  const [passwordData, setPasswordData] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
+
   const [isOpen, setIsOpen] = useState(false);
+  const [isPasswordOpen, setIsPasswordOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isPasswordSaving, setIsPasswordSaving] = useState(false);
 
   useEffect(() => {
     if (profile) {
@@ -49,7 +54,7 @@ export default function Profile() {
     try {
       const response = await vendorService.updateProfileDetails(formData);
       if (response.status || response) {
-        toast.success("Profile updates committed to relational database successfully!");
+        toast.success("your changes are changed safely");
         setIsOpen(false);
         if (refreshVendorData) {
           await refreshVendorData();
@@ -60,6 +65,36 @@ export default function Profile() {
       toast.error("Failed to commit profile updates to server.");
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+      toast.error("Please fill out all password fields.");
+      return;
+    }
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      toast.error("New passwords do not match.");
+      return;
+    }
+
+    setIsPasswordSaving(true);
+    try {
+      const response = await vendorService.updatePassword({
+        old_password: passwordData.oldPassword,
+        new_password: passwordData.newPassword
+      });
+      if (response.status || response) {
+        toast.success("your changes are changed safely");
+        setIsPasswordOpen(false);
+        setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
+      }
+    } catch (err) {
+      console.error("Password modification process fault:", err);
+      toast.error(err.response?.data?.detail || "Failed to change password.");
+    } finally {
+      setIsPasswordSaving(false);
     }
   };
 
@@ -98,7 +133,7 @@ export default function Profile() {
   const leftActionPanelStyle = {
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
+    gap: "12px",
     height: "fit-content"
   };
 
@@ -190,6 +225,47 @@ export default function Profile() {
     fontWeight: "600"
   };
 
+  const modalOverlayStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(15, 23, 42, 0.4)",
+    backdropFilter: "blur(4px)",
+    zIndex: 9999,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  };
+
+  const modalBodyStyle = {
+    backgroundColor: "#ffffff",
+    borderRadius: "16px",
+    padding: "32px",
+    width: "440px",
+    boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+    textAlign: "left"
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px 14px",
+    borderRadius: "8px",
+    border: "1px solid #cbd5e1",
+    outline: "none",
+    fontSize: "14px",
+    boxSizing: "border-box",
+    marginTop: "6px",
+    marginBottom: "16px"
+  };
+
+  const labelFormStyle = {
+    fontSize: "13px",
+    fontWeight: "600",
+    color: "#475569"
+  };
+
   return (
     <PageContainer>
       <style>{`
@@ -217,36 +293,41 @@ export default function Profile() {
       </div>
 
       <div className="profile-grid-container" style={gridContainerStyle}>
-        
         <div style={leftActionPanelStyle}>
           <div style={darkCardBoxStyle}>
-            <img 
-              src={profileIconImage} 
-              alt="Vendor Profile" 
-              style={profileImageStyle} 
-            />
-            <h3 style={darkCardTitleStyle}>
-              {profile?.business_name || "Loading..."}
-            </h3>
-            <p style={darkCardSubtitleStyle}>
-              ({profile?.user_id || "Checking ID..."})
-            </p>
+            <img src={profileIconImage} alt="Vendor Profile" style={profileImageStyle} />
+            <h3 style={darkCardTitleStyle}>{profile?.business_name || "Loading..."}</h3>
+            <p style={darkCardSubtitleStyle}>({profile?.user_id || "Checking ID..."})</p>
           </div>
 
-          <Button 
+          <button 
             onClick={handleEdit} 
-            variant="primary" 
             style={{ 
-              width: "100%", 
-              height: "46px", 
-              fontSize: "14px", 
-              fontWeight: "600", 
-              borderRadius: "10px", 
-              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)" 
+              width: "100%", height: "46px", backgroundColor: "#3b82f6", color: "#ffffff", 
+              border: "none", borderRadius: "10px", fontWeight: "600", cursor: "pointer", fontSize: "14px",
+              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
             }}
           >
             Edit Profile Credentials
-          </Button>
+          </button>
+
+          <button
+            onClick={() => setIsPasswordOpen(true)}
+            style={{
+              width: "100%",
+              height: "46px",
+              backgroundColor: "#ffffff",
+              color: "#1f2937",
+              border: "1px solid #cbd5e1",
+              borderRadius: "10px",
+              fontWeight: "600",
+              cursor: "pointer",
+              fontSize: "14px",
+              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+            }}
+          >
+            🔄 Change Password
+          </button>
         </div>
 
         <div className="profile-details-box" style={detailsContainerStyle}>
@@ -279,48 +360,66 @@ export default function Profile() {
             <span style={valueStyle}>{profile?.location || "Not Provided"}</span>
           </div>
         </div>
-      </div>
 
-      <Modal isOpen={isOpen} onClose={() => { if(!isSaving) setIsOpen(false); }} title="Edit Profile Details">
-        <div style={{ display: "flex", flexDirection: "column", gap: "18px", marginTop: "8px", fontFamily: "'Inter', sans-serif" }}>
-          <Input
-            label="Business Name"
-            name="business_name"
-            value={formData.business_name}
-            onChange={(e) => setFormData({ ...formData, business_name: e.target.value })}
-          />
+        {isOpen && (
+          <div style={modalOverlayStyle} onClick={() => setIsOpen(false)}>
+            <div style={modalBodyStyle} onClick={(e) => e.stopPropagation()}>
+              <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px", color: "#0f172a" }}>
+                Edit Profile Details
+              </h3>
 
-          <Input
-            label="Mobile Number"
-            name="mobile"
-            value={formData.mobile}
-            onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-          />
+              <label style={labelFormStyle}>Business Name</label>
+              <input type="text" value={formData.business_name} onChange={(e) => setFormData({ ...formData, business_name: e.target.value })} style={inputStyle} />
 
-          <Input
-            label="Business Type"
-            name="business_type"
-            value={formData.business_type}
-            onChange={(e) => setFormData({ ...formData, business_type: e.target.value })}
-          />
+              <label style={labelFormStyle}>Business Category</label>
+              <input type="text" value={formData.business_type} onChange={(e) => setFormData({ ...formData, business_type: e.target.value })} style={inputStyle} />
 
-          <Input
-            label="Location"
-            name="location"
-            value={formData.location}
-            onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-          />
+              <label style={labelFormStyle}>Operation Location</label>
+              <input type="text" value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} style={inputStyle} />
 
-          <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "12px" }}>
-            <Button variant="secondary" onClick={() => setIsOpen(false)} disabled={isSaving}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={handleSave} loading={isSaving}>
-              Save Changes
-            </Button>
+              <label style={labelFormStyle}>Mobile Number</label>
+              <input type="text" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })} style={inputStyle} />
+
+              <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "10px" }}>
+                <button onClick={() => setIsOpen(false)} style={{ padding: "10px 18px", borderRadius: "8px", border: "1px solid #cbd5e1", background: "#fff", cursor: "pointer" }}>
+                  Cancel
+                </button>
+                <button onClick={handleSave} disabled={isSaving} style={{ padding: "10px 18px", borderRadius: "8px", border: "none", background: "#3b82f6", color: "#fff", cursor: "pointer" }}>
+                  {isSaving ? "Saving..." : "Save"}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </Modal>
+        )}
+
+        {isPasswordOpen && (
+          <div style={modalOverlayStyle} onClick={() => setIsPasswordOpen(false)}>
+            <div style={modalBodyStyle} onClick={(e) => e.stopPropagation()}>
+              <h3 style={{ fontSize: "18px", fontWeight: "700", marginBottom: "20px", color: "#0f172a" }}>
+                Change Password
+              </h3>
+
+              <label style={labelFormStyle}>Old Password</label>
+              <input type="password" value={passwordData.oldPassword} onChange={(e) => setPasswordData({ ...passwordData, oldPassword: e.target.value })} style={inputStyle} />
+
+              <label style={labelFormStyle}>New Password</label>
+              <input type="password" value={passwordData.newPassword} onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })} style={inputStyle} />
+
+              <label style={labelFormStyle}>Confirm Password</label>
+              <input type="password" value={passwordData.confirmPassword} onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })} style={inputStyle} />
+
+              <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "10px" }}>
+                <button onClick={() => setIsPasswordOpen(false)} style={{ padding: "10px 18px", borderRadius: "8px", border: "1px solid #cbd5e1", background: "#fff", cursor: "pointer" }}>
+                  Cancel
+                </button>
+                <button onClick={handleChangePassword} disabled={isPasswordSaving} style={{ padding: "10px 18px", borderRadius: "8px", border: "none", background: "#111827", color: "#fff", cursor: "pointer" }}>
+                  {isPasswordSaving ? "Saving..." : "Confirm"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </PageContainer>
   );
 }

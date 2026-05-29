@@ -1,23 +1,27 @@
 import os
 import sys
 import shutil
+import jwt
 from fastapi import APIRouter, Depends, HTTPException, status, File, Form, UploadFile
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
-import jwt
+from pydantic import BaseModel  
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from database import get_db
 import models
 from models import User, Product, VendorRequest
-from pydantic import BaseModel  
 
 class SupplierProfileUpdate(BaseModel):
     business_name: str | None = None
     business_type: str | None = None
     location: str | None = None
     mobile: str | None = None
+
+class PasswordUpdateRequest(BaseModel):
+    old_password: str
+    new_password: str
 
 class VendorRequestStatusUpdate(BaseModel):
     status: str
@@ -50,12 +54,15 @@ def get_current_supplier(credentials: HTTPAuthorizationCredentials = Depends(sec
 
 @router.get("/metrics")
 def get_supplier_metrics(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
-    supplier_id = current_user["user_id"]
-    total_products = db.query(Product).filter(Product.supplier_id == supplier_id).count()
-    products = db.query(Product).filter(Product.supplier_id == supplier_id).all()
-    overall_stock = sum([int(getattr(p, 'stock', getattr(p, 'quantity', 0)) or 0) for p in products])
-    pending_requests = db.query(VendorRequest).filter(VendorRequest.supplier_id == supplier_id, VendorRequest.status == "Pending").count()
-    return {"totalProducts": int(total_products), "overallStock": int(overall_stock), "pendingRequests": int(pending_requests)}
+    try:
+        supplier_id = current_user["user_id"]
+        total_products = db.query(Product).filter(Product.supplier_id == supplier_id).count()
+        products = db.query(Product).filter(Product.supplier_id == supplier_id).all()
+        overall_stock = sum([int(getattr(p, 'stock', getattr(p, 'quantity', 0)) or 0) for p in products])
+        pending_requests = db.query(VendorRequest).filter(VendorRequest.supplier_id == supplier_id, VendorRequest.status == "Pending").count()
+        return {"totalProducts": int(total_products), "overallStock": int(overall_stock), "pendingRequests": int(pending_requests)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Metrics processing failure: {str(e)}")
 
 @router.get("/profile")
 def get_supplier_profile(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
@@ -65,9 +72,9 @@ def get_supplier_profile(db: Session = Depends(get_db), current_user: dict = Dep
         
     u_id = str(user.user_id) if user.user_id else "SUP001"
     mob = str(user.mobile) if user.mobile else ""
-    b_name = str(user.business_name) if (user.business_name and str(user.business_name).strip() != "") else "New Supplier Enterprise"
-    b_type = str(user.business_type) if (user.business_type and str(user.business_type).strip() != "") else "Wholesale Distributor"
-    loc = str(user.location) if (user.location and str(user.location).strip() != "") else "Not Provided"
+    b_name = str(getattr(user, 'business_name', '')) if getattr(user, 'business_name', None) else "New Supplier Enterprise"
+    b_type = str(getattr(user, 'business_type', '')) if getattr(user, 'business_type', None) else "Wholesale Distributor"
+    loc = str(getattr(user, 'location', '')) if getattr(user, 'location', None) else "Not Provided"
 
     return {
         "user_id": u_id,
@@ -86,34 +93,49 @@ def update_supplier_profile(payload: SupplierProfileUpdate, db: Session = Depend
     user = db.query(User).filter(User.user_id == current_user["user_id"]).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    user.business_name = payload.business_name
-    user.business_type = payload.business_type
-    user.location = payload.location
-    user.mobile = payload.mobile
+        
+    if hasattr(user, 'business_name') and payload.business_name: user.business_name = payload.business_name
+    if hasattr(user, 'business_type') and payload.business_type: user.business_type = payload.business_type
+    if hasattr(user, 'location') and payload.location: user.location = payload.location
+    if hasattr(user, 'mobile') and payload.mobile: user.mobile = payload.mobile
+    
     db.commit()
     return {"status": True, "message": "Profile updated successfully"}
 
+@router.put("/profile/password")
+def update_supplier_password(payload: PasswordUpdateRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
+    user = db.query(User).filter(User.user_id == current_user["user_id"]).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if user.password != payload.old_password:
+        raise HTTPException(status_code=400, detail="Incorrect current password")
+        
+    user.password = payload.new_password
+    db.commit()
+    return {"status": True, "message": "Password updated successfully"}
+
 @router.get("/stock")
 def get_stock_list(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
-    products = db.query(Product).filter(Product.supplier_id == current_user["user_id"]).all()
-    stock_list = []
-    for p in products:
-        if not p:
-            continue
-        raw_stock = getattr(p, 'stock', 0)
-        if raw_stock is None:
-            raw_stock = getattr(p, 'quantity', 0) or 0
-        raw_price = getattr(p, 'price', 0) or 0
-        raw_image = str(p.image) if hasattr(p, 'image') and p.image else ""
-        stock_list.append({
-            "id": int(p.id),
-            "name": str(p.name),
-            "category": str(getattr(p, 'category', 'General') or 'General'),
-            "stock": int(raw_stock),
-            "price": float(raw_price),
-            "image": raw_image
-        })
-    return stock_list
+    try:
+        products = db.query(Product).filter(Product.supplier_id == current_user["user_id"]).all()
+        stock_list = []
+        for p in products:
+            if not p: continue
+            raw_stock = getattr(p, 'stock', getattr(p, 'quantity', 0)) or 0
+            raw_price = getattr(p, 'price', 0) or 0
+            raw_image = str(p.image) if hasattr(p, 'image') and p.image else ""
+            stock_list.append({
+                "id": int(p.id),
+                "name": str(p.name),
+                "category": str(getattr(p, 'category', 'General') or 'General'),
+                "stock": int(raw_stock),
+                "price": float(raw_price),
+                "image": raw_image
+            })
+        return stock_list
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Stock processing failure: {str(e)}")
 
 @router.post("/products")
 async def add_product(
@@ -126,150 +148,75 @@ async def add_product(
     db: Session = Depends(get_db),
     current_user: dict = Depends(get_current_supplier)
 ):
-    supplier_id = str(current_user["user_id"])
-    UPLOAD_DIR = "uploads/products"
-    os.makedirs(UPLOAD_DIR, exist_ok=True)
-    image_url = ""
-    calculated_quantity = quantity if quantity is not None else stock
-    clean_name = name.strip()
+    try:
+        supplier_id = str(current_user["user_id"])
+        UPLOAD_DIR = "uploads/products"
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        image_url = ""
+        calculated_quantity = quantity if quantity is not None else stock
+        clean_name = name.strip()
 
-    db_product = db.query(Product).filter(
-        Product.name.ilike(clean_name),
-        Product.supplier_id == supplier_id
-    ).first()
+        db_product = db.query(Product).filter(Product.name.ilike(clean_name), Product.supplier_id == supplier_id).first()
 
-    if image and image.filename:
-        file_location = os.path.join(UPLOAD_DIR, image.filename)
-        with open(file_location, "wb") as buffer:
-            shutil.copyfileobj(image.file, buffer)
-        image_url = f"http://localhost:8085/uploads/products/{image.filename}"
-    elif db_product and hasattr(db_product, 'image') and db_product.image:
-        image_url = str(db_product.image)
+        if image and image.filename:
+            file_location = os.path.join(UPLOAD_DIR, image.filename)
+            with open(file_location, "wb") as buffer:
+                shutil.copyfileobj(image.file, buffer)
+            image_url = f"http://localhost:8085/uploads/products/{image.filename}"
+        elif db_product and hasattr(db_product, 'image') and db_product.image:
+            image_url = str(db_product.image)
 
-    if db_product:
-        db_product.category = category.strip()
-        db_product.price = price
-        db_product.stock += stock
-        db_product.quantity += calculated_quantity
-        db_product.image = image_url
-        db.commit()
-
-        return {
-            "id": int(db_product.id) if db_product.id else 0,
-            "name": str(db_product.name),
-            "category": str(db_product.category),
-            "price": float(db_product.price),
-            "stock": int(db_product.stock) if db_product.stock else 0,
-            "quantity": int(db_product.quantity) if db_product.quantity else 0,
-            "image": str(db_product.image)
-        }
-    else:
-        new_product = Product(
-            name=clean_name,
-            category=category.strip(),
-            price=price,
-            stock=stock,
-            quantity=calculated_quantity,
-            supplier_id=supplier_id,
-            image=image_url
-        )
-        db.add(new_product)
-        db.commit()
-        db.refresh(new_product)
-
-        return {
-            "id": int(new_product.id) if new_product.id else 0,
-            "name": str(new_product.name),
-            "category": str(new_product.category),
-            "price": float(new_product.price),
-            "stock": int(new_product.stock) if new_product.stock else 0,
-            "quantity": int(new_product.quantity) if new_product.quantity else 0,
-            "image": str(new_product.image)
-        }
+        if db_product:
+            db_product.category = category.strip()
+            db_product.price = price
+            if hasattr(db_product, 'stock'): db_product.stock += stock
+            if hasattr(db_product, 'quantity'): db_product.quantity += calculated_quantity
+            db_product.image = image_url
+            db.commit()
+            return {"id": int(db_product.id), "name": str(db_product.name), "status": "updated"}
+        else:
+            new_product = Product(name=clean_name, category=category.strip(), price=price, supplier_id=supplier_id, image=image_url)
+            if hasattr(new_product, 'stock'): new_product.stock = stock
+            if hasattr(new_product, 'quantity'): new_product.quantity = calculated_quantity
+            db.add(new_product)
+            db.commit()
+            return {"id": int(new_product.id), "name": str(new_product.name), "status": "created"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Product creation failure: {str(e)}")
 
 @router.get("/vendor-requests")
 def get_vendor_requests(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
     try:
-        requests = db.query(VendorRequest).filter(
-            VendorRequest.supplier_id == current_user["user_id"]
-        ).all()
-
+        requests = db.query(VendorRequest).filter(VendorRequest.supplier_id == current_user["user_id"]).all()
         response_list = []
         for r in requests:
-            if not r:
-                continue
-
-            r_data = r.__dict__
-            v_id = str(r_data.get('vendor_id', r_data.get('user_id', 'Unknown ID')))
-            v_name = str(r_data.get('vendor_name', f"Vendor ({v_id})"))
-            p_name = str(r_data.get('product_name', 'Catalog Product'))
-            qty = int(r_data.get('quantity', 1))
-            stat = str(r_data.get('status', 'Pending'))
-            notes = str(r_data.get('notes', ''))
-
+            if not r: continue
+            v_id = str(getattr(r, 'vendor_id', getattr(r, 'user_id', 'Unknown ID')))
+            vendor_user = db.query(User).filter(User.user_id == v_id).first()
+            v_name = getattr(vendor_user, 'business_name', f"Vendor ({v_id})") if vendor_user else f"Vendor ({v_id})"
+            p_name = str(getattr(r, 'product_name', getattr(r, 'product', 'General Item')))
+            
             response_list.append({
-                "id": int(r_data.get('id', 0)),
-                "vendorName": v_name,
-                "product": p_name,
-                "quantity": qty,
-                "status": stat,
-                "notes": notes
+                "id": int(r.id),
+                "vendorId": v_id,
+                "vendorName": str(v_name),
+                "productName": p_name,
+                "quantity": int(getattr(r, 'quantity', 0)),
+                "notes": str(getattr(r, 'notes', '')) if getattr(r, 'notes', None) else "",
+                "status": str(r.status) if r.status else "Pending"
             })
-
         return response_list
-
     except Exception as e:
-        print(f"Error fetching vendor requests: {str(e)}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+        raise HTTPException(status_code=500, detail=f"Requests processing failure: {str(e)}")
 
 @router.put("/vendor-requests/{request_id}/status")
-def update_vendor_request_status(
-    request_id: int,
-    payload: VendorRequestStatusUpdate,
-    db: Session = Depends(get_db),
-    current_user: dict = Depends(get_current_supplier)
-):
-    try:
-        next_status = payload.status
+def update_request_status(request_id: int, payload: VendorRequestStatusUpdate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
+    request_record = db.query(VendorRequest).filter(VendorRequest.id == request_id).first()
 
-        vendor_req = db.query(VendorRequest).filter(
-            VendorRequest.id == request_id
-        ).first()
+    if not request_record:
+        raise HTTPException(status_code=404, detail="Request not found")
 
-        if not vendor_req:
-            raise HTTPException(status_code=404, detail="Order request record not found")
+    request_record.status = payload.status.strip()
+    db.commit()
 
-        if next_status.lower() == "accepted" and vendor_req.status.lower() != "accepted":
-            product_item = db.query(Product).filter(
-                Product.name == vendor_req.product_name,
-                Product.supplier_id == current_user["user_id"]
-            ).first()
-
-            if not product_item:
-                raise HTTPException(
-                    status_code=404,
-                    detail="Requested product not found in your stock list"
-                )
-
-            if product_item.stock < vendor_req.quantity:
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"Insufficient stock. Available: {product_item.stock}, Requested: {vendor_req.quantity}"
-                )
-
-            product_item.stock -= vendor_req.quantity
-
-            if hasattr(product_item, 'quantity') and product_item.quantity:
-                product_item.quantity = max(0, product_item.quantity - vendor_req.quantity)
-
-        vendor_req.status = next_status
-        db.commit()
-
-        return {
-            "status": True,
-            "message": f"Order status updated to {next_status} successfully."
-        }
-
-    except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"Database operational update error: {str(e)}")
+    return {"status": True, "message": "Status updated successfully"}

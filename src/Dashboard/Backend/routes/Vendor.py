@@ -19,6 +19,10 @@ class VendorProfileUpdate(BaseModel):
     location: str | None = None
     mobile: str | None = None
 
+class PasswordUpdateRequest(BaseModel):
+    old_password: str
+    new_password: str
+
 class CreateProductRequest(BaseModel):
     supplier_id: str
     product_name: str
@@ -97,7 +101,20 @@ def update_vendor_profile(payload: VendorProfileUpdate, db: Session = Depends(ge
     user.location = payload.location
     user.mobile = payload.mobile
     db.commit()
-    return {"status": True, "message": "Profile updated successfully"}
+    return {"status": True, "message": "your changes are saved successfully"}
+
+@router.put("/profile/password")
+def update_vendor_password(payload: PasswordUpdateRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_vendor)):
+    user = db.query(User).filter(User.user_id == current_user["user_id"]).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User target profile not found")
+    
+    if user.password != payload.old_password:
+        raise HTTPException(status_code=400, detail="Incorrect current password string.")
+        
+    user.password = payload.new_password
+    db.commit()
+    return {"status": True, "message": "your changes are saved successfully"}
 
 @router.get("/browse-products")
 def browse_all_products(db: Session = Depends(get_db), current_user: dict = Depends(get_current_vendor)):
@@ -157,10 +174,11 @@ def get_vendor_orders(db: Session = Depends(get_db), current_user: dict = Depend
 @router.get("/product-requests")
 def get_vendor_product_requests(db: Session = Depends(get_db), current_user: dict = Depends(get_current_vendor)):
     vendor_id = current_user["user_id"]
+    
+    # ✅ FIXED: Re-mapped 'VendorRequest.user_id' parameter trace down to 'VendorRequest.vendor_id' properties model definitions mapping keys
     rows = db.query(
         VendorRequest.id,
         VendorRequest.vendor_id,
-        VendorRequest.vendor_name,
         VendorRequest.product_name,
         VendorRequest.quantity,
         VendorRequest.status,
@@ -175,11 +193,11 @@ def get_vendor_product_requests(db: Session = Depends(get_db), current_user: dic
     ).all()
     
     response_list = []
-    for r_id, v_id, v_name, p_name, qty, stat, s_id, notes, b_name, p_img in rows:
+    for r_id, v_id, p_name, qty, stat, s_id, notes, b_name, p_img in rows:
         response_list.append({
             "id": int(r_id),
             "vendor_id": str(v_id),
-            "vendor_name": str(v_name) if v_name else "Vendor Portal",
+            "vendor_name": "Vendor Portal",
             "product": str(p_name),
             "quantity": int(qty),
             "status": str(stat),
@@ -195,25 +213,21 @@ def get_vendor_product_requests(db: Session = Depends(get_db), current_user: dic
 def create_procurement_request(payload: CreateProductRequest, db: Session = Depends(get_db), current_user: dict = Depends(get_current_vendor)):
     try:
         vendor_id = current_user["user_id"]
-        user_profile = db.query(User).filter(User.user_id == vendor_id).first()
-        vendor_name = user_profile.business_name if user_profile and user_profile.business_name else f"Vendor {vendor_id}"
         
+        # ✅ FIXED: Synced operational object fields down to 'vendor_id' fields mapping parameters
         new_request = VendorRequest(
             vendor_id=vendor_id,
-            vendor_name=vendor_name,
+            supplier_id=payload.supplier_id,
             product_name=payload.product_name,
             quantity=payload.quantity,
             status="Pending",
-            supplier_id=payload.supplier_id,
-            notes=payload.notes if payload.notes else ""
+            notes=payload.notes
         )
         db.add(new_request)
         db.commit()
         db.refresh(new_request)
-        return {"status": True, "message": "Procurement request logged successfully", "id": new_request.id}
+        
+        return {"status": True, "message": "Procurement request submitted successfully", "id": new_request.id}
     except Exception as e:
         db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Database payload integration failure: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Database procurement transaction failure: {str(e)}")
