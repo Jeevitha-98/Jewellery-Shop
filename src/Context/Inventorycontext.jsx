@@ -46,7 +46,7 @@ export function InventoryProvider({ children }) {
         }),
         supplierService.getVendorRequests().catch(err => {
           console.error("Error loading Vendor Requests (Server 500):", err.message);
-          return { data: [] }; 
+          return { data: { status: "error", data: [] } }; 
         }),
         supplierService.getProfileDetails().catch(err => {
           console.error("Error loading Profile Details:", err.message);
@@ -54,12 +54,26 @@ export function InventoryProvider({ children }) {
         })
       ]);
 
+      // Unpack stock list records cleanly
       const stockData = stockRes?.data || stockRes;
-      const requestsData = requestsRes?.data || requestsRes;
+
+      // ✅ FIX: Safe unwrapping handles raw Axios objects and backend payload wrappers
+      let requestsData = [];
+      const rawRequestsObj = requestsRes?.data || requestsRes;
+      if (rawRequestsObj) {
+        if (Array.isArray(rawRequestsObj)) {
+          requestsData = rawRequestsObj;
+        } else if (rawRequestsObj.data && Array.isArray(rawRequestsObj.data)) {
+          requestsData = rawRequestsObj.data;
+        } else if (rawRequestsObj.vendor_requests && Array.isArray(rawRequestsObj.vendor_requests)) {
+          requestsData = rawRequestsObj.vendor_requests;
+        }
+      }
+
       const profileData = profileRes?.data || profileRes;
 
       setProducts(Array.isArray(stockData) ? stockData : []);
-      setVendorRequests(Array.isArray(requestsData) ? requestsData : []);
+      setVendorRequests(requestsData);
       setProfile(profileData || null);
     } catch (err) {
       console.error("Critical error inside dashboard sync routine:", err);
@@ -67,7 +81,6 @@ export function InventoryProvider({ children }) {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
@@ -102,9 +115,7 @@ export function InventoryProvider({ children }) {
       }
 
       await refreshDashboardData(); 
-
       logActivity(`Catalog update: Added/Replenished ${productStock} units of "${productName}" in stock.`, "Stock", false);
-
       return { success: true };
     } catch (err) {
       console.error("Failed to add product:", err);
@@ -120,8 +131,8 @@ export function InventoryProvider({ children }) {
   const updateRequestStatus = async (requestId, nextStatus) => {
     try {
       const targetReq = vendorRequests.find(r => r.id === requestId);
-      const pName = targetReq ? targetReq.product : "Goods";
-      const vName = targetReq ? targetReq.vendorName : "Vendor";
+      const pName = targetReq ? (targetReq.product_name || targetReq.product) : "Goods";
+      const vName = targetReq ? (targetReq.vendor_name || targetReq.vendorName) : "Vendor";
 
       await supplierService.updateVendorRequestStatus(requestId, nextStatus);
       
@@ -130,7 +141,6 @@ export function InventoryProvider({ children }) {
       );
 
       logActivity(`Order finalized: Procurement from "${vName}" for "${pName}" status set to [${nextStatus}].`, "Order", nextStatus === "Rejected");
-
       await refreshDashboardData();
       return { success: true };
     } catch (err) {

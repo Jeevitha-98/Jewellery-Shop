@@ -1,12 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useInventory } from "../../Context/Inventorycontext";
 import { useVendor } from "../../Context/Vendorcontext";
 import { useAdmin } from "../../Context/AdminContext";
 import profileIconImage from "../../Assests/Profileicon Image.jpg";
+import NotificationBell from "./NotificationBell";
+// ✅ FIXED RELATIVE IMPORT PATH: Points directly to the layout directory to resolve Vite compilation errors
+import { NotificationContext } from "./NotificationContext";
 
 export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
   const navigate = useNavigate();
+  
+  // Hook directly into your production real-time backend alerts manager context stream
+  const { notifications, unreadCount: contextUnread, markAllAsRead } = useContext(NotificationContext);
 
   const storageRole = (localStorage.getItem("role") || role || "").trim().toLowerCase();
   const isVendor = storageRole === "vendor";
@@ -47,8 +53,17 @@ export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
   };
 
   const getRecentActivities = () => {
-    const list = [];
+    // Priority 1: Map your active backend live context polling notifications array if populated
+    if (notifications && notifications.length > 0) {
+      return notifications.slice(0, 4).map(n => ({
+        id: n.id,
+        text: n.message || n.text || "System operation notification log row",
+        time: n.time || "Just now",
+        urgent: n.unread
+      }));
+    }
 
+    const list = [];
     if (isAdmin) {
       (adminNotifications || []).forEach((act, index) => {
         list.push({
@@ -75,7 +90,6 @@ export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
 
     (requests || []).forEach((req, index) => {
       const isPending = req.status?.toLowerCase() === "pending";
-
       list.push({
         id: req.id || `req-${index}`,
         text: isVendor
@@ -94,8 +108,7 @@ export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
   };
 
   const recentActivities = getRecentActivities();
-  const unreadCount = recentActivities.filter(a => a.urgent).length;
-
+  const unreadCount = contextUnread !== undefined ? contextUnread : recentActivities.filter(a => a.urgent).length;
   return (
     <div className="professional-navbar">
       <style>{`
@@ -116,6 +129,19 @@ export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
           width: 100%;
           box-sizing: border-box;
           transition: all 0.3s ease;
+        }
+
+        .nav-left-controls-box {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .nav-right-actions-box {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          position: relative;
         }
 
         .nav-action-btn {
@@ -276,143 +302,90 @@ export default function Navbar({ role = "supplier", toggleSidebar, isOpen }) {
         }
 
         .profile-trigger:hover {
-          background-color: #ffffff;
-          border-color: #f1f5f9;
-          box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+          background-color: #f1f5f9;
+          border-color: #e2e8f0;
         }
 
-        .profile-text-group {
+        .nav-avatar-img {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          object-fit: cover;
+          border: 1px solid #e2e8f0;
+        }
+
+        .meta-user-details {
           display: flex;
           flex-direction: column;
-          text-align: left;
+          align-items: flex-start;
         }
 
-        .user-name-text {
+        .meta-username {
           font-size: 14px;
           font-weight: 600;
           color: #0f172a;
           margin: 0;
-          line-height: 1.4;
-          letter-spacing: -0.01em;
         }
 
-        .user-id-badge {
+        .meta-role-tag {
           font-size: 11px;
           color: #64748b;
+          margin: 2px 0 0 0;
           font-weight: 500;
-          margin: 0;
-          line-height: 1.2;
           text-transform: uppercase;
-        }
-
-        .avatar-image {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid #ffffff;
-          box-shadow: 0 0 0 2px #e2e8f0;
-          background-color: #f8fafc;
-          transition: transform 0.2s ease;
-        }
-
-        .profile-trigger:hover .avatar-image {
-          transform: scale(1.04);
-          box-shadow: 0 0 0 2px #3b82f6;
-        }
-
-        @media (max-width: 1024px) {
-          .professional-navbar {
-            padding: 0 24px;
-            height: 64px;
-          }
-          .profile-text-group {
-            display: none; 
-          }
-          .profile-trigger {
-            padding: 4px;
-          }
+          letter-spacing: 0.02em;
         }
       `}</style>
+      
+      <div className="nav-left-controls-box">
+        <button className="nav-action-btn" onClick={toggleSidebar}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {isOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
+          </svg>
+        </button>
+      </div>
 
-      {/* Sidebar Toggle Button */}
-      <button className="nav-action-btn" onClick={toggleSidebar} aria-label="Toggle navigation menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          {isOpen ? (
-            <>
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </>
-          ) : (
-            <>
-              {/* menu icon */}
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <line x1="3" y1="12" x2="21" y2="12"></line>
-              <line x1="3" y1="18" x2="21" y2="18"></line>
-            </>
-          )}
-        </svg>
-      </button>
+      <div className="nav-right-actions-box" ref={notificationRef}>
+        <button className="nav-action-btn" onClick={() => {
+          setShowNotifications(!showNotifications);
+          if (!showNotifications) markAllAsRead();
+        }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          {unreadCount > 0 && <span className="notification-dot" />}
+        </button>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "16px", marginLeft: "auto" }}>
-        <div ref={notificationRef} style={{ position: "relative" }}>
-          <button
-            className="nav-action-btn bell-action-btn"
-            onClick={() => setShowNotifications(!showNotifications)}
-            aria-label="View alerts"
-          >
-            🔔
-            {unreadCount > 0 && <span className="notification-dot"></span>}
-          </button>
-
-          {showNotifications && (
-            <div className="notification-dropdown">
-              <div className="dropdown-header">
-                Notifications
-                {unreadCount > 0 && (
-                  <span className="dropdown-badge">{unreadCount} New</span>
-                )}
-              </div>
-
-              <div className="activity-scroll-area">
-                {recentActivities.length > 0 ? (
-                  recentActivities.map((a) => (
-                    <div key={a.id} className="activity-row">
-                      <p className="activity-text">{a.text}</p>
-                      <div className="activity-time-wrapper">
-                        <span className="activity-time">{a.time}</span>
-                        <span
-                          className="activity-status-dot"
-                          style={{
-                            backgroundColor: a.urgent ? "#ef4444" : "#3b82f6"
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div style={{ padding: "32px 20px", color: "#94a3b8", fontSize: "13px", textAlign: "center", fontWeight: "500" }}>
-                    No recent notifications
-                  </div>
-                )}
-              </div>
+        {showNotifications && (
+          <div className="notification-dropdown">
+            <div className="dropdown-header">
+              <span>Activity Alerts Stream</span>
+              {unreadCount > 0 && <span className="dropdown-badge">{unreadCount} New</span>}
             </div>
-          )}
-        </div>
+            <div className="activity-scroll-area">
+              {recentActivities.map((act) => (
+                <div key={act.id} className="activity-row">
+                  <p className="activity-text">{act.text}</p>
+                  <div className="activity-time-wrapper">
+                    <span className="activity-time">{act.time}</span>
+                    <span className="activity-status-dot" style={{ backgroundColor: act.urgent ? '#ef4444' : '#e2e8f0' }} />
+                  </div>
+                </div>
+              ))}
+              {recentActivities.length === 0 && (
+                <div className="activity-row" style={{ textAlign: 'center', color: '#94a3b8', padding: '24px' }}>
+                  Zero operational alerts logged.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="profile-trigger" onClick={goProfile}>
-          <img
-            src={profile?.avatar || profileIconImage}
-            className="avatar-image"
-            alt="profile"
-          />
-          <div className="profile-text-group">
-            <p className="user-name-text">
-              {profile?.business_name || profile?.name || (isAdmin ? "System Admin" : "User Account")}
-            </p>
-            <p className="user-id-badge">
-              {profile?.user_id || profile?.uid || "ID: admin-01"}
-            </p>
+          <img className="nav-avatar-img" src={profileIconImage} alt="User Avatar" onError={(e) => { e.target.src = "https://unsplash.com" }} />
+          <div className="meta-user-details">
+            <p className="meta-username">{profile?.business_name || profile?.name || "Workspace Partner"}</p>
+            <p className="meta-role-tag">{storageRole}</p>
           </div>
         </div>
       </div>

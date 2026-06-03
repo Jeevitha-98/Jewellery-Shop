@@ -6,9 +6,7 @@ import { toast } from "react-toastify";
 
 export default function VendorRequests() {
   const { products, vendorRequests, updateRequestStatus, refreshDashboardData } = useInventory();
-  
-  // Dynamic component tab filter state mapping unit
-  const [statusFilter, setStatusFilter] = useState("All"); // Options: "All", "Pending", "Accepted", "Rejected"
+  const [statusFilter, setStatusFilter] = useState("All"); 
 
   useEffect(() => {
     if (refreshDashboardData) {
@@ -17,27 +15,41 @@ export default function VendorRequests() {
   }, []);
 
   const handleAccept = async (id) => {
-    const request = vendorRequests.find((r) => r.id === id);
-    if (!request || request.status !== "Pending") return;
+    const request = (vendorRequests || []).find((r) => r && r.id === id);
+    if (!request) return;
 
-    const targetProduct = products.find(
-      (p) => p && p.name && p.name.toLowerCase() === request.product.toLowerCase()
+    const currentProductName = request.product_name || request.product || "Unknown Product";
+    const currentVendorName = request.vendor_name || request.vendorName || "BB";
+
+    const targetProduct = (products || []).find(
+      (p) => p && p.name && p.name.toLowerCase() === currentProductName.toLowerCase()
     );
 
     if (!targetProduct) {
-      toast.error(`Error: "${request.product}" does not exist in your warehouse system stock.`);
+      toast.error(`Error: "${currentProductName}" does not exist in your warehouse system stock.`);
       return;
     }
 
-    if (targetProduct.stock < request.quantity) {
-      toast.error(`Insufficient Stock! ${targetProduct.name} only has ${targetProduct.stock} units left.`);
+    // Convert stock properties safely to numbers to bypass verification type drops
+    const stockAvailable = Number(targetProduct.stock !== undefined ? targetProduct.stock : (targetProduct.quantity || 0));
+    const quantityDemanded = Number(request.quantity || 1);
+
+    if (stockAvailable < quantityDemanded) {
+      toast.error(`Insufficient Stock! ${targetProduct.name} only has ${stockAvailable} units left.`);
       return;
     }
 
     const result = await updateRequestStatus(id, "Accepted");
 
-    if (result && result.success) {
-      toast.success(`Request accepted! Dispatched ${request.quantity} units to ${request.vendorName}.`);
+    if (result && (result.success || result.status === 'success')) {
+      // ✅ REAL-TIME DEDUCTION TRIGGER: Forces warehouse memory array units down instantly upon clicking accept button
+      if (targetProduct.stock !== undefined) {
+        targetProduct.stock = stockAvailable - quantityDemanded;
+      } else if (targetProduct.quantity !== undefined) {
+        targetProduct.quantity = stockAvailable - quantityDemanded;
+      }
+
+      toast.success(`Request accepted! Dispatched ${quantityDemanded} units to ${currentVendorName}.`);
       if (refreshDashboardData) {
         await refreshDashboardData(); 
       }
@@ -48,8 +60,7 @@ export default function VendorRequests() {
 
   const handleReject = async (id) => {
     const result = await updateRequestStatus(id, "Rejected");
-    
-    if (result && result.success) {
+    if (result && (result.success || result.status === 'success')) {
       toast.info(`Procurement request from vendor rejected successfully.`);
       if (refreshDashboardData) {
         await refreshDashboardData();
@@ -59,118 +70,36 @@ export default function VendorRequests() {
     }
   };
 
-  // Perform localized array row filtering based on clicked active tab criteria
   const filteredRequests = (vendorRequests || []).filter((req) => {
     if (!req) return false;
     if (statusFilter === "All") return true;
-    return req.status?.toLowerCase() === statusFilter.toLowerCase();
+    const currentStatus = String(req.status || "").toLowerCase();
+    return currentStatus === statusFilter.toLowerCase();
   });
 
-  // Modern UI Style Blocks Matrix
-  const headerWrapperStyle = {
-    fontFamily: "'Inter', sans-serif",
-    marginBottom: "32px",
-    borderBottom: "1px solid #f1f5f9",
-    paddingBottom: "16px",
-    textAlign: "left"
-  };
-
-  const mainHeadingStyle = {
-    margin: "0 0 6px 0",
-    fontSize: "26px",
-    fontWeight: "700",
-    color: "#0f172a",
-    letterSpacing: "-0.02em"
-  };
-
-  const subHeadingStyle = {
-    margin: 0,
-    fontSize: "14px",
-    color: "#64748b",
-    fontWeight: "400"
-  };
-
-  const tableContainerStyle = {
-    background: "#ffffff",
-    borderRadius: "16px",
-    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05)",
-    border: "1px solid #e2e8f0",
-    overflow: "hidden",
-    width: "100%",
-    boxSizing: "border-box",
-    marginTop: "8px"
-  };
-
-  // Heading Header Row Layout holding both Title text and Tab Buttons block 
-  const tableTitleBarStyle = {
-    padding: "20px 24px",
-    borderBottom: "1px solid #e2e8f0",
-    backgroundColor: "#ffffff",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap: "16px"
-  };
-
-  const segmentConsoleStyle = {
-    display: "flex",
-    backgroundColor: "#f1f5f9",
-    padding: "4px",
-    borderRadius: "8px",
-    gap: "2px"
-  };
-
-  const tableStyle = {
-    width: "100%",
-    borderCollapse: "collapse",
-    textAlign: "left",
-    fontSize: "14px",
-    fontFamily: "'Inter', sans-serif"
-  };
-
-  const thStyle = {
-    padding: "18px 24px",
-    background: "#f8fafc",
-    color: "#475569",
-    fontWeight: "600",
-    fontSize: "12px",
-    textTransform: "uppercase",
-    letterSpacing: "0.06em",
-    borderBottom: "1px solid #e2e8f0",
-  };
-
-  const tdStyle = {
-    padding: "18px 24px",
-    color: "#334155",
-    borderBottom: "1px solid #f1f5f9",
-    verticalAlign: "middle",
-  };
-
-  const actionContainerStyle = {
-    display: "flex",
-    gap: "10px",
-    alignItems: "center",
-  };
-
+  const headerWrapperStyle = { fontFamily: "'Inter', sans-serif", marginBottom: "32px", borderBottom: "1px solid #f1f5f9", paddingBottom: "16px", textAlign: "left" };
+  const mainHeadingStyle = { margin: "0 0 6px 0", fontSize: "26px", fontWeight: "700", color: "#0f172a", letterSpacing: "-0.02em" };
+  const subHeadingStyle = { margin: 0, fontSize: "14px", color: "#64748b", fontWeight: "400" };
+  const tableContainerStyle = { background: "#ffffff", borderRadius: "16px", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05)", border: "1px solid #e2e8f0", overflow: "hidden", width: "100%", boxSizing: "border-box", marginTop: "8px" };
+  const tableTitleBarStyle = { padding: "20px 24px", borderBottom: "1px solid #e2e8f0", backgroundColor: "#ffffff", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px" };
+  const segmentConsoleStyle = { display: "flex", backgroundColor: "#f1f5f9", padding: "4px", borderRadius: "8px", gap: "2px" };
+  const tableStyle = { width: "100%", borderCollapse: "collapse", textAlign: "left", fontSize: "14px", fontFamily: "'Inter', sans-serif" };
+  const thStyle = { padding: "18px 24px", background: "#f8fafc", color: "#475569", fontWeight: "600", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.06em", borderBottom: "1px solid #e2e8f0" };
+  const tdStyle = { padding: "18px 24px", color: "#334155", borderBottom: "1px solid #f1f5f9", verticalAlign: "middle" };
+  const actionContainerStyle = { display: "flex", gap: "10px", alignItems: "center" };
   return (
     <PageContainer>
-      {/* TITLE CONTAINER */}
       <div style={headerWrapperStyle}>
         <h2 style={mainHeadingStyle}>Vendor Requests</h2>
         <p style={subHeadingStyle}>Manage incoming procurement and stock fulfillment requests from vendors.</p>
       </div>
 
-      {/* RESTRUCTURED DATA CONTAINER WALL */}
       <div style={tableContainerStyle}>
-        
-        {/* COMPACT TOP-BAR HEADER LINE: CONTAINS PREMIUM ALIGNED TABS CONTROLS */}
         <div style={tableTitleBarStyle}>
           <span style={{ fontSize: "16px", fontWeight: "700", color: "#0f172a", fontFamily: "'Inter', sans-serif" }}>
             Fulfillment Queue
           </span>
           
-          {/* HIGH-END INTERACTIVE TAB ROW SEGMENT PANEL */}
           <div style={segmentConsoleStyle}>
             {["All", "Pending", "Accepted", "Rejected"].map((tab) => {
               const isSelected = statusFilter === tab;
@@ -214,92 +143,77 @@ export default function VendorRequests() {
 
             <tbody>
               {filteredRequests && filteredRequests.length > 0 ? (
-                filteredRequests.map((req) => req && (
-                  <tr
-                    key={req.id}
-                    style={{ transition: "background-color 0.2s ease" }}
-                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
-                  >
-                    <td style={{ ...tdStyle, fontWeight: "600", color: "#0f172a" }}>{req.vendorName}</td>
-                    <td style={{ ...tdStyle, color: "#475569", fontWeight: "500" }}>{req.product}</td>
-                    <td style={{ ...tdStyle, fontFamily: "'JetBrains Mono', 'Fira Code', monospace", fontWeight: "600", color: "#0f172a", fontSize: "14px" }}>{req.quantity}</td>
-                    
-                    <td style={tdStyle}>
-                      <span
-                        style={{
-                          padding: "6px 14px",
-                          borderRadius: "8px",
-                          fontWeight: "600",
-                          fontSize: "12px",
-                          display: "inline-block",
-                          letterSpacing: "0.02em",
-                          background:
-                            req.status === "Accepted"
-                              ? "#e6f4ea"
-                              : req.status === "Rejected"
-                              ? "#fee2e2"
-                              : "#fef9c3",
-                          color:
-                            req.status === "Accepted"
-                              ? "#137333"
-                              : req.status === "Rejected"
-                              ? "#c53030"
-                              : "#a16207",
-                          border: `1px solid ${
-                            req.status === "Accepted"
-                              ? "#c4eed0"
-                              : req.status === "Rejected"
-                              ? "#fecaca"
-                              : "#fef08a"
-                          }`
-                        }}
-                      >
-                        {req.status}
-                      </span>
-                    </td>
+                filteredRequests.map((req) => {
+                  if (!req) return null;
+                  const displayStatus = req.status || "Pending";
+                  
+                  const finalVendorName = req.vendor_name || req.vendorName || "BB";
+                  const finalProductName = req.product_name || req.product || "Unknown Item";
 
-                    <td style={tdStyle}>
-                      <div style={actionContainerStyle}>
-                        <Button
-                          variant="success"
-                          onClick={() => handleAccept(req.id)}
-                          disabled={req.status !== "Pending"}
-                          style={{ 
-                            height: "36px", 
-                            fontSize: "13px", 
-                            padding: "0 16px", 
-                            fontWeight: "600", 
+                  return (
+                    <tr
+                      key={req.id}
+                      style={{ transition: "background-color 0.2s ease" }}
+                      onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f8fafc")}
+                      onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+                    >
+                      <td style={{ ...tdStyle, fontWeight: "600", color: "#0f172a" }}>{finalVendorName}</td>
+                      <td style={{ ...tdStyle, color: "#475569", fontWeight: "500" }}>{finalProductName}</td>
+                      <td style={{ ...tdStyle, fontFamily: "'JetBrains Mono', monospace", fontWeight: "600", color: "#0f172a", fontSize: "14px" }}>{req.quantity ?? 0}</td>
+                      
+                      {/* ✅ FIXED AND RECONSTRUCTED BADGES: Fully repaired the cutoff syntax loop cleanly */}
+                      <td style={tdStyle}>
+                        <span
+                          style={{
+                            padding: "6px 14px",
                             borderRadius: "8px",
-                            boxShadow: req.status === "Pending" ? "0 1px 2px 0 rgba(0, 0, 0, 0.05)" : "none"
+                            fontWeight: "600",
+                            fontSize: "12px",
+                            display: "inline-block",
+                            letterSpacing: "0.02em",
+                            background:
+                              displayStatus === "Accepted" || displayStatus === "Completed" || displayStatus === "Approved"
+                                ? "#e6f4ea"
+                                : displayStatus === "Rejected" || displayStatus === "Cancelled"
+                                ? "#fce8e6"
+                                : "#fef3c7",
+                            color:
+                              displayStatus === "Accepted" || displayStatus === "Completed" || displayStatus === "Approved"
+                                ? "#137333"
+                                : displayStatus === "Rejected" || displayStatus === "Cancelled"
+                                ? "#c5221f"
+                                : "#b45309"
                           }}
                         >
-                          Accept
-                        </Button>
+                          {displayStatus}
+                        </span>
+                      </td>
 
-                        <Button
-                          variant="danger"
-                          onClick={() => handleReject(req.id)}
-                          disabled={req.status !== "Pending"}
-                          style={{ 
-                            height: "36px", 
-                            fontSize: "13px", 
-                            padding: "0 16px", 
-                            fontWeight: "600", 
-                            borderRadius: "8px",
-                            boxShadow: req.status === "Pending" ? "0 1px 2px 0 rgba(0, 0, 0, 0.05)" : "none"
-                          }}
-                        >
-                          Reject
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                      <td style={tdStyle}>
+                        <div style={actionContainerStyle}>
+                          {displayStatus === "Pending" ? (
+                            <React.Fragment>
+                              <Button variant="success" size="small" onClick={() => handleAccept(req.id)}>
+                                Accept
+                              </Button>
+                              <Button variant="danger" size="small" onClick={() => handleReject(req.id)}>
+                                Reject
+                              </Button>
+                            </React.Fragment>
+                          ) : (
+                            <span style={{ fontSize: "12px", color: "#94a3b8", fontWeight: "500", fontStyle: "italic" }}>
+                              Processed
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
-                  <td colSpan="5" style={{ ...tdStyle, textAlign: "center", color: "#94a3b8", padding: "48px", fontSize: "14px", fontWeight: "400" }}>
-                    No registered order entries match the selected '{statusFilter}' status tag filter.
+                  <td colSpan="5" style={{ ...tdStyle, textAlign: "center", padding: "40px", color: "#94a3b8" }}>
+                    No procurement request entries recorded inside this filter queue context.
                   </td>
                 </tr>
               )}

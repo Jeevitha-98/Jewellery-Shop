@@ -942,6 +942,9 @@ import { InventoryProvider } from "./Context/Inventorycontext";
 import { VendorProvider } from "./Context/Vendorcontext";
 import { AdminProvider } from "./Context/AdminContext";
 
+// --- IMPORT NOTIFICATION SYSTEM CONTEXT ---
+import { NotificationProvider } from "./components/layout/NotificationContext";
+
 import Login from "./Dashboard/Login";
 
 // --- SUPPLIER PORTAL PAGES ---
@@ -952,6 +955,8 @@ import AddProduct from "./pages/Supplier/AddProduct";
 import Profile from "./pages/Supplier/Profile";
 import VendorRequests from "./pages/Supplier/VendorRequest";
 import SupplierOrders from "./pages/Supplier/OrderManagement";
+// ✅ FIXED: Imported your specific, dedicated Supplier Reports component file safely
+import SupplierReports from "./pages/Supplier/Reports";
 
 // --- VENDOR PORTAL PAGES ---
 import VendorLayout from "./Layout/VendorLayout";
@@ -961,6 +966,7 @@ import MyOrders from "./pages/Vendor/MyOrders";
 import RequestProduct from "./pages/Vendor/productRequest";
 import VendorProfile from "./pages/Vendor/Profile";
 import VendorOrders from "./pages/Vendor/OrderManagement";
+import VendorReports from "./pages/Vendor/Reports";
 
 // --- ADMIN PORTAL PAGES ---
 import AdminLayout from "./Layout/AdminLayout"; 
@@ -973,90 +979,105 @@ import AdminProfile from "./pages/Admin/Profile";
 import AdminStockMonitoring from "./pages/Admin/StockMonitoring"; 
 import AdminOrdersPage from "./pages/Admin/OrderManagement";
 import AdminReports from "./pages/Admin/Reports";
-
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
+    <NotificationProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
 
-        {/* --- SUPPLIER PORTAL ROUTE GROUP --- */}
-        <Route 
-          path="/supplier/dashboard/*" 
-          element={
-            <InventoryProvider>
-              <Routes>
-                <Route element={<SupplierLayout />}>
-                  <Route index element={<DashboardHome />} />
-                  <Route path="stock-list" element={<StockList />} />
-                  <Route path="add-product" element={<AddProduct />} />
-                  <Route path="profile" element={<Profile />} />
-                  <Route path="vendor-request" element={<VendorRequests />} />
-                  <Route path="vendor-requests" element={<VendorRequests />} />
-                  <Route path="order-management" element={<SupplierOrders />} />
-                </Route>
-              </Routes>
-            </InventoryProvider>
-          }
-        />
+          {/* --- SUPPLIER PORTAL ROUTE GROUP --- */}
+          <Route 
+            path="/supplier/dashboard/*" 
+            element={
+              <InventoryProvider>
+                <Routes>
+                  <Route element={<SupplierLayout />}>
+                    <Route index element={<DashboardHome />} />
+                    <Route path="stock-list" element={<StockList />} />
+                    <Route path="add-product" element={<AddProduct />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="vendor-request" element={<VendorRequests />} />
+                    <Route path="vendor-requests" element={<VendorRequests />} />
+                    
+                    {/* ✅ FIXED ROUTE ALIASES: Matches both path iterations to bypass 404 errors completely */}
+                    <Route path="order-management" element={<SupplierOrders />} />
+                    <Route path="orders" element={<SupplierOrders />} />
+                    
+                    <Route path="reports" element={<SupplierReports />} />
+                  </Route>
+                </Routes>
+              </InventoryProvider>
+            }
+          />
 
-        {/* --- VENDOR PORTAL ROUTE GROUP --- */}
-        <Route 
-          path="/vendor/dashboard/*" 
-          element={
-            <VendorProvider>
-              <Routes>
-                <Route element={<VendorLayout />}>
-                  <Route index element={<VendorDashboardHome />} />
-                  <Route path="browse-products" element={<BrowseProducts />} />
-                  <Route path="my-orders" element={<MyOrders />} />
-                  <Route path="request-product" element={<RequestProduct />} />
-                  <Route path="profile" element={<VendorProfile />} />
-                  <Route path="order-management" element={<VendorOrders />} />
-                </Route>
-              </Routes>
-            </VendorProvider>
-          }
-        />
+          {/* --- VENDOR PORTAL ROUTE GROUP --- */}
+          <Route 
+            path="/vendor/dashboard/*" 
+            element={
+              <VendorProvider>
+                <Routes>
+                  <Route element={<VendorLayout />}>
+                    <Route index element={<VendorDashboardHome />} />
+                    <Route path="browse-products" element={<BrowseProducts />} />
+                    <Route path="my-orders" element={<MyOrders />} />
+                    <Route path="request-product" element={<RequestProduct />} />
+                    <Route path="profile" element={<VendorProfile />} />
+                    
+                    {/* ✅ FIXED ROUTE ALIASES: Matches both path iterations to bypass 404 errors completely */}
+                    <Route path="order-management" element={<VendorOrders />} />
+                    <Route path="orders" element={<VendorOrders />} />
+                    
+                    <Route path="reports" element={<VendorReports />} />
+                  </Route>
+                </Routes>
+              </VendorProvider>
+            }
+          />
 
-        {/* --- ADMIN PORTAL ROUTE GROUP --- */}
-        <Route 
-          path="/admin/dashboard/*" 
-          element={
-            <AdminProvider>
-              <Routes>
-                <Route element={<AdminLayout />}>
-                  <Route index element={<AdminDashboardHome />} />
-                  <Route path="suppliers" element={<AdminSuppliers />} />
-                  <Route path="vendors" element={<AdminVendors />} />
-                  <Route path="products" element={<AdminProducts />} />
-                  <Route path="orders" element={<AdminOrders />} />
-                  <Route path="stock-monitoring" element={<AdminStockMonitoring />} /> 
-                  <Route path="profile" element={<AdminProfile />} />
-                  <Route path="order-management" element={<AdminOrdersPage />} />
-                  <Route path="reports" element={<AdminReports />} />
-                </Route>
-              </Routes>
-            </AdminProvider>
-          }
-        />
+          {/* --- ADMIN PORTAL ROUTE GROUP --- */}
+          <Route 
+            path="/admin/dashboard/*" 
+            element={
+              <AdminProvider>
+                <Routes>
+                  <Route element={<AdminLayout />}>
+                    <Route index element={<AdminDashboardHome />} />
+                    <Route path="suppliers" element={<AdminSuppliers />} />
+                    <Route path="vendors" element={<AdminVendors />} />
+                    <Route path="products" element={<AdminProducts />} />
+                    <Route path="stock-monitoring" element={<AdminStockMonitoring />} /> 
+                    <Route path="profile" element={<AdminProfile />} />
+                    
+                    {/* ✅ FIXED ROUTE ALIASES: Matches all path variations for administrative consistency */}
+                    <Route path="order-management" element={<AdminOrdersPage />} />
+                    <Route path="orders" element={<AdminOrdersPage />} />
+                    <Route path="admin-orders" element={<AdminOrders />} />
+                    
+                    <Route path="reports" element={<AdminReports />} />
+                  </Route>
+                </Routes>
+              </AdminProvider>
+            }
+          />
 
-        {/* --- LEGACY REDIRECT PATH CORES --- */}
-        <Route path="/pages/Supplier/DashboardHome" element={<Navigate to="/supplier/dashboard" replace />} />
-        <Route path="/pages/Supplier/StockList" element={<Navigate to="/supplier/dashboard/stock-list" replace />} />
-        <Route path="/pages/Supplier/AddProduct" element={<Navigate to="/supplier/dashboard/add-product" replace />} />
-        <Route path="/pages/Supplier/Profile" element={<Navigate to="/supplier/dashboard/profile" replace />} />
-        <Route path="/pages/Supplier/VendorRequest" element={<Navigate to="/supplier/dashboard/vendor-requests" replace />} />
+          {/* --- LEGACY REDIRECT PATH CORES --- */}
+          <Route path="/pages/Supplier/DashboardHome" element={<Navigate to="/supplier/dashboard" replace />} />
+          <Route path="/pages/Supplier/StockList" element={<Navigate to="/supplier/dashboard/stock-list" replace />} />
+          <Route path="/pages/Supplier/AddProduct" element={<Navigate to="/supplier/dashboard/add-product" replace />} />
+          <Route path="/pages/Supplier/Profile" element={<Navigate to="/supplier/dashboard/profile" replace />} />
+          <Route path="/pages/Supplier/VendorRequest" element={<Navigate to="/supplier/dashboard/vendor-requests" replace />} />
 
-        <Route path="/pages/Vendor/DashboardHome" element={<Navigate to="/vendor/dashboard" replace />} />
-        <Route path="/pages/Vendor/BrowseProducts" element={<Navigate to="/vendor/dashboard/browse-products" replace />} />
-        <Route path="/pages/Vendor/MyOrders" element={<Navigate to="/vendor/dashboard/my-orders" replace />} />
-        <Route path="/pages/Vendor/productRequest" element={<Navigate to="/vendor/dashboard/request-product" replace />} />
-        <Route path="/pages/Vendor/Profile" element={<Navigate to="/vendor/dashboard/profile" replace />} />
-       
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/pages/Vendor/DashboardHome" element={<Navigate to="/vendor/dashboard" replace />} />
+          <Route path="/pages/Vendor/BrowseProducts" element={<Navigate to="/vendor/dashboard/browse-products" replace />} />
+          <Route path="/pages/Vendor/MyOrders" element={<Navigate to="/vendor/dashboard/my-orders" replace />} />
+          <Route path="/pages/Vendor/productRequest" element={<Navigate to="/vendor/dashboard/request-product" replace />} />
+          <Route path="/pages/Vendor/Profile" element={<Navigate to="/vendor/dashboard/profile" replace />} />
+         
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </NotificationProvider>
   );
 }

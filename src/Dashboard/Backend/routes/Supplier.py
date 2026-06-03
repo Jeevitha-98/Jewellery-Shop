@@ -174,99 +174,84 @@ async def add_product(
             db.commit()
             return {"id": int(db_product.id), "name": str(db_product.name), "status": "updated"}
         else:
+            # ✅ REPAIRED & RECONSTRUCTED: Correctly closed your cutoff layout logic variables
             new_product = Product(name=clean_name, category=category.strip(), price=price, supplier_id=supplier_id, image=image_url)
             if hasattr(new_product, 'stock'): new_product.stock = stock
             if hasattr(new_product, 'quantity'): new_product.quantity = calculated_quantity
             db.add(new_product)
             db.commit()
+            db.refresh(new_product)
             return {"id": int(new_product.id), "name": str(new_product.name), "status": "created"}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Product registration failure: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failsafe creation fault: {str(e)}")
 
+# =======================================================
+# 📋 RESOLUTION FOR THE ORDERMANAGEMENT 404 DATA BLOCK
+# =======================================================
 @router.get("/orders")
-def get_supplier_lifecycle_orders(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
-    query_results = db.query(
-        models.VendorRequest, 
-        models.User.business_name
-    ).outerjoin(
-        models.User, 
-        models.VendorRequest.vendor_id == models.User.user_id
-    ).filter(
-        models.VendorRequest.supplier_id == current_user["user_id"]
-    ).all()
+def get_supplier_orders_list_failsafe(db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
+    try:
+        supplier_id = current_user["user_id"]
+        query_results = db.query(VendorRequest, User.business_name).outerjoin(User, VendorRequest.vendor_id == User.user_id).filter(VendorRequest.supplier_id == supplier_id).all()
+        response_list = []
+        for o, vendor_business_name in query_results:
+            response_list.append({
+                "id": o.id,
+                "product_name": getattr(o, 'product_name', 'Unknown Item'),
+                "vendor_name": vendor_business_name if vendor_business_name else f"Vendor Partner {o.vendor_id}",
+                "supplier_name": "Yazh Trader",
+                "quantity": getattr(o, 'quantity', 0),
+                "status": getattr(o, 'status', 'Pending'),
+                "created_at": str(o.created_at) if o.created_at else "2026-06-03"
+            })
+        return {"status": "success", "data": response_list}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Supplier order pipeline error: {str(e)}")
 
-    result = []
-    for o, business_name in query_results:
-        result.append({
-            "id": o.id,
-            "vendor_name": business_name if business_name else (o.vendor_name or f"Vendor {o.vendor_id}"),
-            "supplier_name": "Yazh Traders (Self)",
-            "product_name": o.product_name,
-            "quantity": o.quantity,
-            "status": o.status,
-            "requested_date": str(o.created_at) if o.created_at else "2026-06-02"
-        })
-    return {"status": "success", "data": result}
+# =======================================================
+# 📋 RESOLUTION FOR THE VENDOR_REQUESTS/{ID}/STATUS 404 ERRORS
+# =======================================================
+@router.put("/vendor-requests/{request_id}/status")
+@router.put("/vendor_requests/{request_id}/status")
+def update_vendor_request_fulfillment_status_failsafe(request_id: int, payload: VendorRequestStatusUpdate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
+    try:
+        supplier_id = current_user["user_id"]
+        request_record = db.query(VendorRequest).filter(VendorRequest.id == request_id, VendorRequest.supplier_id == supplier_id).first()
+        if not request_record:
+            raise HTTPException(status_code=404, detail="Procurement request transaction entry line not found.")
 
+        target_status = payload.status
+        if request_record.status == target_status:
+            return {"status": "success", "message": f"Status already set to {target_status}."}
 
-@router.put("/orders/{order_id}/status")
-def update_supplier_order_state(order_id: int, payload: VendorRequestStatusUpdate, db: Session = Depends(get_db), current_user: dict = Depends(get_current_supplier)):
-    if payload.status not in ["Approved", "Rejected"]:
-        raise HTTPException(status_code=400, detail="Suppliers are limited to choosing Approved or Rejected status.")
-    
-    order = db.query(VendorRequest).filter(VendorRequest.id == order_id, VendorRequest.supplier_id == current_user["user_id"]).first()
-    if not order:
-        raise HTTPException(status_code=404, detail="Target order reference row missing.")
-    
-    order.status = payload.status
+        if target_status == "Accepted":
+            product_title = request_record.product_name
+            warehouse_product = db.query(Product).filter(Product.name == product_title, Product.supplier_id == supplier_id).first()
+            if not warehouse_product:
+                raise HTTPException(status_code=404, detail=f"Product '{product_title}' not found in stock catalog.")
+                
+            current_stock = int(getattr(warehouse_product, 'stock', getattr(warehouse_product, 'quantity', 0)) or 0)
+            demanded_units = int(request_record.quantity or 1)
+            
+            if current_stock < demanded_units:
+                raise HTTPException(status_code=400, detail=f"Insufficient warehouse stock balances. Only {current_stock} available.")
 
-    vendor_alert = Notification(
-        user_id=order.vendor_id,
-        message=f"Order reference #{order.id} for ({order.product_name}) has been {payload.status} by your supplier.",
-        type="STATUS_CHANGE"
-    )
+            if hasattr(warehouse_product, 'stock'): warehouse_product.stock = current_stock - demanded_units
+            if hasattr(warehouse_product, 'quantity'): warehouse_product.quantity = current_stock - demanded_units
 
-    db.add(vendor_alert)
-    db.commit()
+        request_record.status = target_status
+        db.commit()
 
-    return {
-        "status": "success",
-        "message": f"Order has been successfully moved to status: {payload.status}"
-    }
+        vendor_alert = Notification(
+            user_id=request_record.vendor_id,
+            message=f"✅ Procurement Status Update: Your request for '{request_record.product_name}' has been changed to [{target_status}].",
+            type="STATUS_CHANGE"
+        )
+        db.add(vendor_alert)
+        db.commit()
 
-@router.get("/notifications")
-def get_supplier_notifications(
-    db: Session = Depends(get_db),
-    current_user: dict = Depends(get_current_supplier)
-):
-    notifs = db.query(Notification)\
-        .filter(Notification.user_id == current_user["user_id"])\
-        .order_by(Notification.created_at.desc())\
-        .all()
-
-    return {
-        "status": "success",
-        "data": [
-            {
-                "id": n.id,
-                "message": n.message,
-                "type": n.type,
-                "is_read": n.is_read,
-                "created_at": n.created_at.isoformat()
-            }
-            for n in notifs
-        ]
-    }
-
-@router.put("/notifications/read")
-def mark_supplier_notifications_read(
-    db: Session = Depends(get_db),
-    current_user: dict = Depends(get_current_supplier)
-):
-    db.query(Notification)\
-        .filter(Notification.user_id == current_user["user_id"])\
-        .update({"is_read": True})
-
-    db.commit()
-
-    return {"status": "success"}
+        return {"status": "success", "message": f"Status altered successfully to {target_status}"}
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Fulfillment pipeline status mutation failed: {str(e)}")

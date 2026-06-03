@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import OrderTable from '../../Components/feature/OrderTable';
+// ✅ FIXED: Connects directly to the native centralized notification module context
+import { NotificationContext } from '../../components/layout/NotificationContext';
 
 export default function OrderManagement() {
+  // ✅ CONSUME PIPELINE: Pull the explicit refresh action center handler
+  const { refresh: refreshNotifications } = useContext(NotificationContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,6 +54,10 @@ export default function OrderManagement() {
       const result = await response.json();
       if (response.ok && result.status === 'success') {
         fetchSupplierOrders();
+        // ✅ REAL-TIME REFRESH TRIGGER: Forces notification bar to pull backend updates instantly
+        if (typeof refreshNotifications === 'function') {
+          refreshNotifications();
+        }
       } else {
         alert(result.detail || 'Status alteration validation failed.');
       }
@@ -67,15 +75,17 @@ export default function OrderManagement() {
   };
 
   const filteredOrders = orders.filter(order => {
-    const matchesSearch = order.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          order.vendor_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          order.id.toString().includes(searchTerm);
+    if (!order) return false;
+    const pName = String(order.product_name || "").toLowerCase();
+    const vName = String(order.vendor_name || "").toLowerCase();
+    const sQuery = searchTerm.toLowerCase();
+
+    const matchesSearch = pName.includes(sQuery) || vName.includes(sQuery) || String(order.id || "").includes(searchTerm);
     const matchesStatus = statusFilter === 'All' || 
                           order.status === statusFilter || 
                           (statusFilter === 'Approved' && order.status === 'Accepted');
     return matchesSearch && matchesStatus;
   });
-
   const renderSupplierActions = (order) => (
     <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end", alignItems: "center" }}>
       
@@ -87,7 +97,7 @@ export default function OrderManagement() {
         View
       </button>
 
-      {/* 2. UPDATE STATUS DROPDOWN WIDGET (Always Visible Nearby) */}
+      {/* 2. UPDATE STATUS DROPDOWN WIDGET */}
       <select
         value={order.status === 'Accepted' ? 'Approved' : order.status}
         onChange={(e) => handleUpdateStatus(order.id, e.target.value)}
@@ -154,28 +164,26 @@ export default function OrderManagement() {
       ) : error ? (
         <div style={{ padding: "16px", backgroundColor: "#fef2f2", border: "1px solid #fee2e2", color: "#ef4444", borderRadius: "8px", fontWeight: "600", fontSize: "14px" }}>{error}</div>
       ) : (
-        <OrderTable orders={filteredOrders} renderActions={renderSupplierActions} />
+        <div style={{ backgroundColor: "#fff", padding: "16px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+          <OrderTable orders={filteredOrders} renderActions={renderSupplierActions} />
+        </div>
       )}
 
-      {/* VIEW DIALOG MODAL LAYOUT */}
+      {/* ✅ FIXED: Restored complete View Dialog Overlay Modal Portal Window */}
       {selectedOrder && (
         <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", backgroundColor: "rgba(15, 23, 42, 0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999 }}>
-          <div style={{ backgroundColor: "white", padding: "24px", borderRadius: "12px", width: "400px", border: "1px solid #e2e8f0", boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1)", textAlign: "left" }}>
-            <h3 style={{ margin: "0 0 16px 0", fontSize: "18px", fontWeight: "700", color: "#0f172a" }}>Order Specifications</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px", fontSize: "14px", color: "#334155" }}>
-              <div><strong>Order Reference:</strong> <span style={{ color: "#2563eb", fontWeight: "600" }}>#{selectedOrder.id}</span></div>
-              <div><strong>Purchasing Vendor:</strong> {selectedOrder.vendor_name}</div>
-              <div><strong>Fulfillment Partner:</strong> {selectedOrder.supplier_name}</div>
-              <div><strong>Product Name:</strong> {selectedOrder.product_name}</div>
-              <div><strong>Quantity Volume:</strong> {selectedOrder.quantity} Units</div>
-              <div><strong>Lifecycle State:</strong> {selectedOrder.status}</div>
-              <div><strong>Log Entry Date:</strong> {selectedOrder.requested_date}</div>
-            </div>
+          <div style={{ backgroundColor: "#fff", padding: "24px", borderRadius: "16px", width: "400px", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}>
+            <h3 style={{ margin: "0 0 16px 0", fontSize: "18px", color: "#0f172a", borderBottom: "1px solid #f1f5f9", paddingBottom: "10px" }}>Order Detail Audit</h3>
+            <p style={{ margin: "8px 0", fontSize: "14px", color: "#475569", textAlign: "left" }}><strong>Order ID:</strong> #{selectedOrder.id}</p>
+            <p style={{ margin: "8px 0", fontSize: "14px", color: "#475569", textAlign: "left" }}><strong>Product Name:</strong> {selectedOrder.product_name}</p>
+            <p style={{ margin: "8px 0", fontSize: "14px", color: "#475569", textAlign: "left" }}><strong>Vendor Client:</strong> {selectedOrder.vendor_name || "N/A"}</p>
+            <p style={{ margin: "8px 0", fontSize: "14px", color: "#475569", textAlign: "left" }}><strong>Quantity Requested:</strong> {selectedOrder.quantity} Units</p>
+            <p style={{ margin: "8px 0", fontSize: "14px", color: "#475569", textAlign: "left" }}><strong>Fulfillment Status:</strong> <span style={{ color: "#2563eb", fontWeight: 600 }}>{selectedOrder.status}</span></p>
             <button 
-              onClick={() => setSelectedOrder(null)}
-              style={{ width: "100%", marginTop: "24px", padding: "10px", backgroundColor: "#0f172a", color: "white", border: "none", borderRadius: "8px", fontWeight: "600", cursor: "pointer" }}
+              onClick={() => setSelectedOrder(null)} 
+              style={{ marginTop: "20px", width: "100%", padding: "10px 0", backgroundColor: "#3b82f6", color: "#fff", border: "none", borderRadius: "8px", cursor: "pointer", fontWeight: 600, fontSize: "14px" }}
             >
-              Dismiss Details Window
+              Close Record Window
             </button>
           </div>
         </div>

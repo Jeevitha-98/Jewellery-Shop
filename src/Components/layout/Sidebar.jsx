@@ -68,6 +68,18 @@ export default function Sidebar({ isOpen, role = "supplier" }) {
       )
     },
     { 
+    // NEW ACCESSIBLE PATH ELEMENT: Supplier Analytics Summary Panel
+    name: "Reports", 
+    path: "/supplier/dashboard/reports",
+    icon: (isActive) => (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+    )
+  },
+    { 
       name: "Profile", 
       path: "/supplier/dashboard/profile",
       icon: (isActive) => (
@@ -136,6 +148,16 @@ export default function Sidebar({ isOpen, role = "supplier" }) {
         </svg>
       )
     },
+    { name: "Reports", 
+  path: "/vendor/dashboard/reports",
+  icon: (isActive) => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#ffffff" : "#64748b"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.2s" }}>
+      <line x1="18" y1="20" x2="18" y2="10"></line>
+      <line x1="12" y1="20" x2="12" y2="4"></line>
+      <line x1="6" y1="20" x2="6" y2="14"></line>
+    </svg>
+  )
+},
     { 
       name: "Profile", 
       path: "/vendor/dashboard/profile",
