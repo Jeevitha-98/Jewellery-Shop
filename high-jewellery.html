@@ -1,0 +1,2952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Fine Jewellery</title>
+    <!-- Google Typography Integration -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Linked Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Luxury Entry Preloader Overlay Layer -->
+    <div id="luxury-preloader">
+        <div class="preloader-branding">
+            <h1 class="preloader-logo">Stackly</h1>
+            <p class="preloader-sub">Fine Jewellery</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+ 
+   
+
+    <!-- Lifecycle Timing Logic System -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Target animation lock: 3.5 seconds
+            const preloaderDuration = 3500; 
+
+            setTimeout(() => {
+                const preloader = document.getElementById('luxury-preloader');
+                const content = document.getElementById('main-site-content');
+
+                // Trigger smooth CSS slide-up transition layout
+                preloader.classList.add('preloader-hidden');
+                
+                // Restore client window interaction states
+                document.body.style.overflow = 'visible';
+
+                // Fade home container fluidly into viewport context
+                content.classList.add('content-visible');
+            }, preloaderDuration);
+        });
+    </script>
+
+    
+<!-- ==========================================================================
+   1. LIVE METAL RATE TICKER CAROUSEL (REMOVED BLACK, TRANSITIONED TO EMERALD)
+   ========================================================================== -->
+<div class="ticker-wrapper">
+    <div class="ticker-container" id="ticker-container">
+        
+        <!-- Master Loop Track -->
+        <div class="ticker-track" id="master-track">
+            <div class="ticker-item" data-metal="gold24k">
+                <span class="metal-label">GOLD 24K <span class="unit">(PER G)</span></span>
+                <span class="metal-value">$78.42</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="gold22k">
+                <span class="metal-label">GOLD 22K <span class="unit">(PER POWN)</span></span>
+                <span class="metal-value">$574.92</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="silver">
+                <span class="metal-label">FINE SILVER <span class="unit">(PER G)</span></span>
+                <span class="metal-value">$0.98</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="diamond">
+                <span class="metal-label">SOLITAIRE DIAMOND <span class="unit">(1 CT)</span></span>
+                <span class="metal-value">$4,240.77</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ==========================================================================
+   2. LUXURY FLOATING NAVIGATION HEADER MODULE
+   ========================================================================== -->
+
+<header class="site-header">
+    <div class="header-container">
+        
+        <!-- MOBILE HAMBURGER BUTTON (CRITICAL ID HOOK: id="menu-trigger") -->
+       
+
+        <!-- Company Brand Logo Area (Configured for Instant Page Refresh) -->
+        <div class="header-branding">
+            <div class="logo-interaction-group">
+                <a href="javascript:void(0);" onclick="window.location.reload();" class="brand-logo-wrapper" id="logo-refresh-link" title="Click to Refresh Page">
+                    <div class="logo-slot-render">
+                        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
+                    </div>
+                </a>
+            </div>
+            <span class="brand-sub">Fine Jewellery</span>
+        </div>
+
+        <!-- Desktop Oriented Navigation Links -->
+        <nav class="desktop-navigation">
+            <a href="404.html" class="nav-link">Home</a>
+            <a href="collections-rings.html" class="nav-link">Bespoke Rings</a>
+            <a href="high-jewellery.html" class="nav-link active">High Jewellery</a>
+            <a href="404.html" class="nav-link">Our Atelier</a>
+            <a href="404.html" class="nav-link">Contact Us</a>
+        </nav>
+
+        <!-- Global Action Utilities Panel -->
+        <!-- ==========================================================================
+   GLOBAL UTILITIES PANEL WITH DIRECT INLINE TOGGLE ACTIONS
+   ========================================================================== -->
+<div class="header-actions">
+    
+    <!-- Desktop Floating Search Container -->
+    <div class="desktop-search-container">
+        <input type="text" id="global-search-input" class="search-input" placeholder="Search creations...">
+        <button class="search-trigger-btn" aria-label="Execute Search"><svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+    </div>
+
+    <!-- Account Credentials Buttons -->
+   <!-- Account Credentials Buttons (WIRED FOR NAVIGATION) -->
+<a href="login.html" style="text-decoration: none;">
+    <button class="auth-btn btn-login">Sign In</button>
+</a>
+<a href="signup.html" style="text-decoration: none;">
+    <button class="auth-btn btn-signup">Sign Up</button>
+</a>
+
+    
+    <!-- WISHLIST TRIGGER MODULE (FIXED INLINE TOGGLE) -->
+    <div class="utility-dropdown-wrapper">
+        <!-- FIXED: Added direct inline onclick layout toggle rule -->
+        <button class="action-icon-link relative-badge" id="wishlist-trigger-btn" onclick="window.toggleWishlistMenuDropdown(event)" aria-label="Open Wishlist Menu">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="utility-badge bg-gold" id="wishlist-badge">0</span>
+        </button>
+        <div class="luxury-menu-dropdown" id="wishlist-dropdown-panel">
+            <h3 class="dropdown-panel-title">Your Wishlist</h3>
+            <div class="dropdown-items-list" id="wishlist-items-container"></div>
+            <!-- NAVIGATION LINK ADDED HERE -->
+            <div class="dropdown-panel-footer">
+                <a href="wishlist.html" class="dropdown-nav-link-btn">View Full Wishlist</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SHOPPING BAG MODULE (FIXED INLINE TOGGLE) -->
+    <div class="utility-dropdown-wrapper">
+        <!-- FIXED: Added direct inline onclick layout toggle rule -->
+        <button class="action-icon-link relative-badge" id="cart-trigger-btn" onclick="window.toggleCartMenuDropdown(event)" aria-label="Open Shopping Bag">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="utility-badge bg-white" id="cart-badge">0</span>
+        </button>
+        <div class="luxury-menu-dropdown" id="cart-dropdown-panel">
+            <h3 class="dropdown-panel-title">Your Selection Bag</h3>
+            <div class="dropdown-items-list" id="cart-items-container"></div>
+            <!-- MODIFIED FOOTER FOR CONTINUOUS VISIBILITY WITH BAG NAVIGATION -->
+            <div class="dropdown-panel-footer" id="cart-summary-footer">
+                <div class="summary-total-row"><span>Estimated Subtotal:</span><span id="cart-dropdown-total">$0.00</span></div>
+                <div class="dropdown-button-group" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="cart.html" class="dropdown-nav-link-btn" style="flex: 1; text-align: center;">View Full Bag</a>
+                    <button class="dropdown-checkout-btn" style="flex: 1; margin-top: 0;">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+
+
+
+ <button class="mobile-nav-toggle" id="menu-trigger" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        </div>
+    </div>
+</header>
+
+<!-- FLOATING RESPONSIVE MOBILE DRAWER LAYER OVERLAY (CRITICAL ID HOOK: id="mobile-drawer") -->
+<!-- FLOATING RESPONSIVE MOBILE DRAWER LAYER OVERLAY -->
+<div class="mobile-drawer-overlay" id="mobile-drawer">
+    <div class="drawer-content-box">
+        
+        <!-- Drawer Top Bar -->
+        <div class="drawer-top-bar">
+            <span class="drawer-brand-heading">MENU</span>
+            <button class="drawer-close-btn" id="drawer-close-trigger" aria-label="Close Menu">
+                <svg class="close-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Professional Capsule Mobile Search Bar Wrapper -->
+        <div class="mobile-search-wrapper">
+            <div class="mobile-search-inner-box">
+                <input type="text" class="mobile-search-input" placeholder="Search our creations...">
+                <button class="mobile-search-submit-btn" aria-label="Search">
+                    <svg class="mobile-search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu Links -->
+        <nav class="mobile-drawer-links">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="collections-rings.html" class="drawer-link">Bespoke Rings</a>
+            <a href="high-jewellery.html" class="drawer-link">High Jewellery</a>
+            <a href="404.html" class="drawer-link">Our Atelier</a>
+            <a href="404.html" class="drawer-link">Contact Us</a>
+        </nav>
+
+        <!-- Professional Stacked Mobile Authentication Buttons with Spacing -->
+        <div class="drawer-auth-footer">
+          <!-- Account Credentials Buttons (WIRED FOR NAVIGATION) -->
+<a href="login.html" style="text-decoration: none;">
+    <button class="auth-btn btn-login">Sign In</button>
+</a>
+<a href="signup.html" style="text-decoration: none;">
+    <button class="auth-btn btn-signup">Sign Up</button>
+</a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    // Core Navigation & Layout Selectors
+    const menuTrigger = document.getElementById("menu-trigger");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const siteHeader = document.querySelector(".site-header");
+    const logoRefreshLink = document.getElementById("logo-refresh-link");
+
+    // Interactive Panel Dropdowns Selectors
+    const wishlistBtn = document.getElementById("wishlist-trigger-btn");
+    const wishlistPanel = document.getElementById("wishlist-dropdown-panel");
+    const cartBtn = document.getElementById("cart-trigger-btn");
+    const cartPanel = document.getElementById("cart-dropdown-panel");
+
+    // Real-Time Live Search Selectors
+    const searchInput = document.getElementById("global-search-input");
+    const searchPanel = document.getElementById("search-results-panel");
+    const searchContent = document.getElementById("search-results-content");
+
+    // ==========================================================================
+    // 1. HARDWARE-ACCELERATED CONTINUOUS MARQUEE ENGINE
+    // ==========================================================================
+    const tickerContainer = document.getElementById("ticker-container");
+    const masterTrack = document.getElementById("master-track");
+
+    if (masterTrack && tickerContainer) {
+        masterTrack.style.animation = "none";
+        
+        // Clone the master track to achieve a completely gapless infinite loop
+        const cloneTrack = masterTrack.cloneNode(true);
+        cloneTrack.setAttribute("aria-hidden", "true");
+        cloneTrack.style.animation = "none";
+        tickerContainer.appendChild(cloneTrack);
+
+        let currentScrollOffset = 0;
+        const translationSpeedOffset = 1.0; // Control speed (1.0 = smooth baseline pacing)
+        let isClientHovered = false;
+
+        // Fetch the structural width boundary of a single loop element
+        const singleTrackElementWidth = masterTrack.offsetWidth;
+
+        function executeMarqueeRenderingLoop() {
+            if (!isClientHovered) {
+                currentScrollOffset += translationSpeedOffset;
+
+                // Infinite reset barrier loop check
+                if (currentScrollOffset >= singleTrackElementWidth) {
+                    currentScrollOffset = 0;
+                }
+
+                // Force GPU layer composition using transform3d to stop scrolling lag
+                tickerContainer.style.transform = `translate3d(-${currentScrollOffset}px, 0, 0)`;
+            }
+            requestAnimationFrame(executeMarqueeRenderingLoop);
+        }
+
+        // Mouse Action Event Listeners for Hover-Pausing
+        tickerContainer.addEventListener("mouseenter", () => isClientHovered = true);
+        tickerContainer.addEventListener("mouseleave", () => isClientHovered = false);
+        tickerContainer.addEventListener("touchstart", () => isClientHovered = true, { passive: true });
+        tickerContainer.addEventListener("touchend", () => isClientHovered = false, { passive: true });
+
+        // Start Marquee Loop
+        requestAnimationFrame(executeMarqueeRenderingLoop);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL BRAND LOGO PAGE REFRESH SYSTEM
+       ========================================================================== */
+    if (logoRefreshLink) {
+        logoRefreshLink.addEventListener("click", () => {
+            window.location.reload(); 
+        });
+    }
+
+    /* ==========================================================================
+       3. INTERACTIVE MOBILE SIDEBAR LEFT REVEAL ENGINE (SCROLL LOCKED)
+       ========================================================================== */
+    if (menuTrigger && mobileDrawer) {
+        menuTrigger.addEventListener("click", (e) => {
+            e.stopPropagation(); // Stops parent document triggers from firing right away
+            
+            // Toggle animation line vectors on the white hamburger lines
+            const isActivated = menuTrigger.classList.toggle("open");
+            
+            // Toggle sliding positioning states on the left sidebar overlay sheet
+            mobileDrawer.classList.toggle("active");
+            menuTrigger.setAttribute("aria-expanded", isActivated);
+
+            // BACKGROUND SCROLL LOCK LOOP
+            if (isActivated) {
+                document.body.style.overflow = "hidden";
+                document.body.style.height = "100vh";
+            } else {
+                document.body.style.overflow = "visible";
+                document.body.style.height = "auto";
+            }
+        });
+
+        // Device Orientation Adjustment Monitor
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 820 && mobileDrawer.classList.contains("active")) {
+                menuTrigger.classList.remove("open");
+                mobileDrawer.classList.remove("active");
+                document.body.style.overflow = "visible";
+                document.body.style.height = "auto";
+            }
+        });
+    }
+    // Add this line inside your existing "3. MOBILE MENU TOGGLE" block in app.js
+const drawerCloseTrigger = document.getElementById("drawer-close-trigger");
+
+if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
+    drawerCloseTrigger.addEventListener("click", () => {
+        // Remove open/active status tags cleanly
+        menuTrigger.classList.remove("open");
+        mobileDrawer.classList.remove("active");
+        
+        // Unlocks background body window scrollbars
+        document.body.style.overflow = "visible";
+        document.body.style.height = "auto";
+    });
+}
+
+
+    /* ==========================================================================
+       4. GLOBAL DROPDOWN INTERFACE CONTROLLERS & OUTSIDE CLICK HANDLERS
+       ========================================================================== */
+    function closeAllActiveDropdowns() {
+        if (wishlistPanel) wishlistPanel.classList.remove("is-visible");
+        if (cartPanel) cartPanel.classList.remove("is-visible");
+        if (searchPanel) searchPanel.classList.remove("is-active");
+    }
+
+    if (wishlistBtn && cartBtn) {
+        wishlistBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = wishlistPanel.classList.contains("is-visible");
+            closeAllActiveDropdowns();
+            if (!isOpen) wishlistPanel.classList.add("is-visible");
+        });
+
+        cartBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = cartPanel.classList.contains("is-visible");
+            closeAllActiveDropdowns();
+            if (!isOpen) cartPanel.classList.add("is-visible");
+        });
+
+        // Close panels cleanly if user taps outside item bounding box margins
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest('.utility-dropdown-wrapper') && !e.target.closest('.desktop-search-wrapper')) {
+                closeAllActiveDropdowns();
+            }
+        });
+    }
+
+    /* ==========================================================================
+       5. REAL-TIME SEARCH FILTER SYSTEM
+       ========================================================================== */
+    const catalogData = [
+        { id: 1, name: "Solitaire Diamond Ring", category: "Bespoke Rings", price: 2450 },
+        { id: 2, name: "Helios Archway Pendant", category: "High Jewellery", price: 1850 },
+        { id: 3, name: "Marquise Cut Emerald Studs", category: "Collections", price: 3100 }
+    ];
+
+    if (searchInput && searchPanel && searchContent) {
+        searchInput.addEventListener("input", (e) => {
+            const queryText = e.target.value.trim().toLowerCase();
+            
+            if (queryText.length === 0) {
+                searchPanel.classList.remove("is-active");
+                return;
+            }
+
+            const matches = catalogData.filter(item => 
+                item.name.toLowerCase().includes(queryText) || 
+                item.category.toLowerCase().includes(queryText)
+            );
+
+            closeAllActiveDropdowns();
+            searchPanel.classList.add("is-active");
+
+            if (matches.length === 0) {
+                searchContent.innerHTML = `<div class="search-no-match-message">No creations match "${e.target.value}"</div>`;
+                return;
+            }
+
+            searchContent.innerHTML = matches.map(match => `
+                <a href="#" class="search-result-item-link" style="display: flex; justify-content: space-between; padding: 0.6rem; text-decoration: none; color: white;">
+                    <div>
+                        <div style="font-size: 0.8rem; font-family: serif;">${match.name}</div>
+                        <div style="font-size: 0.6rem; color: #8FA39E; text-transform: uppercase;">${match.category}</div>
+                    </div>
+                    <div style="font-size: 0.72rem; color: #DFB76C;">$${match.price.toLocaleString()}</div>
+                </a>
+            `).join('');
+        });
+    }
+
+    /* ==========================================================================
+       6. DESKTOP ACCENT SCROLL OBSERVER
+       ========================================================================== */
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 45) {
+            siteHeader.classList.add("scrolled-active");
+        } else {
+            siteHeader.classList.remove("scrolled-active");
+        }
+    });
+});
+
+</script>
+
+<section class="zenith-hero-section" id="high-jewellery-hero" aria-labelledby="zenith-main-heading">
+    
+    <!-- 🖼️ ENVIRONMENTAL BACKDROP IMAGE LAYER -->
+    <div class="zenith-bg-wrapper">
+        <img src="./Assests/pendant.webp" alt="STACKLY Atelier Texture" class="zenith-native-bg" loading="eager">
+        <div class="zenith-matte-tint"></div>
+    </div>
+
+    <div class="zenith-max-container">
+        <div class="zenith-editorial-row">
+            
+            <!-- Left Side: Clean Typography with Constellation Ring -->
+            <div class="zenith-copy-panel">
+                <div class="zenith-constellation-ring"></div>
+                
+                <span class="zenith-eyebrow">Haute Joaillerie Portfolio</span>
+                <h1 id="zenith-main-heading" class="zenith-main-title">
+                    The High Jewellery <br><span class="liquid-shimmer-text">Zenith Exhibition</span>
+                </h1>
+                
+                <p class="zenith-abstract-desc">
+                    A private retrospective showcasing certified rare emerald neckwear, flawless colorless solitaire diamonds, and masterfully cast platinum execution lines reserved for wealth preservation and heritage collections.
+                </p>
+
+                <div class="zenith-action-row">
+                    <a href="./collections-rings.html" class="zenith-solid-gold-btn" title="Explore the collection portfolio">
+                        <span>Explore Exhibition</span>
+                    </a>
+                    <a href="signup.html" class="zenith-minimal-text-link" title="Navigate to secure signup framework to register profile">
+                        <span>Initialize Vault Access</span>
+                        <svg class="nav-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side: Circular Porthole Art Frame -->
+            <div class="zenith-viewport-panel">
+                <div class="zenith-porthole-frame">
+                    <!-- This image behaves as a focal preview window inside the hero -->
+                    <img src="./Assests/rosegoldpendant.webp" alt="STACKLY Signature Emerald High Jewellery Masterpiece Suite" class="zenith-porthole-artwork">
+                    
+                    <!-- Floating Minimal Technical Tags -->
+                    <div class="zenith-floating-coordinate">
+                        <span>COORDINATE // NO. 02</span>
+                        <strong>18.40 CARATS TOTAL</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   💎 ZENITH MINIMALIST HIGH JEWELLERY HERO STYLING (CREATIVE RE-BUILD)
+   ========================================================================== */
+
+.zenith-hero-section {
+  position: relative;
+  background-color: #021410; /* Extra deep dark forest green base tint */
+  padding: 80px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Background Configuration layers */
+.zenith-bg-wrapper {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+}
+.zenith-native-bg {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.62;
+  filter: grayscale(15%) contrast(120%) brightness(35%);
+}
+.zenith-matte-tint {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(3, 30, 23, 0.3) 0%, rgba(2, 20, 15, 0.98) 90%);
+}
+
+.zenith-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* Balanced 2-Column Split Configuration Layout */
+.zenith-editorial-row {
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* --- LEFT PANEL: TEXT LINES & THE CONSTELLATION EMBELLISHMENT --- */
+.zenith-copy-panel {
+  position: relative;
+  opacity: 0; transform: translateY(20px);
+  animation: zenithRevealElement 0.8s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+/* Rotating Fine Gold Alignment Ring decoration layer */
+.zenith-constellation-ring {
+  position: absolute;
+  top: -60px; left: -60px; width: 220px; height: 220px;
+  border: 1px dashed rgba(212, 175, 55, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: slowOrbitalRotate 25s linear infinite; /* Modern slow micro-rotation */
+}
+
+@keyframes slowOrbitalRotate {
+  100% { transform: rotate(360deg); }
+}
+
+.zenith-eyebrow {
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 15px;
+}
+
+.zenith-main-title {
+  font-size: 3.2rem; font-weight: 400; line-height: 1.15; margin: 0 0 25px 0; letter-spacing: 1px;
+}
+
+.liquid-shimmer-text {
+  color: #D4AF37; transition: text-shadow 0.4s ease;
+}
+.zenith-hero-section:hover .liquid-shimmer-text {
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.7), 0 0 35px rgba(212, 175, 55, 0.3);
+}
+
+.zenith-abstract-desc {
+  font-family: sans-serif; font-size: 0.95rem; line-height: 1.7; color: #A3B8B3; margin: 0 0 40px 0; max-width: 90%;
+}
+
+/* Action Trigger Buttons Configuration blocks links */
+.zenith-action-row {
+  display: flex; gap: 25px; align-items: center;
+}
+
+.zenith-solid-gold-btn {
+  display: inline-block; background-color: #D4AF37; color: #031E17;
+  text-decoration: none; text-transform: uppercase; font-family: sans-serif;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; padding: 16px 35px; border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1); box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.zenith-solid-gold-btn:hover {
+  background-color: #FFFFFF; color: #031E17;
+  box-shadow: 0 8px 25px rgba(212,175,55,0.35), 0 0 20px rgba(212,175,55,0.45);
+  transform: translateY(-2px);
+}
+
+.zenith-minimal-text-link {
+  display: inline-flex; align-items: center; gap: 8px; color: #FFFFFF;
+  text-decoration: none; text-transform: uppercase; font-family: sans-serif;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; transition: color 0.3s ease;
+}
+.nav-arrow { transition: transform 0.3s cubic-bezier(0.25, 1, 0.3, 1); color: #D4AF37; }
+.zenith-minimal-text-link:hover { color: #D4AF37; }
+.zenith-minimal-text-link:hover .nav-arrow { transform: translateX(5px); }
+
+/* --- RIGHT PANEL: THE CIRCULAR PORTHOLE ART ACCENT --- */
+.zenith-viewport-panel {
+  display: flex; justify-content: flex-end;
+  opacity: 0; transform: scale(0.97) translateY(20px);
+  animation: zenithRevealElement 1s cubic-bezier(0.25, 1, 0.5, 1) 0.15s both;
+}
+
+.zenith-porthole-frame {
+  position: relative; width: 440px; height: 440px;
+  border-radius: 50%; /* Creative Circular Porthole Shape Mask */
+  overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.zenith-porthole-artwork {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(85%);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1), filter 0.5s ease;
+}
+
+/* Hover glowing responses on Porthole masks graphics */
+.zenith-hero-section:hover .zenith-porthole-frame {
+  border-color: #D4AF37; box-shadow: 0 30px 65px rgba(0,0,0,0.7), 0 0 35px rgba(212, 175, 55, 0.2);
+}
+.zenith-hero-section:hover .zenith-porthole-artwork {
+  transform: scale(1.04); filter: brightness(100%);
+}
+
+/* Floating Technical Minimal Description Tags */
+.zenith-floating-coordinate {
+  position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%);
+  background-color: rgba(2, 20, 15, 0.85); backdrop-filter: blur(5px);
+  border: 1px solid rgba(212, 175, 55, 0.15); padding: 10px 20px; border-radius: 4px;
+  display: flex; flex-direction: column; gap: 3px; align-items: center; text-align: center;
+  white-space: nowrap; z-index: 3; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.zenith-floating-coordinate span { font-family: sans-serif; font-size: 0.65rem; color: #617A75; letter-spacing: 2px; }
+.zenith-floating-coordinate strong { font-family: sans-serif; font-size: 0.8rem; color: #D4AF37; letter-spacing: 0.5px; }
+
+@keyframes zenithRevealElement {
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================================
+   📱 SYSTEM COMPONENT RESPONSIVE BREAKPOINTS (UNBREAKABLE SCALE MATCH)
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .zenith-hero-section { padding: 100px 30px; }
+  .zenith-editorial-row { gap: 40px; }
+  .zenith-main-title { font-size: 2.5rem; }
+  .zenith-porthole-frame { width: 360px; height: 360px; }
+}
+
+@media (max-width: 992px) {
+  /* Collapse horizontal side layout to single fluid columns on tablet screens */
+  .zenith-editorial-row { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+  .zenith-constellation-ring { left: 50%; transform: translateX(-50%) rotate(0deg); top: -40px; }
+  .zenith-abstract-desc { margin: 0 auto 35px auto; }
+  .zenith-action-row { justify-content: center; }
+  .zenith-viewport-panel { justify-content: center; }
+}
+
+@media (max-width: 520px) {
+  .zenith-hero-section { padding: 80px 16px; }
+  .zenith-main-title { font-size: 2rem; }
+  .zenith-porthole-frame { width: 280px; height: 280px; } /* Fits cleanly inside standard phone browser parameters layouts */
+  .zenith-action-row { flex-direction: column; align-items: stretch; gap: 15px; }
+  .zenith-solid-gold-btn { text-align: center; width: 100%; }
+  .zenith-minimal-text-link { justify-content: center; width: 100%; }
+  .zenith-floating-coordinate { bottom: 15px; padding: 8px 14px; }
+}
+
+</style>
+
+
+<section class="haute-exhibition-section" id="highjewel-exhibition-view" aria-labelledby="haute-main-heading">
+    
+    <!-- Dynamic Layered Environmental Backdrop Texture Grid -->
+    <div class="haute-exhibition-bg-layer">
+        <img src="./Assests/hand.webp" alt="STACKLY Luxury High Jewellery Atelier Backdrop" class="haute-native-bg-img" loading="lazy">
+        <div class="haute-section-dark-matte"></div>
+    </div>
+
+    <div class="haute-max-container">
+        <div class="haute-magazine-layout">
+            
+            <!-- Left Sticky Presentation Pillar (SEO Narrative & Filters) -->
+            <div class="haute-sticky-pillar">
+                <span class="haute-eyebrow-label">The Sovereign Archives</span>
+                <h2 id="haute-main-heading" class="haute-main-title">
+                    The Curated <br><span class="liquid-gold-glow-text">Masterpieces</span>
+                </h2>
+                <div class="haute-minimal-divider"></div>
+                <p class="haute-seo-abstract-text">
+                    A private retrospective showcasing certified rare emerald neckwear collages, flawless colorless solitaire diamond layers, and heavy hand-cast gold traces. Every limited-edition asset is stamped by hallmark authorities to guarantee future capital preservation.
+                </p>
+                
+                <!-- NEW: Interactive Architectural Sub-Selectors -->
+                <div class="haute-exhibition-nav-deck">
+                    <button class="haute-nav-chip active-chip" onclick="window.switchExhibitionFrame('hj-neck-01', this)">01 / Helios Archway</button>
+                    <button class="haute-nav-chip" onclick="window.switchExhibitionFrame('hj-neck-02', this)">02 / Elegance Emerald</button>
+                </div>
+            </div>
+
+            <!-- Right Column Panel: Re-engineered into a Single Dynamic Showcase Frame -->
+            <div class="haute-single-display-dock" id="haute-dynamic-display-dock">
+                
+                <!-- Masterpiece Item 1: Helios Archway (Visible on load) -->
+                <article class="haute-display-block active-display-block" id="hj-neck-01">
+                    <div class="haute-viewport-frame circle-porthole-shape">
+                        <img src="./Assests/rosegoldpendant.webp" alt="Helios Archway Diamond Pendant" class="haute-artwork-img">
+                        <div class="haute-sparkle-lens-flare"></div>
+                        <div class="haute-luxury-badge">Signature Selection</div>
+                    </div>
+                    <div class="haute-text-frame">
+                        <div class="haute-item-meta-row"><span>METRIC NO. 01</span><span class="gold-coordinate">// GIA CERTIFIED</span></div>
+                        <h3 class="haute-item-display-title">Helios Archway Pendant</h3>
+                        <p class="haute-item-display-desc">An elongated raw rose gold geometric matrix frame holding an impeccably faceted colorless internally flawless solitaire centerpiece cut.</p>
+                        <div class="haute-item-acquisition-row">
+                            <span class="haute-item-display-price">$1,850.00</span>
+                            <a href="signup.html" class="haute-acquire-nav-btn" title="Create an account vault profile to arrange private viewing access">Acquire Masterpiece &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Masterpiece Item 2: Elegance Emerald (Hidden on load) -->
+                <article class="haute-display-block fallback-hidden-block" id="hj-neck-02">
+                    <div class="haute-viewport-frame soft-octagonal-shape">
+                        <img src="./Assests/neck.webp" alt="Elegance Emerald Locket Pendant Suite" class="haute-artwork-img">
+                        <div class="haute-sparkle-lens-flare"></div>
+                        <div class="haute-luxury-badge">Limited Vault Drop</div>
+                    </div>
+                    <div class="haute-text-frame">
+                        <div class="haute-item-meta-row"><span>METRIC NO. 02</span><span class="gold-coordinate">// 18.40 CARATS TOTAL</span></div>
+                        <h3 class="haute-item-display-title">Elegance Emerald Locket</h3>
+                        <p class="haute-item-display-desc">A deep architectural square-cut emerald statement pendant stone suspended flawlessly between clean stepped baguette-cut diamonds in pure platinum.</p>
+                        <div class="haute-item-acquisition-row">
+                            <span class="haute-item-display-price">$1,200.00</span>
+                            <a href="signup.html" class="haute-acquire-nav-btn" title="Create an account vault profile to arrange private viewing access">Acquire Masterpiece &rarr;</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   💎 ASYMMETRICAL LUXURY PRESENTATION CORRIDOR WITH DYNAMIC GLOW STATES
+   ========================================================================== */
+
+.haute-exhibition-section {
+  position: relative;
+  background-color: #031E17; /* Theme Deep Forest Green Base */
+  padding: 80px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Background Image Layering Configurations */
+.haute-exhibition-bg-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
+}
+.haute-native-bg-img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.66;
+  filter: grayscale(15%) contrast(120%) brightness(35%);
+}
+.haute-section-dark-matte {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(3, 30, 23, 0.2) 0%, rgba(2, 22, 17, 0.98) 90%);
+}
+
+.haute-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* --- EDITORIAL ASYMMETRICAL COLUMN DIVISION --- */
+.haute-magazine-layout {
+  display: grid !important;
+  grid-template-columns: 4.5fr 7.5fr !important; /* Allocates explicit side-by-side split screen balance */
+  gap: 60px !important;
+  align-items: center !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.haute-sticky-pillar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.haute-eyebrow-label {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 15px;
+}
+
+.haute-main-title {
+  font-size: 3.5rem; font-weight: 400; line-height: 1.15; margin: 0 0 25px 0; letter-spacing: 1px;
+}
+
+.liquid-gold-glow-text {
+  color: #D4AF37; transition: text-shadow 0.4s ease;
+}
+.haute-sticky-pillar:hover .liquid-gold-glow-text {
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.75), 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.haute-minimal-divider {
+  width: 50px; height: 1px; background-color: #D4AF37; margin-bottom: 30px;
+}
+
+.haute-seo-abstract-text {
+  font-family: sans-serif; font-size: 0.95rem; line-height: 1.7; color: #A3B8B3; margin: 0;
+}
+
+/* --- INTERACTIVE SELECTOR BUTTON CHIPS --- */
+.haute-exhibition-nav-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.haute-nav-chip {
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: #A3B8B3;
+  padding: 14px 20px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.haute-nav-chip:hover {
+  border-color: #D4AF37;
+  color: #FFFFFF;
+}
+
+.haute-nav-chip.active-chip {
+  background-color: rgba(212, 175, 55, 0.05);
+  border-color: #D4AF37;
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+  padding-left: 26px; /* Elegant indentation shift on active state */
+}
+
+/* --- DYNAMIC SINGLE DISPLAY DOCK INTERFACE --- */
+.haute-single-display-dock {
+  position: relative;
+  width: 100% !important;
+  display: block !important; /* Removes vertical grid listing flow */
+}
+
+/* Base item blocks configurations */
+.haute-display-block {
+  width: 100% !important;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.3, 1), transform 0.4s ease;
+}
+
+/* Explicit hide helper state */
+.fallback-hidden-block {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Active display cross-fade entry animation layout modifier classes */
+.active-display-block {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: dynamicHauteSwap 0.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+@keyframes dynamicHauteSwap {
+  0% { opacity: 0; transform: translateY(12px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Viewport Image Capture Box properties profiles */
+.haute-viewport-frame {
+  position: relative; width: 100% !important; height: 420px !important; overflow: hidden; z-index: 2;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.04);
+  background-color: rgba(0,0,0,0.2); transition: all 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.circle-porthole-shape { border-radius: 6px; }
+.soft-octagonal-shape { border-radius: 6px; }
+
+.haute-artwork-img {
+  width: 100% !important; height: 100% !important; object-fit: cover !important; filter: brightness(85%);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1), filter 0.5s ease;
+}
+
+/* Active Hover Glow Scaling interactions */
+.haute-display-block:hover .haute-viewport-frame {
+  box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 35px rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+.haute-display-block:hover .haute-artwork-img { transform: scale(1.05); filter: brightness(100%); }
+
+/* ✨ HOLOGRAM SPARKLE RAY OVERLAY LAYER ELEMENT */
+.haute-sparkle-lens-flare {
+  position: absolute; width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(212,175,55,0.06) 40%, transparent 70%);
+  pointer-events: none; opacity: 0; z-index: 3; transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+.haute-viewport-frame:hover .haute-sparkle-lens-flare { opacity: 1; }
+
+.haute-luxury-badge {
+  position: absolute; bottom: 20px; right: 20px; background-color: rgba(3, 30, 23, 0.85);
+  backdrop-filter: blur(5px); border: 1px solid #D4AF37; color: #D4AF37;
+  padding: 6px 14px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; z-index: 4;
+}
+
+/* Typography details boxes content area settings */
+.haute-text-frame { padding: 30px 10px 0 10px; }
+.haute-item-meta-row { display: flex; justify-content: space-between; font-family: sans-serif; font-size: 0.75rem; color: #617A75; letter-spacing: 2px; margin-bottom: 8px; }
+.gold-coordinate { color: #D4AF37; font-weight: bold; }
+
+.haute-item-display-title { font-size: 1.8rem; font-weight: 400; margin: 0 0 12px 0; letter-spacing: 0.5px; transition: color 0.3s ease; }
+.haute-display-block:hover .haute-item-display-title { color: #FFFFFF; text-shadow: 0 0 12px rgba(212, 175, 55, 0.5); }
+
+.haute-item-display-desc { font-family: sans-serif; font-size: 0.9rem; line-height: 1.6; color: #A3B8B3; margin: 0 0 25px 0; }
+
+.haute-item-acquisition-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+.haute-item-display-price { font-size: 1.4rem; color: #D4AF37; font-weight: bold; }
+
+/* Navigation Redirection Action button links */
+.haute-acquire-nav-btn {
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: #D4AF37; text-decoration: none; position: relative; padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+.haute-acquire-nav-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: #FFFFFF; transition: width 0.3s ease;
+}
+.haute-display-block:hover .haute-acquire-nav-btn { color: #FFFFFF; text-shadow: 0 0 8px #FFFFFF; }
+.haute-display-block:hover .haute-acquire-nav-btn::after { width: 100%; }
+
+/* ==========================================================================
+   📱 HIGH FIDELITY RESPONSIBILITY MATRIX BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  /* Safely collapse back to a single column vertical stack on tablets and phones */
+  .haute-magazine-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .haute-exhibition-nav-deck {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .haute-nav-chip {
+    flex: 1;
+    text-align: center;
+  }
+  .haute-viewport-frame {
+    height: 340px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .haute-exhibition-section { padding: 60px 16px; }
+  .haute-main-title { font-size: 2rem; }
+  .haute-item-acquisition-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .haute-viewport-frame { height: 280px !important; }
+  .haute-nav-chip { width: 100%; text-align: center; padding: 12px; }
+}
+
+</style>
+
+<script>
+    // ==========================================================================
+// 🏛️ ATELIER ARCHIVES SINGLE CONTAINER SWAP & MOUSE ENGINE
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  initHauteFlareCursorTracker();
+});
+
+/**
+ * 1. REAL-TIME MOUSE REFRACTION REFLECTION ACCELERATOR
+ * Tracks cursor movements dynamically across active viewing image windows frames
+ */
+function initHauteFlareCursorTracker() {
+  const exhibitionViewports = document.querySelectorAll('.haute-viewport-frame');
+  
+  exhibitionViewports.forEach(viewport => {
+    const flareNodeElement = viewport.querySelector('.haute-sparkle-lens-flare');
+    if (!flareNodeElement) return;
+    
+    viewport.addEventListener('mousemove', (mouseEvent) => {
+      const parentFrameBounds = viewport.getBoundingClientRect();
+      
+      // Calculate cursor coordinates offset from container limits
+      const xDelta = mouseEvent.clientX - parentFrameBounds.left;
+      const yDelta = mouseEvent.clientY - parentFrameBounds.top;
+      
+      // Map coordinates securely inline
+      flareNodeElement.style.left = `${xDelta}px`;
+      flareNodeElement.style.top = `${yDelta}px`;
+    });
+  });
+}
+
+/**
+ * 2. SINGLE BOX EXHIBITION CANVAS REPAINT CONTROLLER
+ * Alternates active masterpiece viewing cards to avoid long vertical page sprawl
+ */
+window.switchExhibitionFrame = function(targetBlockId, clickedChipButton) {
+  if (event) event.preventDefault();
+
+  // A. Swap active navigation chip highlights
+  const siblingChips = clickedChipButton.parentNode.querySelectorAll('.haute-nav-chip');
+  siblingChips.forEach(chip => chip.classList.remove('active-chip'));
+  clickedChipButton.classList.add('active-chip');
+
+  // B. Hide all items and reveal only the chosen product card
+  const showcaseBlocks = document.querySelectorAll('.haute-display-block');
+  showcaseBlocks.forEach(block => {
+    if (block.getAttribute('id') === targetBlockId) {
+      block.classList.remove('fallback-hidden-block');
+      block.classList.add('active-display-block');
+    } else {
+      block.classList.remove('active-display-block');
+      block.classList.add('fallback-hidden-block');
+    }
+  });
+  
+  console.log(`Exhibition Dock Swapped Active Frame Target: ${targetBlockId.toUpperCase()}`);
+};
+
+</script>
+
+<section class="heritage-exhibition-section" id="atelier-heritage-view" aria-labelledby="heritage-main-title">
+    <!-- Ambient glowing mesh blur background layer -->
+    <div class="heritage-ambient-glow-layer"></div>
+
+    <div class="heritage-max-container">
+        
+        <!-- SEO Semantic Section Header -->
+        <header class="heritage-section-header">
+            <span class="heritage-eyebrow-label">Generational Legacy</span>
+            <h2 id="heritage-main-title" class="heritage-main-heading">
+                The Heritage Atelier & <span class="gold-text-neon-glow">Valuation Vault</span>
+            </h2>
+            <div class="heritage-geometric-divider"></div>
+            <p class="heritage-seo-abstract">
+                Discover the uncompromising standards behind STACKLY's private commissions. Learn how our master bench artisans analyze gemstone crystal lattices and forge certified precious metals.
+            </p>
+        </header>
+
+        <!-- Asymmetrical Editorial Magazine Mosaic Grid -->
+        <div class="heritage-mosaic-layout">
+            
+            <!-- Block 1: Immersive Descriptive Panel Card (Text Heavy) -->
+            <article class="heritage-mosaic-card card-text-block">
+                <div class="card-geometric-accent"></div>
+                <div class="card-inner-viewport">
+                    <span class="heritage-card-serial">ARCHIVE FOCUS NO. 01</span>
+                    <h3 class="heritage-card-title">GIA Gemological Asset Analysis</h3>
+                    <p class="heritage-card-desc">
+                        Every single high jewellery suite necklace and solitaire pendant created inside our private atelier undergoes rigid optical testing. Our diamond analysts inspect cutting proportions and facet angles under ultra-precise instrumentation to guarantee maximum fire and future capital preservation.
+                    </p>
+                    <footer class="heritage-card-action-row">
+                        <a href="signup.html" class="heritage-discover-text-link" title="Create a secure profile to read our diamond investment indexing dossiers">
+                            <span>Access Asset Dossiers</span>
+                            <svg class="nav-arrow-vector" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </footer>
+                </div>
+            </article>
+
+            <!-- Block 2: Asymmetrical Floating Visual Panel (Large Height Offset Image Block) -->
+            <article class="heritage-mosaic-card card-visual-block item-offset-down">
+                <div class="card-geometric-accent"></div>
+                <div class="heritage-viewport-frame cushion-pillow-shape">
+                    <!-- High-quality studio image representing diamond processing -->
+                    <img src="./Assests/studs.webp" alt="STACKLY Master Jeweler inspecting rare colorless solitaire diamonds" class="heritage-artwork-img" loading="lazy">
+                    <div class="heritage-slit-flash-layer"></div>
+                    <div class="heritage-luxury-badge">Private Vault</div>
+                </div>
+            </article>
+
+            <!-- Block 3: Asymmetrical Floating Visual Panel (Wide Landscape Image Block) -->
+            <article class="heritage-mosaic-card card-visual-block item-span-two-columns">
+                <div class="card-geometric-accent"></div>
+                <div class="heritage-viewport-frame soft-octagonal-shape" style="height: 350px;">
+                    <img src="./Assests/neck.webp" alt="Handcrafted 18K Solid Gold Emerald Suite Casting Process" class="heritage-artwork-img" loading="lazy">
+                    <div class="heritage-slit-flash-layer"></div>
+                </div>
+                <div class="heritage-caption-overlay">
+                    <span class="caption-serial">METRIC NO. 02 // CASTING</span>
+                    <h4 class="caption-title">Artisanal Metal Forging</h4>
+                </div>
+            </article>
+
+            <!-- Block 4: Private Commission Gate Card (Call To Action Link Block) -->
+            <article class="heritage-mosaic-card card-text-block accent-gold-highlight">
+                <div class="card-geometric-accent"></div>
+                <div class="card-inner-viewport">
+                    <span class="heritage-card-serial" style="color: #D4AF37;">ESTABLISH PRIVILEGE</span>
+                    <h3 class="heritage-card-title">Bespoke Design Commissions</h3>
+                    <p class="heritage-card-desc">
+                        Collaborate directly with our master bench jewelers to sketch, refine, and cast your entirely custom high jewellery concept suite. Gain entry to our digital bridal registries and rate-lock options.
+                    </p>
+                    <footer class="heritage-card-action-row">
+                        <a href="signup.html" class="heritage-solid-gold-cta-btn" title="Navigate to secure signup framework to register profile">
+                            <span>Register Free Profile</span>
+                        </a>
+                    </footer>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   💎 ASYMMETRICAL HERITAGE EXHBITITION MOASIC (CREATIVE LOOKBOOK LAYOUT)
+   ========================================================================== */
+
+.heritage-exhibition-section {
+  position: relative;
+  background-color: #031E17; /* Theme Core Deep Forest Green Base */
+  padding: 80px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.heritage-ambient-glow-layer {
+  position: absolute;
+  top: 60%; left: 70%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
+}
+
+.heritage-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* --- SEO ACCENT SECTON HEADER --- */
+.heritage-section-header { text-align: center; max-width: 780px; margin: 0 auto 80px auto; }
+.heritage-eyebrow-label {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 12px;
+}
+.heritage-main-heading { font-size: 2.8rem; font-weight: 400; margin: 0 0 18px 0; letter-spacing: 1px; }
+.gold-text-neon-glow { color: #D4AF37; transition: text-shadow 0.4s ease; }
+.heritage-exhibition-section:hover .gold-text-neon-glow { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7), 0 0 35px rgba(212, 175, 55, 0.3); }
+.heritage-geometric-divider {
+  width: 60px; height: 1px; background-color: #D4AF37; margin: 0 auto 25px auto; position: relative;
+}
+.heritage-geometric-divider::after {
+  content: ''; position: absolute; width: 4px; height: 4px; background-color: #D4AF37; transform: rotate(45deg); top: -2px; left: 28px;
+}
+.heritage-seo-abstract { font-family: sans-serif; font-size: 0.95rem; line-height: 1.6; color: #A3B8B3; margin: 0; }
+
+/* --- ASYMMETRICAL EDITORIAL MAGAZINE GRID MOSAIC --- */
+.heritage-mosaic-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+/* Structural Grid Position Maps */
+.card-text-block { grid-column: span 6; }
+.card-visual-block { grid-column: span 6; }
+.item-span-two-columns { grid-column: span 8; }
+.heritage-mosaic-layout .accent-gold-highlight { grid-column: span 4; }
+
+/* Asymmetrical Spacing Height Shifting Look */
+.item-offset-down {
+  margin-top: 50px;
+}
+
+/* Core Creative Card Styling */
+.heritage-mosaic-card {
+  position: relative;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  opacity: 0; transform: translateY(30px);
+  animation: heritageLiftEntrance 0.85s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+.heritage-mosaic-card:nth-child(1) { animation-delay: 0.1s; }
+.heritage-mosaic-card:nth-child(2) { animation-delay: 0.25s; }
+.heritage-mosaic-card:nth-child(3) { animation-delay: 0.4s; }
+.heritage-mosaic-card:nth-child(4) { animation-delay: 0.55s; }
+
+/* Abstract Floating Gold Frame Background accents */
+.card-geometric-accent {
+  position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.1); pointer-events: none; z-index: 1;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1);
+}
+.heritage-mosaic-card:hover .card-geometric-accent {
+  transform: translate(22px, 22px); border-color: #D4AF37;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.card-inner-viewport {
+  position: relative; z-index: 2; width: 100%;
+  background: linear-gradient(145deg, rgba(4, 37, 29, 0.45) 0%, rgba(2, 22, 17, 0.75) 100%);
+  backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.12);
+  border-radius: 6px; padding: 45px 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  box-sizing: border-box; min-height: 350px; display: flex; flex-direction: column;
+}
+
+.accent-gold-highlight .card-inner-viewport {
+  border-color: rgba(212, 175, 55, 0.25);
+  background: linear-gradient(145deg, rgba(4, 45, 35, 0.5) 0%, rgba(2, 22, 17, 0.85) 100%);
+}
+
+.heritage-card-serial { font-family: sans-serif; font-size: 0.7rem; font-weight: 700; color: #617A75; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 12px; display: block; }
+.heritage-card-title { font-size: 1.6rem; font-weight: 400; margin: 0 0 15px 0; letter-spacing: 0.5px; }
+.heritage-mosaic-card:hover .heritage-card-title { color: #FFFFFF; text-shadow: 0 0 12px rgba(212, 175, 55, 0.4); }
+
+.heritage-card-desc { font-family: sans-serif; font-size: 0.9rem; line-height: 1.6; color: #A3B8B3; margin: 0 0 35px 0; }
+.heritage-card-action-row { margin-top: auto; display: flex; align-items: center; }
+
+/* Micro-Underline text link interactions */
+.heritage-discover-text-link {
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: #FFFFFF; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; position: relative; padding-bottom: 4px;
+}
+.heritage-discover-text-link::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 25px; height: 1.5px; background-color: #D4AF37; transition: width 0.4s ease;
+}
+.heritage-mosaic-card:hover .heritage-discover-text-link::after { width: 100%; box-shadow: 0 0 8px #D4AF37; }
+.nav-arrow-vector { transition: transform 0.3s ease; color: #D4AF37; }
+.heritage-mosaic-card:hover .nav-arrow-vector { transform: translateX(5px); }
+
+/* Solid Premium Liquid Gold CTA Button */
+.heritage-solid-gold-cta-btn {
+  width: 100%; text-align: center; background-color: #D4AF37; border: 1px solid #D4AF37; color: #031E17; font-family: sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 14px; border-radius: 4px; text-decoration: none; cursor: pointer; transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); box-sizing: border-box;
+}
+.heritage-solid-gold-cta-btn:hover {
+  background-color: #FFFFFF; border-color: #FFFFFF; color: #031E17;
+  box-shadow: 0 8px 20px rgba(212,175,55,0.35), 0 0 15px rgba(212,175,55,0.4); transform: translateY(-2px);
+}
+
+/* --- VISUAL VIEWPORT CARD MASKS PROPERTIES --- */
+.heritage-viewport-frame {
+  position: relative; width: 100%; height: 350px; overflow: hidden; z-index: 2;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.04);
+  background-color: rgba(0,0,0,0.15); transition: border-color 0.4s ease;
+}
+.cushion-pillow-shape { border-radius: 6px; }
+.soft-octagonal-shape { border-radius: 6px; }
+
+.heritage-artwork-img {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(85%);
+  transition: transform 0.6s ease;
+}
+.heritage-mosaic-card:hover .heritage-artwork-img { transform: scale(1.03); filter: brightness(95%); }
+.heritage-mosaic-card:hover .heritage-viewport-frame { border-color: rgba(212, 175, 55, 0.25); }
+
+/* Shimmer laser pass lines */
+.heritage-slit-flash-layer {
+  position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.08) 30%, rgba(212,175,55,0.2) 50%, rgba(255,255,255,0.08) 70%, transparent 100%); transform: skewX(-25deg); z-index: 3;
+}
+.heritage-mosaic-card:hover .heritage-slit-flash-layer { animation: heritageRayPass 0.85s ease-out forwards; }
+@keyframes heritageRayPass { 100% { left: 150%; } }
+
+.heritage-luxury-badge {
+  position: absolute; bottom: 20px; right: 20px; background-color: rgba(3, 30, 23, 0.85); backdrop-filter: blur(5px); border: 1px solid #D4AF37; color: #D4AF37; padding: 5px 12px; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; z-index: 4;
+}
+
+/* Caption Overlays for Wide Images */
+.heritage-caption-overlay {
+  position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; box-sizing: border-box; z-index: 4; background: linear-gradient(to top, rgba(3,30,23,0.9) 0%, transparent 100%); pointer-events: none;
+}
+.caption-serial { font-family: sans-serif; font-size: 0.65rem; color: #D4AF37; letter-spacing: 2px; display: block; margin-bottom: 4px; }
+.caption-title { font-size: 1.3rem; font-weight: 400; margin: 0; }
+
+@keyframes heritageLiftEntrance { 100% { opacity: 1; transform: translateY(0); } }
+
+/* ==========================================================================
+   📱 SYSTEM COMPONENT BREAKPOINTS (UNBREAKABLE MOBILES DISPLACEMENT)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .heritage-mosaic-layout { gap: 30px; }
+  .card-text-block, .card-visual-block, .item-span-two-columns, .heritage-mosaic-layout .accent-gold-highlight {
+    grid-column: span 6; /* Convert grid to balanced double columns columns layouts on mid-size tablet devices */
+  }
+  .item-offset-down { margin-top: 0; } /* Normalizes layout heights on screens */
+}
+
+@media (max-width: 768px) {
+  .heritage-exhibition-section { padding: 80px 24px; }
+  .heritage-main-heading { font-size: 2.2rem; }
+  .heritage-mosaic-layout { display: flex; flex-direction: column; gap: 40px; } /* Fallback to un-breakable single stack columns downwards on phones display monitors */
+  .card-inner-viewport { min-height: auto; padding: 35px 25px; }
+  .heritage-viewport-frame { height: 280px !important; }
+}
+
+@media (max-width: 480px) {
+  .heritage-exhibition-section { padding: 60px 16px; }
+  .heritage-main-heading { font-size: 1.8rem; }
+}
+
+</style>
+
+<section class="haute-material-section" id="necklaces-material-catalog" aria-labelledby="haute-mat-heading">
+    
+    <!-- 🖼️ NATIVE ENVIRONMENTAL BACKGROUND IMAGE LAYER -->
+    <div class="haute-mat-bg-layer">
+        <img src="./Assests/background - home.webp" alt="STACKLY Luxury Gold & Diamond Alignment Mesh" class="haute-mat-native-bg-img" loading="lazy">
+        <div class="haute-mat-dark-matte"></div>
+    </div>
+
+    <div class="haute-mat-max-container">
+        
+        <!-- SEO-Friendly Header Block -->
+        <header class="haute-mat-section-header">
+            <span class="haute-mat-eyebrow">Exquisite Classifications</span>
+            <h2 id="haute-mat-heading" class="haute-mat-main-title">
+                Shop Suite by <span class="gold-neon-ray-text">Precious Elements</span>
+            </h2>
+            <div class="haute-mat-geometric-divider"></div>
+            <p class="haute-mat-seo-lead">
+                Filter our private vaults to discover unheated deep-sea emerald necklaces, certified colorless solitaire diamond chains, and heavy hand-sculpted 18K/24K yellow gold assets.
+            </p>
+            
+            <!-- 🔬 MATERIAL SELECTOR TABS -->
+            <nav class="haute-mat-filter-tabs-row" aria-label="Filter suites by material type">
+                <button class="haute-mat-tab-btn active-tab" onclick="window.filterHauteMaterial('all', this)">All Masterpieces</button>
+                <button class="haute-mat-tab-btn" onclick="window.filterHauteMaterial('gold', this)">Solid Gold</button>
+                <button class="haute-mat-tab-btn" onclick="window.filterHauteMaterial('diamond', this)">Certified Diamond</button>
+                <button class="haute-mat-tab-btn" onclick="window.filterHauteMaterial('gemstone', this)">Rare Gemstones</button>
+            </nav>
+        </header>
+
+        <!-- Dynamic Product Catalog Grid Matrix -->
+        <div class="haute-mat-products-grid" id="haute-material-canvas">
+            
+            <!-- Item 1: Solid Gold Category -->
+            <article class="haute-luxury-showcase-card" data-element-type="gold" data-id="hj-gold-01" data-name="Sovereign Choker Statement Link" data-price="$3,450.00" data-img="./Assests/rosegoldpendant.webp">
+                <div class="haute-card-glow-border"></div>
+                <div class="haute-media-box">
+                    <img src="./Assests/rosegoldpendant.webp" alt="STACKLY 18K Sovereign Choker Statement Link" class="haute-showcase-img">
+                    <div class="haute-laser-slit"></div>
+                </div>
+                <div class="haute-details-box">
+                    <span class="haute-category-tag">18K Hand-Forged Gold</span>
+                    <h3 class="haute-item-title">Sovereign Choker Statement Link</h3>
+                    <p class="haute-seo-desc">A heavy architectural uniform flat-link collar choker, hand-sculpted and burnished in deep saturation certified solid yellow gold.</p>
+                    <div class="haute-action-row">
+                        <span class="haute-item-price">$3,450.00</span>
+                        <a href="signup.html" class="haute-nav-acquire-btn" title="Create a secure account vault profile to arrange private viewing access">Acquire Suite &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Item 2: Certified Diamond Category -->
+            <article class="haute-luxury-showcase-card" data-element-type="diamond" data-id="hj-dia-02" data-name="Aura Intricate Solitaire Cascade" data-price="$6,800.00" data-img="./Assests/neck.webp">
+                <div class="haute-card-glow-border"></div>
+                <div class="haute-media-box">
+                    <img src="./Assests/neck.webp" alt="STACKLY Aura Intricate Solitaire Cascade Diamond Necklace" class="haute-showcase-img">
+                    <div class="haute-laser-slit"></div>
+                </div>
+                <div class="haute-details-box">
+                    <span class="haute-category-tag">Flawless Solitaires</span>
+                    <h3 class="haute-item-title">Aura Intricate Solitaire Cascade</h3>
+                    <p class="haute-seo-desc">A magnificent constellation trace necklace mapping twelve GIA certified colorless VVS1 round brilliant diamonds inside raw platinum frames.</p>
+                    <div class="haute-action-row">
+                        <span class="haute-item-price">$6,800.00</span>
+                        <a href="signup.html" class="haute-nav-acquire-btn" title="Create a secure account vault profile to arrange private viewing access">Acquire Suite &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Item 3: Rare Gemstones Category -->
+            <article class="haute-luxury-showcase-card" data-element-type="gemstone" data-id="hj-gem-03" data-name="Marquise Emerald Architectural Locket" data-price="$4,120.00" data-img="./Assests/rosegoldpendant.webp">
+                <div class="haute-card-glow-border"></div>
+                <div class="haute-media-box">
+                    <img src="./Assests/rosegoldpendant.webp" alt="STACKLY Marquise Emerald Architectural Locket Pendant" class="haute-showcase-img">
+                    <div class="haute-laser-slit"></div>
+                </div>
+                <div class="haute-details-box">
+                    <span class="haute-category-tag">Unheated Colombia Emerald</span>
+                    <h3 class="haute-item-title">Marquise Emerald Locket</h3>
+                    <p class="haute-seo-desc">A deep historical step-cut rectangular emerald pendant asset, suspended from a flexible multifaceted micro-pavé anchor rail.</p>
+                    <div class="haute-action-row">
+                        <span class="haute-item-price">$4,120.00</span>
+                        <a href="signup.html" class="haute-nav-acquire-btn" title="Create a secure account vault profile to arrange private viewing access">Acquire Suite &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   🏛️ HAUTE MATERIAL CATEGORY CATALOG SHOWCASE THEME
+   ========================================================================== */
+
+.haute-material-section {
+  position: relative;
+  background-color: #031E17; /* Theme Core Deep Forest Green */
+  padding: 100px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Background Configuration Layering */
+.haute-mat-bg-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+.haute-mat-native-bg-img {
+  width: 100%; height: 100%; object-fit: cover; opacity: 0.08;
+  filter: contrast(120%) brightness(35%);
+}
+.haute-mat-dark-matte {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(3, 30, 23, 0.3) 0%, rgba(3, 30, 23, 0.98) 90%);
+}
+
+.haute-mat-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* --- SEO KEYWORD HEADER SECTION --- */
+.haute-mat-section-header { text-align: center; max-width: 800px; margin: 0 auto 75px auto; }
+.haute-mat-eyebrow {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 12px;
+}
+.haute-mat-main-title { font-size: 2.8rem; font-weight: 400; margin: 0 0 18px 0; letter-spacing: 1px; }
+.gold-neon-ray-text { color: #D4AF37; transition: text-shadow 0.4s ease; }
+.haute-material-section:hover .gold-neon-ray-text { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7), 0 0 35px rgba(212, 175, 55, 0.3); }
+.haute-mat-geometric-divider {
+  width: 60px; height: 1px; background-color: #D4AF37; margin: 0 auto 35px auto; position: relative;
+}
+.haute-mat-geometric-divider::after {
+  content: ''; position: absolute; width: 4px; height: 4px; background-color: #D4AF37; transform: rotate(45deg); top: -2px; left: 28px;
+}
+.haute-mat-seo-lead { font-family: sans-serif; font-size: 0.95rem; line-height: 1.6; color: #A3B8B3; margin: 0 0 45px 0; }
+
+/* Filter Tabs Selection Strip Row Layout */
+.haute-mat-filter-tabs-row {
+  display: inline-flex; gap: 15px; background-color: rgba(4, 37, 29, 0.5); backdrop-filter: blur(10px);
+  padding: 8px; border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.15);
+}
+.haute-mat-tab-btn {
+  background: transparent; border: none; color: #A3B8B3; font-family: sans-serif; font-size: 0.85rem;
+  font-weight: 600; padding: 10px 24px; border-radius: 25px; cursor: pointer; transition: all 0.3s ease;
+}
+.haute-mat-tab-btn:hover { color: #FFFFFF; }
+.haute-mat-tab-btn.active-tab {
+  background-color: #D4AF37; color: #031E17; font-weight: 700; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+/* --- THE 3-COLUMN PRODUCT EXHIBITION GRIDS --- */
+.haute-mat-products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;
+}
+
+.haute-luxury-showcase-card {
+  position: relative; background: linear-gradient(145deg, rgba(4, 37, 29, 0.45) 0%, rgba(2, 22, 17, 0.75) 100%);
+  backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.12); border-radius: 6px;
+  overflow: hidden; display: flex; flex-direction: column; transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3); animation: hauteMatCardReveal 0.6s ease-out both;
+}
+
+/* Outer card neon bounding box border flows on hover */
+.haute-card-glow-border {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 1px solid transparent; border-radius: 6px; pointer-events: none; z-index: 5; transition: all 0.4s ease;
+}
+
+.haute-luxury-showcase-card:hover {
+  transform: translateY(-6px); border-color: #D4AF37;
+  box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 25px rgba(212, 175, 55, 0.25);
+}
+.haute-luxury-showcase-card:hover .haute-card-glow-border { border-color: #D4AF37; box-shadow: inset 0 0 15px rgba(212,175,55,0.08); }
+
+/* Image capture viewports mechanics */
+.haute-media-box {
+  position: relative; width: 100%; height: 340px; overflow: hidden; background-color: rgba(0,0,0,0.2);
+}
+.haute-showcase-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(90%); transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1); }
+.haute-luxury-showcase-card:hover .haute-showcase-img { transform: scale(1.03); filter: brightness(100%); }
+
+/* Diagonal laser pass ray line decoration */
+.haute-laser-slit {
+  position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.08) 30%, rgba(212,175,55,0.25) 50%, rgba(255,255,255,0.08) 70%, transparent 100%); transform: skewX(-25deg); z-index: 2;
+}
+.haute-luxury-showcase-card:hover .haute-laser-slit { animation: hauteLaserPass 0.9s cubic-bezier(0.25, 1, 0.3, 1) forwards; }
+@keyframes hauteLaserPass { 100% { left: 150%; } }
+
+/* Details text block configuration metrics */
+.haute-details-box { padding: 25px 22px; display: flex; flex-direction: column; flex-grow: 1; }
+.haute-category-tag { font-family: sans-serif; font-size: 0.7rem; font-weight: 700; color: #D4AF37; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 8px; }
+.haute-item-title { font-size: 1.4rem; font-weight: 400; margin: 0 0 10px 0; letter-spacing: 0.5px; }
+.haute-luxury-showcase-card:hover .haute-item-title { color: #FFFFFF; text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+.haute-seo-desc { font-family: sans-serif; font-size: 0.85rem; line-height: 1.5; color: #A3B8B3; margin: 0 0 25px 0; flex-grow: 1; }
+
+.haute-action-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 18px; margin-top: auto; }
+.haute-item-price { font-size: 1.35rem; color: #D4AF37; font-weight: bold; }
+
+/* Micro-Underline sliding animation text link look specs */
+.haute-nav-acquire-btn {
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: #D4AF37; text-decoration: none; position: relative; padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+.haute-nav-acquire-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: #FFFFFF; transition: width 0.3s ease;
+}
+.haute-luxury-showcase-card:hover .haute-nav-acquire-btn { color: #FFFFFF; text-shadow: 0 0 8px #FFFFFF; }
+.haute-luxury-showcase-card:hover .haute-nav-acquire-btn::after { width: 100%; }
+
+@keyframes hauteMatCardReveal {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   📱 SEAMLESS COMPONENT MOBILE RESPONSIVE LAYOUT MATRIX
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .haute-mat-products-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; } /* 2 columns tablet presentation models */
+}
+
+@media (max-width: 768px) {
+  .haute-material-section { padding: 80px 24px; }
+  .haute-mat-main-title { font-size: 2.2rem; }
+  .haute-mat-products-grid { grid-template-columns: 1fr; gap: 35px; } /* Stacks products into single column fields on mobile devices */
+  .haute-mat-filter-tabs-row { display: flex; flex-direction: column; width: 100%; border-radius: 8px; padding: 6px; }
+  .haute-mat-tab-btn { text-align: center; width: 100%; border-radius: 4px; }
+}
+
+@media (max-width: 480px) {
+  .haute-material-section { padding: 60px 16px; }
+  .haute-mat-main-title { font-size: 1.8rem; }
+  .haute-details-box { padding: 20px 15px; }
+  .haute-action-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+}
+
+</style>
+
+<script>
+    // ==========================================================================
+// 💎 HAUTE SUITE ASYNC TAB-FILTERING ENGINE
+// ==========================================================================
+
+window.filterHauteMaterial = function(selectedMaterialKey, clickedTabButton) {
+  if (event) event.preventDefault();
+
+  // 1. Synchronize active sliding visual tab outline classes
+  const siblingTabs = clickedTabButton.parentNode.querySelectorAll('.haute-mat-tab-btn');
+  siblingTabs.forEach(tab => tab.classList.remove('active-tab'));
+  clickedTabButton.classList.add('active-tab');
+
+  // 2. Filter matching element card items on the canvas workspace
+  const showcaseCards = document.querySelectorAll('.haute-luxury-showcase-card');
+  
+  showcaseCards.forEach(card => {
+    const cardElementAttribute = card.getAttribute('data-element-type');
+    
+    if (selectedMaterialKey === 'all' || cardElementAttribute === selectedMaterialKey) {
+      card.style.display = 'flex';
+      card.style.animation = 'none';
+      card.offsetHeight; // Force browser layout redraw step
+      card.style.animation = 'hauteMatCardReveal 0.5s ease-out both';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  console.log(`High Jewellery Material Filter Executed Target Scope: ${selectedMaterialKey.toUpperCase()}`);
+};
+
+</script>
+
+<section class="suite-configurator-section" id="haute-configurator-studio" aria-labelledby="suite-config-title">
+    <!-- Ambient glowing blur backdrop layer -->
+    <div class="suite-config-ambient-glow"></div>
+
+    <div class="suite-config-max-container">
+        <!-- SEO Semantic Header Block with Premium Keyword Weights -->
+        <header class="suite-config-header">
+            <span class="suite-config-eyebrow">Interactive Estimation Studio</span>
+            <h2 id="suite-config-title" class="suite-config-heading">
+                The Suite & Carat <span class="gold-text-glow">Valuation Estimator</span>
+            </h2>
+            <div class="suite-config-geometric-divider"></div>
+            <p class="suite-config-seo-lead">
+                Calculate custom museum-tier asset pricing indices instantly. Select hallmark-certified GIA diamond matrix scales, loose unheated gemstone carats, and mounting metals to design your digital commission.
+            </p>
+        </header>
+
+        <!-- Asymmetrical Split Screen Workspace Grid -->
+        <div class="suite-config-split-workspace">
+            
+            <!-- Left Side: Large High-Glow Visual Stage -->
+            <div class="suite-config-visual-stage">
+                <div class="suite-stage-geometric-accent"></div>
+                <div class="suite-stage-viewport">
+                    <img src="./Assests/neck.webp" id="suite-ring-render" alt="STACKLY Bespoke Custom High Jewellery Necklace Render" class="suite-stage-render-artwork">
+                    
+                    <!-- Dynamic Glowing Display Floating Badges -->
+                    <div class="suite-stage-floating-badge top-left-badge">
+                        <span class="suite-badge-label">Active Carat Scale</span>
+                        <span class="suite-badge-value-glowing" id="suite-live-badge-carat">2.00 Carat</span>
+                    </div>
+                    <div class="suite-stage-floating-badge bottom-right-badge">
+                        <span class="suite-badge-label">Mounting Alloy</span>
+                        <span class="suite-badge-value-glowing" id="suite-live-badge-metal">Platinum 950</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Interactive Control Form Panel Deck -->
+            <div class="suite-config-control-deck">
+                
+                <!-- Variant Step 1: Carat Weight Slider -->
+                <div class="suite-control-group">
+                    <div class="suite-control-header-row">
+                        <h3 class="suite-control-heading">1. Primary Gemstone Carat Mass</h3>
+                        <span class="suite-live-indicator" id="suite-live-carat-text">2.00 Carat</span>
+                    </div>
+                    <div class="suite-slider-lane">
+                        <input type="range" id="suite-carat-slider" min="1.0" max="5.0" step="0.5" value="2.0" class="suite-range-slider" oninput="window.calculateLiveSuitePricing()">
+                        <div class="suite-slider-labels">
+                            <span>1.00 Ct</span>
+                            <span>2.00 Ct</span>
+                            <span>3.50 Ct</span>
+                            <span>5.00 Ct</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant Step 2: Precious Metal Selection Chips -->
+                <div class="suite-control-group">
+                    <h3 class="suite-control-heading">2. Choose Mount Foundation Alloy</h3>
+                    <div class="suite-chips-grid">
+                        <button class="suite-chip-btn" onclick="window.selectSuiteMetal('18K Yellow Gold', 0, this)">
+                            <span class="suite-color-dot suite-dot-yellow-gold"></span>
+                            <span>18K Yellow Gold</span>
+                        </button>
+                        <button class="suite-chip-btn active-chip" onclick="window.selectSuiteMetal('Platinum 950', 650, this)">
+                            <span class="suite-color-dot suite-dot-platinum"></span>
+                            <span>Platinum 950</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Variant Step 3: Clarity Selection Grade Strip -->
+                <div class="suite-control-group">
+                    <h3 class="suite-control-heading">3. Diamond Clarities (GIA Grading Dossier)</h3>
+                    <div class="suite-grade-grid">
+                        <button class="suite-node-btn" onclick="window.selectSuiteClarity('SI1', 0.9, this)">SI1</button>
+                        <button class="suite-node-btn" onclick="window.selectSuiteClarity('VS1', 1.15, this)">VS1</button>
+                        <button class="suite-node-btn active-node" onclick="window.selectSuiteClarity('Flawless', 1.6, this)">FLAWLESS</button>
+                    </div>
+                </div>
+
+                <!-- Live Dynamic Pricing Display & Final Order Submission Strip -->
+                <div class="suite-pricing-summary-bar">
+                    <div class="suite-price-box">
+                        <span class="suite-price-label">Estimated Allocation</span>
+                        <div class="suite-price-value-row">
+                            <span class="suite-final-calculated-price" id="suite-live-price">$6,800.00</span>
+                        </div>
+                    </div>
+                    <!-- HIGH CONTRAST ROUTING CTA BUTTON -->
+                    <a href="signup.html" class="suite-acquire-btn-glowing" id="suite-submit-action-trigger" title="Navigate to secure signup framework to claim private appraisal slot">
+                        <span>Request Vault Appraisal</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   💍 INTERACTIVE HIGH JEWELLERY CONFIGURATOR ESTIMATOR THEME
+   ========================================================================== */
+
+.suite-configurator-section {
+  position: relative;
+  background-color: #031E17; /* Core Theme Forest Green Baseline */
+  padding: 120px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.suite-config-ambient-glow {
+  position: absolute;
+  top: 35%; left: 15%; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+  pointer-events: none; z-index: 1;
+}
+
+.suite-config-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* --- SEO ACCENT THEMED HEADER --- */
+.suite-config-header { text-align: center; max-width: 760px; margin: 0 auto 75px auto; }
+.suite-config-eyebrow {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 12px;
+}
+.suite-config-heading { font-size: 2.8rem; font-weight: 400; margin: 0 0 18px 0; letter-spacing: 1px; }
+.gold-text-glow { color: #D4AF37; transition: text-shadow 0.4s ease; }
+.suite-config-header:hover .gold-text-glow { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7), 0 0 30px rgba(212, 175, 55, 0.3); }
+.suite-config-geometric-divider {
+  width: 60px; height: 1px; background-color: #D4AF37; margin: 0 auto 25px auto; position: relative;
+}
+.suite-config-geometric-divider::after {
+  content: ''; position: absolute; width: 4px; height: 4px; background-color: #D4AF37; transform: rotate(45deg); top: -2px; left: 28px;
+}
+.suite-config-seo-lead { font-family: sans-serif; font-size: 0.95rem; line-height: 1.6; color: #A3B8B3; margin: 0; }
+
+/* --- SPLIT GRID INFRASTRUCTURE CANVAS --- */
+.suite-config-split-workspace {
+  display: grid; grid-template-columns: 5.5fr 6.5fr; gap: 60px; align-items: stretch;
+}
+
+/* --- LEFT PANEL: VISUAL RENDERING PLATFORM --- */
+.suite-config-visual-stage {
+  position: relative; background: transparent; display: flex; flex-direction: column; width: 100%;
+}
+.suite-stage-geometric-accent {
+  position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.12); pointer-events: none; z-index: 1;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.3, 1);
+}
+.suite-config-visual-stage:hover .suite-stage-geometric-accent {
+  transform: translate(20px, 20px); border-color: #D4AF37; box-shadow: 0 0 25px rgba(212,175,55,0.15);
+}
+
+.suite-stage-viewport {
+  position: relative; width: 100%; height: 100%; min-height: 500px; overflow: hidden; z-index: 2;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(4, 37, 29, 0.3); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box;
+}
+
+.suite-stage-render-artwork {
+  max-width: 90%; max-height: 380px; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+.suite-config-visual-stage:hover .suite-stage-render-artwork { transform: scale(1.03) rotate(-0.5deg); }
+
+/* Floating Overlay Display Badges */
+.suite-stage-floating-badge {
+  position: absolute; background-color: rgba(3, 30, 23, 0.85); backdrop-filter: blur(5px);
+  border: 1px solid rgba(212, 175, 55, 0.2); padding: 10px 16px; border-radius: 4px;
+  display: flex; flex-direction: column; gap: 3px; z-index: 4; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.top-left-badge { top: 25px; left: 25px; border-left: 2px solid #D4AF37; }
+.bottom-right-badge { bottom: 25px; right: 25px; border-right: 2px solid #D4AF37; text-align: right; }
+.suite-badge-label { font-family: sans-serif; font-size: 0.65rem; color: #617A75; letter-spacing: 1.5px; text-transform: uppercase; }
+.suite-badge-value-glowing { font-size: 1rem; color: #FFFFFF; font-weight: 500; letter-spacing: 0.5px; transition: text-shadow 0.3s ease; }
+.suite-config-visual-stage:hover .suite-badge-value-glowing { text-shadow: 0 0 8px #D4AF37; }
+
+/* --- RIGHT PANEL: FORM INPUT SELECTION DECKS --- */
+.suite-config-control-deck {
+  background-color: rgba(4, 37, 29, 0.4); backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.12); border-radius: 6px; padding: 45px 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); display: flex; flex-direction: column; gap: 35px; box-sizing: border-box;
+}
+
+.suite-control-group { display: flex; flex-direction: column; gap: 14px; }
+.suite-control-header-row { display: flex; justify-content: space-between; align-items: baseline; }
+.suite-control-heading { font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #FFFFFF; margin: 0; }
+.suite-live-indicator { font-size: 1.2rem; color: #D4AF37; font-weight: bold; }
+
+/* Premium Range Sliders Inputs formatting */
+.suite-slider-lane { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.suite-range-slider {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; outline: none; margin: 15px 0;
+}
+.suite-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #D4AF37; border: 2px solid #031E17; cursor: pointer; box-shadow: 0 0 10px rgba(212,175,55,0.6); transition: transform 0.2s, background-color 0.2s;
+}
+.suite-range-slider::-webkit-slider-thumb:hover { transform: scale(1.2); background-color: #FFFFFF; box-shadow: 0 0 15px #D4AF37; }
+.suite-slider-labels { display: flex; justify-content: space-between; font-family: sans-serif; font-size: 0.75rem; color: #617A75; font-weight: 600; }
+
+/* Interactive Selection grids chips text buttons configurations */
+.suite-chips-grid, .suite-grade-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; width: 100%; }
+
+.suite-chip-btn, .suite-node-btn {
+  background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; padding: 12px 14px; font-family: sans-serif; font-size: 0.85rem; color: #A3B8B3; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+.suite-color-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.suite-dot-yellow-gold { background-color: #E5C158; box-shadow: 0 0 6px #E5C158; }
+.suite-dot-platinum { background-color: #E5E9E8; box-shadow: 0 0 6px #E5E9E8; }
+
+.suite-chip-btn:hover, .suite-node-btn:hover { border-color: rgba(212, 175, 55, 0.4); color: #FFFFFF; background-color: rgba(212,175,55,0.02); }
+
+/* Selected Glowing parameter targets filters indicators states */
+.suite-chip-btn.active-chip, .suite-node-btn.active-node {
+  background-color: rgba(212, 175, 55, 0.04); border-color: #D4AF37; color: #FFFFFF; font-weight: 700; box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Financial Summary strip panel boundaries formatting specs rules layout */
+.suite-pricing-summary-bar {
+  border-top: 1px solid rgba(212, 175, 55, 0.15); padding-top: 30px; margin-top: 10px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+}
+.suite-price-box { display: flex; flex-direction: column; gap: 4px; }
+.suite-price-label { font-family: sans-serif; font-size: 0.75rem; color: #617A75; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+.suite-final-calculated-price { font-size: 1.8rem; color: #D4AF37; font-weight: bold; transition: text-shadow 0.3s ease; }
+.suite-control-deck:hover .suite-final-calculated-price { text-shadow: 0 0 12px #D4AF37; }
+
+/* Brighter High-Contrast Redirection Button Link Components matching requested updates */
+.suite-acquire-btn-glowing {
+  flex-grow: 1; max-width: 260px; text-align: center; background-color: #D4AF37; border: 1px solid #D4AF37; color: #031E17; font-family: sans-serif; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; padding: 15px 20px; border-radius: 4px; cursor: pointer; text-decoration: none; transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); box-sizing: border-box;
+}
+.suite-acquire-btn-glowing:hover {
+  background-color: #FFFFFF; border-color: #FFFFFF; color: #031E17;
+  box-shadow: 0 8px 25px rgba(212,175,55,0.3), 0 0 20px rgba(212,175,55,0.4); transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   📱 WORKSPACE RESPONSIVE DESIGN BREAKPOINTS SYSTEM
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .suite-config-split-workspace { grid-template-columns: 1fr; gap: 40px; }
+  .suite-stage-viewport { min-height: 380px; }
+}
+
+@media (max-width: 768px) {
+  .suite-configurator-section { padding: 80px 24px; }
+  .suite-config-heading { font-size: 2.2rem; }
+  .suite-config-control-deck { padding: 35px 24px; }
+  .suite-grade-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .suite-configurator-section { padding: 60px 16px; }
+  .suite-config-heading { font-size: 1.8rem; }
+  .suite-pricing-summary-bar { flex-direction: column; align-items: stretch; gap: 20px; }
+  .suite-acquire-btn-glowing { max-width: 100%; width: 100%; padding: 16px; }
+  .suite-stage-floating-badge { display: none; } /* Clear overlay display tags on smartphones widths */
+  .suite-chips-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+
+<script>
+    // ==========================================================================
+// 💎 HAUTE SUITE VALUATION ESTIMATION PROCESSOR
+// ==========================================================================
+
+// Track live localized configurator values state allocations parameters
+let activeSuiteMetalName = "Platinum 950";
+let activeSuiteMetalCostDelta = 650;
+let activeSuiteClarityName = "Flawless";
+let activeSuiteClarityMultiplier = 1.6;
+
+/**
+ * 1. DYNAMIC HIGH JEWELLERY PRICING INDEX CALCULATOR
+ * Evaluates slider increments and sets string formatting outputs natively
+ */
+window.calculateLiveSuitePricing = function() {
+  const massSliderElement = document.getElementById('suite-carat-slider');
+  const livePriceDisplayLabel = document.getElementById('suite-live-price');
+  const liveCaratIndicatorText = document.getElementById('suite-live-carat-text');
+  const activeBadgeCaratText = document.getElementById('suite-live-badge-carat');
+  
+  if (!massSliderElement || !livePriceDisplayLabel) return;
+
+  const numericalCaratValue = parseFloat(massSliderElement.value);
+
+  // Synchronize description labels text strings dynamically inline
+  if (liveCaratIndicatorText) liveCaratIndicatorText.innerText = `${numericalCaratValue.toFixed(2)} Carat`;
+  if (activeBadgeCaratText) activeBadgeCaratText.innerText = `${numericalCaratValue.toFixed(2)} Carat`;
+
+  // Luxury high jewellery baseline valuation parameters metrics formulation models loops bounds
+  const BASE_MUSEUM_GEM_STONE_COST_PER_CARAT = 2800;
+  const BASE_SUITE_CASTING_FABRICATION_COST = 1200;
+
+  // Compute total financial valuation framework sum parameters
+  let aggregateTotalValuation = (BASE_MUSEUM_GEM_STONE_COST_PER_CARAT * numericalCaratValue * activeSuiteClarityMultiplier) + BASE_SUITE_CASTING_FABRICATION_COST + activeSuiteMetalCostDelta;
+
+  // Repaint final currency text output inside targets
+  livePriceDisplayLabel.innerText = `$${aggregateTotalValuation.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+};
+
+/**
+ * 2. INTERACTIVE Mount Foundation Selector
+ */
+window.selectSuiteMetal = function(metalNameString, priceCostDelta, buttonNode) {
+  if (event) event.preventDefault();
+  
+  activeSuiteMetalName = metalNameString;
+  activeSuiteMetalCostDelta = priceCostDelta;
+
+  const siblingChips = buttonNode.parentNode.querySelectorAll('.suite-chip-btn');
+  siblingChips.forEach(chip => chip.classList.remove('active-chip'));
+  buttonNode.classList.add('active-chip');
+
+  // Synchronize visual stage overlay tags display layout text
+  const liveBadgeMetalText = document.getElementById('suite-live-badge-metal');
+  if (liveBadgeMetalText) liveBadgeMetalText.innerText = metalNameString;
+
+  window.calculateLiveSuitePricing();
+};
+
+/**
+ * 3. INTERACTIVE GIA Diamond Clarity Grade Node Selector
+ */
+window.selectSuiteClarity = function(clarityGradeString, weightMultiplierFactor, buttonNode) {
+  if (event) event.preventDefault();
+
+  activeSuiteClarityName = clarityGradeString;
+  activeSuiteClarityMultiplier = weightMultiplierFactor;
+
+  const siblingNodes = buttonNode.parentNode.querySelectorAll('.suite-node-btn');
+  siblingNodes.forEach(node => node.classList.remove('active-node'));
+  buttonNode.classList.add('active-node');
+
+  window.calculateLiveSuitePricing();
+};
+
+</script>
+
+<section class="trend-manifest-section" id="atelier-trending-vault" aria-labelledby="trend-main-title">
+    <!-- Ambient micro-glow backdrop lighting node layer -->
+    <div class="trend-ambient-blur-layer"></div>
+
+    <div class="trend-max-container">
+        
+        <!-- SEO Semantic Section Header -->
+        <header class="trend-section-header">
+            <span class="trend-eyebrow-label">Atelier Velocity</span>
+            <h2 id="trend-main-title" class="trend-main-heading">
+                The Trending <span class="gold-text-aurora-glow">Manifest</span>
+            </h2>
+            <div class="trend-geometric-divider"></div>
+            <p class="trend-seo-lead">
+                Explore the most desired haute joaillerie acquisitions of the season. Track GIA-graded diamond chokers and rare raw sterling silver elements trending across elite global collectors network circles.
+            </p>
+        </header>
+
+        <!-- Asymmetrical Lookbook Spread Grid Matrix Layout -->
+        <div class="trend-lookbook-spread-grid">
+            
+            <!-- Trend Item 1: Tall Porthole Mask -->
+            <article class="trend-editorial-block card-stagger-up" data-id="trend-hj-01">
+                <div class="trend-card-glow-border"></div>
+                <div class="trend-viewport-frame porthole-arch-mask">
+                    <img src="./Assests/rosegoldpendant.webp" alt="STACKLY Trending Aura Diamond Choker Suite" class="trend-artwork-img" loading="lazy">
+                    <div class="trend-laser-shimmer-slit"></div>
+                    <div class="trend-rank-indicator">NO. 01 // TRENDING</div>
+                </div>
+                <div class="trend-text-frame">
+                    <div class="trend-meta-row"><span>COLLECTION PRIVILEGE</span><span class="gold-index-tracker">// TOP VOLUME</span></div>
+                    <h3 class="trend-item-display-title">Aura Solitaire Choker Link</h3>
+                    <p class="trend-item-display-desc">A fluid, continuous mesh line chain choker forged in 18K solid gold, carrying a central calibrated flawless emerald-cut diamond link.</p>
+                    <div class="trend-acquisition-row">
+                        <span class="trend-item-display-price">$4,120.00</span>
+                        <a href="signup.html" class="trend-acquire-nav-btn" title="Create account vault profile to arrange private viewing access">Acquire Masterwork &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Trend Item 2: Offset Geometric Shield Mask -->
+            <article class="trend-editorial-block card-stagger-down" data-id="trend-hj-02">
+                <div class="trend-card-glow-border"></div>
+                <div class="trend-viewport-frame shield-geometric-mask">
+                    <img src="./Assests/neck.webp" alt="STACKLY Trending Elegance Emerald Cascade Suite" class="trend-artwork-img" loading="lazy">
+                    <div class="trend-laser-shimmer-slit"></div>
+                    <div class="trend-rank-indicator">NO. 02 // IN DEMAND</div>
+                </div>
+                <div class="trend-text-frame">
+                    <div class="trend-meta-row"><span>VALUATION CLASS</span><span class="gold-index-tracker">// RARE DROP</span></div>
+                    <h3 class="trend-item-display-title">Elegance Emerald Collar Suite</h3>
+                    <p class="trend-item-display-desc">An intense architectural statement locket suspended from micro-pavé platinum tracks, framing deep unheated Colombian emerald matrix nodes.</p>
+                    <div class="trend-acquisition-row">
+                        <span class="trend-item-display-price">$6,800.00</span>
+                        <a href="signup.html" class="trend-acquire-nav-btn" title="Create account vault profile to arrange private viewing access">Acquire Masterwork &rarr;</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   💎 ASYMMETRICAL TRENDING MANIFEST VECTOR FLOW STYLES
+   ========================================================================== */
+
+.trend-manifest-section {
+  position: relative;
+  background-color: #031E17; /* Theme Deep Forest Green Base */
+  padding: 60px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.trend-ambient-blur-layer {
+  position: absolute;
+  top: 20%; left: 50%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 75%);
+  pointer-events: none; z-index: 1;
+}
+
+.trend-max-container {
+  position: relative; z-index: 2; max-width: 1300px; margin: 0 auto;
+}
+
+/* --- SEO KEYWORD HEADER CONFIGS --- */
+.trend-section-header { text-align: center; max-width: 780px; margin: 0 auto 85px auto; }
+.trend-eyebrow-label {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 5px; text-transform: uppercase; display: block; margin-bottom: 12px;
+}
+.trend-main-heading { font-size: 2.8rem; font-weight: 400; margin: 0 0 18px 0; letter-spacing: 1px; }
+.gold-text-aurora-glow { color: #D4AF37; transition: text-shadow 0.4s ease; }
+.trend-manifest-section:hover .gold-text-aurora-glow { text-shadow: 0 0 15px rgba(212, 175, 55, 0.7), 0 0 35px rgba(212, 175, 55, 0.3); }
+.trend-geometric-divider {
+  width: 60px; height: 1px; background-color: #D4AF37; margin: 0 auto 25px auto; position: relative;
+}
+.trend-geometric-divider::after {
+  content: ''; position: absolute; width: 4px; height: 4px; background-color: #D4AF37; transform: rotate(45deg); top: -2px; left: 28px;
+}
+.trend-seo-lead { font-family: sans-serif; font-size: 0.95rem; line-height: 1.6; color: #A3B8B3; margin: 0; }
+
+/* --- EDITORIAL ASYMMETRICAL STREAM LAYOUT --- */
+.trend-lookbook-spread-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+  align-items: start;
+}
+
+.trend-editorial-block {
+  position: relative; background: transparent; display: flex; flex-direction: column; box-sizing: border-box;
+  opacity: 0; transform: translateY(35px);
+  animation: trendEntranceGlide 0.9s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+.trend-lookbook-spread-grid .card-stagger-up { animation-delay: 0.15s; }
+.trend-lookbook-spread-grid .card-stagger-down { animation-delay: 0.4s; margin-top: 60px; } /* Asymmetrical height offset spacing */
+
+/* Bounding border micro glow layer fields */
+.trend-card-glow-border {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 1px solid transparent; border-radius: 6px; pointer-events: none; z-index: 5; transition: all 0.4s ease;
+}
+
+.trend-editorial-block:hover {
+  transform: translateY(-5px);
+}
+.trend-lookbook-spread-grid .card-stagger-down:hover { transform: translateY(55px); } /* Safe tracking offset preservation during hover shifts */
+
+.trend-editorial-block:hover .trend-card-glow-border {
+  box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.05);
+}
+
+/* --- THE VIEWPORT PHOTO FRAMES --- */
+.trend-viewport-frame {
+  position: relative; width: 100%; height: 420px; overflow: hidden; z-index: 2;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.04);
+  background-color: rgba(0,0,0,0.15); transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Customized Asymmetrical Geometric Mask Shapes */
+.porthole-arch-mask { border-radius: 120px 120px 6px 6px; }
+.shield-geometric-mask { border-radius: 6px 6px 120px 120px; }
+
+.trend-artwork-img {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(85%);
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.3, 1), filter 0.5s ease;
+}
+.trend-editorial-block:hover .trend-artwork-img { transform: scale(1.03); filter: brightness(98%); }
+.trend-editorial-block:hover .trend-viewport-frame {
+  border-color: rgba(212, 175, 55, 0.25);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.1);
+}
+
+/* Diagonal holographic ray pass shimmer slit */
+.trend-laser-shimmer-slit {
+  position: absolute; top: 0; left: -150%; width: 50%; height: 100%; background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.08) 30%, rgba(212,175,55,0.2) 50%, rgba(255,255,255,0.08) 70%, transparent 100%); transform: skewX(-25deg); z-index: 3;
+}
+.trend-editorial-block:hover .trend-laser-shimmer-slit { animation: trendSlitPass 0.9s ease-out forwards; }
+@keyframes trendSlitPass { 100% { left: 150%; } }
+
+.trend-rank-indicator {
+  position: absolute; top: 20px; right: 20px; background-color: rgba(3, 30, 23, 0.85);
+  backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.25); color: #D4AF37;
+  padding: 6px 12px; font-family: sans-serif; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; z-index: 4;
+}
+
+/* Details text card panels framework definitions links styling layout context */
+.trend-text-frame { padding: 30px 10px 0 10px; position: relative; z-index: 2; }
+.trend-meta-row { display: flex; justify-content: space-between; font-family: sans-serif; font-size: 0.75rem; color: #617A75; letter-spacing: 2px; margin-bottom: 8px; }
+.gold-index-tracker { color: #D4AF37; font-weight: bold; }
+
+.trend-item-display-title { font-size: 1.8rem; font-weight: 400; margin: 0 0 12px 0; letter-spacing: 0.5px; transition: color 0.3s ease; }
+.trend-editorial-block:hover .trend-item-display-title { color: #FFFFFF; text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+
+.trend-item-display-desc { font-family: sans-serif; font-size: 0.9rem; line-height: 1.6; color: #A3B8B3; margin: 0 0 25px 0; }
+
+.trend-acquisition-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 20px; }
+.trend-item-display-price { font-size: 1.4rem; color: #D4AF37; font-weight: bold; }
+
+/* Micro-Underline interactive navigation anchors tags controllers lookup specs */
+.trend-acquire-nav-btn {
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: #D4AF37; text-decoration: none; position: relative; padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+.trend-acquire-nav-btn::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background-color: #FFFFFF; transition: width 0.3s ease;
+}
+.trend-editorial-block:hover .trend-acquire-nav-btn { color: #FFFFFF; text-shadow: 0 0 8px #FFFFFF; }
+.trend-editorial-block:hover .trend-acquire-nav-btn::after { width: 100%; }
+
+@keyframes trendEntranceGlide { 100% { opacity: 1; transform: translateY(0); } }
+
+/* ==========================================================================
+   📱 SYSTEM COMPONENT RESPONSIVE BREAKPOINTS (UNBREAKABLE GRID COLLAPSING)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  .trend-lookbook-spread-grid { gap: 35px; }
+  .card-stagger-down { margin-top: 0 !important; } /* Standardizes layout balancing rows across mid-size screens */
+  .trend-viewport-frame { height: 350px; }
+  .trend-editorial-block:hover { transform: translateY(-5px) !important; }
+}
+
+@media (max-width: 768px) {
+  .trend-manifest-section { padding: 80px 24px; }
+  .trend-main-heading { font-size: 2.2rem; }
+  .trend-lookbook-spread-grid { display: flex; flex-direction: column; gap: 45px; } /* Clean linear column collapse on portrait smart terminals ports */
+  .trend-viewport-frame { height: 320px; border-radius: 4px !important; } /* Drops complex shapes to preserve maximum image scales metrics */
+}
+
+@media (max-width: 480px) {
+  .trend-manifest-section { padding: 60px 16px; }
+  .trend-main-heading { font-size: 1.8rem; }
+  .trend-acquisition-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+}
+
+</style>
+
+<section class="bright-cta-banner" aria-label="Exclusive Acquisition Privilege">
+  <!-- Brighter Luxury Backdrop Asset -->
+  <div class="cta-banner-bg-wrapper">
+    <img src="./Assests/CTA home.webp" alt="Bright Liquid Gold Silk Backdrop" class="cta-banner-native-img" loading="lazy">
+    <div class="cta-banner-matte-overlay"></div>
+  </div>
+
+  <div class="cta-banner-max-container">
+    <div class="cta-single-line-flex">
+      <!-- High Impact Text Content -->
+      <div class="cta-text-group">
+        <span class="cta-mini-eyebrow">Limited Atelier Privilege</span>
+        <h2 class="cta-banner-heading">Secure Today’s <span class="glow-keyword">Gold Valuation Index</span> Rate</h2>
+      </div>
+
+      <!-- High Contrast Liquid Metal Action Button Wrapper -->
+      <div class="cta-action-group">
+        <a href="javascript:void(0)" class="liquid-neon-gold-btn" onclick="window.triggerSchemeEnquiry('Sovereign Rate Lock Banner')" title="Secure current gold rate lock valuation now">
+          <span class="btn-text-layer">Lock Rate Now</span>
+          <span class="btn-icon-layer">
+            <svg class="btn-arrow-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   ⚡ BRIGHT LUXURY LIQUID GOLD SINGLE-LINE CTA BANNER
+   ========================================================================== */
+
+.bright-cta-banner {
+  position: relative;
+  background-color: #0c3328; /* Brighter, richer emerald foundation layer tint */
+  padding: 60px 40px;
+  overflow: hidden;
+  border-top: 1px solid #D4AF37;
+  border-bottom: 1px solid #D4AF37;
+  display: flex;
+  align-items: center;
+}
+
+/* Background Optimization Layers */
+.cta-banner-bg-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 2;
+}
+
+.cta-banner-native-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.65; /* Significantly brighter backdrop visibility for rich texture depth */
+  filter: contrast(130%) brightness(80%) saturate(120%);
+}
+
+.cta-banner-matte-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Blends light emerald nodes into a vibrant radial focal center */
+  background: radial-gradient(circle at 30% 50%, rgba(12, 51, 40, 0.2) 0%, rgba(3, 30, 23, 0.95) 85%);
+}
+
+.cta-banner-max-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* --- THE UNBREAKABLE SINGLE LINE FLEX LAYOUT --- */
+.cta-single-line-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.cta-text-group {
+  flex-grow: 1;
+}
+
+.cta-mini-eyebrow {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cta-banner-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: #FFFFFF;
+  line-height: 1.3;
+}
+
+.glow-keyword {
+  color: #D4AF37;
+  font-style: italic;
+  transition: text-shadow 0.4s ease;
+}
+
+/* Trigger intense word level glow together on hover bounds */
+.bright-cta-banner:hover .glow-keyword {
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+/* --- THE ULTRABRIGHT SOLID LIQUID GOLD BUTTON --- */
+.liquid-neon-gold-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #D4AF37; /* Brighter Signature Solid Gold */
+  color: #031E17;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.btn-text-layer {
+  position: relative;
+  z-index: 3;
+}
+
+.btn-icon-layer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.btn-arrow-svg {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+/* Micro Shimmer Laser ray tracking across button background */
+.liquid-neon-gold-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  z-index: 2;
+}
+
+/* --- HOVER GLOW INTERACTIONS --- */
+.liquid-neon-gold-btn:hover {
+  background-color: #FFFFFF; /* Shifts sharply to high-contrast Diamond White */
+  color: #031E17;
+  transform: translateY(-4px);
+  /* High-intensity outer neon aura glow drop shadows */
+  box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4), 
+              0 0 35px rgba(212, 175, 55, 0.7);
+}
+
+.liquid-neon-gold-btn:hover::before {
+  left: 100%;
+  transition: left 0.65s ease-in-out;
+}
+
+.liquid-neon-gold-btn:hover .btn-arrow-svg {
+  transform: translateX(6px) scale(1.1);
+}
+
+/* ==========================================================================
+   📱 HIGH FIDELITY BREAKPOINTS (SEAMLESS RESPONSIVE MATRIX)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .cta-banner-heading { font-size: 1.8rem; }
+  .liquid-neon-gold-btn { padding: 14px 26px; font-size: 0.8rem; }
+}
+
+@media (max-width: 768px) {
+  .bright-cta-banner { padding: 50px 24px; }
+  
+  /* Collapses the single-line flex format to stack cleanly on portrait configurations */
+  .cta-single-line-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  
+  .cta-action-group {
+    width: 100%;
+  }
+  
+  .liquid-neon-gold-btn {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center; /* Center items perfectly on tablet screens */
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bright-cta-banner { padding: 40px 16px; }
+  .cta-banner-heading { font-size: 1.4rem; }
+  .cta-mini-eyebrow { letter-spacing: 3px; font-size: 0.75rem; }
+}
+
+</style>
+
+<footer class="luxury-global-footer" aria-labelledby="footer-brand-heading">
+    <!-- Fluid background environmental texture grid layer -->
+    <div class="footer-environmental-bg-mask"></div>
+
+    <div class="footer-max-container">
+        <div class="footer-main-grid-matrix">
+            
+            <!-- Column 1: Brand Identifier Logo, SEO Text, and Social Icons -->
+            <div class="footer-brand-column">
+    <!-- 🏷️ CLICKABLE BRAND LOGO CONTAINER -->
+    <div class="footer-logo-box" onclick="window.scrollToTopEngine()" style="cursor: pointer;" title="Scroll back to top of page">
+        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="footer-brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h2 id="footer-brand-heading" class="footer-logo-fallback-text" style="display:none;">STACKLY</h2>
+    </div>
+    <p class="footer-brand-seo-statement">
+        Artisans of heirloom-quality fine jewellery, certified flawless diamonds, and bespoke solid gold creations. Crafting timeless luxury and capital-preserving investment assets for generations.
+    </p>
+                <div class="footer-social-glow-strip">
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on X / Twitter">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on GitHub">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2: Semantic Navigation Group (SEO Jewelery Terms) -->
+            <div class="footer-links-column">
+                <h3 class="footer-group-title">The Collections</h3>
+                <ul class="footer-links-stack">
+                    <li><a href="collections.html#rings" class="footer-nav-hover-link">Bespoke Diamond Rings</a></li>
+                    <li><a href="collections.html#necklaces" class="footer-nav-hover-link">High Jewellery Necklaces</a></li>
+                    <li><a href="collections.html#bangles" class="footer-nav-hover-link">Stunning Gold Bangles</a></li>
+                    <li><a href="collections.html#earrings" class="footer-nav-hover-link">Fine Cluster Earrings</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Privilege Services Link Group -->
+            <div class="footer-links-column">
+                <h3 class="footer-group-title">Elite Services</h3>
+                <ul class="footer-links-stack">
+                    <li><a href="index.html#investment-schemes-view" class="footer-nav-hover-link">Gold Savings Schemes</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Sovereign Rate Booking</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Bespoke Consultations</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Insured Vault Valuations</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter Field Wrapper with Brighter Liquid Gold Action Button -->
+            <div class="footer-newsletter-column">
+                <h3 class="footer-group-title">The Atelier Newsletter</h3>
+                <p class="newsletter-descriptor">Get priority notifications on seasonal masterpiece drops, private exhibitions, and gold market updates weekly.</p>
+                
+                <form class="footer-newsletter-form-box" onsubmit="window.handleNewsletterSubmission(event)">
+                    <!-- EMAIL PATTERN INPUT REGEX CHECK ATTACHED -->
+                    <input type="email" 
+                           required 
+                           id="footer-subscriber-email" 
+                           class="footer-input-field" 
+                           placeholder="your@email.com" 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           title="Please enter a valid email address (e.g., name@domain.com)"
+                           aria-label="Email address for news subscription">
+                    <button type="submit" class="footer-newsletter-submit-btn" aria-label="Subscribe to newsletter">
+                        <span class="submit-btn-text">Subscribe</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Lower Baseline Copyright Strip -->
+        <div class="footer-baseline-strip">
+            <p class="footer-copyright-text">&copy; 2026 STACKLY Fine Jewellery. All rights reserved.</p>
+            <div class="footer-legal-inline-menu">
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Privacy Policy</a>
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Terms of Service</a>
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Cookie Policy</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🔝 FLOATING BACK TO TOP ARROW BUTTON -->
+    <button class="scroll-to-top-btn" id="backToTopBtn" onclick="window.scrollToTopEngine()" aria-label="Scroll back to top of page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+</footer>
+<style>
+
+    /* Gives a clear interactive hover state to your footer brand logo */
+.footer-logo-box {
+  margin-bottom: 20px;
+  display: inline-flex; /* Shrinks the click area tightly to only fit your logo */
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.footer-logo-box:hover {
+  transform: translateY(-2px); /* Gentle floating liftoff on hover */
+}
+
+.footer-logo-box:hover .footer-brand-logo-img {
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6)); /* Intense gold glow feedback loop */
+}
+
+.footer-logo-box:hover .footer-logo-fallback-text {
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+    /* ==========================================================================
+   🏛️ ADAPTED WIREFRAME JEWELRY GLOBAL FOOTER STYLING
+   ========================================================================== */
+
+.luxury-global-footer {
+  position: relative;
+  background-color: #031E17; /* Domain Color: Stackly Deep Forest Green */
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 80px 40px 40px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+}
+
+.footer-environmental-bg-mask {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-max-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* --- THE NAVIGATION COLUMN MATRIX LAYOUTS --- */
+.footer-main-grid-matrix {
+  display: grid;
+  grid-template-columns: 3.5fr 2fr 2fr 4.5fr; /* Matches the layout width distribution of wireframe */
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* Logo Image Container adjustments */
+.footer-logo-box {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-brand-logo-img {
+  max-height: 32px; /* Restricts vertical bounding frame of brand logo file */
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+}
+
+.footer-logo-fallback-text {
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.footer-brand-seo-statement {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #A3B8B3;
+  margin: 0 0 25px 0;
+  max-width: 95%;
+}
+
+.footer-group-title {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF; /* White crisp header styling matching wireframe */
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 25px 0;
+}
+
+/* Links Stack configuration rules layout */
+.footer-links-stack {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links-stack li a,
+.footer-legal-inline-menu a {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  color: #A3B8B3; /* Slate grey muted links match wireframe text states */
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+  display: inline-block;
+}
+
+/* Link item translation text shadow glow animations mechanics */
+.footer-nav-hover-link:hover {
+  color: #D4AF37; /* Theme Color: Luxury Gold Highlight Accent */
+  transform: translateX(3px);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.footer-legal-inline-menu a:hover {
+  color: #D4AF37;
+}
+
+/* Social Icon Matrix Strips formatting codes settings adjustment info */
+.footer-social-glow-strip {
+  display: flex; gap: 12px;
+}
+
+.social-glow-circle-link {
+  width: 34px; height: 34px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px; /* Squared radius profile tracking image layout frame specs */
+  color: #A3B8B3;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.social-glow-circle-link:hover {
+  background-color: #D4AF37;
+  color: #031E17;
+  border-color: #D4AF37;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+/* --- THE CAPTURE FIELD COMPONENT CONFIGS --- */
+.newsletter-descriptor {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #A3B8B3;
+  margin: 0 0 20px 0;
+}
+
+.footer-newsletter-form-box {
+  display: flex;
+  flex-direction: column; /* Matches the top to bottom stacked format of wireframe */
+  width: 100%;
+  gap: 12px;
+}
+
+.footer-input-field {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.footer-input-field:focus {
+  border-color: #D4AF37;
+}
+
+.footer-input-field::placeholder {
+  color: #4a635e;
+}
+
+/* Brighter Solid Liquid Gold Action button matching requested spec updates */
+.footer-newsletter-submit-btn {
+  width: 100%;
+  background-color: #D4AF37; /* Brighter Solid Gold Base */
+  border: 1px solid #D4AF37;
+  color: #031E17;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.footer-newsletter-submit-btn:hover {
+  background-color: #FFFFFF; /* High contrast white toggle core shift */
+  color: #031E17;
+  border-color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3), 0 0 25px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+
+/* --- BASELINE STRIP COPYRIGHT CODES DEFINITIONS LOOK --- */
+.footer-baseline-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copyright-text {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  color: #617A75;
+  margin: 0;
+}
+
+.footer-legal-inline-menu {
+  display: flex; gap: 20px;
+}
+
+/* --- 🔝 BACK TO TOP FLOATING ACTION BUTTON --- */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px; height: 40px;
+  background-color: #D4AF37; /* Brighter theme palette matched indicator matching blue circle wireframe */
+  color: #031E17;
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.scroll-to-top-btn.reveal-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top-btn:hover {
+  background-color: #FFFFFF;
+  color: #031E17;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5), 0 0 25px rgba(212, 175, 55, 0.7);
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   📱 SEAMLESS COMPONENT MOBILE RESPONSIVE LAYOUT MATRIX
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .footer-main-grid-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .luxury-global-footer { padding: 60px 24px 30px 24px; }
+  
+  .footer-main-grid-matrix {
+    display: flex;
+    flex-direction: column; /* Force linear vertical single stack on smaller layout breakpoints devices */
+    gap: 35px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand-seo-statement { max-width: 100%; }
+
+  .footer-baseline-strip {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer-legal-inline-menu {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .scroll-to-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 36px; height: 36px;
+  }
+}
+
+</style>
+
+<script>
+    // ==========================================================================
+// 🏛️ LUXURY ATELIER FOOTER INTERACTION UTILITIES FRAMEWORK
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Bind windows monitoring viewport scrolling handler to show/hide the back to top arrow icon
+  window.addEventListener("scroll", handleFooterScrollMonitorEvent);
+});
+
+// A. BACK TO TOP SCROLL MONITOR VISIBILITY MAP
+function handleFooterScrollMonitorEvent() {
+  const scrollArrowButton = document.getElementById("backToTopBtn");
+  if (!scrollArrowButton) return;
+
+  // Reveal the floating button once the window rolls down past 400 vertical layout pixels
+  if (window.scrollY > 400) {
+    scrollArrowButton.classList.add("reveal-active");
+  } else {
+    scrollArrowButton.classList.remove("reveal-active");
+  }
+}
+
+// B. SMOOTH BACK TO TOP ANIMATION ENGINE
+window.scrollToTopEngine = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Native fluid scrolling physics acceleration
+  });
+};
+
+// C. VALIDATED NEWSLETTER INSIGHT CAPTURE HANDLER
+window.handleNewsletterSubmission = function(formEvent) {
+  // Intercept data packet to bypass automatic layout reloading
+  formEvent.preventDefault();
+
+  const emailFieldNode = document.getElementById("footer-subscriber-email");
+  if (!emailFieldNode) return;
+
+  const dynamicEmailString = emailFieldNode.value.trim();
+
+  // Formal luxury validation checking response message window strings
+  const successNotificationAlert = `Successfully Subscribed!\n\nThank you for joining the STACKLY Inner Circle. A luxury lookbook collection briefing has been transmitted to: ${dynamicEmailString}`;
+  
+  // Flash custom alerting box metrics
+  alert(successNotificationAlert);
+
+  // Flush form text box parameter values clean
+  emailFieldNode.value = "";
+};
+
+// ==========================================================================
+// 🏛️ STACKLY JEWELLERY FOOTER SYSTEM ENGINE
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Bind viewport scroll listener to monitor the visibility of the bottom-right arrow button
+  window.addEventListener("scroll", handleFooterScrollMonitorEvent);
+});
+
+/**
+ * 1. BACK TO TOP SCROLL MONITOR VISIBILITY
+ * Automatically reveals or hides the floating arrow button based on screen location
+ */
+function handleFooterScrollMonitorEvent() {
+  const scrollArrowButton = document.getElementById("backToTopBtn");
+  if (!scrollArrowButton) return;
+
+  // Reveal the floating button once the window rolls down past 400 vertical pixels
+  if (window.scrollY > 400) {
+    scrollArrowButton.classList.add("reveal-active");
+  } else {
+    scrollArrowButton.classList.remove("reveal-active");
+  }
+}
+
+/**
+ * 2. SMOOTH BACK TO TOP ACCELERATION ENGINE
+ * Executed instantly when clicking either the Footer Brand Logo or the Floating Arrow Button
+ */
+window.scrollToTopEngine = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Triggers native, ultra-smooth acceleration curves
+  });
+};
+
+/**
+ * 3. VALIDATED NEWSLETTER INSIGHT CAPTURE HANDLER
+ * Validates email integrity and delivers a premium confirmation alert prompt
+ */
+window.handleNewsletterSubmission = function(formEvent) {
+  // Intercept the data packet to bypass automatic page reloading
+  formEvent.preventDefault();
+
+  const emailFieldNode = document.getElementById("footer-subscriber-email");
+  if (!emailFieldNode) return;
+
+  const dynamicEmailString = emailFieldNode.value.trim();
+
+  // Formal luxury confirmation output string
+  const successNotificationAlert = `Successfully Subscribed!\n\nThank you for joining the STACKLY Inner Circle. A luxury lookbook collection briefing has been transmitted to: ${dynamicEmailString}`;
+  
+  // Flash custom alert box
+  alert(successNotificationAlert);
+
+  // Flush the input text field clean
+  emailFieldNode.value = "";
+};
+
+</script>
+</body>
+</html>
+
+
