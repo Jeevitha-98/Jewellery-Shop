@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curated Desires | Wishlist Vault</title>
+  <!-- Main layout style file link -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Elegant typography embedding links -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body class="luxury-body">
+
+  <!-- Shared Global Header Panel Setup -->
+  <header class="luxury-header">
+    <div class="header-container">
+      <div class="logo"><a href="index.html">STACKLY</a></div>
+      
+      <nav class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="collections.html">Collections</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Wishlist Button Counter Link Toggle -->
+        <div class="action-item" id="wishlist-menu-wrapper">
+          <a href="wishlist.html" class="action-btn active-page-link" aria-label="Wishlist View">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge-count" id="wishlist-count">0</span>
+          </a>
+        </div>
+
+        <!-- Shopping Cart Trigger Button Layout Links -->
+        <div class="action-item" id="cart-menu-wrapper">
+          <a href="cart.html" class="action-btn" aria-label="Shopping Cart View">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge-count" id="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Viewport Wishlist Canvas Section Layout -->
+  <main class="page-viewport-section">
+    <div class="page-container">
+      <div class="wishlist-header-box">
+        <span class="page-subtitle">Your Curated Collection</span>
+        <h1 class="page-main-title">The Wishlist Vault</h1>
+        <div class="luxury-divider"><span></span></div>
+      </div>
+      
+      <!-- Grid container target for dynamic JavaScript card insertion mapping -->
+      <div class="wishlist-grid-display" id="wishlist-page-grid">
+        <!-- Rendered dynamically via javascript -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Business Core Logic Controller file attachment linkage links -->
+ <style>
+    /* Custom variables for look normalization controls mapping elements */
+.luxury-body {
+  background-color: #031E17;
+  color: #FFFFFF;
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif, sans-serif;
+  min-height: 100vh;
+}
+
+/* Header Action Base Overlap Settings styling elements adjustments layout */
+.active-page-link {
+  color: #D4AF37 !important;
+}
+
+/* Core Main Structural Section Layout configurations definitions settings */
+.wishlist-header-box {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+/* Asymmetrical Responsive Product Card Layout Grid Display blocks rules structure layout */
+.wishlist-grid-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* Luxury Editorial Modular Display Structure Frame Core setup configs adjustment details look profiles */
+.wishlist-item-card {
+  position: relative;
+  background-color: rgba(4, 37, 29, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.wishlist-item-card:hover {
+  transform: translateY(-6px);
+  border-color: #D4AF37;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* Viewport Image Capture Box properties profiles */
+.wishlist-img-box {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wishlist-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.wishlist-item-card:hover .wishlist-img-box img {
+  transform: scale(1.05);
+}
+
+/* Trash removal absolute cross element tags button mapping styles setup look overlay profile layers */
+.wishlist-remove-icon-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(3, 30, 23, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+
+.wishlist-remove-icon-btn:hover {
+  background-color: #ff6b6b;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+/* Details Box Container Layout Configurations settings blocks styling text content zones styles */
+.wishlist-info-area {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.wishlist-item-name {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.5px;
+}
+
+.wishlist-item-mat {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  color: #A3B8B3;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 20px 0;
+}
+
+/* Action Control Strip Bottom parameters profiles look adjust mapping components alignment setups rules */
+.wishlist-action-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 15px;
+}
+
+.wishlist-item-price {
+  font-size: 1.35rem;
+  color: #D4AF37;
+  font-weight: 500;
+}
+
+/* Move to Bag Gold Line Outline Buttons look specs rules settings configs layouts details styles */
+.wishlist-move-bag-btn {
+  background: transparent;
+  border: 1px solid #D4AF37;
+  color: #FFFFFF;
+  padding: 10px 18px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.wishlist-move-bag-btn:hover {
+  background-color: #D4AF37;
+  color: #031E17;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+/* Fallback Container view configuration models if state counts equal absolute zero elements layout definitions look values setup */
+.empty-wishlist-vault {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+  border: 1px dashed rgba(212, 175, 55, 0.2);
+  border-radius: 4px;
+}
+
+.empty-wishlist-vault p {
+  color: #A3B8B3;
+  font-size: 1.15rem;
+  margin-bottom: 25px;
+}
+
+.return-exhibition-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: transparent;
+  border: 1px solid #D4AF37;
+  color: #D4AF37;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.return-exhibition-btn:hover {
+  background-color: #D4AF37;
+  color: #031E17;
+}
+
+/* High Definition Tablet Breakpoint Views Settings Layout mappings adjustments components controls blocks */
+@media (max-width: 992px) {
+  .wishlist-grid-display {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+}
+
+/* Mobile Minimal Stack Vertical Grid configuration settings specs look setups */
+@media (max-width: 600px) {
+  .wishlist-grid-display {
+    grid-template-columns: 1fr;
+  }
+  .page-viewport-section {
+    padding: 60px 16px;
+  }
+}
+
+ </style>
+ <script>
+// 1. STATE INITIALIZATION (Reads securely from browser storage)
+let cart = JSON.parse(localStorage.getItem('stackly_cart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('stackly_wishlist')) || [];
+
+// Trigger UI sync immediately when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  syncHeaderCounters();
+  renderDropdownPanels();
+  initHomeCardTriggers();
+});
+
+// 2. COUNTERS INTEGRATION (Synchronizes your HTML badge strings)
+function syncHeaderCounters() {
+  const wishlistBadge = document.getElementById('wishlist-badge');
+  const cartBadge = document.getElementById('cart-badge');
+  
+  if (wishlistBadge) wishlistBadge.innerText = wishlist.length;
+  if (cartBadge) cartBadge.innerText = cart.length;
+}
+
+// Save current arrays to memory buffers
+function saveStoreState() {
+  localStorage.setItem('stackly_cart', JSON.stringify(cart));
+  localStorage.setItem('stackly_wishlist', JSON.stringify(wishlist));
+  syncHeaderCounters();
+  renderDropdownPanels(); // Force refresh dropdown content arrays
+}
+
+// 3. CORE ADD / REMOVE FUNCTION APIs
+window.addToCart = function(product) {
+  if (!cart.some(item => item.id === product.id)) {
+    cart.push(product);
+    saveStoreState();
+  }
+};
+
+window.addToWishlist = function(product) {
+  if (!wishlist.some(item => item.id === product.id)) {
+    wishlist.push(product);
+    saveStoreState();
+  }
+};
+
+window.executeWishlistItemRemoval = function(id) {
+  wishlist = wishlist.filter(item => item.id !== id);
+  saveStoreState();
+};
+
+window.executeCartProductRemoval = function(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveStoreState();
+};
+
+window.transferWishlistItemToCart = function(id) {
+  const item = wishlist.find(w => w.id === id);
+  if (item) {
+    if (!cart.some(c => c.id === id)) cart.push(item);
+    wishlist = wishlist.filter(w => w.id !== id);
+    saveStoreState();
+  }
+};
+
+// 4. DROPDOWN RENDERING (Targets your specific container IDs)
+function renderDropdownPanels() {
+  // FIXED Target Element Containers
+  const wishListContainer = document.getElementById('wishlist-items-container');
+  const cartListContainer = document.getElementById('cart-items-container');
+  const cartTotalDisplay = document.getElementById('cart-dropdown-total');
+
+  // A. Render Your Wishlist Dropdown Content
+  if (wishListContainer) {
+    if (wishlist.length === 0) {
+      wishListContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#A3B8B3; font-size:0.85rem;">Your Wishlist is empty</div>';
+    } else {
+      wishListContainer.innerHTML = wishlist.map(item => `
+        <div class="drop-micro-product" style="display: flex; gap: 15px; padding: 12px 15px; border-bottom: 1px solid rgba(212,175,55,0.12); align-items: center;">
+          <img src="${item.img}" alt="${item.name}" style="width: 50px; height: 60px; object-fit: cover; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="flex-grow: 1;">
+            <h4 style="font-size: 0.9rem; margin: 0 0 4px 0; font-weight: 400; color: #fff;">${item.name}</h4>
+            <span style="font-size: 0.85rem; color: #D4AF37;">${item.price}</span>
+            <div style="margin-top: 4px;">
+              <button onclick="transferWishlistItemToCart('${item.id}')" style="background:none; border:none; color:#D4AF37; font-size:0.75rem; cursor:pointer; padding:0; font-weight:bold; margin-right:10px;">+ Add to Bag</button>
+            </div>
+          </div>
+          <button onclick="executeWishlistItemRemoval('${item.id}')" style="background: none; border: none; color: #ff6b6b; font-size: 1.2rem; cursor: pointer;">&times;</button>
+        </div>
+      `).join('');
+    }
+  }
+
+  // B. Render Your Selection Bag Dropdown Content
+  if (cartListContainer) {
+    if (cart.length === 0) {
+      cartListContainer.innerHTML = '<div style="padding:20px; text-align:center; color:#A3B8B3; font-size:0.85rem;">Your Selection Bag is empty</div>';
+      if (cartTotalDisplay) cartTotalDisplay.innerText = "$0.00";
+    } else {
+      let subtotalSum = 0;
+      
+      cartListContainer.innerHTML = cart.map(item => {
+        // Strip non-numeric data symbols to count subtotals safely
+        const flatNumericPrice = parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
+        subtotalSum += flatNumericPrice;
+
+        return `
+          <div class="drop-micro-product" style="display: flex; gap: 15px; padding: 12px 15px; border-bottom: 1px solid rgba(212,175,55,0.12); align-items: center;">
+            <img src="${item.img}" alt="${item.name}" style="width: 50px; height: 60px; object-fit: cover; border: 1px solid rgba(255,255,255,0.05);">
+            <div style="flex-grow: 1;">
+              <h4 style="font-size: 0.9rem; margin: 0 0 4px 0; font-weight: 400; color: #fff;">${item.name}</h4>
+              <span style="font-size: 0.85rem; color: #D4AF37;">${item.price}</span>
+            </div>
+            <button onclick="executeCartProductRemoval('${item.id}')" style="background: none; border: none; color: #ff6b6b; font-size: 1.2rem; cursor: pointer;">&times;</button>
+          </div>
+        `;
+      }).join('');
+      
+      if (cartTotalDisplay) cartTotalDisplay.innerText = `$${subtotalSum.toLocaleString()}.00`;
+    }
+  }
+}
+
+// 5. SEAMLESS HOMEPAGE MAPPING MOUSE EVENT TRIGGERS
+function initHomeCardTriggers() {
+  document.querySelectorAll('.masterpiece-card').forEach((card, index) => {
+    // Automatic ID generation fallback index mapping profiles
+    const fallbackId = `prod-0${index + 1}`;
+    
+    const id = card.getAttribute('data-id') || fallbackId;
+    const name = card.getAttribute('data-name') || card.querySelector('.artwork-title')?.innerText || "Signature Gem";
+    const price = card.getAttribute('data-price') || card.querySelector('.artwork-price')?.innerText || "$0.00";
+    
+    // Find image source inside the specific card container block
+    const imgElement = card.querySelector('img');
+    const img = card.getAttribute('data-img') || (imgElement ? imgElement.getAttribute('src') : "./Assests/diamondrings.webp");
+
+    const activeProductPayload = { id, name, price, img };
+
+    // Wire up clicking discovery links to Add items to Cart
+    const buyActionBtn = card.querySelector('.editorial-discover-link');
+    if (buyActionBtn) {
+      buyActionBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.addToCart(activeProductPayload);
+      });
+    }
+
+    // Double Click action event wrapper target link addition to Wishlist 
+    card.addEventListener('dblclick', () => {
+      window.addToWishlist(activeProductPayload);
+    });
+  });
+}
+
+ </script>
+</body>
+</html>
