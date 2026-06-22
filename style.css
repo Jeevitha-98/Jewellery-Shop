@@ -411,30 +411,44 @@ body {
     background-color: rgba(250, 250, 247, 0.02);
 }
 
+/* ==========================================================================
+   📐 PREMIUM STACKLY BRAND LOGO COMPRESSION FIX
+   ========================================================================== */
+
 .logo-slot-render {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns content tightly to the left side edge */
+  height: 100%;
+  width: auto; /* Shrinks boundary box container space down to only fit artwork width */
 }
 
-.brand-logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.95rem;
-    font-weight: 400;
-    color: var(--theme-white);
-    letter-spacing: 0.25em;
-    line-height: 1.1;
-    pointer-events: none;
+/* TARGET THE NATIVE IMG ELMENT INSIDE THE RENDER CLASS SLOT */
+.logo-slot-render img {
+  /* Adjust these values perfectly until the logo scale matches your preference */
+  height: 72px !important;  /* Controls total vertical scale thickness cleanly */
+  width: auto !important;    /* Forces aspect-ratio scales to adjust without squishing */
+  
+  max-height: 100%;
+  object-fit: contain;
+  
+  /* Adds a premium high-end subtle reflection drop shadow behind vector layers */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.3, 1);
 }
 
-.brand-logo-uploaded-image {
-    max-height: 100%;
-    max-width: 160px;
-    object-fit: contain;
-    pointer-events: none;
+/* Micro-interaction hover trigger response feedback state curves */
+.logo-slot-render img:hover {
+  transform: scale(1.02); /* Gentle crisp pop feedback interaction loop */
 }
+
+/* 📱 Responsive Mobile Breakpoint Scaling Normalization */
+@media (max-width: 768px) {
+  .logo-slot-render img {
+    height: 32px !important; /* Compresses image bounds tighter on smaller screen widths */
+  }
+}
+
 
 .hidden-file-input {
     display: none !important;

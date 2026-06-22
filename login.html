@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Back | STACKLY Vault Gateway</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body-reset">
+
+  <section class="auth-section">
+    <!-- Unbreakable Full Screen Environmental Backdrop -->
+    <div class="auth-bg-layer">
+        <img src="./Assests/background - home.webp" alt="STACKLY Luxury Backdrop Texture" class="auth-native-bg-img" loading="lazy">
+        <div class="auth-matte-overlay"></div>
+    </div>
+
+    <!-- Central Interactive Credentials Login Box Card -->
+    <div class="auth-container">
+        
+        <!-- Upper Corner Home Navigation Pill Button -->
+        <a href="index.html" class="auth-card-corner-home-btn" title="Return to Homepage">
+            <span>&larr; Home</span>
+        </a>
+
+        <header class="auth-header">
+            <h1 class="auth-title-large">WELCOME BACK</h1>
+            <p class="auth-editorial-lead">Select your operational platform role to access your secure inventory workspace.</p>
+        </header>
+
+        <form class="auth-form-box" onsubmit="window.handleUserLogin(event)">
+            
+            <!-- 🎭 ROLE SELECTION GRIDS (ADAPTED TO DOMAIN) -->
+            <div class="form-group">
+                <label class="form-label-tracking">SELECT PLATFORM ROLE</label>
+                <div class="role-selection-grid">
+                    <!-- Role Option 1: Studio Partner -->
+                    <div class="role-card active-role" id="role-partner" onclick="window.selectPlatformRole('partner')">
+                        <div class="role-icon-wrapper circle-gold-glow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <span class="role-title-text">Studio Partner</span>
+                    </div>
+
+                    <!-- Role Option 2: Corporate Client -->
+                    <div class="role-card" id="role-client" onclick="window.selectPlatformRole('client')">
+                        <div class="role-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </div>
+                        <span class="role-title-text">Corporate Client</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Address Entry Field -->
+            <div class="form-group">
+                <label for="log-email" class="form-label-tracking">EMAIL ADDRESS</label>
+                <input type="email" id="log-email" required class="form-input-field" placeholder="name@company.com" autocomplete="email">
+            </div>
+
+            <!-- Password Entry Field with Toggle Eye Icon Button -->
+            <div class="form-group">
+                <label for="log-password" class="form-label-tracking">PASSWORD</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="log-password" required class="form-input-field input-with-icon" placeholder="Enter security key" autocomplete="current-password">
+                    <button type="button" class="password-toggle-eye-btn" onclick="window.toggleLoginPassword('log-password', this)" aria-label="Toggle password view state">
+                        <svg class="eye-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 🗳️ REMEMBER ME & FORGOT PASSWORD ACTIONS BAR -->
+            <div class="form-auxiliary-actions-row">
+                <label class="remember-me-checkbox-label">
+                    <input type="checkbox" id="log-remember" class="native-custom-checkbox">
+                    <span class="checkbox-custom-display"></span>
+                    <span class="checkbox-text-string">Remember me</span>
+                </label>
+                <a href="404.html" class="forgot-security-key-link">Forgot Password?</a>
+            </div>
+
+            <!-- Secure Login Call to Action Submit Button (Fluid Golden Glow) -->
+            <button type="submit" class="auth-submit-btn-glow">
+                <span>LOG IN SECURELY &rarr;</span>
+            </button>
+        </form>
+
+        <!-- OAuth Third-Party Integrations Group Panels -->
+      <!-- OAuth Third-Party Integrations Group Panels (WIRED TO 404) -->
+<div class="oauth-divider-strip">
+    <span class="oauth-divider-line-text">OR SIGN IN WITH</span>
+</div>
+
+<div class="oauth-button-stack-row">
+    <!-- Google wrapped completely inside an anchor pointed to 404 -->
+    <a href="404.html" style="text-decoration: none; display: block; width: 100%;">
+        <button type="button" class="oauth-provider-btn" style="width: 100%;">Google</button>
+    </a>
+    
+    <!-- Facebook wrapped completely inside an anchor pointed to 404 -->
+    <a href="404.html" style="text-decoration: none; display: block; width: 100%;">
+        <button type="button" class="oauth-provider-btn" style="width: 100%;">Facebook</button>
+    </a>
+</div>
+
+
+        <p class="auth-switch-text">Don't have an account? <a href="signup.html" class="auth-switch-link">Create Account</a></p>
+    </div>
+  </section>
+
+  
+  <style>
+    /* ==========================================================================
+   🏛️ STACKLY VAULT INTEGRATED LOGIN GATEWAY LAYOUT CONTEXT
+   ========================================================================== */
+
+   /* ==========================================================================
+   🔧 UNBREAKABLE CORE SCROLL RESTORATION FIX
+   ========================================================================== */
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  /* FIX: Ensure the vertical y-axis is completely open and scrolls naturally */
+  overflow-y: auto !important; 
+  overflow-x: hidden !important; /* Safely keep horizontal scrolling locked */
+  height: -webkit-fit-content !important;
+  height: -moz-fit-content !important;
+  height: fit-content !important;
+}
+
+.auth-section {
+  position: relative;
+  background-color: #031E17;
+  width: 100% !important;
+  
+  /* FIX: Changed from forced strict height to a flexible padding expansion height */
+  min-height: 100vh !important; 
+  height: auto !important; 
+  
+  /* Increased top/bottom padding to give breathing space on small mobile screens */
+  padding: 80px 24px !important; 
+  
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* FIX: Ensure the backdrop image layer stretches to the new dynamic layout limits */
+.auth-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1;
+}
+
+.auth-native-bg-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 0.12;
+  filter: contrast(120%) brightness(35%);
+}
+
+
+.auth-body-reset {
+  margin: 0 !important; padding: 0 !important; width: 100% !important; overflow-x: hidden;
+}
+
+/* Force outer section container wrapper canvas layout bounds to full monitor scale */
+.auth-section {
+  position: relative; background-color: #031E17;
+  width: 100% !important; min-height: 100vh !important; margin: 0 !important; padding: 60px 24px;
+  color: #FFFFFF; font-family: 'Playfair Display', serif, sans-serif;
+  display: flex; align-items: center; justify-content: center; overflow: hidden; box-sizing: border-box;
+}
+
+.auth-bg-layer { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; z-index: 1; }
+.auth-native-bg-img { width: 100% !important; height: 100% !important; object-fit: cover !important; opacity: 0.12; filter: contrast(120%) brightness(35%); }
+.auth-matte-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(3, 30, 23, 0.2) 0%, rgba(2, 22, 17, 0.98) 95%); }
+
+/* Main Card Body Structural Formatting Settings */
+.auth-container {
+  position: relative; z-index: 2; width: 100%; max-width: 520px;
+  background: linear-gradient(145deg, rgba(4, 37, 29, 0.7) 0%, rgba(2, 22, 17, 0.9) 100%);
+  backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 55px 45px; border-radius: 12px; box-shadow: 0 25px 50px rgba(0,0,0,0.6); box-sizing: border-box;
+}
+
+/* Corner Home Pill Navigation Button */
+.auth-card-corner-home-btn {
+  position: absolute; top: 24px; right: 28px;
+  color: #A3B8B3; text-decoration: none;
+  font-family: sans-serif; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; padding: 8px 16px; border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1); box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.auth-card-corner-home-btn:hover {  color: #D4AF37; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(212,175,55,0.4); }
+
+.auth-header { text-align: left; margin-bottom: 35px; margin-top: 35px;}
+.auth-title-large { font-size: 2.5rem; font-weight: 800; margin: 0 0 10px 0; letter-spacing: 1px; color: #FFFFFF; }
+.auth-editorial-lead { font-family: sans-serif; font-size: 0.85rem; color: #A3B8B3; line-height: 1.5; margin: 0; }
+
+.auth-form-box { display: flex; flex-direction: column; gap: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label-tracking { font-family: sans-serif; font-size: 0.75rem; font-weight: 700; color: #617A75; letter-spacing: 1.5px; }
+
+/* 🎭 THE ROLE CHANGER SELECTION CARDS STYLING */
+.role-selection-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 4px; }
+.role-card {
+  background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px; padding: 20px 15px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1); text-align: center;
+}
+.role-icon-wrapper {
+  width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+  color: #617A75; transition: all 0.3s ease;
+}
+.role-title-text { font-family: sans-serif; font-size: 0.85rem; font-weight: 600; color: #617A75; transition: all 0.3s ease; }
+
+/* Active Selection Glowing Role Parameter Metrics */
+.role-card.active-role {
+  border-color: #D4AF37; background-color: rgba(212, 175, 55, 0.03);
+}
+.role-card.active-role .role-icon-wrapper {
+  background-color: #D4AF37; color: #031E17; border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+}
+.role-card.active-role .role-title-text { color: #FFFFFF; font-weight: bold; }
+
+/* Control Fields Entries */
+.form-input-field {
+  width: 100%; background-color: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px; padding: 14px; font-family: sans-serif; font-size: 0.9rem; color: #FFFFFF;
+  outline: none; box-sizing: border-box; transition: all 0.3s ease;
+}
+.form-input-field:focus { border-color: #D4AF37; box-shadow: 0 0 12px rgba(212, 175, 55, 0.2); }
+
+.password-input-wrapper { position: relative; width: 100%; }
+.input-with-icon { padding-right: 45px; }
+.password-toggle-eye-btn {
+  position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+  background: none; border: none; color: #617A75; cursor: pointer; display: flex; align-items: center; transition: color 0.3s ease;
+}
+.password-toggle-eye-btn:hover { color: #D4AF37; }
+.eye-svg-icon { width: 18px; height: 18px; }
+
+/* 🗳️ AUXILIARY REMEMBER ME CHECKS & ALIGNMENTS */
+.form-auxiliary-actions-row { display: flex; justify-content: space-between; align-items: center; margin-top: -4px; }
+.remember-me-checkbox-label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: sans-serif; font-size: 0.8rem; color: #A3B8B3; }
+.native-custom-checkbox { display: none; }
+.checkbox-custom-display {
+  width: 16px; height: 16px; border: 1px solid rgba(255,255,255,0.2); background-color: rgba(0,0,0,0.2); border-radius: 3px; display: inline-block; position: relative; transition: all 0.2s ease;
+}
+.native-custom-checkbox:checked + .checkbox-custom-display { background-color: #D4AF37; border-color: #D4AF37; }
+.native-custom-checkbox:checked + .checkbox-custom-display::after {
+  content: ''; position: absolute; left: 5px; top: 2px; width: 4px; height: 8px; border: solid #031E17; border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.forgot-security-key-link { font-family: sans-serif; font-size: 0.8rem; color: #617A75; text-decoration: none; transition: color 0.3s; }
+.forgot-security-key-link:hover { color: #D4AF37; }
+
+/* Fluid Gold High-Contrast Submission Button Configuration */
+.auth-submit-btn-glow {
+  width: 100%; background-color: #D4AF37; border: 1px solid #D4AF37; color: #031E17;
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2.5px; padding: 16px; border-radius: 6px; cursor: pointer; margin-top: 5px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.auth-submit-btn-glow:hover {
+  background-color: #FFFFFF; border-color: #FFFFFF; color: #031E17;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3), 0 0 30px rgba(212, 175, 55, 0.5); transform: translateY(-2px);
+}
+
+/* Third Party Providers layout divisions metrics codes */
+.oauth-divider-strip {
+  text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 0.1em; margin: 35px 0 25px 0;
+}
+.oauth-divider-line-text { font-family: sans-serif; font-size: 0.7rem; font-weight: 700; color: #4a635e; letter-spacing: 2px; background-color: #031E17; padding: 0 15px; }
+
+.oauth-button-stack-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.oauth-provider-btn {
+  background-color: rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px;
+  padding: 12px; font-family: sans-serif; font-size: 0.85rem; color: #CCCCCC; cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+.oauth-provider-btn:hover { background-color: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); color: #FFFFFF; }
+
+.auth-switch-text { font-family: sans-serif; font-size: 0.85rem; color: #A3B8B3; text-align: center; margin: 30px 0 0 0; }
+.auth-switch-link { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+.auth-switch-link:hover { color: #ffffff; text-shadow: 0 0 8px rgba(212,175,55,0.4); }
+
+/* ==========================================================================
+   📱 SYSTEM BREAKPOINTS (SEAMLESS FLUID RESPONSIVE INTEGRATION)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .auth-section { padding: 40px 16px; }
+  .auth-container { padding: 40px 24px; border: none; background: transparent; box-shadow: none; }
+  .auth-title-large { font-size: 2rem; }
+  .role-selection-grid { grid-template-columns: 1fr; gap: 12px; } /* Stack operational roles vertically on small devices */
+  .auth-card-corner-home-btn { top: -10px; right: 24px; }
+}
+
+  </style>
+
+  <script>
+    // ==========================================================================
+// 🔐 STACKLY VAULT SECURE LOGIN CONTROLLER ENGINE
+// ==========================================================================
+
+// Track default runtime platform operational state role selection
+let selectedPlatformRole = "partner";
+
+/**
+ * 1. PLATFORM ROLE CONTROLLER
+ * Toggles structural highlight states across operational role card grid anchors
+ */
+window.selectPlatformRole = function(targetRoleKey) {
+  selectedPlatformRole = targetRoleKey;
+  
+  const partnerCard = document.getElementById('role-partner');
+  const clientCard = document.getElementById('role-client');
+  
+  if (targetRoleKey === 'partner') {
+    partnerCard?.classList.add('active-role');
+    clientCard?.classList.remove('active-role');
+  } else {
+    clientCard?.classList.add('active-role');
+    partnerCard?.classList.remove('active-role');
+  }
+  
+  console.log(`Operational Platform State Context Configured To: ${selectedPlatformRole.toUpperCase()}`);
+};
+
+/**
+ * 2. SECURE PASSWORD EYE MASK TOGGLE UTILITY
+ */
+window.toggleLoginPassword = function(inputFieldId, buttonNode) {
+  const passwordField = document.getElementById(inputFieldId);
+  if (!passwordField) return;
+
+  const currentType = passwordField.getAttribute('type');
+  const eyeSvg = buttonNode.querySelector('svg');
+
+  if (currentType === 'password') {
+    passwordField.setAttribute('type', 'text');
+    if (eyeSvg) {
+      eyeSvg.innerHTML = `
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+      `;
+    }
+  } else {
+    passwordField.setAttribute('type', 'password');
+    if (eyeSvg) {
+      eyeSvg.innerHTML = `
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      `;
+    }
+  }
+};
+
+/**
+ * 3. DYNAMIC DASHBOARD ROUTER SUBMISSION PIPELINE (FIXED TARGET REDIRECTIONS)
+ * Catches user parameters, checks memory checkboxes, and flashes corresponding custom routing alerts
+ */
+window.handleUserLogin = function(submitEvent) {
+  // Prevent default browser refresh routes behavior
+  submitEvent.preventDefault();
+
+  const userEmail = document.getElementById('log-email')?.value.trim();
+  const isRememberChecked = document.getElementById('log-remember')?.checked;
+  
+  // Custom luxury routing declaration output strings
+  const successLoginMessage = `Access Granted Securely!\n\nWelcome back to the STACKLY Atelier network.\n\n[Identity Profile]: ${userEmail}\n[Persistent Memory]: ${isRememberChecked ? "Enabled on this machine" : "Disabled"}\n\nClick OK to initialize your customized ${selectedPlatformRole.toUpperCase()} Management Dashboard Workspace.`;
+  
+  alert(successLoginMessage);
+
+  // DYNAMIC TARGET WORKSPACE ROUTING REDIRECTIONS
+  if (selectedPlatformRole === "partner") {
+    // Routes directly to Studio Partner Management Workspace document
+    window.location.href = "partner-dashboard.html";
+  } else {
+    // Routes directly to Corporate Client Inventory Portfolio document
+    window.location.href = "client-dashboard.html";
+  }
+};
+
+  </script>
+</body>
+</html>

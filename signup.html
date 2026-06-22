@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join The Inner Circle | STACKLY Vault Registration</title>
+  <!-- Global site stylesheet link -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Premium typography embedding configurations -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Full Canvas Wrapper Block -->
+  <section class="auth-section" aria-labelledby="auth-main-heading">
+    
+    <!-- UNBREAKABLE FULL COVER BACKDROP IMAGE LAYER -->
+    <div class="auth-bg-layer">
+        <img src="./Assests/background - home.webp" alt="STACKLY Luxury Backdrop Texture" class="auth-native-bg-img" loading="lazy">
+        <div class="auth-matte-overlay"></div>
+    </div>
+
+    <!-- Glassmorphic Auth Form Box Card Container -->
+    <div class="auth-container">
+        
+        <!-- UPPER RIGHT CORNER BACK TO LOGIN LINK -->
+        <a href="login.html" class="auth-card-corner-back-link" title="Return to Secure Login Gateway">
+            <span>Back to Login</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </a>
+
+        <!-- Section Header block elements -->
+        <header class="auth-header">
+            <span class="auth-eyebrow">Create An Account</span>
+            <h1 id="auth-main-heading" class="auth-title">Join The Inner Circle</h1>
+            <div class="auth-gold-line"></div>
+        </header>
+
+        <!-- Main Registration Form -->
+        <form class="auth-form-box" onsubmit="window.handleUserSignUp(event)">
+            
+            <!-- Full Name Input Group -->
+            <div class="form-group">
+                <label for="reg-name" class="form-label">Full Name</label>
+                <input type="text" id="reg-name" required class="form-input-field" placeholder="Enter your name..." autocomplete="name">
+                <span class="error-msg-tag" id="name-error">Names cannot contain numbers</span>
+            </div>
+
+            <!-- Phone Number Input Group -->
+            <div class="form-group">
+                <label for="reg-phone" class="form-label">Phone Number</label>
+                <input type="tel" id="reg-phone" required class="form-input-field" placeholder="e.g. +91 9876543210" autocomplete="tel">
+                <span class="error-msg-tag" id="phone-error">Phone numbers cannot contain alphabets</span>
+            </div>
+
+            <!-- Email Input Group -->
+            <div class="form-group">
+                <label for="reg-email" class="form-label">Email Address</label>
+                <input type="email" id="reg-email" required class="form-input-field" placeholder="your@email.com" autocomplete="email">
+            </div>
+
+            <!-- Password Input Group with Toggle Eye Button Icon -->
+            <div class="form-group">
+                <label for="reg-password" class="form-label">Password</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="reg-password" required class="form-input-field input-with-icon" placeholder="••••••••" autocomplete="new-password">
+                    <button type="button" class="password-toggle-eye-btn" onclick="window.togglePasswordVisibility('reg-password', this)" aria-label="Toggle password visibility">
+                        <svg class="eye-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Confirm Password Input Group with Toggle Eye Button Icon -->
+            <div class="form-group">
+                <label for="reg-confirm" class="form-label">Confirm Password</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="reg-confirm" required class="form-input-field input-with-icon" placeholder="••••••••" autocomplete="new-password">
+                    <button type="button" class="password-toggle-eye-btn" onclick="window.togglePasswordVisibility('reg-confirm', this)" aria-label="Toggle password visibility">
+                        <svg class="eye-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+                <span class="error-msg-tag" id="confirm-error">Passwords do not match</span>
+            </div>
+
+            <!-- Submit Registration Button -->
+            <button type="submit" class="auth-submit-btn">
+                <span>Sign Up & Initialize Account</span>
+            </button>
+        </form>
+
+        <p class="auth-switch-text">Already registered? <a href="login.html" class="auth-switch-link">Sign In to Vault</a></p>
+    </div>
+  </section>
+
+  <style>
+    /* ==========================================================================
+   🔑 STACKLY LUXURY REGISTRATION AND COVER INTERFACE STYLES
+   ========================================================================== */
+
+/* Universal Reset Normalizer rules mapping settings blocks */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  overflow-x: hidden;
+}
+
+/* Master canvas fullscreen wrapper block settings configuration properties */
+.auth-section {
+  position: relative;
+  background-color: #031E17; /* Theme Deep Forest Green Base */
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 80px 24px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Native background element layer rules matrix */
+.auth-bg-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1;
+}
+
+.auth-native-bg-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 0.12; /* Subtle background visual texture integration visibility index metrics */
+  filter: contrast(120%) brightness(40%);
+}
+
+.auth-matte-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(3, 30, 23, 0.3) 0%, rgba(3, 30, 23, 0.98) 90%);
+}
+
+/* Glassmorphic Central Box Layout Settings */
+.auth-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(145deg, rgba(4, 37, 29, 0.6) 0%, rgba(2, 22, 17, 0.8) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 50px 40px;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  box-sizing: border-box;
+}
+
+/* Upper right corner absolute back link styling profiles details look tracking */
+.auth-card-corner-back-link {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #A3B8B3; /* Muted slate grey tracking link metrics layout wireframe values */
+  text-decoration: none;
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.auth-card-corner-back-link svg {
+  transition: transform 0.3s ease;
+}
+
+.auth-card-corner-back-link:hover {
+  color: #D4AF37; /* Theme Luxury Gold highlight accent feedback */
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.auth-card-corner-back-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Header Section block settings values text elements alignment context setups */
+.auth-header { text-align: center; margin-bottom: 35px; margin-top: 35px;}
+
+.auth-eyebrow {
+  font-family: sans-serif; font-size: 0.75rem; font-weight: 700; color: #D4AF37;
+  letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 8px;
+}
+
+.auth-title { font-size: 2.2rem; font-weight: 400; margin: 0 0 15px 0; letter-spacing: 1px; }
+
+.auth-gold-line {
+  width: 60px; height: 1px; background-color: #D4AF37; margin: 0 auto;
+}
+
+/* Form input styling matrix configurations */
+.auth-form-box { display: flex; flex-direction: column; gap: 20px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; position: relative; }
+
+.form-label {
+  font-family: sans-serif; font-size: 0.8rem; font-weight: 600; color: #A3B8B3; letter-spacing: 0.5px;
+}
+
+.form-input-field {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: sans-serif; font-size: 0.9rem; color: #FFFFFF; outline: none;
+  box-sizing: border-box; transition: all 0.3s ease;
+}
+
+.form-input-field:focus {
+  border-color: #D4AF37; box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Icon placement wrap settings text offsets configurations variables settings values setup links */
+.password-input-wrapper { position: relative; width: 100%; }
+
+.input-with-icon { padding-right: 45px; }
+
+.password-toggle-eye-btn {
+  position: absolute;
+  top: 50%; right: 12px; transform: translateY(-50%);
+  background: none; border: none; color: #617A75; cursor: pointer;
+  padding: 5px; display: flex; align-items: center; justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.password-toggle-eye-btn:hover { color: #D4AF37; }
+
+.eye-svg-icon { width: 18px; height: 18px; }
+
+/* Dynamic Validation error visual messages flags profiles label rules structures info layout metrics bounds setup info links */
+.error-msg-tag {
+  font-family: sans-serif; font-size: 0.75rem; color: #ff6b6b; display: none; margin-top: 2px;
+}
+
+/* Premium Solid Luxury Gold CTA form submit button block profile specs look bounds structure layout */
+.auth-submit-btn {
+  width: 100%; background-color: #D4AF37; border: 1px solid #D4AF37; color: #031E17;
+  font-family: sans-serif; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; padding: 15px; border-radius: 4px; cursor: pointer; margin-top: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.auth-submit-btn:hover {
+  background-color: #FFFFFF; border-color: #FFFFFF; color: #031E17;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3), 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.auth-switch-text {
+  font-family: sans-serif; font-size: 0.85rem; color: #A3B8B3; text-align: center; margin: 25px 0 0 0;
+}
+
+.auth-switch-link { color: #D4AF37; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+.auth-switch-link:hover { color: #ffffff; text-shadow: 0 0 8px rgba(212,175,55,0.4); }
+
+/* --- RESPONSIVE SCREEN ADAPTABILITY BREAKPOINTS --- */
+@media (max-width: 600px) {
+  .auth-section { padding: 60px 16px; }
+  .auth-container { padding: 40px 20px; border: none; background: transparent; box-shadow: none; }
+  .auth-title { font-size: 1.8rem; }
+  .auth-card-corner-back-link { top: 15px; right: 20px; font-size: 0.7rem; }
+}
+
+  </style>
+
+  <script>
+    // ==========================================================================
+// 🔐 STACKLY SECURE SIGN-UP CAPTURE ENGINE
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  initRealTimeInputFilters();
+});
+
+/**
+ * A. REAL-TIME INPUT FILTERS
+ * Dynamic keystroke interception rules to sanitize input types on the fly
+ */
+function initRealTimeInputFilters() {
+  const nameInputField = document.getElementById('reg-name');
+  const phoneInputField = document.getElementById('reg-phone');
+
+  // Strict: Intercept and purge numbers instantly from Name strings inputs
+  if (nameInputField) {
+    nameInputField.addEventListener('input', () => {
+      const originalValue = nameInputField.value;
+      const sanitizedValue = originalValue.replace(/[0-9]/g, '');
+      
+      const errorTag = document.getElementById('name-error');
+      if (originalValue !== sanitizedValue) {
+        nameInputField.value = sanitizedValue;
+        if (errorTag) errorTag.style.display = 'block';
+      } else {
+        if (errorTag) errorTag.style.display = 'none';
+      }
+    });
+  }
+
+  // Strict: Intercept and purge alphabetical letters instantly from Phone strings inputs
+  if (phoneInputField) {
+    phoneInputField.addEventListener('input', () => {
+      const originalValue = phoneInputField.value;
+      const sanitizedValue = originalValue.replace(/[a-zA-Z]/g, '');
+      
+      const errorTag = document.getElementById('phone-error');
+      if (originalValue !== sanitizedValue) {
+        phoneInputField.value = sanitizedValue;
+        if (errorTag) errorTag.style.display = 'block';
+      } else {
+        if (errorTag) errorTag.style.display = 'none';
+      }
+    });
+  }
+}
+
+/**
+ * B. SECURE VISIBILITY EYE TOGGLE CONTROLLER
+ * Dynamically switches characters masking between password and unmasked text profiles
+ */
+window.togglePasswordVisibility = function(targetInputId, eyeButtonNode) {
+  const passwordField = document.getElementById(targetInputId);
+  if (!passwordField) return;
+
+  const currentType = passwordField.getAttribute('type');
+  const eyeSvg = eyeButtonNode.querySelector('svg');
+
+  if (currentType === 'password') {
+    passwordField.setAttribute('type', 'text');
+    if (eyeSvg) {
+      // Swaps layout icon profile to show crossed out unmasked eye view state
+      eyeSvg.innerHTML = `
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+      `;
+    }
+  } else {
+    passwordField.setAttribute('type', 'password');
+    if (eyeSvg) {
+      // Revert back to standard native masked look structure
+      eyeSvg.innerHTML = `
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      `;
+    }
+  }
+};
+
+/**
+ * C. SUBMISSION CONTROLLER & CREDENTIAL ROUTING GATEWAY
+ * Validates confirm password alignment and routes users directly to login gateway
+ */
+window.handleUserSignUp = function(formSubmissionEvent) {
+  formSubmissionEvent.preventDefault(); // Stop form submission page reloading behaviors
+
+  const passwordText = document.getElementById('reg-password')?.value;
+  const confirmText = document.getElementById('reg-confirm')?.value;
+  const nameText = document.getElementById('reg-name')?.value.trim();
+  const confirmErrorTag = document.getElementById('confirm-error');
+
+  // Verify confirm password fields map identically
+  if (passwordText !== confirmText) {
+    if (confirmErrorTag) confirmErrorTag.style.display = 'block';
+    return;
+  } else {
+    if (confirmErrorTag) confirmErrorTag.style.display = 'none';
+  }
+
+  // Success Alert Modal output tracking confirmation callback message window strings parameters sets loops runs variables bounds indicators
+  const notificationAlertMessage = `Successfully Subscribed!\n\nWelcome to the STACKLY Vault ecosystem, ${nameText}.\nYour luxury profile initialization setup is complete. You will now be redirected to the secure login gateway panel.`;
+  
+  alert(notificationAlertMessage);
+
+  // Safely redirect user to your secure login gate page document route file target
+  window.location.href = "login.html";
+};
+
+  </script>
+</body>
+</html>
