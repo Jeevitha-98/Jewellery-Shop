@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Fine Jewellery</title>
+    <!-- Google Typography Integration -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Linked Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Luxury Entry Preloader Overlay Layer -->
+    <div id="luxury-preloader">
+        <div class="preloader-branding">
+            <h1 class="preloader-logo">Stackly</h1>
+            <p class="preloader-sub">Fine Jewellery</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+ 
+   
+
+    <!-- Lifecycle Timing Logic System -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Target animation lock: 3.5 seconds
+            const preloaderDuration = 3500; 
+
+            setTimeout(() => {
+                const preloader = document.getElementById('luxury-preloader');
+                const content = document.getElementById('main-site-content');
+
+                // Trigger smooth CSS slide-up transition layout
+                preloader.classList.add('preloader-hidden');
+                
+                // Restore client window interaction states
+                document.body.style.overflow = 'visible';
+
+                // Fade home container fluidly into viewport context
+                content.classList.add('content-visible');
+            }, preloaderDuration);
+        });
+    </script>
+
+    
+<!-- ==========================================================================
+   1. LIVE METAL RATE TICKER CAROUSEL (REMOVED BLACK, TRANSITIONED TO EMERALD)
+   ========================================================================== -->
+<div class="ticker-wrapper">
+    <div class="ticker-container" id="ticker-container">
+        
+        <!-- Master Loop Track -->
+        <div class="ticker-track" id="master-track">
+            <div class="ticker-item" data-metal="gold24k">
+                <span class="metal-label">GOLD 24K <span class="unit">(PER G)</span></span>
+                <span class="metal-value">$78.42</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="gold22k">
+                <span class="metal-label">GOLD 22K <span class="unit">(PER POWN)</span></span>
+                <span class="metal-value">$574.92</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="silver">
+                <span class="metal-label">FINE SILVER <span class="unit">(PER G)</span></span>
+                <span class="metal-value">$0.98</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+            <div class="ticker-item" data-metal="diamond">
+                <span class="metal-label">SOLITAIRE DIAMOND <span class="unit">(1 CT)</span></span>
+                <span class="metal-value">$4,240.77</span>
+                <span class="trend-indicator trend-stable">0.0%</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ==========================================================================
+   2. LUXURY FLOATING NAVIGATION HEADER MODULE
+   ========================================================================== -->
+
+<header class="site-header">
+    <div class="header-container">
+        
+        <!-- MOBILE HAMBURGER BUTTON (CRITICAL ID HOOK: id="menu-trigger") -->
+       
+
+        <!-- Company Brand Logo Area (Configured for Instant Page Refresh) -->
+        <div class="header-branding">
+            <div class="logo-interaction-group">
+                <a href="javascript:void(0);" onclick="window.location.reload();" class="brand-logo-wrapper" id="logo-refresh-link" title="Click to Refresh Page">
+                    <div class="logo-slot-render">
+                        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
+                    </div>
+                </a>
+            </div>
+            <span class="brand-sub">Fine Jewellery</span>
+        </div>
+
+        <!-- Desktop Oriented Navigation Links -->
+        <nav class="desktop-navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="collections-rings.html" class="nav-link">Bespoke Rings</a>
+            <a href="high-jewellery.html" class="nav-link ">High Jewellery</a>
+            <a href="ouratelier.html" class="nav-link ">Our Atelier</a>
+            <a href="contact.html" class="nav-link active">Contact Us</a>
+        </nav>
+
+        <!-- Global Action Utilities Panel -->
+        <!-- ==========================================================================
+   GLOBAL UTILITIES PANEL WITH DIRECT INLINE TOGGLE ACTIONS
+   ========================================================================== -->
+<div class="header-actions">
+    
+    <!-- Desktop Floating Search Container -->
+    <div class="desktop-search-container">
+        <input type="text" id="global-search-input" class="search-input" placeholder="Search creations...">
+        <button class="search-trigger-btn" aria-label="Execute Search"><svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+    </div>
+
+    <!-- Account Credentials Buttons -->
+   <!-- Account Credentials Buttons (WIRED FOR NAVIGATION) -->
+<a href="login.html" style="text-decoration: none;">
+    <button class="auth-btn btn-login">Sign In</button>
+</a>
+<a href="signup.html" style="text-decoration: none;">
+    <button class="auth-btn btn-signup">Sign Up</button>
+</a>
+
+    
+    <!-- WISHLIST TRIGGER MODULE (FIXED INLINE TOGGLE) -->
+    <div class="utility-dropdown-wrapper">
+        <!-- FIXED: Added direct inline onclick layout toggle rule -->
+        <button class="action-icon-link relative-badge" id="wishlist-trigger-btn" onclick="window.toggleWishlistMenuDropdown(event)" aria-label="Open Wishlist Menu">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="utility-badge bg-gold" id="wishlist-badge">0</span>
+        </button>
+        <div class="luxury-menu-dropdown" id="wishlist-dropdown-panel">
+            <h3 class="dropdown-panel-title">Your Wishlist</h3>
+            <div class="dropdown-items-list" id="wishlist-items-container"></div>
+            <!-- NAVIGATION LINK ADDED HERE -->
+            <div class="dropdown-panel-footer">
+                <a href="wishlist.html" class="dropdown-nav-link-btn">View Full Wishlist</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SHOPPING BAG MODULE (FIXED INLINE TOGGLE) -->
+    <div class="utility-dropdown-wrapper">
+        <!-- FIXED: Added direct inline onclick layout toggle rule -->
+        <button class="action-icon-link relative-badge" id="cart-trigger-btn" onclick="window.toggleCartMenuDropdown(event)" aria-label="Open Shopping Bag">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="utility-badge bg-white" id="cart-badge">0</span>
+        </button>
+        <div class="luxury-menu-dropdown" id="cart-dropdown-panel">
+            <h3 class="dropdown-panel-title">Your Selection Bag</h3>
+            <div class="dropdown-items-list" id="cart-items-container"></div>
+            <!-- MODIFIED FOOTER FOR CONTINUOUS VISIBILITY WITH BAG NAVIGATION -->
+            <div class="dropdown-panel-footer" id="cart-summary-footer">
+                <div class="summary-total-row"><span>Estimated Subtotal:</span><span id="cart-dropdown-total">$0.00</span></div>
+                <div class="dropdown-button-group" style="display: flex; gap: 10px; margin-top: 10px;">
+                    <a href="cart.html" class="dropdown-nav-link-btn" style="flex: 1; text-align: center;">View Full Bag</a>
+                    <button class="dropdown-checkout-btn" style="flex: 1; margin-top: 0;">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    
+
+
+
+ <button class="mobile-nav-toggle" id="menu-trigger" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        </div>
+    </div>
+</header>
+
+<!-- FLOATING RESPONSIVE MOBILE DRAWER LAYER OVERLAY (CRITICAL ID HOOK: id="mobile-drawer") -->
+<!-- FLOATING RESPONSIVE MOBILE DRAWER LAYER OVERLAY -->
+<div class="mobile-drawer-overlay" id="mobile-drawer">
+    <div class="drawer-content-box">
+        
+        <!-- Drawer Top Bar -->
+        <div class="drawer-top-bar">
+            <span class="drawer-brand-heading">MENU</span>
+            <button class="drawer-close-btn" id="drawer-close-trigger" aria-label="Close Menu">
+                <svg class="close-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Professional Capsule Mobile Search Bar Wrapper -->
+        <div class="mobile-search-wrapper">
+            <div class="mobile-search-inner-box">
+                <input type="text" class="mobile-search-input" placeholder="Search our creations...">
+                <button class="mobile-search-submit-btn" aria-label="Search">
+                    <svg class="mobile-search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu Links -->
+        <nav class="mobile-drawer-links">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="collections-rings.html" class="drawer-link">Bespoke Rings</a>
+            <a href="high-jewellery.html" class="drawer-link">High Jewellery</a>
+            <a href="ouratelier.html" class="drawer-link">Our Atelier</a>
+            <a href="contact.html" class="drawer-link">Contact Us</a>
+        </nav>
+
+        <!-- Professional Stacked Mobile Authentication Buttons with Spacing -->
+        <div class="drawer-auth-footer">
+          <!-- Account Credentials Buttons (WIRED FOR NAVIGATION) -->
+<a href="login.html" style="text-decoration: none;">
+    <button class="auth-btn btn-login">Sign In</button>
+</a>
+<a href="signup.html" style="text-decoration: none;">
+    <button class="auth-btn btn-signup">Sign Up</button>
+</a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    // Core Navigation & Layout Selectors
+    const menuTrigger = document.getElementById("menu-trigger");
+    const mobileDrawer = document.getElementById("mobile-drawer");
+    const siteHeader = document.querySelector(".site-header");
+    const logoRefreshLink = document.getElementById("logo-refresh-link");
+
+    // Interactive Panel Dropdowns Selectors
+    const wishlistBtn = document.getElementById("wishlist-trigger-btn");
+    const wishlistPanel = document.getElementById("wishlist-dropdown-panel");
+    const cartBtn = document.getElementById("cart-trigger-btn");
+    const cartPanel = document.getElementById("cart-dropdown-panel");
+
+    // Real-Time Live Search Selectors
+    const searchInput = document.getElementById("global-search-input");
+    const searchPanel = document.getElementById("search-results-panel");
+    const searchContent = document.getElementById("search-results-content");
+
+    // ==========================================================================
+    // 1. HARDWARE-ACCELERATED CONTINUOUS MARQUEE ENGINE
+    // ==========================================================================
+    const tickerContainer = document.getElementById("ticker-container");
+    const masterTrack = document.getElementById("master-track");
+
+    if (masterTrack && tickerContainer) {
+        masterTrack.style.animation = "none";
+        
+        // Clone the master track to achieve a completely gapless infinite loop
+        const cloneTrack = masterTrack.cloneNode(true);
+        cloneTrack.setAttribute("aria-hidden", "true");
+        cloneTrack.style.animation = "none";
+        tickerContainer.appendChild(cloneTrack);
+
+        let currentScrollOffset = 0;
+        const translationSpeedOffset = 1.0; // Control speed (1.0 = smooth baseline pacing)
+        let isClientHovered = false;
+
+        // Fetch the structural width boundary of a single loop element
+        const singleTrackElementWidth = masterTrack.offsetWidth;
+
+        function executeMarqueeRenderingLoop() {
+            if (!isClientHovered) {
+                currentScrollOffset += translationSpeedOffset;
+
+                // Infinite reset barrier loop check
+                if (currentScrollOffset >= singleTrackElementWidth) {
+                    currentScrollOffset = 0;
+                }
+
+                // Force GPU layer composition using transform3d to stop scrolling lag
+                tickerContainer.style.transform = `translate3d(-${currentScrollOffset}px, 0, 0)`;
+            }
+            requestAnimationFrame(executeMarqueeRenderingLoop);
+        }
+
+        // Mouse Action Event Listeners for Hover-Pausing
+        tickerContainer.addEventListener("mouseenter", () => isClientHovered = true);
+        tickerContainer.addEventListener("mouseleave", () => isClientHovered = false);
+        tickerContainer.addEventListener("touchstart", () => isClientHovered = true, { passive: true });
+        tickerContainer.addEventListener("touchend", () => isClientHovered = false, { passive: true });
+
+        // Start Marquee Loop
+        requestAnimationFrame(executeMarqueeRenderingLoop);
+    }
+
+    /* ==========================================================================
+       2. GLOBAL BRAND LOGO PAGE REFRESH SYSTEM
+       ========================================================================== */
+    if (logoRefreshLink) {
+        logoRefreshLink.addEventListener("click", () => {
+            window.location.reload(); 
+        });
+    }
+
+    /* ==========================================================================
+       3. INTERACTIVE MOBILE SIDEBAR LEFT REVEAL ENGINE (SCROLL LOCKED)
+       ========================================================================== */
+    if (menuTrigger && mobileDrawer) {
+        menuTrigger.addEventListener("click", (e) => {
+            e.stopPropagation(); // Stops parent document triggers from firing right away
+            
+            // Toggle animation line vectors on the white hamburger lines
+            const isActivated = menuTrigger.classList.toggle("open");
+            
+            // Toggle sliding positioning states on the left sidebar overlay sheet
+            mobileDrawer.classList.toggle("active");
+            menuTrigger.setAttribute("aria-expanded", isActivated);
+
+            // BACKGROUND SCROLL LOCK LOOP
+            if (isActivated) {
+                document.body.style.overflow = "hidden";
+                document.body.style.height = "100vh";
+            } else {
+                document.body.style.overflow = "visible";
+                document.body.style.height = "auto";
+            }
+        });
+
+        // Device Orientation Adjustment Monitor
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 820 && mobileDrawer.classList.contains("active")) {
+                menuTrigger.classList.remove("open");
+                mobileDrawer.classList.remove("active");
+                document.body.style.overflow = "visible";
+                document.body.style.height = "auto";
+            }
+        });
+    }
+    // Add this line inside your existing "3. MOBILE MENU TOGGLE" block in app.js
+const drawerCloseTrigger = document.getElementById("drawer-close-trigger");
+
+if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
+    drawerCloseTrigger.addEventListener("click", () => {
+        // Remove open/active status tags cleanly
+        menuTrigger.classList.remove("open");
+        mobileDrawer.classList.remove("active");
+        
+        // Unlocks background body window scrollbars
+        document.body.style.overflow = "visible";
+        document.body.style.height = "auto";
+    });
+}
+
+
+    /* ==========================================================================
+       4. GLOBAL DROPDOWN INTERFACE CONTROLLERS & OUTSIDE CLICK HANDLERS
+       ========================================================================== */
+    function closeAllActiveDropdowns() {
+        if (wishlistPanel) wishlistPanel.classList.remove("is-visible");
+        if (cartPanel) cartPanel.classList.remove("is-visible");
+        if (searchPanel) searchPanel.classList.remove("is-active");
+    }
+
+    if (wishlistBtn && cartBtn) {
+        wishlistBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = wishlistPanel.classList.contains("is-visible");
+            closeAllActiveDropdowns();
+            if (!isOpen) wishlistPanel.classList.add("is-visible");
+        });
+
+        cartBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = cartPanel.classList.contains("is-visible");
+            closeAllActiveDropdowns();
+            if (!isOpen) cartPanel.classList.add("is-visible");
+        });
+
+        // Close panels cleanly if user taps outside item bounding box margins
+        document.addEventListener("click", (e) => {
+            if (!e.target.closest('.utility-dropdown-wrapper') && !e.target.closest('.desktop-search-wrapper')) {
+                closeAllActiveDropdowns();
+            }
+        });
+    }
+
+    /* ==========================================================================
+       5. REAL-TIME SEARCH FILTER SYSTEM
+       ========================================================================== */
+    const catalogData = [
+        { id: 1, name: "Solitaire Diamond Ring", category: "Bespoke Rings", price: 2450 },
+        { id: 2, name: "Helios Archway Pendant", category: "High Jewellery", price: 1850 },
+        { id: 3, name: "Marquise Cut Emerald Studs", category: "Collections", price: 3100 }
+    ];
+
+    if (searchInput && searchPanel && searchContent) {
+        searchInput.addEventListener("input", (e) => {
+            const queryText = e.target.value.trim().toLowerCase();
+            
+            if (queryText.length === 0) {
+                searchPanel.classList.remove("is-active");
+                return;
+            }
+
+            const matches = catalogData.filter(item => 
+                item.name.toLowerCase().includes(queryText) || 
+                item.category.toLowerCase().includes(queryText)
+            );
+
+            closeAllActiveDropdowns();
+            searchPanel.classList.add("is-active");
+
+            if (matches.length === 0) {
+                searchContent.innerHTML = `<div class="search-no-match-message">No creations match "${e.target.value}"</div>`;
+                return;
+            }
+
+            searchContent.innerHTML = matches.map(match => `
+                <a href="#" class="search-result-item-link" style="display: flex; justify-content: space-between; padding: 0.6rem; text-decoration: none; color: white;">
+                    <div>
+                        <div style="font-size: 0.8rem; font-family: serif;">${match.name}</div>
+                        <div style="font-size: 0.6rem; color: #8FA39E; text-transform: uppercase;">${match.category}</div>
+                    </div>
+                    <div style="font-size: 0.72rem; color: #DFB76C;">$${match.price.toLocaleString()}</div>
+                </a>
+            `).join('');
+        });
+    }
+
+    /* ==========================================================================
+       6. DESKTOP ACCENT SCROLL OBSERVER
+       ========================================================================== */
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 45) {
+            siteHeader.classList.add("scrolled-active");
+        } else {
+            siteHeader.classList.remove("scrolled-active");
+        }
+    });
+});
+
+</script>
+
+<!-- ==========================================================================
+   STACKLY Fine Jewellery - Minimalist Centered Contact Page Hero Section
+   ========================================================================== -->
+<section class="contact-page-hero-canvas" aria-labelledby="contact-main-heading">
+    
+    <!-- FULL-BLEED BACKDROP MEDIA CANVAS LAYER -->
+    <div class="contact-hero-bg-media-frame">
+        <img src="./Assests/background - home.webp" alt="STACKLY Luxury Concierge Consultation and Private Archive Lounges Texture" class="contact-hero-native-bg-img" loading="eager">
+    </div>
+    <!-- Semi-transparent radial shadow matte masks light bleeds to protect text contrast -->
+    <div class="contact-hero-vignette-matte"></div>
+
+    <div class="contact-hero-max-bounds-wrapper">
+        <article class="contact-hero-editorial-card">
+            
+            <!-- Curated Eyebrow Header Segment -->
+            <header class="contact-hero-header-panels">
+                <div class="contact-hero-eyebrow-row reveal-fade-delay-1">
+                    <div class="contact-hero-hairline-divider"></div>
+                    <span class="contact-hero-eyebrow-text">Global Concierge Channels</span>
+                    <div class="contact-hero-hairline-divider"></div>
+                </div>
+                
+                <h1 id="contact-main-heading" class="contact-hero-editorial-main-title reveal-fade-delay-2">
+                    Initialize Your <span class="gold-luminous-script-string">Private Inquiry.</span>
+                </h1>
+            </header>
+
+            <!-- TWO-LINE CONSTRAINT TEXT BLOCK WITH ADVANCED CONTENT HOVER RESPONSE -->
+            <div class="contact-hero-body-content reveal-fade-delay-3">
+                <p class="contact-hero-paragraph-summary-text">
+                    Connect cleanly with our multi-generational curators to sketch, mold, and cast a certified flawless signature masterpiece. Our digital and physical concierge desks remain fully open to secure your private commission records globally.
+                </p>
+            </div>
+
+            <!-- Horizontal Action Button Navigation Row Track -->
+            <footer class="contact-hero-action-navigation-row reveal-fade-delay-4">
+                <a href="#concierge-console" class="luxury-contact-glow-btn btn-solid-gold" title="Open secure portal console">
+                    Open Secure Console
+                </a>
+            </footer>
+
+        </article>
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   STACKLY MINIMALIST CENTERED CONTACT HERO RESPONSIVE STYLES
+   ========================================================================== */
+.contact-page-hero-canvas {
+    position: relative !important;
+    width: 100% !important;
+    height: calc(100vh - 140px); /* Seamless viewport clearance fit below headers */
+    min-height: 540px;
+    background-color: var(--theme-emerald-dark);
+    overflow: hidden;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 15;
+}
+
+/* ==========================================================================
+   Full-Bleed Media Canvas Background Layers
+   ========================================================================== */
+.contact-hero-bg-media-frame {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none;
+}
+
+.contact-hero-native-bg-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Perfect crop stretches photo cleanly without distorting pixel files */
+    object-position: center !important;
+    transform: scale(1.06); /* Cushions space for smooth panning parallax tracking effects */
+    will-change: transform;
+    transition: transform 8s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.contact-page-hero-canvas:hover .contact-hero-native-bg-img {
+    transform: scale(1.02); /* Smooth image lens zoom-out reflection feedback loops */
+}
+
+/* Vignette dark mask overlay protects text visibility over light graphics */
+.contact-hero-vignette-matte {
+    position: absolute !important;
+    inset: 0 !important;
+    background: radial-gradient(circle at 50% 50%, rgba(5, 20, 16, 0.85) 0%, #051410 100%) !important;
+    z-index: 2 !important;
+    pointer-events: none;
+}
+
+.contact-hero-max-bounds-wrapper {
+    max-w: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 4rem;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+}
+
+/* Master Centered Grid Align Presentation Card Block */
+.contact-hero-editorial-card {
+    width: 100% !important;
+    max-width: 820px; /* Locks text column lengths for premium geometric look layouts */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ADVANCED CONTENT HOVER REACTION: Entire content card lifts slightly on user hover passes [INDEX] */
+.contact-page-hero-canvas:hover .contact-hero-editorial-card {
+    transform: translate3d(0, -6px, 0);
+}
+
+/* Curated Eyebrow Divider hairline rules track */
+.contact-hero-eyebrow-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem !important;
+}
+
+.contact-hero-eyebrow-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--theme-gold);
+    font-weight: 500;
+}
+
+.contact-hero-hairline-divider {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(223, 183, 108, 0.25);
+}
+
+.contact-hero-editorial-main-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.6rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--theme-white);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.8rem !important;
+    text-align: center !important;
+}
+
+/* LUXURY GLOW EFFECT: Champagne Gold Ambient Text Halo Glow Reflections */
+.gold-luminous-script-string {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--theme-white);
+    text-shadow: 0 0 10px rgba(250, 250, 247, 0.15);
+    transition: text-shadow 0.4s ease, color 0.4s ease;
+}
+
+/* Triggers golden text bloom halo reflections upon section hover */
+.contact-page-hero-canvas:hover .gold-luminous-script-string {
+    color: var(--theme-gold);
+    text-shadow: 0 0 18px rgba(223, 183, 108, 0.55), 0 0 35px rgba(223, 183, 108, 0.2);
+}
+
+/* STRICT TWO-LINE FLUID CONSTRAINTS LOCK SYSTEM */
+.contact-hero-paragraph-summary-text {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.9rem !important;
+    line-height: 1.85 !important;
+    color: var(--theme-text-muted) !important;
+    text-align: center !important;
+    max-width: 720px !important; /* Locks width proportions to guide text strings onto exactly two horizontal lines */
+    margin: 0 auto 3rem auto !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    transition: color 0.3s ease;
+}
+
+.contact-page-hero-canvas:hover .contact-hero-paragraph-summary-text {
+    color: rgba(250, 250, 247, 0.85); /* Text brightens elegantly on content hovers */
+}
+
+/* Navigation Call To Action Buttons Alignment Track */
+.contact-hero-action-navigation-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    width: 100% !important;
+}
+
+.luxury-contact-glow-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 500;
+    padding: 1.1rem 2.6rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-solid-gold { 
+    background-color: var(--theme-gold); 
+    color: var(--theme-emerald-dark); 
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.15); 
+    border-radius: 40px; /* Elegant capsule rounding format */
+}
+
+.btn-solid-gold:hover { 
+    background-color: var(--theme-white); 
+    color: #051410; 
+    box-shadow: 0 0 25px rgba(250, 250, 247, 0.5), 0 4px 15px rgba(0, 0, 0, 0.2); 
+    transform: translate3d(0, -2px, 0); 
+}
+
+/* MODERN REVEAL ANIMATIONS: Cinematic Staggered Fade Entrance Loading Library */
+.reveal-fade-delay-1 { opacity: 0; transform: translate3d(0, 15px, 0); animation: contactHeroReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.2s; }
+.reveal-fade-delay-2 { opacity: 0; transform: translate3d(0, 25px, 0); animation: contactHeroReveal 1.0s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.4s; }
+.reveal-fade-delay-3 { opacity: 0; transform: translate3d(0, 20px, 0); animation: contactHeroReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.6s; }
+.reveal-fade-delay-4 { opacity: 0; transform: translate3d(0, 15px, 0); animation: contactHeroReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards 0.8s; }
+
+@keyframes contactHeroReveal { to { opacity: 1; transform: translate3d(0, 0, 0); } }
+
+/* ==========================================================================
+   FLUID MOBILE RESPONSIVE MEDIA QUERIES BREAKPOINTS
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+    .contact-hero-max-bounds-wrapper { padding: 0 2rem; }
+    .contact-hero-editorial-main-title { font-size: 2.8rem; }
+}
+
+@media screen and (max-width: 768px) {
+    .contact-page-hero-canvas { height: auto; padding: 6rem 0; }
+    .contact-hero-editorial-main-title { font-size: 2.4rem; line-height: 1.25; }
+    .contact-hero-paragraph-summary-text { font-size: 0.82rem !important; max-width: 100% !important; margin-bottom: 2.5rem !important; }
+    
+    .contact-hero-action-navigation-row { width: 100%; max-width: 280px; margin: 0 auto; }
+    .luxury-contact-glow-btn { width: 100% !important; text-align: center !important; padding: 0.95rem; }
+}
+
+@media screen and (max-width: 480px) {
+    .contact-hero-editorial-main-title { font-size: 2rem; }
+}
+
+</style>
+
+<!-- ==========================================================================
+   STACKLY Fine Jewellery - Private Messaging & Contact Gateway Console
+   ========================================================================== -->
+<section class="concierge-console-section" id="concierge-console" aria-labelledby="console-main-heading">
+    <div class="console-max-container">
+        <div class="console-dual-asymmetric-split">
+            
+            <!-- LEFT WING: Flagship Contact Directory Details Layout Panel -->
+            <div class="console-directory-sidebar">
+                <header class="sidebar-header-block">
+                    <span class="sidebar-eyebrow-tag">✦ Flagship Atelier</span>
+                    <h2 id="console-main-heading" class="sidebar-editorial-title">
+                        Reach Our <br>
+                        <span class="gold-luminous-script-string">Design Architects.</span>
+                    </h2>
+                </header>
+
+                <div class="sidebar-directory-rows-stack">
+                    
+                    <!-- Directory Item 1: Physical Studio Address Location -->
+                    <!-- FIXED: Direct map anchor point routing links cleanly on click passes -->
+                    <a href="https://maps.app.goo.gl/1iUAJLxSuFhmkqeE8" target="_blank" class="directory-interactive-card" title="Open studio coordinates inside Google Maps mapping application">
+                        <div class="directory-card-geometric-accent"></div>
+                        <div class="directory-vector-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div class="directory-text-box">
+                            <span class="directory-label-tag">Visit Our Studio</span>
+                            <p class="directory-value-data">MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008</p>
+                        </div>
+                    </a>
+
+                    <!-- Directory Item 2: Direct Encrypted Phone Hotlines Panel -->
+                    <!-- FIXED: Smart deep lync triggers native mobile phone dialing pads instantly -->
+                    <a href="tel:+917010792745" class="directory-interactive-card" title="Initiate a direct mobile voice consultation call">
+                        <div class="directory-card-geometric-accent"></div>
+                        <div class="directory-vector-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        </div>
+                        <div class="directory-text-box">
+                            <span class="directory-label-tag">Direct Hotlines</span>
+                            <p class="directory-value-data">+91 7010792745</p>
+                        </div>
+                    </a>
+
+                    <!-- Directory Item 3: Electronic Messaging Mailbox -->
+                    <!-- FIXED: Launches mail application (Outlook/iOS Mail) with pre-filled composer fields -->
+                   <!-- ==========================================================================
+   FIXED ELECTRONIC MAILBOX INTERACTIVE CARD (Recipients Auto-inject Fixed)
+   ========================================================================== -->
+<!-- FIXED: Removed the space after the question mark so the mail ID passes to Outlook perfectly -->
+<a href="mailto:design@://stacklystudio.com" class="directory-interactive-card" title="Compose a new secure email communication track">
+    <div class="directory-card-geometric-accent"></div>
+    <div class="directory-vector-icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+    </div>
+    <div class="directory-text-box">
+        <span class="directory-label-tag">Electronic Mail</span>
+        <p class="directory-value-data">design@stacklystudio.com</p>
+    </div>
+</a>
+
+
+                    <!-- Directory Item 4: Studio Operational Availability Times -->
+                    <div class="directory-interactive-card static-card" title="Studio operational hours matrix">
+                        <div class="directory-card-geometric-accent"></div>
+                        <div class="directory-vector-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        </div>
+                        <div class="directory-text-box">
+                            <span class="directory-label-tag">Atelier Availability</span>
+                            <p class="directory-value-data">Mon - Sun: 9:00 AM - 7:00 PM</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- RIGHT WING: Glassmorphic High-Conversion Input Box Form Engine Console -->
+            <div class="console-form-viewport-pane">
+                <div class="console-glassmorphic-input-card">
+                    <header class="form-header-card-block">
+                        <h3 class="form-panel-headline-title">Send Us a Message 📜</h3>
+                        <p class="form-panel-sub-indicator-text">Submit your credentials. Form boundaries illuminate on active focus.</p>
+                    </header>
+                    
+                    <form class="console-form-element-loop" onsubmit="window.executeConciergeGatewayFormSubmit(event)" novalidate>
+                        
+                        <!-- Client Name Input Module Block -->
+                        <div class="console-input-group-field">
+                            <label for="console-client-name" class="console-input-field-label">Your Elegant Name</label>
+                            <input type="text" id="console-client-name" class="console-text-input-node" placeholder="Your elegant name..." required autocomplete="name">
+                            <div class="input-perimeter-glow-border-line"></div>
+                        </div>
+
+                        <!-- Client Email Input Module Block -->
+                        <div class="console-input-group-field">
+                            <label for="console-client-email" class="console-input-field-label">Email Address</label>
+                            <input type="email" id="console-client-email" class="console-text-input-node" placeholder="name@example.com" required autocomplete="email">
+                            <div class="input-perimeter-glow-border-line"></div>
+                        </div>
+
+                        <!-- Client Mobile Field Block (Numerical Lock Attached) -->
+                        <div class="console-input-group-field">
+                            <label for="console-client-phone" class="console-input-field-label">10-Digit Mobile Number</label>
+                            <!-- Input locked parameters using inputmode to force numerical dialers on smartphones natively -->
+                            <input type="tel" id="console-client-phone" class="console-text-input-node" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" required autocomplete="tel">
+                            <div class="input-perimeter-glow-border-line"></div>
+                        </div>
+
+                        <!-- Project Discipline Category Select Module Block -->
+                        <div class="console-input-group-field">
+                            <label for="console-project-class" class="console-input-field-label">Project Discipline Category</label>
+                            <select id="console-project-class" class="console-text-input-node select-native-dropdown-override" required>
+                                <option value="" disabled selected hidden>Select a discipline category...</option>
+                                <option value="bespoke">Bespoke Diamond Engagement Ring Commission</option>
+                                <option value="necklace">High-Necklace Fine Jewellery Crafting</option>
+                                <option value="bracelet">Artisanal Hand-Beaten Wristwear Collection</option>
+                                <option value="archive">Archive Blueprint Modification Request</option>
+                            </select>
+                            <div class="input-perimeter-glow-border-line"></div>
+                        </div>
+
+                        <!-- Project Narrative Large Textarea Block -->
+                        <div class="console-input-group-field">
+                            <label for="console-project-narrative" class="console-input-field-label">Your Project Narrative</label>
+                            <textarea id="console-project-narrative" class="console-text-input-node textarea-native-override" rows="4" placeholder="Tell us about your project footprint size, timeline metrics, and stone preferences..." required></textarea>
+                            <div class="input-perimeter-glow-border-line"></div>
+                        </div>
+
+                        <!-- Elegant Luminous Submit Activation Button Trigger -->
+                        <button type="submit" class="console-form-submit-glow-btn">
+                            Get an Consultation →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+<style>
+    /* ==========================================================================
+   STACKLY LUXURY CONCIERGE INTERACTIVE MESSAGING GATEWAY STYLES
+   ========================================================================== */
+.concierge-console-section {
+    position: relative !important;
+    width: 100% !important;
+    padding: 7rem 0;
+    background-color: var(--theme-emerald-dark); /* Continuous Obsidian Emerald Canvas Base */
+    overflow: hidden;
+    z-index: 25;
+    border-bottom: 1px solid rgba(223, 183, 108, 0.06);
+}
+
+.console-max-container {
+    max-w: 1340px; /* Aligns with master container grids perfectly */
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* Symmetrical Grid Split balances left directory cards stack and right form boxes smoothly */
+.console-dual-asymmetric-split {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important; /* Forces side-by-side components to share matching equal heights */
+    justify-content: space-between !important;
+    gap: 4rem;
+    width: 100%;
+}
+
+/* ==========================================================================
+   Left Column: Flagship Directory Cards Layout Stack
+   ========================================================================== */
+.console-directory-sidebar {
+    width: 44% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: left;
+}
+
+.sidebar-header-block {
+    margin-bottom: 2.5rem;
+}
+
+.sidebar-eyebrow-tag {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--theme-gold);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.sidebar-editorial-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--theme-white);
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.gold-luminous-script-string {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--theme-white);
+    text-shadow: 0 0 10px rgba(250, 250, 247, 0.15);
+    transition: text-shadow 0.4s ease, color 0.4s ease;
+}
+
+.console-directory-sidebar:hover .gold-luminous-script-string {
+    color: var(--theme-gold);
+    text-shadow: 0 0 15px rgba(223, 183, 108, 0.45);
+}
+
+/* Interactive Card Directory Items Grid System */
+.sidebar-directory-rows-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important; /* Spreads out card elements to lock matching height metrics symmetrically */
+    gap: 1.25rem;
+    flex: 1 !important;
+}
+
+.directory-interactive-card {
+    background: rgba(9, 38, 30, 0.15) !important;
+    border: 1px solid rgba(250, 250, 247, 0.04) !important;
+    border-radius: 4px;
+    padding: 1.4rem 1.75rem !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    flex: 1 !important; /* Shares height workspace coordinates with neighbor tags equally */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, background-color 0.4s ease;
+}
+
+/* Static tracking item card reset (Availability Card) */
+.directory-interactive-card.static-card { cursor: default !important; }
+
+/* Interactive Hover Reactions: lift matrix + golden fine outlines expansion */
+.directory-interactive-card:not(.static-card):hover {
+    transform: translate3d(6px, 0, 0) !important; /* Elegant horizontal creep zoom feedback */
+    border-color: rgba(223, 183, 108, 0.2) !important;
+    background: rgba(9, 38, 30, 0.25) !important;
+}
+
+.directory-card-geometric-accent { position: absolute; top: 0; left: 0; width: 12px; height: 12px; border-top: 1px solid rgba(223, 183, 108, 0.2); border-left: 1px solid rgba(223, 183, 108, 0.2); pointer-events: none; transition: all 0.4s ease; }
+.directory-interactive-card:not(.static-card):hover .directory-card-geometric-accent { width: 100%; height: 100%; border-color: rgba(223, 183, 108, 0.1); }
+
+.directory-vector-icon-box {
+    width: 22px;
+    height: 22px;
+    color: var(--theme-text-muted);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+.directory-interactive-card:not(.static-card):hover .directory-vector-icon-box { color: var(--theme-gold); }
+.directory-vector-icon-box svg { width: 100%; height: 100%; stroke-width: 1.5; }
+
+.directory-text-box { display: flex !important; flex-direction: column !important; text-align: left !important; }
+.directory-label-tag { font-family: 'Poppins', sans-serif; font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--theme-text-muted); margin-bottom: 2px; }
+.directory-value-data { font-family: 'Poppins', sans-serif; font-size: 0.82rem; color: var(--theme-white); font-weight: 400; line-height: 1.4; margin: 0; }
+.directory-interactive-card:not(.static-card):hover .directory-value-data { color: var(--theme-gold); }
+
+/* ==========================================================================
+   Right Column: Glassmorphic Messaging Input Box Console Card
+   ========================================================================== */
+.console-form-viewport-pane {
+    width: 50% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.console-glassmorphic-input-card {
+    width: 100%;
+    background: rgba(9, 38, 30, 0.35) !important; /* Translucent luxury emerald alpha sheet */
+    border: 1px solid rgba(223, 183, 108, 0.15) !important; /* Champagne gold wire perimeter line */
+    border-radius: 6px;
+    padding: 3rem 2.5rem;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.6rem;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.console-glassmorphic-input-card:hover {
+    border-color: rgba(223, 183, 108, 0.3) !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45), 0 0 25px rgba(223, 183, 108, 0.15); /* Soft halo perimeter glow bloom */
+}
+
+.form-header-card-block { text-align: left; }
+.form-panel-headline-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--theme-white); letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+.form-panel-sub-indicator-text { font-family: 'Poppins', sans-serif; font-size: 0.72rem; color: var(--theme-text-muted); margin: 0; line-height: 1.4; }
+
+.console-form-element-loop { display: flex !important; flex-direction: column !important; gap: 1.4rem; width: 100%; }
+
+/* Input Boxes Components Custom Structural Formatting */
+.console-input-group-field {
+    position: relative;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: left !important;
+}
+
+.console-input-field-label { font-family: 'Poppins', sans-serif; font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--theme-text-muted); }
+
+.console-text-input-node {
+    width: 100% !important;
+    background: rgba(5, 20, 16, 0.45) !important; /* Recessed dark cell background */
+    border: 1px solid rgba(250, 250, 247, 0.06) !important;
+    border-radius: 4px;
+    padding: 0.95rem 1.2rem !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    color: var(--theme-white) !important;
+    outline: none;
+    box-shadow: none !important;
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+}
+
+/* Explicit native overrides ensuring placeholder text blends cleanly with theme colors */
+.console-text-input-node::placeholder { color: rgba(250, 250, 247, 0.25) !important; }
+.textarea-native-override { resize: none !important; min-height: 110px; font-weight: 400; line-height: 1.6; }
+
+/* Custom select dropdown cell configurations overrides */
+.select-native-dropdown-override { cursor: pointer; color: rgba(250, 250, 247, 0.3) !important; }
+.select-native-dropdown-override option { background-color: #051410; color: white; }
+
+/* Injected focus loop classes managed under active focus states loops */
+.console-text-input-node:focus {
+    border-color: var(--theme-gold) !important;
+    background-color: rgba(5, 20, 16, 0.75) !important;
+}
+
+/* Luminous Gold Action Button Submit Trigger Elements */
+.console-form-submit-glow-btn {
+    width: 100% !important;
+    background-color: var(--theme-gold) !important;
+    color: var(--theme-emerald-dark) !important;
+    border: none !important;
+    border-radius: 4px;
+    padding: 1.15rem !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(223, 183, 108, 0.15);
+    margin-top: 0.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.console-form-submit-glow-btn:hover {
+    background-color: var(--theme-white) !important;
+    color: #051410 !important;
+    box-shadow: 0 0 25px rgba(250, 250, 247, 0.45), 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translate3d(0, -2px, 0);
+}
+
+/* Input error feedback states rules injected programmatically via script filters */
+.console-text-input-node.input-alert-error {
+    border-color: #F87171 !important;
+    background-color: rgba(248, 113, 113, 0.05) !important;
+}
+
+/* ==========================================================================
+   STACKLY CONTACT GATEWAY - LIQUID MASTER RESPONSIVE GRID RESET
+   ========================================================================== */
+
+/* --- TABLET REFUSE ALIGNMENTS LOCK (TRIGGERED EARLY AT 1024PX VIEWPORTS) --- */
+@media screen and (max-width: 1024px) {
+    /* Converts horizontal layout into a solid, clean single column stack */
+    .console-dual-asymmetric-split {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 3rem !important; /* Elegant vertical breathing room between elements */
+        width: 100% !important;
+    }
+
+    /* Left Sidebar: Expands full-width while remaining compact and centered */
+    .console-directory-sidebar {
+        width: 100% !important;
+        max-width: 680px !important; /* Prevents stretching too wide on landscape tablets */
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .sidebar-header-block {
+        text-align: center !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .sidebar-editorial-title {
+        font-size: 2.4rem !important; /* Scales title cleanly */
+    }
+
+    /* FIXED SIZING REDUCTION: Makes left side cards tighter and non-overflowing */
+    .sidebar-directory-rows-stack {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important; /* Pairs cards cleanly into neat duos */
+        gap: 1rem !important;
+    }
+
+    .directory-interactive-card {
+        padding: 1rem 1.25rem !important; /* Significantly reduced internal padding size variables */
+        gap: 1rem !important;
+        min-height: 90px !important; /* Symmetrical baseline framework clearance */
+    }
+
+    .directory-text-box {
+        text-align: left !important;
+    }
+
+    .directory-value-data {
+        font-size: 0.76rem !important; /* Reduces typography size metrics to prevent line drops */
+    }
+
+    /* Right Form Viewport Pane: Expands flush to pair evenly with top directory cards */
+    .console-form-viewport-pane {
+        width: 100% !important;
+        max-width: 680px !important;
+    }
+
+    .console-glassmorphic-input-card {
+        padding: 2.5rem 2rem !important;
+    }
+}
+
+/* --- SMARTPHONE ULTIMATE RESPONSIVE PROFILE (TRIGGERED AT 640PX VIEWPORTS) --- */
+@media screen and (max-width: 640px) {
+    .concierge-console-section {
+        padding: 4rem 0 !important;
+    }
+
+    .sidebar-editorial-title {
+        font-size: 1.85rem !important;
+    }
+
+    /* Drops card pairs into a secure standalone single vertical track line */
+    .sidebar-directory-rows-stack {
+        grid-template-columns: 1fr !important;
+        gap: 0.85rem !important;
+    }
+
+    .directory-interactive-card {
+        padding: 1rem !important;
+        flex-direction: row !important; /* Maintains horizontal icon-to-text flow layout cleanly */
+        align-items: center !important;
+    }
+
+    .directory-value-data {
+        font-size: 0.74rem !important;
+        line-height: 1.35 !important;
+    }
+
+    .console-glassmorphic-input-card {
+        padding: 2rem 1.15rem !important; /* Micro internal spacing profiles maximize typing workspace */
+        gap: 1.25rem !important;
+    }
+
+    .console-form-element-loop {
+        gap: 1rem !important;
+    }
+
+    .console-text-input-node {
+        padding: 0.85rem 1rem !important;
+        font-size: 0.78rem !important;
+    }
+
+    .console-form-submit-glow-btn {
+        padding: 1rem !important;
+        font-size: 0.68rem !important;
+    }
+}
+
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    
+    const clientNameInputNode = document.getElementById("console-client-name");
+    const clientPhoneInputNode = document.getElementById("console-client-phone");
+    const clientEmailInputNode = document.getElementById("console-client-email");
+    const projectClassSelectNode = document.getElementById("console-project-class");
+    const projectNarrativeTextNode = document.getElementById("console-project-narrative");
+
+    /* ==========================================================================
+       1. REAL-TIME INPUT TEXT DATA VERIFICATION LOCKS
+       ========================================================================== */
+
+    // --- NAME KEY LOCK: Blocks numbers and special symbols on type runs ---
+    if (clientNameInputNode) {
+        clientNameInputNode.addEventListener("input", (event) => {
+            const typedInputNodeCell = event.target;
+            // Native regex replaces numeric numbers and brackets immediately with empty spaces [INDEX]
+            const cleanAlphaStringValue = typedInputNodeCell.value.replace(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]+/g, "");
+            
+            if (typedInputNodeCell.value !== cleanAlphaStringValue) {
+                typedInputNodeCell.value = cleanAlphaStringValue; // Restores only alphabet strings to field
+            }
+            typedInputNodeCell.classList.remove("input-alert-error");
+        });
+    }
+
+    // --- MOBILE KEY LOCK: Blocks all non-numeric letters or characters ---
+    if (clientPhoneInputNode) {
+        clientPhoneInputNode.addEventListener("input", (event) => {
+            const typedInputNodeCell = event.target;
+            // Native regex strips letters and alphabet symbols immediately on type runs [INDEX]
+            const cleanNumericStringValue = typedInputNodeCell.value.replace(/[^0-9]+/g, "");
+            
+            if (typedInputNodeCell.value !== cleanNumericStringValue) {
+                typedInputNodeCell.value = cleanNumericStringValue; // Restores only pure digits to field
+            }
+            typedInputNodeCell.classList.remove("input-alert-error");
+        });
+    }
+
+    // Clear error highlights seamlessly when dropdown selectors options shift values
+    if (projectClassSelectNode) {
+        projectClassSelectNode.addEventListener("change", (e) => {
+            e.target.style.color = "#FAFAF7"; // Changes text color variable on selection
+            e.target.classList.remove("input-alert-error");
+        });
+    }
+    if (clientEmailInputNode) clientEmailInputNode.addEventListener("input", (e) => e.target.classList.remove("input-alert-error"));
+    if (projectNarrativeTextNode) projectNarrativeTextNode.addEventListener("input", (e) => e.target.classList.remove("input-alert-error"));
+
+    /* ==========================================================================
+       2. SECURE CONCIERGE GATEWAY COMPLETION SUBMIT HANDLER
+       ========================================================================== */
+    window.executeConciergeGatewayFormSubmit = function(event) {
+        if (!event) return;
+        event.preventDefault(); // Intercept browser reload behavior paths [INDEX]
+
+        const masterFormNodeElement = event.target;
+        
+        // Grab values from current text nodes input boxes
+        const nameVal = clientNameInputNode?.value.trim();
+        const emailVal = clientEmailInputNode?.value.trim();
+        const phoneVal = clientPhoneInputNode?.value.trim();
+        const classVal = projectClassSelectNode?.value;
+        const narrativeVal = projectNarrativeTextNode?.value.trim();
+
+        let structuralValidationPassed = true;
+
+        // --- SUBMIT VERIFICATION LOOP RULES ---
+        if (!nameVal) { clientNameInputNode?.classList.add("input-alert-error"); structuralValidationPassed = false; }
+        if (!narrativeVal) { projectNarrativeTextNode?.classList.add("input-alert-error"); structuralValidationPassed = false; }
+        if (!classVal) { projectClassSelectNode?.classList.add("input-alert-error"); structuralValidationPassed = false; }
+        
+        // Basic explicit regular expression verifying email syntax structures [INDEX]
+        const emailRegexCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailVal || !emailRegexCheck.test(emailVal)) {
+            clientEmailInputNode?.classList.add("input-alert-error");
+            structuralValidationPassed = false;
+        }
+
+        // Enforce strict 10 digit requirement criteria layout parameter
+        if (!phoneVal || phoneVal.length !== 10) {
+            clientPhoneInputNode?.classList.add("input-alert-error");
+            structuralValidationPassed = false;
+        }
+
+        if (!structuralValidationPassed) {
+            alert("Verification Blocked.\n\nPlease complete all highlighted private concierge data fields correctly before saving records.");
+            return;
+        }
+
+        // customized operations logging parameter tracker
+        console.log(`Private Get In Touch Gateway Confirmed: ${nameVal} | Connection: ${phoneVal}`);
+
+        // Present dynamic luxury haptic confirmation success message [INDEX]
+        alert(`Bespoke Consultation Initialized.\n\nThank you, ${nameVal}. Your digital portfolio inquiry details have been securely logged inside our Salem atelier records database.\n\nA master STACKLY jewelry curator will review your project narrative specs and connect with you on phone channel ${phoneVal} within 24 hours to coordinate your private design exhibition.`);
+
+        // Clear out internal form cache variables cleanly to restore pristine setup look [INDEX]
+        if (masterFormNodeElement && typeof masterFormNodeElement.reset === "function") {
+            masterFormNodeElement.reset();
+            if (projectClassSelectNode) projectClassSelectNode.style.color = "rgba(250, 250, 247, 0.3)";
+        }
+    };
+});
+</script>
+
+
+<!-- ==========================================================================
+   STACKLY Fine Jewellery - Curated Geographic Hub Map Section
+   ========================================================================== -->
+<section class="concierge-geographic-hub-section" aria-labelledby="hub-main-heading">
+    <div class="hub-max-container">
+        
+        <!-- Section Global Header Title -->
+        <header class="hub-section-header">
+            <h2 id="hub-main-heading" class="hub-editorial-title">
+                Geographic <span class="glow-script-string">Hub.</span>
+            </h2>
+        </header>
+
+        <!-- LUXURY DARK ENCLOSURE CANVAS WITH HIGH RADIUS ROUNDED CORNERS -->
+        <div class="luxury-rounded-map-wrapper">
+            
+            <!-- FLOATING TECH HUD METRICS CORNER BADGE (LEFT SIDE) -->
+            <div class="map-hud-coordinates-tag">COORD // 11.6816° N, 78.1402° E</div>
+            
+            <!-- FIXED REQUEST: FLOATING INTERACTIVE OPEN MAP ACTION BTN (RIGHT SIDE) -->
+            <button class="map-vault-open-redirect-btn" onclick="window.executeExternalMapNavigationRoute(event)" title="Launch active turn-by-turn smartphone street navigation">
+                <span>Open Map</span>
+                <svg class="navigation-vector-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </button>
+            
+            <!-- STATIC LUXURY MAP IMAGE BACKDROP LAYER -->
+            <div class="map-image-viewport-layer">
+                <!-- NATIVE MAP IMAGE TAG: Point this source route to your map graphic texture screenshot -->
+                <img src="./Assests/map.webp" alt="STACKLY Flagship Atelier Location Map Coordinates - MMR Complex Salem India" class="google-minimal-image-element">
+                
+                <!-- Ambient Dark Glass Overlay Matte ensures contrast alignment -->
+                <div class="map-glass-dark-overlay-sheet"></div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   STACKLY GEOGRAPHIC HUB CHANNELS — COMPLETE CSS STYLES
+   ========================================================================== */
+.concierge-geographic-hub-section {
+    position: relative !important;
+    width: 100% !important;
+    padding: 4rem 0 6rem 0; /* Premium spacing cushion headroom */
+    background-color: #031E17; /* Obsidian Jade Base */
+    z-index: 25;
+}
+
+.hub-max-container {
+    max-w: 1200px; /* Locks container width to group components tightly on desktop monitors */
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+.hub-section-header { text-align: center; margin-bottom: 3.5rem; }
+.hub-editorial-title { font-family: 'Poppins', sans-serif; font-size: 3.2rem; font-weight: 300; line-height: 1.2; color: var(--theme-white); letter-spacing: -0.01em; margin: 0; }
+.glow-script-string { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--theme-white); text-shadow: 0 0 10px rgba(223, 183, 108, 0.15); }
+.hub-section-header:hover .glow-script-string { color: var(--theme-gold); text-shadow: 0 0 15px rgba(223, 183, 108, 0.55); }
+
+/* ==========================================================================
+   LUXURY ROUNDED CANVAS CONTAINER BOX (MATCHES SCREENSHOT LAYOUT)
+   ========================================================================== */
+.luxury-rounded-map-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 480px; /* Bounding vertical desktop viewport height clearance box */
+    border-radius: 24px !important; /* Large premium rounded corner radius curves */
+    overflow: hidden !important; /* Locks map image safely inside the rounded corners */
+    border: 1px solid rgba(223, 183, 108, 0.12) !important; /* Champagne gold fine perimeter wire */
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.5);
+    transform: translate3d(0, 0, 0);
+    will-change: border-color, box-shadow;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.luxury-rounded-map-wrapper:hover {
+    border-color: rgba(223, 183, 108, 0.25) !important;
+    box-shadow: 0 30px 65px rgba(0, 0, 0, 0.6), 0 0 20px rgba(223, 183, 108, 0.1);
+}
+
+.map-image-viewport-layer {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1;
+    background-color: #161a19;
+}
+
+/* Force your custom map image graphic to fill the rounded frame dimensions */
+.google-minimal-image-element {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Perfectly clips and crops the picture asset without distortion */
+    object-position: center !important;
+    filter: grayscale(0.6) contrast(1.1) saturate(0.8) !important; /* Inverts bright maps to premium dark look [INDEX] */
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease !important;
+}
+
+.luxury-rounded-map-wrapper:hover .google-minimal-image-element {
+    transform: scale(1.03); /* Slow magnification pan zoom feedback */
+    filter: grayscale(0.2) contrast(1.15) saturate(0.9) !important;
+}
+
+.map-glass-dark-overlay-sheet { position: absolute !important; inset: 0 !important; background: linear-gradient(to top, rgba(5, 20, 16, 0.45) 0%, transparent 100%) !important; z-index: 2 !important; pointer-events: none; }
+
+/* ==========================================================================
+   DYNAMIC TOP RIGHT OPEN MAP GLASS CAPSULE BUTTON
+   ========================================================================== */
+.map-vault-open-redirect-btn {
+    position: absolute !important;
+    top: 1.5rem !important;
+    right: 1.5rem !important; /* Snaps precisely to the right top corner axis */
+    background: rgba(9, 38, 30, 0.65) !important; /* Translucent White-Emerald Alpha Sheet [INDEX] */
+    border: 1px solid rgba(223, 183, 108, 0.25) !important; /* Gold perimeter wire seam */
+    border-radius: 40px !important; /* Rounded pill capsule style look */
+    padding: 0.7rem 1.4rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.6rem !important;
+    color: #FAFAF7 !important;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    cursor: pointer !important;
+    z-index: 10; /* Elevated above background graphics image and matte sheet layers */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.map-vault-open-redirect-btn:hover {
+    background-color: var(--theme-gold) !important;
+    color: var(--theme-emerald-dark) !important;
+    border-color: var(--theme-gold) !important;
+    box-shadow: 0 0 20px rgba(223, 183, 108, 0.4), 0 4px 10px rgba(0,0,0,0.2) !important;
+    transform: translate3d(0, -2px, 0) !important;
+}
+
+.navigation-vector-arrow {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.4s ease;
+}
+.map-vault-open-redirect-btn:hover .navigation-vector-arrow {
+    transform: translate3d(2px, -2px, 0); /* Vector arrow drifts upward-right on hover highlights */
+}
+
+/* Left Technical HUD data tag */
+.map-hud-coordinates-tag { position: absolute !important; top: 1.5rem !important; left: 1.5rem !important; font-family: monospace !important; font-size: 0.6rem !important; letter-spacing: 0.18em !important; color: var(--theme-gold) !important; background: rgba(5, 20, 16, 0.85) !important; padding: 6px 12px !important; border: 1px solid rgba(223, 183, 108, 0.15) !important; border-radius: 4px; z-index: 5; pointer-events: none; }
+
+/* ==========================================================================
+   FLUID MASTER RESPONSIVE GRID MEDIA BREAKPOINTS System
+   ========================================================================== */
+@media screen and (max-width: 920px) {
+    .hub-max-container { padding: 0 1.5rem; }
+    .hub-editorial-title { font-size: 2.5rem; }
+    .luxury-rounded-map-wrapper { height: 380px; border-radius: 16px !important; }
+}
+
+@media screen and (max-width: 640px) {
+    .concierge-geographic-hub-section { padding: 3rem 0 4rem 0 !important; }
+    .hub-editorial-title { font-size: 2rem; }
+    .luxury-rounded-map-wrapper { height: 320px; border-radius: 12px !important; }
+    
+    /* Strips left HUD badge on mobile viewports to give the button canvas maximal clicking width */
+    .map-hud-coordinates-tag { display: none !important; }
+    
+    .map-vault-open-redirect-btn {
+        top: 1rem !important;
+        right: 1rem !important;
+        padding: 0.6rem 1.15rem !important;
+        font-size: 0.62rem !important;
+    }
+}
+
+</style>
+
+<script>
+    /**
+ * STACKLY Fine Jewellery - Global Flagship Boutique External Map Deep-Link Router
+ */
+document.addEventListener("DOMContentLoaded", () => {
+
+    /**
+     * NATIVE ROUTER DEEP-LYNC INTERLOCK
+     * Fired instantly upon tapping the "Open Map" capsule button
+     */
+    window.executeExternalMapNavigationRoute = function(event) {
+        if (event) { event.preventDefault(); event.stopPropagation(); }
+
+        // Core address parameters pointing directly to your MMR Complex Salem studio location [INDEX]
+        const geographicSearchAddressQuery = "MMR Complex, Periyakollappatty, Chinna Thirupathi, Salem, Tamil Nadu 636008";
+        const encodedUrlQueryString = encodeURIComponent(geographicSearchAddressQuery);
+
+        let targetSystemNavigationUrlPath = "";
+
+        // Detect device operating system to select native maps application protocol rings
+        const deviceAgentHardwarePlatform = navigator.userAgent.toLowerCase();
+        const isAppleDeviceEnvironment = /iphone|ipad|ipod/.test(deviceAgentHardwarePlatform);
+
+        if (isAppleDeviceEnvironment) {
+            // Launches native Apple Maps App on iOS mobile screens cleanly [INDEX]
+            targetSystemNavigationUrlPath = `maps://://apple.com{encodedUrlQueryString}`;
+        } else {
+            // Launches native Google Maps App or standard browser mapping coordinates engines cleanly [INDEX]
+            targetSystemNavigationUrlPath = `https://maps.app.goo.gl/1iUAJLxSuFhmkqeE8`;
+        }
+
+        // Open window canvas layer channel
+        window.open(targetSystemNavigationUrlPath, "_blank");
+        console.log(`Deep lync map tracking route initialized: ${geographicSearchAddressQuery}`);
+    };
+});
+
+</script>
+
+
+<section class="bright-cta-banner" aria-label="Exclusive Acquisition Privilege">
+  <!-- Brighter Luxury Backdrop Asset -->
+  <div class="cta-banner-bg-wrapper">
+    <img src="./Assests/CTA home.webp" alt="Bright Liquid Gold Silk Backdrop" class="cta-banner-native-img" loading="lazy">
+    <div class="cta-banner-matte-overlay"></div>
+  </div>
+
+  <div class="cta-banner-max-container">
+    <div class="cta-single-line-flex">
+      <!-- High Impact Text Content -->
+      <div class="cta-text-group">
+        <span class="cta-mini-eyebrow">Limited Atelier Privilege</span>
+        <h2 class="cta-banner-heading">Secure Today’s <span class="glow-keyword">Gold Valuation Index</span> Rate</h2>
+      </div>
+
+      <!-- High Contrast Liquid Metal Action Button Wrapper -->
+      <div class="cta-action-group">
+        <a href="javascript:void(0)" class="liquid-neon-gold-btn" onclick="window.triggerSchemeEnquiry('Sovereign Rate Lock Banner')" title="Secure current gold rate lock valuation now">
+          <span class="btn-text-layer">Lock Rate Now</span>
+          <span class="btn-icon-layer">
+            <svg class="btn-arrow-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    /* ==========================================================================
+   ⚡ BRIGHT LUXURY LIQUID GOLD SINGLE-LINE CTA BANNER
+   ========================================================================== */
+
+.bright-cta-banner {
+  position: relative;
+  background-color: #0c3328; /* Brighter, richer emerald foundation layer tint */
+  padding: 60px 40px;
+  overflow: hidden;
+  border-top: 1px solid #D4AF37;
+  border-bottom: 1px solid #D4AF37;
+  display: flex;
+  align-items: center;
+}
+
+/* Background Optimization Layers */
+.cta-banner-bg-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 2;
+}
+
+.cta-banner-native-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.65; /* Significantly brighter backdrop visibility for rich texture depth */
+  filter: contrast(130%) brightness(80%) saturate(120%);
+}
+
+.cta-banner-matte-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Blends light emerald nodes into a vibrant radial focal center */
+  background: radial-gradient(circle at 30% 50%, rgba(12, 51, 40, 0.2) 0%, rgba(3, 30, 23, 0.95) 85%);
+}
+
+.cta-banner-max-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* --- THE UNBREAKABLE SINGLE LINE FLEX LAYOUT --- */
+.cta-single-line-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.cta-text-group {
+  flex-grow: 1;
+}
+
+.cta-mini-eyebrow {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cta-banner-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: #FFFFFF;
+  line-height: 1.3;
+}
+
+.glow-keyword {
+  color: #D4AF37;
+  font-style: italic;
+  transition: text-shadow 0.4s ease;
+}
+
+/* Trigger intense word level glow together on hover bounds */
+.bright-cta-banner:hover .glow-keyword {
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 30px rgba(212, 175, 55, 0.4);
+}
+
+/* --- THE ULTRABRIGHT SOLID LIQUID GOLD BUTTON --- */
+.liquid-neon-gold-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #D4AF37; /* Brighter Signature Solid Gold */
+  color: #031E17;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.btn-text-layer {
+  position: relative;
+  z-index: 3;
+}
+
+.btn-icon-layer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.btn-arrow-svg {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+/* Micro Shimmer Laser ray tracking across button background */
+.liquid-neon-gold-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  z-index: 2;
+}
+
+/* --- HOVER GLOW INTERACTIONS --- */
+.liquid-neon-gold-btn:hover {
+  background-color: #FFFFFF; /* Shifts sharply to high-contrast Diamond White */
+  color: #031E17;
+  transform: translateY(-4px);
+  /* High-intensity outer neon aura glow drop shadows */
+  box-shadow: 0 12px 25px rgba(212, 175, 55, 0.4), 
+              0 0 35px rgba(212, 175, 55, 0.7);
+}
+
+.liquid-neon-gold-btn:hover::before {
+  left: 100%;
+  transition: left 0.65s ease-in-out;
+}
+
+.liquid-neon-gold-btn:hover .btn-arrow-svg {
+  transform: translateX(6px) scale(1.1);
+}
+
+/* ==========================================================================
+   📱 HIGH FIDELITY BREAKPOINTS (SEAMLESS RESPONSIVE MATRIX)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .cta-banner-heading { font-size: 1.8rem; }
+  .liquid-neon-gold-btn { padding: 14px 26px; font-size: 0.8rem; }
+}
+
+@media (max-width: 768px) {
+  .bright-cta-banner { padding: 50px 24px; }
+  
+  /* Collapses the single-line flex format to stack cleanly on portrait configurations */
+  .cta-single-line-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  
+  .cta-action-group {
+    width: 100%;
+  }
+  
+  .liquid-neon-gold-btn {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center; /* Center items perfectly on tablet screens */
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bright-cta-banner { padding: 40px 16px; }
+  .cta-banner-heading { font-size: 1.4rem; }
+  .cta-mini-eyebrow { letter-spacing: 3px; font-size: 0.75rem; }
+}
+
+</style>
+
+<footer class="luxury-global-footer" aria-labelledby="footer-brand-heading">
+    <!-- Fluid background environmental texture grid layer -->
+    <div class="footer-environmental-bg-mask"></div>
+
+    <div class="footer-max-container">
+        <div class="footer-main-grid-matrix">
+            
+            <!-- Column 1: Brand Identifier Logo, SEO Text, and Social Icons -->
+            <div class="footer-brand-column">
+    <!-- 🏷️ CLICKABLE BRAND LOGO CONTAINER -->
+    <div class="footer-logo-box" onclick="window.scrollToTopEngine()" style="cursor: pointer;" title="Scroll back to top of page">
+        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="footer-brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h2 id="footer-brand-heading" class="footer-logo-fallback-text" style="display:none;">STACKLY</h2>
+    </div>
+    <p class="footer-brand-seo-statement">
+        Artisans of heirloom-quality fine jewellery, certified flawless diamonds, and bespoke solid gold creations. Crafting timeless luxury and capital-preserving investment assets for generations.
+    </p>
+                <div class="footer-social-glow-strip">
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on X / Twitter">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on LinkedIn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on GitHub">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2: Semantic Navigation Group (SEO Jewelery Terms) -->
+            <div class="footer-links-column">
+                <h3 class="footer-group-title">The Collections</h3>
+                <ul class="footer-links-stack">
+                    <li><a href="collections.html#rings" class="footer-nav-hover-link">Bespoke Diamond Rings</a></li>
+                    <li><a href="collections.html#necklaces" class="footer-nav-hover-link">High Jewellery Necklaces</a></li>
+                    <li><a href="collections.html#bangles" class="footer-nav-hover-link">Stunning Gold Bangles</a></li>
+                    <li><a href="collections.html#earrings" class="footer-nav-hover-link">Fine Cluster Earrings</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Privilege Services Link Group -->
+            <div class="footer-links-column">
+                <h3 class="footer-group-title">Elite Services</h3>
+                <ul class="footer-links-stack">
+                    <li><a href="index.html#investment-schemes-view" class="footer-nav-hover-link">Gold Savings Schemes</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Sovereign Rate Booking</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Bespoke Consultations</a></li>
+                    <li><a href="404.html" class="footer-nav-hover-link">Insured Vault Valuations</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter Field Wrapper with Brighter Liquid Gold Action Button -->
+            <div class="footer-newsletter-column">
+                <h3 class="footer-group-title">The Atelier Newsletter</h3>
+                <p class="newsletter-descriptor">Get priority notifications on seasonal masterpiece drops, private exhibitions, and gold market updates weekly.</p>
+                
+                <form class="footer-newsletter-form-box" onsubmit="window.handleNewsletterSubmission(event)">
+                    <!-- EMAIL PATTERN INPUT REGEX CHECK ATTACHED -->
+                    <input type="email" 
+                           required 
+                           id="footer-subscriber-email" 
+                           class="footer-input-field" 
+                           placeholder="your@email.com" 
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           title="Please enter a valid email address (e.g., name@domain.com)"
+                           aria-label="Email address for news subscription">
+                    <button type="submit" class="footer-newsletter-submit-btn" aria-label="Subscribe to newsletter">
+                        <span class="submit-btn-text">Subscribe</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Lower Baseline Copyright Strip -->
+        <div class="footer-baseline-strip">
+            <p class="footer-copyright-text">&copy; 2026 STACKLY Fine Jewellery. All rights reserved.</p>
+            <div class="footer-legal-inline-menu">
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Privacy Policy</a>
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Terms of Service</a>
+                <a href="javascript:void(0)" class="footer-nav-hover-link">Cookie Policy</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 🔝 FLOATING BACK TO TOP ARROW BUTTON -->
+    <button class="scroll-to-top-btn" id="backToTopBtn" onclick="window.scrollToTopEngine()" aria-label="Scroll back to top of page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+</footer>
+<style>
+
+    /* Gives a clear interactive hover state to your footer brand logo */
+.footer-logo-box {
+  margin-bottom: 20px;
+  display: inline-flex; /* Shrinks the click area tightly to only fit your logo */
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.footer-logo-box:hover {
+  transform: translateY(-2px); /* Gentle floating liftoff on hover */
+}
+
+.footer-logo-box:hover .footer-brand-logo-img {
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.6)); /* Intense gold glow feedback loop */
+}
+
+.footer-logo-box:hover .footer-logo-fallback-text {
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+    /* ==========================================================================
+   🏛️ ADAPTED WIREFRAME JEWELRY GLOBAL FOOTER STYLING
+   ========================================================================== */
+
+.luxury-global-footer {
+  position: relative;
+  background-color: #031E17; /* Domain Color: Stackly Deep Forest Green */
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 80px 40px 40px 40px;
+  color: #FFFFFF;
+  font-family: 'Playfair Display', serif, sans-serif;
+  overflow: hidden;
+}
+
+.footer-environmental-bg-mask {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-max-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* --- THE NAVIGATION COLUMN MATRIX LAYOUTS --- */
+.footer-main-grid-matrix {
+  display: grid;
+  grid-template-columns: 3.5fr 2fr 2fr 4.5fr; /* Matches the layout width distribution of wireframe */
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+/* Logo Image Container adjustments */
+.footer-logo-box {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-brand-logo-img {
+  max-height: 32px; /* Restricts vertical bounding frame of brand logo file */
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+}
+
+.footer-logo-fallback-text {
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin: 0;
+  color: #FFFFFF;
+}
+
+.footer-brand-seo-statement {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #A3B8B3;
+  margin: 0 0 25px 0;
+  max-width: 95%;
+}
+
+.footer-group-title {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF; /* White crisp header styling matching wireframe */
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 25px 0;
+}
+
+/* Links Stack configuration rules layout */
+.footer-links-stack {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links-stack li a,
+.footer-legal-inline-menu a {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  color: #A3B8B3; /* Slate grey muted links match wireframe text states */
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+  display: inline-block;
+}
+
+/* Link item translation text shadow glow animations mechanics */
+.footer-nav-hover-link:hover {
+  color: #D4AF37; /* Theme Color: Luxury Gold Highlight Accent */
+  transform: translateX(3px);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.footer-legal-inline-menu a:hover {
+  color: #D4AF37;
+}
+
+/* Social Icon Matrix Strips formatting codes settings adjustment info */
+.footer-social-glow-strip {
+  display: flex; gap: 12px;
+}
+
+.social-glow-circle-link {
+  width: 34px; height: 34px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px; /* Squared radius profile tracking image layout frame specs */
+  color: #A3B8B3;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.social-glow-circle-link:hover {
+  background-color: #D4AF37;
+  color: #031E17;
+  border-color: #D4AF37;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+/* --- THE CAPTURE FIELD COMPONENT CONFIGS --- */
+.newsletter-descriptor {
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #A3B8B3;
+  margin: 0 0 20px 0;
+}
+
+.footer-newsletter-form-box {
+  display: flex;
+  flex-direction: column; /* Matches the top to bottom stacked format of wireframe */
+  width: 100%;
+  gap: 12px;
+}
+
+.footer-input-field {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  color: #FFFFFF;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.footer-input-field:focus {
+  border-color: #D4AF37;
+}
+
+.footer-input-field::placeholder {
+  color: #4a635e;
+}
+
+/* Brighter Solid Liquid Gold Action button matching requested spec updates */
+.footer-newsletter-submit-btn {
+  width: 100%;
+  background-color: #D4AF37; /* Brighter Solid Gold Base */
+  border: 1px solid #D4AF37;
+  color: #031E17;
+  font-family: sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.footer-newsletter-submit-btn:hover {
+  background-color: #FFFFFF; /* High contrast white toggle core shift */
+  color: #031E17;
+  border-color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3), 0 0 25px rgba(212, 175, 55, 0.5);
+  transform: translateY(-2px);
+}
+
+/* --- BASELINE STRIP COPYRIGHT CODES DEFINITIONS LOOK --- */
+.footer-baseline-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copyright-text {
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  color: #617A75;
+  margin: 0;
+}
+
+.footer-legal-inline-menu {
+  display: flex; gap: 20px;
+}
+
+/* --- 🔝 BACK TO TOP FLOATING ACTION BUTTON --- */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px; height: 40px;
+  background-color: #D4AF37; /* Brighter theme palette matched indicator matching blue circle wireframe */
+  color: #031E17;
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.scroll-to-top-btn.reveal-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top-btn:hover {
+  background-color: #FFFFFF;
+  color: #031E17;
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5), 0 0 25px rgba(212, 175, 55, 0.7);
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   📱 SEAMLESS COMPONENT MOBILE RESPONSIVE LAYOUT MATRIX
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .footer-main-grid-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .luxury-global-footer { padding: 60px 24px 30px 24px; }
+  
+  .footer-main-grid-matrix {
+    display: flex;
+    flex-direction: column; /* Force linear vertical single stack on smaller layout breakpoints devices */
+    gap: 35px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand-seo-statement { max-width: 100%; }
+
+  .footer-baseline-strip {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer-legal-inline-menu {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .scroll-to-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 36px; height: 36px;
+  }
+}
+
+</style>
+
+<script>
+    // ==========================================================================
+// 🏛️ LUXURY ATELIER FOOTER INTERACTION UTILITIES FRAMEWORK
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Bind windows monitoring viewport scrolling handler to show/hide the back to top arrow icon
+  window.addEventListener("scroll", handleFooterScrollMonitorEvent);
+});
+
+// A. BACK TO TOP SCROLL MONITOR VISIBILITY MAP
+function handleFooterScrollMonitorEvent() {
+  const scrollArrowButton = document.getElementById("backToTopBtn");
+  if (!scrollArrowButton) return;
+
+  // Reveal the floating button once the window rolls down past 400 vertical layout pixels
+  if (window.scrollY > 400) {
+    scrollArrowButton.classList.add("reveal-active");
+  } else {
+    scrollArrowButton.classList.remove("reveal-active");
+  }
+}
+
+// B. SMOOTH BACK TO TOP ANIMATION ENGINE
+window.scrollToTopEngine = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Native fluid scrolling physics acceleration
+  });
+};
+
+// C. VALIDATED NEWSLETTER INSIGHT CAPTURE HANDLER
+window.handleNewsletterSubmission = function(formEvent) {
+  // Intercept data packet to bypass automatic layout reloading
+  formEvent.preventDefault();
+
+  const emailFieldNode = document.getElementById("footer-subscriber-email");
+  if (!emailFieldNode) return;
+
+  const dynamicEmailString = emailFieldNode.value.trim();
+
+  // Formal luxury validation checking response message window strings
+  const successNotificationAlert = `Successfully Subscribed!\n\nThank you for joining the STACKLY Inner Circle. A luxury lookbook collection briefing has been transmitted to: ${dynamicEmailString}`;
+  
+  // Flash custom alerting box metrics
+  alert(successNotificationAlert);
+
+  // Flush form text box parameter values clean
+  emailFieldNode.value = "";
+};
+
+// ==========================================================================
+// 🏛️ STACKLY JEWELLERY FOOTER SYSTEM ENGINE
+// ==========================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Bind viewport scroll listener to monitor the visibility of the bottom-right arrow button
+  window.addEventListener("scroll", handleFooterScrollMonitorEvent);
+});
+
+/**
+ * 1. BACK TO TOP SCROLL MONITOR VISIBILITY
+ * Automatically reveals or hides the floating arrow button based on screen location
+ */
+function handleFooterScrollMonitorEvent() {
+  const scrollArrowButton = document.getElementById("backToTopBtn");
+  if (!scrollArrowButton) return;
+
+  // Reveal the floating button once the window rolls down past 400 vertical pixels
+  if (window.scrollY > 400) {
+    scrollArrowButton.classList.add("reveal-active");
+  } else {
+    scrollArrowButton.classList.remove("reveal-active");
+  }
+}
+
+/**
+ * 2. SMOOTH BACK TO TOP ACCELERATION ENGINE
+ * Executed instantly when clicking either the Footer Brand Logo or the Floating Arrow Button
+ */
+window.scrollToTopEngine = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth" // Triggers native, ultra-smooth acceleration curves
+  });
+};
+
+/**
+ * 3. VALIDATED NEWSLETTER INSIGHT CAPTURE HANDLER
+ * Validates email integrity and delivers a premium confirmation alert prompt
+ */
+window.handleNewsletterSubmission = function(formEvent) {
+  // Intercept the data packet to bypass automatic page reloading
+  formEvent.preventDefault();
+
+  const emailFieldNode = document.getElementById("footer-subscriber-email");
+  if (!emailFieldNode) return;
+
+  const dynamicEmailString = emailFieldNode.value.trim();
+
+  // Formal luxury confirmation output string
+  const successNotificationAlert = `Successfully Subscribed!\n\nThank you for joining the STACKLY Inner Circle. A luxury lookbook collection briefing has been transmitted to: ${dynamicEmailString}`;
+  
+  // Flash custom alert box
+  alert(successNotificationAlert);
+
+  // Flush the input text field clean
+  emailFieldNode.value = "";
+};
+
+</script>
+</body>
+</html>
