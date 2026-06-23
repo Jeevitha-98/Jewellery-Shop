@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Registry Deck — Lumière Jewellery Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100vh;background-color:#030F07;color:#F5F0E8;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden}
+.dashboard-root-body{display:flex;position:relative;min-height:100vh;width:100%}
+.dash-bg-holder{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1;overflow:hidden;pointer-events:none}
+.dash-smoky-mask{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#030F07 0%,rgba(5,20,10,0.96) 100%);z-index:2}
+.dash-sidebar-chassis{position:fixed;top:0;left:0;width:280px;height:100vh;background:linear-gradient(180deg,rgba(5,20,10,0.92) 0%,rgba(3,10,5,0.97) 100%);border-right:1px solid rgba(212,175,55,0.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding:40px 24px;display:flex;flex-direction:column;z-index:100;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.sidebar-brand-axis{display:flex;align-items:center;gap:14px;margin-bottom:44px;padding:8px;cursor:pointer}
+.brand-sparkle-spin-wrapper{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background-color:#050F06;border:1px solid rgba(212,175,55,0.4);overflow:hidden}
+.brand-text-block h3{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;color:#F5F0E8;letter-spacing:0.5px;line-height:1.2}
+.brand-text-block p{font-size:0.68rem;font-weight:700;color:#D4AF37;text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+.sidebar-navigation-menu{display:flex;flex-direction:column;gap:12px;flex-grow:1;width:100%}
+.sidebar-menu-item{position:relative;width:100%;background-color:transparent;border:1px solid transparent;padding:14px 18px;border-radius:12px;display:flex;align-items:center;gap:14px;cursor:pointer;outline:none;text-align:left;transition:all 0.35s cubic-bezier(0.25,1,0.5,1)}
+.menu-icon-token{font-size:18px;line-height:1;display:inline-block}
+.menu-text-label{font-size:0.88rem;font-weight:700;color:#6B8C6B}
+.menu-active-laser-indicator{position:absolute;left:0;top:25%;width:3px;height:50%;background-color:#D4AF37;opacity:0;transform:scaleY(0);transition:all 0.35s ease}
+.sidebar-menu-item:hover{background-color:rgba(212,175,55,0.04)}
+.sidebar-menu-item:hover .menu-text-label{color:#F5F0E8}
+.sidebar-menu-item.active-menu-item{background-color:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.2)}
+.sidebar-menu-item.active-menu-item .menu-text-label{color:#D4AF37}
+.sidebar-menu-item.active-menu-item .menu-active-laser-indicator{opacity:1;transform:scaleY(1);box-shadow:0 0 10px #D4AF37}
+.sidebar-lower-footer{border-top:1px solid rgba(212,175,55,0.1);padding-top:20px;width:100%}
+.sidebar-logout-pill-btn{width:100%;background-color:transparent;border:1px solid rgba(245,240,232,0.15);padding:12px 18px;border-radius:40px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;outline:none;transition:all 0.3s ease}
+.sidebar-logout-pill-btn .logout-text-label{font-size:0.8rem;font-weight:700;color:#ECE5DF;text-transform:uppercase;letter-spacing:1px}
+.sidebar-logout-pill-btn:hover{background-color:#1A6B3A;border-color:#1A6B3A}
+.dash-central-runway-wrapper{margin-left:280px;flex-grow:1;display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:5;width:calc(100% - 280px)}
+.dash-top-navigation-bar{width:100%;height:80px;border-bottom:1px solid rgba(212,175,55,0.1);padding:0 40px;display:flex;justify-content:space-between;align-items:center;background-color:rgba(3,10,5,0.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.topnav-left-breadcrumbs{display:flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+.breadcrumb-root{color:#4A7C59}
+.breadcrumb-divider{color:rgba(212,175,55,0.25)}
+.breadcrumb-node-active{color:#D4AF37}
+.topnav-right-controls-hub{display:flex;align-items:center;gap:24px}
+.topnav-utility-btn{position:relative;background:transparent;border:none;outline:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:4px;transition:transform 0.4s cubic-bezier(0.25,1,0.3,1)}
+.utility-white-bell-svg{width:22px;height:22px;display:block}
+.utility-white-bell-svg path{fill:#F5F0E8}
+.alert-pulse-beacon-dot{position:absolute;top:1px;right:1px;width:6px;height:6px;background-color:#D4AF37;border-radius:50%;box-shadow:0 0 8px #D4AF37}
+.topnav-utility-btn:hover{transform:scale(1.1) rotate(12deg)}
+.topnav-profile-avatar-node{position:relative;width:40px;height:40px;border-radius:50%;cursor:pointer}
+.profile-online-ring-glow{position:absolute;bottom:0;right:0;width:10px;height:10px;background-color:#22C55E;border:2px solid #030F07;border-radius:50%}
+.dash-content-viewport-canvas{flex-grow:1;padding:50px 40px;width:100%}
+.dash-view-panel{display:none;width:100%;animation:panelSlideReveal 0.5s cubic-bezier(0.16,1,0.3,1) forwards}
+.dash-view-panel.active-panel-view{display:block}
+.panel-header-editorial-block{margin-bottom:32px;text-align:left;width:100%}
+.panel-header-meta-trail{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.panel-status-beacon-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.panel-micro-tag{font-size:0.68rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:1.5px}
+.panel-display-title{font-family:'Playfair Display',Georgia,serif;font-size:2rem;font-weight:700;color:#F5F0E8;line-height:1.25;margin-bottom:8px}
+.panel-display-title em{font-style:italic;font-weight:400;color:#D4AF37}
+.panel-descriptor{font-size:0.92rem;color:#6B8C6B;max-width:600px;line-height:1.6}
+.mobile-menu-trigger-bar{display:none}
+@keyframes panelSlideReveal{0%{opacity:0;transform:translateY(12px) scale(0.995)}100%{opacity:1;transform:translateY(0) scale(1)}}
+
+/* BLUEPRINT PANEL */
+.beacon-blueprint-client-pulse{background-color:#D4AF37;box-shadow:0 0 10px #D4AF37}
+.client-blueprint-specs-split-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;width:100%;margin-top:10px;margin-bottom:30px}
+.client-minimal-blueprint-card{position:relative;background-color:rgba(5,20,10,0.5);border:1px solid rgba(212,175,55,0.1);border-radius:16px;box-sizing:border-box;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.4s ease,box-shadow 0.4s cubic-bezier(0.16,1,0.3,1)}
+.mini-blueprint-inner{padding:32px 28px;display:flex;flex-direction:column;width:100%}
+.mini-blueprint-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;width:100%}
+.mini-blueprint-index-id{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;color:#4A7C59;letter-spacing:1px}
+.mini-blueprint-status-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:4px 10px;border-radius:30px}
+.mini-blueprint-status-tag.status-verified{color:#22C55E;border:1px solid rgba(34,197,94,0.25);background-color:rgba(34,197,94,0.04)}
+.mini-blueprint-status-tag.status-locked{color:#D4AF37;border:1px solid rgba(212,175,55,0.25);background-color:rgba(212,175,55,0.04)}
+.mini-blueprint-title{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:700;color:#F5F0E8;text-align:left;margin-bottom:4px}
+.mini-blueprint-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;color:#6B8C6B;text-align:left;margin-bottom:24px}
+.mini-blueprint-spec-list{display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(212,175,55,0.07);border-bottom:1px solid rgba(212,175,55,0.07);padding:16px 0;width:100%}
+.mini-blueprint-spec-row{display:flex;justify-content:space-between;align-items:center;width:100%;gap:16px}
+.mini-blueprint-key{font-size:0.7rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.mini-blueprint-val{font-size:0.88rem;font-weight:600;color:#B8D4B8;text-align:right}
+.client-minimal-blueprint-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,0.35);box-shadow:0 15px 35px rgba(0,0,0,0.5)}
+.client-minimal-blueprint-card:hover .mini-blueprint-title{color:#D4AF37}
+.client-blueprint-action-summary-dock{width:100%;background:linear-gradient(145deg,rgba(10,35,15,0.5) 0%,rgba(5,20,10,0.65) 100%);border:1px solid rgba(212,175,55,0.1);border-radius:16px;padding:24px 36px;display:flex;justify-content:space-between;align-items:center;gap:30px;box-sizing:border-box}
+.dock-meta-left{display:flex;flex-direction:column;align-items:flex-start}
+.dock-meta-left span{font-size:0.68rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.dock-meta-left h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;font-style:italic;color:#F5F0E8}
+.client-blueprint-pill-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;height:40px;padding:0 24px;border-radius:40px;cursor:pointer;outline:none;box-sizing:border-box;background-color:#D4AF37;border:1px solid #D4AF37;color:#030F07;transition:all 0.4s ease}
+.client-blueprint-pill-btn:hover{background-color:#E8C94A;border-color:#E8C94A;transform:translateY(-2px)}
+
+/* ORDER STATUS PANEL */
+.beacon-baking-pulse{background-color:#D4AF37;box-shadow:0 0 10px #D4AF37}
+.commissions-minimal-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;width:100%;margin-top:10px}
+.minimal-commission-card{position:relative;background-color:rgba(5,20,10,0.5);border:1px solid rgba(212,175,55,0.1);border-radius:16px;box-sizing:border-box;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.4s ease,box-shadow 0.4s cubic-bezier(0.16,1,0.3,1)}
+.mini-card-inner{padding:32px 28px;display:flex;flex-direction:column;width:100%}
+.mini-card-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;width:100%}
+.mini-order-id{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;color:#4A7C59;letter-spacing:1px}
+.mini-status-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:4px 10px;border-radius:30px;background-color:rgba(245,240,232,0.03)}
+.mini-status-tag.status-baking{color:#D4AF37;border:1px solid rgba(212,175,55,0.25)}
+.mini-status-tag.status-gilding{color:#22C55E;border:1px solid rgba(34,197,94,0.25)}
+.mini-card-title{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:700;color:#F5F0E8;text-align:left;margin-bottom:4px}
+.mini-card-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;color:#6B8C6B;text-align:left;margin-bottom:24px}
+.mini-spec-list{display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(212,175,55,0.07);border-bottom:1px solid rgba(212,175,55,0.07);padding:16px 0;width:100%}
+.mini-spec-row{display:flex;justify-content:space-between;align-items:center;width:100%;gap:16px}
+.mini-key{font-size:0.7rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.mini-val{font-size:0.88rem;font-weight:600;color:#B8D4B8;text-align:right}
+.mini-val.gold-shimmer-output{color:#D4AF37}
+.mini-val.text-countdown{font-variant-numeric:tabular-nums;color:#F5F0E8;font-weight:700}
+.minimal-commission-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,0.35);box-shadow:0 15px 35px rgba(0,0,0,0.5)}
+.minimal-commission-card:hover .mini-card-title{color:#D4AF37}
+
+/* DESIGN SESSIONS PANEL */
+.beacon-salon-client-pulse{background-color:#D4AF37;box-shadow:0 0 10px #D4AF37}
+.tastings-minimal-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;width:100%;margin-top:10px}
+.minimal-tasting-card{position:relative;background-color:rgba(5,20,10,0.5);border:1px solid rgba(212,175,55,0.1);border-radius:16px;box-sizing:border-box;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),border-color 0.4s ease,box-shadow 0.4s cubic-bezier(0.16,1,0.3,1)}
+.mini-tasting-inner{padding:32px 28px;display:flex;flex-direction:column;width:100%}
+.mini-tasting-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;width:100%}
+.mini-tasting-time{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.7rem;font-weight:700;color:#4A7C59;letter-spacing:1px}
+.mini-tasting-status-tag{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:4px 10px;border-radius:30px;display:inline-flex;align-items:center;gap:6px}
+.mini-tasting-status-tag.status-confirmed{color:#22C55E;border:1px solid rgba(34,197,94,0.25);background-color:rgba(34,197,94,0.04)}
+.mini-tasting-status-tag.status-review{color:#D4AF37;border:1px solid rgba(212,175,55,0.25);background-color:rgba(212,175,55,0.04)}
+.mini-status-pulse{width:5px;height:5px;border-radius:50%;background-color:currentColor}
+.mini-tasting-title{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:700;color:#F5F0E8;text-align:left;margin-bottom:4px}
+.mini-tasting-subtitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;color:#6B8C6B;text-align:left;margin-bottom:24px}
+.mini-tasting-spec-list{display:flex;flex-direction:column;gap:12px;border-top:1px solid rgba(212,175,55,0.07);border-bottom:1px solid rgba(212,175,55,0.07);padding:16px 0;margin-bottom:28px;width:100%}
+.mini-tasting-spec-row{display:flex;justify-content:space-between;align-items:center;width:100%;gap:16px}
+.mini-tasting-key{font-size:0.7rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.mini-tasting-val{font-size:0.88rem;font-weight:600;color:#B8D4B8;text-align:right}
+.mini-tasting-val.text-gold-shimmer{color:#D4AF37}
+.mini-tasting-actions{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:auto;gap:16px}
+.mini-tasting-btn-link{background:transparent;border:none;outline:none;font-family:inherit;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#4A7C59;cursor:pointer;transition:color 0.3s ease}
+.mini-tasting-btn-link:hover{color:#D4AF37;text-decoration:underline}
+.mini-tasting-btn-pill{font-family:inherit;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;height:38px;padding:0 20px;border-radius:40px;cursor:pointer;outline:none;box-sizing:border-box;background-color:#D4AF37;border:1px solid #D4AF37;color:#030F07;transition:all 0.4s ease}
+.mini-tasting-btn-pill:hover{background-color:#E8C94A;border-color:#E8C94A;transform:translateY(-2px)}
+.minimal-tasting-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,0.35);box-shadow:0 15px 35px rgba(0,0,0,0.5)}
+.minimal-tasting-card:hover .mini-tasting-title{color:#D4AF37}
+
+/* ACCOUNT VAULT PANEL */
+.beacon-account-vault-pulse{background-color:#6B8C6B;box-shadow:0 0 10px #6B8C6B}
+.vault-asymmetrical-split-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:30px;width:100%;align-items:flex-start;margin-top:14px}
+.settings-sub-panel-chassis{width:100%}
+.settings-card-inner{background-color:rgba(5,20,10,0.5);border:1px solid rgba(212,175,55,0.1);border-radius:16px;padding:28px}
+.settings-card-serif-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#F5F0E8;margin-bottom:8px}
+.settings-card-descriptor-text{font-size:0.82rem;color:#6B8C6B;margin-bottom:20px;line-height:1.5}
+.client-profile-data-stack{display:flex;flex-direction:column;gap:16px;width:100%;border-top:1px solid rgba(212,175,55,0.1);padding-top:20px}
+.profile-data-row{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;border-bottom:1px solid rgba(245,240,232,0.03);padding-bottom:12px}
+.profile-data-row:last-child{border-bottom:none;padding-bottom:0}
+.data-key-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.68rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:1px}
+.data-value-output{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.95rem;font-weight:600;color:#F5F0E8;word-break:break-all}
+.tier-gold-glow{color:#D4AF37;text-shadow:0 0 8px rgba(212,175,55,0.25)}
+.settings-minimal-form-engine{display:flex;flex-direction:column;gap:22px;width:100%;margin-top:14px}
+.settings-input-envelope-field{display:flex;flex-direction:column;align-items:flex-start;width:100%}
+.settings-editorial-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:0.68rem;font-weight:700;color:#4A7C59;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;transition:color 0.3s ease}
+.settings-password-field-wrapper{position:relative;width:100%;display:block}
+.settings-luxury-text-input{width:100%;background-color:#050F06;border:1px solid rgba(212,175,55,0.2);border-radius:12px;padding:16px 50px 16px 20px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;color:#F5F0E8;outline:none;box-sizing:border-box;transition:border-color 0.4s,box-shadow 0.4s}
+.settings-luxury-text-input:focus{border-color:#D4AF37;background-color:#030F07;box-shadow:0 0 12px rgba(212,175,55,0.1)}
+.settings-input-envelope-field:focus-within .settings-editorial-label{color:#D4AF37}
+.settings-password-toggle-eye{position:absolute;right:18px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1.05rem;opacity:0.35;user-select:none;z-index:5;transition:opacity 0.3s ease}
+.settings-password-toggle-eye:hover{opacity:0.85}
+.settings-action-submit-hub{width:100%;margin-top:8px;text-align:left}
+.settings-submit-vogue-pill-btn{width:100%;max-width:220px;height:44px;background-color:#D4AF37;color:#030F07;border:1px solid #D4AF37;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;outline:none;box-sizing:border-box;transition:all 0.4s cubic-bezier(0.25,1,0.5,1)}
+.settings-submit-vogue-pill-btn:hover{background-color:#E8C94A;border-color:#E8C94A;transform:translateY(-2px)}
+
+/* MOBILE */
+@media(max-width:992px){
+  .dashboard-root-body{display:block}
+  .dash-central-runway-wrapper{margin-left:0;width:100%;max-width:100%}
+  .mobile-menu-trigger-bar{display:flex;justify-content:space-between;align-items:center;width:100%;height:64px;background-color:#050F06;padding:0 20px;border-bottom:1px solid rgba(212,175,55,0.15);position:relative;z-index:150}
+  .mobile-studio-logo{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:#D4AF37}
+  .mobile-hamburger-btn{background:transparent;border:none;outline:none;color:#F5F0E8;font-size:24px;cursor:pointer}
+  .dash-sidebar-chassis{position:fixed;top:64px;left:0;width:75%;height:calc(100vh - 64px);transform:translateX(-100%);z-index:99999;padding:30px 24px}
+  .dash-sidebar-chassis.mobile-sidebar-open{transform:translateX(0)}
+  .sidebar-brand-axis{display:none}
+  .dash-top-navigation-bar{padding:0 20px;height:64px}
+  .dash-content-viewport-canvas{padding:36px 20px}
+  .panel-display-title{font-size:1.6rem;line-height:1.35;white-space:normal;word-wrap:break-word}
+  .client-blueprint-specs-split-grid,.commissions-minimal-cards-grid,.tastings-minimal-cards-grid{grid-template-columns:1fr;gap:20px}
+  .vault-asymmetrical-split-grid{grid-template-columns:1fr;gap:24px}
+  .client-blueprint-action-summary-dock{flex-direction:column;align-items:flex-start;gap:20px;padding:24px 20px}
+  .client-blueprint-pill-btn,.settings-submit-vogue-pill-btn{width:100%;max-width:100%;text-align:center}
+  .mini-blueprint-spec-row,.mini-spec-row,.mini-tasting-spec-row{flex-direction:column;align-items:flex-start;gap:4px}
+  .mini-blueprint-val,.mini-val,.mini-tasting-val{width:100%;text-align:left;white-space:normal;overflow-wrap:break-word}
+  .mini-tasting-actions{flex-direction:column;align-items:flex-start;gap:14px}
+  .mini-tasting-btn-pill{width:100%;text-align:center}
+}
+</style>
+</head>
+<body class="dashboard-root-body">
+
+<div class="dash-bg-holder">
+  <div class="dash-smoky-mask"></div>
+</div>
+
+<header class="mobile-menu-trigger-bar">
+  <span class="mobile-studio-logo">Lumière Client Deck</span>
+  <button class="mobile-hamburger-btn" onclick="toggleMobileSidebarChassis()">☰</button>
+</header>
+
+<aside class="dash-sidebar-chassis">
+  <div class="sidebar-brand-axis">
+   
+    <div class="brand-text-block" onclick="executeStudioWorkspaceRefresh(this)" role="button">
+      <h3>Stackly Client</h3>
+      <p>Registry Deck</p>
+    </div>
+  </div>
+  <nav class="sidebar-navigation-menu">
+    <button class="sidebar-menu-item active-menu-item" data-target="panel-my-blueprint" onclick="switchDashboardActivePanel(this)">
+      <span class="menu-icon-token"></span>
+      <span class="menu-text-label">My Bespoke Design</span>
+      <div class="menu-active-laser-indicator"></div>
+    </button>
+    <button class="sidebar-menu-item" data-target="panel-order-status" onclick="switchDashboardActivePanel(this)">
+      <span class="menu-icon-token"></span>
+      <span class="menu-text-label">Order Status</span>
+      <div class="menu-active-laser-indicator"></div>
+    </button>
+    <button class="sidebar-menu-item" data-target="panel-taste-sessions" onclick="switchDashboardActivePanel(this)">
+      <span class="menu-icon-token"></span>
+      <span class="menu-text-label">Design Sessions</span>
+      <div class="menu-active-laser-indicator"></div>
+    </button>
+    <button class="sidebar-menu-item" data-target="panel-account-vault" onclick="switchDashboardActivePanel(this)">
+      <span class="menu-icon-token"></span>
+      <span class="menu-text-label">Account Vault</span>
+      <div class="menu-active-laser-indicator"></div>
+    </button>
+  </nav>
+  <div class="sidebar-lower-footer">
+    <button class="sidebar-logout-pill-btn" onclick="triggerPartnerLogoutSequence()">
+      <span class="logout-icon-token">🚪</span>
+      <span class="logout-text-label">Exit</span>
+    </button>
+  </div>
+</aside>
+
+<div class="dash-central-runway-wrapper">
+  <header class="dash-top-navigation-bar">
+    <div class="topnav-left-breadcrumbs">
+      <span class="breadcrumb-root">Client Access</span>
+      <span class="breadcrumb-divider">/</span>
+      <span id="breadcrumb-active-node" class="breadcrumb-node-active">My Bespoke Design</span>
+    </div>
+    <div class="topnav-right-controls-hub">
+      <button class="topnav-utility-btn" aria-label="Notifications" onclick="alert('Notification: Your bespoke ring design has been approved by Isabelle Laurent, Head Jewellery Artisan.')">
+        <svg class="utility-white-bell-svg" viewBox="0 0 24 24" fill="none">
+          <path d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.89 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16ZM16 17H8V11C8 8.52 9.51 6.5 12 6.5C14.49 6.5 16 8.52 16 11V17Z" fill="#F5F0E8"/>
+        </svg>
+        <span class="alert-pulse-beacon-dot"></span>
+      </button>
+      <div class="topnav-profile-avatar-node" onclick="alert('Private Client Vault Session Secured.')">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1A5C2A,#0B3D1C);border:1px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;color:#D4AF37">EV</div>
+        <div class="profile-online-ring-glow"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dash-content-viewport-canvas">
+
+    <!-- PANEL 1: MY BESPOKE DESIGN -->
+    <section id="panel-my-blueprint" class="dash-view-panel active-panel-view">
+      <div class="panel-header-editorial-block">
+        <div class="panel-header-meta-trail">
+          <span class="panel-status-beacon-dot beacon-blueprint-client-pulse"></span>
+          <span class="panel-micro-tag">Private Client Design Dossier</span>
+        </div>
+        <h1 class="panel-display-title">My Bespoke <em>Jewellery Design</em></h1>
+        <p class="panel-descriptor">Review your verified architectural parameters, gemstone selections, and metal specifications curated by our master jewellery artisans.</p>
+      </div>
+      <div class="client-blueprint-specs-split-grid">
+        <article class="client-minimal-blueprint-card">
+          <div class="mini-blueprint-inner">
+            <div class="mini-blueprint-header-row">
+              <span class="mini-blueprint-index-id">DESIGN // RING-7219</span>
+              <span class="mini-blueprint-status-tag status-verified">Design Approved</span>
+            </div>
+            <h2 class="mini-blueprint-title">The Emerald Sovereign Ring</h2>
+            <p class="mini-blueprint-subtitle">Private Suite Consultation Design Records</p>
+            <div class="mini-blueprint-spec-list">
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Ring Setting Style</span>
+                <span class="mini-blueprint-val">Halo Pavé Cathedral</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Band Dimensions</span>
+                <span class="mini-blueprint-val">Size 16 — 3mm Width</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Metal Purity Grade</span>
+                <span class="mini-blueprint-val">18K Solid Yellow Gold</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Surface Finish</span>
+                <span class="mini-blueprint-val">High-Polish Mirror Buff</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="client-minimal-blueprint-card">
+          <div class="mini-blueprint-inner">
+            <div class="mini-blueprint-header-row">
+              <span class="mini-blueprint-index-id">GEMSTONE // MATRIX-7219</span>
+              <span class="mini-blueprint-status-tag status-locked">Stone Locked</span>
+            </div>
+            <h2 class="mini-blueprint-title">Colombian Emerald &amp; Diamond</h2>
+            <p class="mini-blueprint-subtitle">Certified Gemstone Curation Profile</p>
+            <div class="mini-blueprint-spec-list">
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Centre Stone</span>
+                <span class="mini-blueprint-val">2.1ct Colombian Emerald</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Stone Clarity Grade</span>
+                <span class="mini-blueprint-val">AAA — Eye Clean</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Accent Stones</span>
+                <span class="mini-blueprint-val">VS1 Diamond Pavé Halo</span>
+              </div>
+              <div class="mini-blueprint-spec-row">
+                <span class="mini-blueprint-key">Engraving Detail</span>
+                <span class="mini-blueprint-val">Hand-Engraved Inner Band</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="client-blueprint-action-summary-dock">
+        <div class="dock-meta-left">
+          <span>Master Artisan Authorisation Signature</span>
+          <h3>Authorised by Isabelle Laurent — Head Jewellery Artisan</h3>
+        </div>
+        <div class="dock-action-right">
+          <button type="button" class="client-blueprint-pill-btn" onclick="alert('Compiling your Jewellery Design Dossier for download...');window.print()">
+            Download Design PDF Dossier
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: ORDER STATUS -->
+    <section id="panel-order-status" class="dash-view-panel">
+      <div class="panel-header-editorial-block">
+        <div class="panel-header-meta-trail">
+          <span class="panel-status-beacon-dot beacon-baking-pulse"></span>
+          <span class="panel-micro-tag">Atelier Crafting Workshop</span>
+        </div>
+        <h1 class="panel-display-title">Production <em>Crafting Monitor</em></h1>
+        <p class="panel-descriptor">Track live crafting progress, stone-setting phases, and real-time completion countdowns for your bespoke commission.</p>
+      </div>
+      <div class="commissions-minimal-cards-grid">
+        <article class="minimal-commission-card">
+          <div class="mini-card-inner">
+            <div class="mini-card-header-row">
+              <span class="mini-order-id">TRACKING // RING-7219</span>
+              <span class="mini-status-tag status-baking">Workshop Bay 01</span>
+            </div>
+            <h2 class="mini-card-title">Gold Band Casting</h2>
+            <p class="mini-card-subtitle">Active Casting Phase</p>
+            <div class="mini-spec-list">
+              <div class="mini-spec-row">
+                <span class="mini-key">Furnace Temperature</span>
+                <span class="mini-val">1064°C Constant Hold</span>
+              </div>
+              <div class="mini-spec-row">
+                <span class="mini-key">Alloy Composition</span>
+                <span class="mini-val gold-shimmer-output">18K 75% Gold Ratio</span>
+              </div>
+              <div class="mini-spec-row">
+                <span class="mini-key">Estimated Completion</span>
+                <span class="mini-val text-countdown">00:24:12</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="minimal-commission-card">
+          <div class="mini-card-inner">
+            <div class="mini-card-header-row">
+              <span class="mini-order-id">TRACKING // GEM-7219</span>
+              <span class="mini-status-tag status-gilding">Setting Studio</span>
+            </div>
+            <h2 class="mini-card-title">Emerald &amp; Diamond Setting</h2>
+            <p class="mini-card-subtitle">Precision Stone-Setting Phase</p>
+            <div class="mini-spec-list">
+              <div class="mini-spec-row">
+                <span class="mini-key">Artisan Station</span>
+                <span class="mini-val">Private Chamber A</span>
+              </div>
+              <div class="mini-spec-row">
+                <span class="mini-key">Setting Method</span>
+                <span class="mini-val gold-shimmer-output">Micro-Pavé Hand Set</span>
+              </div>
+              <div class="mini-spec-row">
+                <span class="mini-key">Estimated Completion</span>
+                <span class="mini-val text-countdown">01:10:44</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PANEL 3: DESIGN SESSIONS -->
+    <section id="panel-taste-sessions" class="dash-view-panel">
+      <div class="panel-header-editorial-block">
+        <div class="panel-header-meta-trail">
+          <span class="panel-status-beacon-dot beacon-salon-client-pulse"></span>
+          <span class="panel-micro-tag">Private Consultation Schedule</span>
+        </div>
+        <h1 class="panel-display-title">My Private <em>Design Sessions</em></h1>
+        <p class="panel-descriptor">Review your reserved consultation appointments for gemstone selection walkthroughs and custom design briefings inside our private showroom suites.</p>
+      </div>
+      <div class="tastings-minimal-cards-grid">
+        <article class="minimal-tasting-card">
+          <div class="mini-tasting-inner">
+            <div class="mini-tasting-header-row">
+              <span class="mini-tasting-time"> Today // 02:30 PM</span>
+              <span class="mini-tasting-status-tag status-confirmed"><span class="mini-status-pulse"></span>Confirmed</span>
+            </div>
+            <h2 class="mini-tasting-title">Gemstone Selection Viewing</h2>
+            <p class="mini-tasting-subtitle">Showroom Suite A — 60-Minute Design Brief</p>
+            <div class="mini-tasting-spec-list">
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Gemstone Preview</span>
+                <span class="mini-tasting-val text-gold-shimmer">Colombian Emerald Parcel — 2ct+</span>
+              </div>
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Setting Review</span>
+                <span class="mini-tasting-val">Halo Pavé 3D Wax Model</span>
+              </div>
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Attending Artisans</span>
+                <span class="mini-tasting-val">Isabelle Laurent &amp; Aryan Dev</span>
+              </div>
+            </div>
+            <div class="mini-tasting-actions">
+              <button type="button" class="mini-tasting-btn-link" onclick="alert('Opening your gemstone preview catalogue...')">View Stone Catalogue</button>
+              <button type="button" class="mini-tasting-btn-pill" onclick="alert('Showroom Suite initialized. Welcome to Lumière Atelier.')">Enter Virtual Showroom</button>
+            </div>
+          </div>
+        </article>
+        <article class="minimal-tasting-card">
+          <div class="mini-tasting-inner">
+            <div class="mini-tasting-header-row">
+              <span class="mini-tasting-time"> Next Week // 11:00 AM</span>
+              <span class="mini-tasting-status-tag status-review"><span class="mini-status-pulse"></span>Pending Confirmation</span>
+            </div>
+            <h2 class="mini-tasting-title">Final Design Sign-Off</h2>
+            <p class="mini-tasting-subtitle">Showroom Suite B — 30-Minute Approval Review</p>
+            <div class="mini-tasting-spec-list">
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Polish Sample</span>
+                <span class="mini-tasting-val text-gold-shimmer">Mirror Finish &amp; Antique Finish</span>
+              </div>
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Engraving Proof</span>
+                <span class="mini-tasting-val">Digital Laser Preview Sheet</span>
+              </div>
+              <div class="mini-tasting-spec-row">
+                <span class="mini-tasting-key">Attending Artisans</span>
+                <span class="mini-tasting-val">Lumière Design Council</span>
+              </div>
+            </div>
+            <div class="mini-tasting-actions">
+              <button type="button" class="mini-tasting-btn-link" onclick="alert('Opening your design approval documents...')">View Design Proof</button>
+              <button type="button" class="mini-tasting-btn-pill" onclick="alert('Reschedule request sent. Our concierge will contact you shortly.')">Request Reschedule</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PANEL 4: ACCOUNT VAULT -->
+    <section id="panel-account-vault" class="dash-view-panel">
+      <div class="panel-header-editorial-block">
+        <div class="panel-header-meta-trail">
+          <span class="panel-status-beacon-dot beacon-account-vault-pulse"></span>
+          <span class="panel-micro-tag">Identity Protection Console</span>
+        </div>
+        <h1 class="panel-display-title">Client Account <em>Vault Credentials</em></h1>
+        <p class="panel-descriptor">Review your registered profile data and update your vault encryption credentials from this secure console.</p>
+      </div>
+      <div class="vault-asymmetrical-split-grid">
+        <div class="settings-sub-panel-chassis">
+          <div class="settings-card-inner">
+            <h2 class="settings-card-serif-title">Client Profile <em>Identity</em> </h2>
+            <p class="settings-card-descriptor-text">Your verified studio registration records, managed by our concierge team.</p>
+            <div class="client-profile-data-stack">
+              <div class="profile-data-row">
+                <span class="data-key-label">Client Name</span>
+                <strong class="data-value-output">Lady Eleanor Vance</strong>
+              </div>
+              <div class="profile-data-row">
+                <span class="data-key-label">Electronic Mail</span>
+                <strong class="data-value-output">eleanor@lumiereatelier.com</strong>
+              </div>
+              <div class="profile-data-row">
+                <span class="data-key-label">Secure Hotline</span>
+                <strong class="data-value-output">+91 7010792745</strong>
+              </div>
+              <div class="profile-data-row">
+                <span class="data-key-label">Membership Tier</span>
+                <strong class="data-value-output tier-gold-glow">Elite Gold Patron</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="settings-sub-panel-chassis">
+          <div class="settings-card-inner">
+            <h2 class="settings-card-serif-title">Security Key <em>Credentials</em> </h2>
+            <p class="settings-card-descriptor-text">Update your private vault passwords. Fields illuminate on active focus.</p>
+            <form class="settings-minimal-form-engine" onsubmit="event.preventDefault();alert('Vault encryption keys rotated successfully.')">
+              <div class="settings-input-envelope-field">
+                <label class="settings-editorial-label">Current Security Key</label>
+                <div class="settings-password-field-wrapper">
+                  <input type="password" id="client-current-pass" value="clientvip2026" class="settings-luxury-text-input" required autocomplete="current-password">
+                  <span class="settings-password-toggle-eye" onclick="toggleDashboardPasswordVisibility('client-current-pass',this)">🙈</span>
+                </div>
+              </div>
+              <div class="settings-input-envelope-field">
+                <label class="settings-editorial-label">New Secret Password</label>
+                <div class="settings-password-field-wrapper">
+                  <input type="password" id="client-new-pass" placeholder="••••••••" class="settings-luxury-text-input" required autocomplete="new-password">
+                  <span class="settings-password-toggle-eye" onclick="toggleDashboardPasswordVisibility('client-new-pass',this)">🙈</span>
+                </div>
+              </div>
+              <div class="settings-input-envelope-field">
+                <label class="settings-editorial-label">Verify Key Match</label>
+                <div class="settings-password-field-wrapper">
+                  <input type="password" id="client-confirm-pass" placeholder="••••••••" class="settings-luxury-text-input" required autocomplete="new-password">
+                  <span class="settings-password-toggle-eye" onclick="toggleDashboardPasswordVisibility('client-confirm-pass',this)">👁️</span>
+                </div>
+              </div>
+              <div class="settings-action-submit-hub">
+                <button type="submit" class="settings-submit-vogue-pill-btn">Rotate Vault Keys</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const breadcrumb=document.getElementById('breadcrumb-active-node');
+  const sidebar=document.querySelector('.dash-sidebar-chassis');
+
+  window.switchDashboardActivePanel=function(btn){
+    if(!btn||!breadcrumb)return;
+    if(btn.classList.contains('active-menu-item'))return;
+    document.querySelector('.sidebar-menu-item.active-menu-item').classList.remove('active-menu-item');
+    btn.classList.add('active-menu-item');
+    document.querySelector('.dash-view-panel.active-panel-view').classList.remove('active-panel-view');
+    const target=document.getElementById(btn.getAttribute('data-target'));
+    if(target)target.classList.add('active-panel-view');
+    breadcrumb.textContent=btn.querySelector('.menu-text-label').textContent;
+    if(sidebar&&sidebar.classList.contains('mobile-sidebar-open'))sidebar.classList.remove('mobile-sidebar-open');
+  };
+
+  window.toggleMobileSidebarChassis=function(){
+    if(sidebar){
+      const open=sidebar.classList.toggle('mobile-sidebar-open');
+      document.body.style.overflow=open?'hidden':'';
+    }
+  };
+
+  window.triggerPartnerLogoutSequence=function(){
+    if(confirm("Seal Active Registry Vault Session?\n\nAre you sure you want to securely close your active jewellery design console and log out?")){
+      window.location.href="login.html";
+    }
+  };
+
+  window.executeStudioWorkspaceRefresh=function(){
+    setTimeout(()=>window.location.reload(),300);
+  };
+
+  window.toggleDashboardPasswordVisibility=function(id,icon){
+    const el=document.getElementById(id);
+    if(el&&icon){
+      if(el.type==="password"){el.type="text";icon.textContent="👁️";}
+      else{el.type="password";icon.textContent="🙈";}
+    }
+  };
+
+  // Countdown timer
+  const clocks=document.querySelectorAll('.text-countdown');
+  if(clocks.length){
+    const timers=Array.from(clocks).map(el=>{
+      const parts=el.textContent.trim().split(':');
+      let s=0;
+      if(parts.length===3){s+=parseInt(parts[0])*3600;s+=parseInt(parts[1])*60;s+=parseInt(parts[2]);}
+      return{el,s};
+    });
+    const interval=setInterval(()=>{
+      let active=0;
+      timers.forEach(t=>{
+        if(t.s>0){
+          t.s--;active++;
+          const h=Math.floor(t.s/3600),m=Math.floor((t.s%3600)/60),sc=t.s%60;
+          t.el.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sc).padStart(2,'0')}`;
+        }else{
+          t.el.textContent="00:00:00 — Complete";
+          t.el.style.color="#22C55E";
+        }
+      });
+      if(!active)clearInterval(interval);
+    },1000);
+  }
+});
+</script>
+</body>
+</html>

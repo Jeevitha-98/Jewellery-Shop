@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STACKLY | Registry Deck Console</title>
+    
+    <!-- Google Typography Serif and Sans Font Engines Pack -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <!-- FIXED FIXED: Replaced unpkg with Cloudflare CDN for guaranteed global icon loading -->
+    <link rel="stylesheet" href="https://cloudflare.com" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+       SIDEBAR NAVIGATION COMPONENT (ICONS RESTORED & OPTIMIZED)
+       ========================================================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <h2>STACKLY</h2>
+            <p>REGISTRY DECK</p>
+        </div>
+        
+        <nav class="sidebar-menu">
+            <ul>
+                <li class="active">
+                    <a href="#" data-page="design-blueprints">
+                        <!-- FIXED: Restored luxury diamond icon node -->
+                        <i class="fa-solid fa-gem sidebar-icon"></i> 
+                        <span>Atelier Designs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="active-commissions">
+                        <!-- FIXED: Restored workflow gears icon node -->
+                        <i class="fa-solid fa-gears sidebar-icon"></i> 
+                        <span>Bench Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="salon-tastings">
+                        <!-- FIXED: Restored boutique calendar icon node -->
+                        <i class="fa-solid fa-calendar-check sidebar-icon"></i> 
+                        <span>Private Viewings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="revenue-metrics">
+                        <!-- FIXED: Restored secure wallet icon node -->
+                        <i class="fa-solid fa-wallet sidebar-icon"></i> 
+                        <span>Vault Earnings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-page="vault-settings">
+                        <!-- FIXED: Restored console configurations slider icon node -->
+                        <i class="fa-solid fa-sliders sidebar-icon"></i> 
+                        <span>Boutique Config</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" onclick="window.executePartnerPlatformLogout(event);">
+                <!-- FIXED: Restored sign-out power vector icon node -->
+                <i class="fa-solid fa-power-off sidebar-icon" style="color: #F87171;"></i> 
+                <span style="color: #F87171;">Exit Vault</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- ==========================================================================
+       MAIN INTERFACE STAGE GRAPHICS CORE CANVAS
+       ========================================================================== -->
+    <div class="main-container">
+        
+        <!-- DASHBOARD HEADER -->
+        <header class="header">
+            <!-- Mobile Menu Burger Icon Button -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Side Menu Drawer">
+                <!-- FIXED: Restored mobile navigation trigger lines node -->
+                <i class="fa-solid fa-bars header-icon"></i>
+            </button>
+            
+            <div class="header-right">
+                
+                <!-- Notification Tray Button -->
+                <div class="header-action-btn notification-wrapper" id="notificationBtn">
+                    <!-- FIXED: Restored notification bell alarm vector icon node -->
+                    <i class="fa-solid fa-bell header-icon"></i>
+                    <span class="badge">1</span>
+                    
+                    <!-- Notification Panel Content -->
+                    <div class="dropdown-panel dropdown-right" id="notificationDropdown">
+                        <div class="dropdown-header">Alerts Vault</div>
+                        <a href="#" class="dropdown-item">
+                            <!-- FIXED: Restored diagnostic information badge icon node -->
+                            <i class="fa-solid fa-circle-info dropdown-item-icon"></i>
+                            <div>
+                                <p>CAD File Ring #9402 Approved</p>
+                                <span class="time-stamp">2 mins ago</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Image Button -->
+                <div class="header-profile-btn" id="profileBtn">
+                    <img src="./Assests/CEO.webp" alt="Partner Avatar Profile" class="profile-avatar-img">
+                    
+                    <!-- Profile Menu Content Dropdown -->
+                    <div class="dropdown-panel dropdown-right" id="profileDropdown">
+                        <div class="dropdown-header">Partner Identity</div>
+                        
+                        <a href="#" class="dropdown-item"><i class="fa-solid fa-id-card dropdown-item-icon"></i> Account Profile</a>
+                        <!-- FIXED: Restored secure insurance policy tracking shield icon node -->
+                        <a href="#" class="dropdown-item"><i class="fa-solid fa-shield-halved dropdown-item-icon"></i> Insurance Policies</a>
+                        <hr class="dropdown-divider">
+                        <!-- FIXED: Restored lock vault terminal sign-out icon node -->
+                        <a href="#" class="dropdown-item logout-link" onclick="window.executePartnerPlatformLogout(event);"><i class="fa-solid fa-lock dropdown-item-icon"></i> Lock Vault</a>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- VIEWPANEL CORE CONTAINER -->
+        <main class="content-viewport" id="contentViewport">
+            
+            <!-- SECTION 1: ATELIER DESIGNS -->
+            <section class="page-section active-page" id="page-design-blueprints">
+                <h1 class="section-title">Atelier Designs</h1>
+                <p class="section-subtitle">Custom Jewelry Renders & CAD Blueprints</p>
+
+                <div class="card-grid">
+                    <div class="jewelry-card">
+                        <div class="card-img-placeholder"><i class='bx bx-gem'></i></div>
+                        <div class="card-body">
+                            <h4>Solitaire Oval Engagement Ring</h4>
+                            <p><strong>Metal:</strong> 18k Yellow Gold</p>
+                            <p><strong>Gem:</strong> 2.04ct VVS1 Diamond</p>
+                            <p style="margin-top: 12px;"><span class="badge-status pending">Awaiting CAD Approval</span></p>
+                        </div>
+                    </div>
+                    <div class="jewelry-card">
+                        <div class="card-img-placeholder"><i class='bx bx-crown'></i></div>
+                        <div class="card-body">
+                            <h4>Art Deco Emerald Pendant</h4>
+                            <p><strong>Metal:</strong> Platinum 950</p>
+                            <p><strong>Gem:</strong> Zambian Emerald Cut</p>
+                            <p style="margin-top: 12px;"><span class="badge-status completed">Ready for Casting</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: BENCH ORDERS -->
+            <section class="page-section" id="page-active-commissions">
+                <h1 class="section-title">Bench Orders</h1>
+                <p class="section-subtitle">Live Workshop Bench Crafting Metrics</p>
+
+                <div class="table-responsive">
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Client Initials</th>
+                                <th>Jewelry Classification</th>
+                                <th>Bench Phase</th>
+                                <th>Target Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#CM-9402</td>
+                                <td>E. Cavendish</td>
+                                <td>Pavé Diamond Eternity Band</td>
+                                <td><span class="badge-status progress">Gem Setting</span></td>
+                                <td>July 04, 2026</td>
+                            </tr>
+                            <tr>
+                                <td>#CM-8931</td>
+                                <td>M. Al-Thani</td>
+                                <td>Custom Sapphire Cufflinks</td>
+                                <td><span class="badge-status pending">Metal Casting</span></td>
+                                <td>July 12, 2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 3: PRIVATE VIEWINGS -->
+            <section class="page-section" id="page-salon-tastings">
+                <h1 class="section-title">Private Viewings</h1>
+                <p class="section-subtitle">Bespoke Showroom Appointments & Consultations</p>
+
+                <div class="table-responsive">
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Time Slot</th>
+                                <th>Guest / Partner</th>
+                                <th>Viewing Collection Focus</th>
+                                <th>Concierge Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>14:00 - 15:30</td>
+                                <td>Lady Sarah Jenkins</td>
+                                <td>High Jewelry Tiara Archive Selection</td>
+                                <td>Prefers Dom Pérignon Rose, security pre-cleared.</td>
+                            </tr>
+                            <tr>
+                                <td>17:00 - 18:00</td>
+                                <td>Bespoke Wedding Party</td>
+                                <td>Bridal Suite Loose Diamond Review</td>
+                                <td>Reviewing flawless d-color sample cuts.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION 4: VAULT EARNINGS -->
+            <section class="page-section" id="page-revenue-metrics">
+                <h1 class="section-title">Vault Earnings</h1>
+                <p class="section-subtitle">Store Commissions & Cleared Statements</p>
+
+                <div class="card-grid">
+                    <div class="jewelry-card metric-card">
+                        <p class="metric-label">MONTHLY COMMISSIONS</p>
+                        <h2 class="metric-value">$42,850.00</h2>
+                        <p class="metric-trend positive"><i class='bx bx-trending-up'></i> +14.2% vs Last Month</p>
+                    </div>
+                    <div class="jewelry-card metric-card">
+                        <p class="metric-label">TOTAL VOLUME CLEARED</p>
+                        <h2 class="metric-value-white">31 Pieces</h2>
+                        <p class="metric-subtext">Average Ticket: $12,500</p>
+                    </div>
+                </div>
+
+</section>
+
+<style>
+
+    /* ==========================================================================
+   FONT AWESOME VECTOR ICON ELEMENT ALIGNMENT RULES
+   ========================================================================== */
+
+/* 1. Sidebar Nav Links Vectors Layout Padding */
+.sidebar-icon {
+    font-size: 1rem !important;
+    width: 20px !important;
+    height: auto !important;
+    text-align: center !important;
+    margin-right: 0.75rem !important; /* Elegant breathing separation gap before label text strings */
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease !important;
+}
+
+.sidebar-menu ul li a:hover .sidebar-icon,
+.sidebar-menu ul li.active a .sidebar-icon {
+    transform: scale(1.05); /* Micro lens pop magnification feedback loop on menu hovers */
+}
+
+/* 2. Top Header Utility Buttons Vectors Layout Parameters */
+.header-icon {
+    font-size: 1.15rem !important;
+    color: var(--theme-white, #FAFAF7) !important;
+    transition: color 0.3s ease !important;
+}
+
+/* ==========================================================================
+   STACKLY INTERFACE — PROFILE AVATAR CONTAINER LAYOUT CONTROLS
+   ========================================================================== */
+
+/* 1. Fixed Header Layout Bar Alignment Track */
+.header {
+    position: fixed !important;
+    top: 0;
+    right: 0;
+    width: calc(100% - 240px) !important; 
+    height: 70px !important;
+    background: #051410 !important;
+    border-bottom: 1px solid rgba(223, 183, 108, 0.12) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important; 
+    padding: 0 2rem !important;
+    z-index: 1000 !important;
+}
+
+.header-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    height: 100% !important;
+}
+
+/* 2. Parent Click Container: FIXED: overflow changed to visible so dropdown stands out */
+.header-profile-btn {
+    position: relative !important;
+    width: 40px !important;       
+    height: 40px !important;      
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important; /* CRITICAL FIXED: Allows dropdown menus to spill out cleanly */
+}
+
+/* 3. Isolated Cropped Picture Frame: Locks and crops the oversized portrait file safely */
+.profile-avatar-cropped-frame {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Circular outline wrapper look */
+    border: 1px solid rgba(223, 183, 108, 0.2) !important; /* Gold perimeter wire trace trim */
+    overflow: hidden !important;   /* Locks profile pixels inside the round container frame */
+    display: block !important;
+}
+
+.profile-avatar-img {
+    width: 100% !important;        
+    height: 100% !important;       
+    object-fit: cover !important;  /* Stops your portrait from squishing or altering dimensions */
+    object-position: top center !important; 
+    display: block !important;
+}
+
+/* 4. FLOATING MENU ACCORDION POSITION MATRIX FIXES */
+.dropdown-panel.dropdown-right {
+    position: absolute !important;
+    top: 100% !important; /* Snaps the drop box directly beneath your profile button avatar */
+    right: 0 !important;   /* Aligns panel flush to the right margin wall */
+    width: 240px !important;
+    background: rgba(9, 38, 30, 0.98) !important; /* Translucent luxury emerald alpha sheet */
+    border: 1px solid rgba(223, 183, 108, 0.2) !important;
+    border-radius: 4px !important;
+    padding: 1rem !important;
+    margin-top: 10px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 1010 !important;
+    /* Ensure your separate JavaScript file toggles display from "none" to "block" on click events */
+}
+
+/* 5. Content Layout Stage Workspace Grid Clearance */
+.main-container {
+    margin-left: 240px !important; 
+    width: calc(100% - 240px) !important;
+    min-height: calc(100vh - 70px);
+    margin-top: 70px !important;
+    padding: 2.5rem !important;
+    background-color: #051410 !important;
+}
+
+
+.header-action-btn:hover .header-icon,
+.header-profile-btn:hover .header-icon {
+    color: var(--theme-gold, #DFB76C) !important; /* Highlights icons to gold variables on mouse hovers */
+}
+
+/* 3. Floating Dropdown Menu Inside Item Icons */
+.dropdown-item-icon {
+    font-size: 0.85rem !important;
+    width: 16px !important;
+    text-align: center !important;
+    color: var(--theme-text-muted, #8FA39E) !important;
+    margin-right: 0.85rem !important;
+    transition: color 0.3s ease, transform 0.3s ease !important;
+}
+
+.dropdown-item:hover .dropdown-item-icon {
+    color: var(--theme-gold, #DFB76C) !important;
+    transform: translate3d(2px, 0, 0); /* Subtle right-drift arrow motion inside menu rows */
+}
+
+/* ==========================================================================
+   STACKLY MINIMALIST GOLD DOT BADGE LAYOUT LOCKS
+   ========================================================================== */
+.header-action-btn.notification-wrapper {
+    position: relative !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/* Base formatting for the white Font Awesome bell icon */
+.header-icon.fa-bell {
+    font-size: 1.3rem !important;
+    color: #FAFAF7 !important;
+    display: inline-block !important;
+    transition: color 0.3s ease;
+}
+
+/* MATCHES IMAGE: Precision floating gold dot notification indicator bubble */
+.notification-wrapper .badge {
+    position: absolute !important;
+    top: 6px !important;            /* Positions dot exactly above the right curve of the bell */
+    right: 6px !important;
+    background-color: #DFB76C !important; /* Pure Champagne Gold Variable Tint */
+    width: 7px !important;          /* FIXED: Tiny minimalist sizing footprint */
+    height: 7px !important;
+    border-radius: 50% !important;  /* Perfect sharp circle lock */
+    display: block !important;
+    font-size: 0 !important;        /* Strips out text/number string parameters */
+    color: transparent !important;
+    text-indent: -9999px !important;
+    border: none !important;
+    box-shadow: 0 0 6px rgba(223, 183, 108, 0.4) !important; /* Elegant subtle glow ring */
+    pointer-events: none !important;
+    z-index: 5;
+}
+
+/* Hover glow effect transitions */
+.header-action-btn:hover .header-icon.fa-bell {
+    color: #DFB76C !important;
+}
+
+
+
+    :root {
+    --bg-dark-teal: #051411;
+    --sidebar-teal: #041d18;
+    --luxury-gold: #ffcf87;
+    --text-muted: #6e8c85;
+    --text-light: #ffffff;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark-teal);
+    color: var(--text-light);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* PAGE DISPLAY STATE HANDLER */
+.page-section {
+    display: none;
+}
+.page-section.active-page {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-light);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+.section-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* SIDEBAR LAYOUT CONFIGURATION */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-teal);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    transition: transform var(--transition-speed);
+}
+.sidebar-brand {
+    padding: 30px 24px;
+    letter-spacing: 2px;
+}
+.sidebar-brand h2 {
+    color: var(--text-light);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+.sidebar-brand p {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    margin-top: 4px;
+}
+.sidebar-menu {
+    flex-grow: 1;
+    margin-top: 20px;
+}
+.sidebar-menu ul {
+    list-style: none;
+}
+.sidebar-menu li a, .sidebar-footer a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all var(--transition-speed);
+}
+.sidebar-menu li a i {
+    font-size: 1.3rem;
+    margin-right: 15px;
+    display: inline-block;
+    width: 20px;
+}
+.sidebar-footer a i {
+    font-size: 1.3rem;
+    margin-right: 15px;
+}
+.sidebar-menu li.active a {
+    background-color: var(--luxury-gold);
+    color: var(--bg-dark-teal);
+    border-radius: 4px;
+    margin: 0 15px;
+}
+.sidebar-menu li:not(.active) a:hover, .sidebar-footer a:hover {
+    color: var(--luxury-gold);
+    padding-left: 30px;
+}
+.sidebar-footer {
+    border-top: 1px solid rgba(110, 140, 133, 0.1);
+    padding: 10px 0;
+}
+
+/* MAIN PANEL CONTAINER SETUP */
+.main-container {
+    flex: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: margin-left var(--transition-speed);
+}
+
+/* HEADER BASE LAYOUT & FIXED ICON FIXES */
+.header {
+    height: 70px;
+    background-color: var(--bg-dark-teal);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    position: relative;
+    z-index: 100;
+}
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--luxury-gold);
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
+
+/* Fixes for Hidden Boxicons in the Header Bar */
+.header-action-btn {
+    position: relative;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background var(--transition-speed);
+}
+.header-action-btn:hover {
+    background-color: rgba(255, 207, 135, 0.08);
+}
+.header-icon {
+    font-size: 1.8rem !important; /* Forces layout size injection */
+    color: var(--luxury-gold) !important;
+    display: inline-block !important;
+    line-height: 1 !important;
+}
+
+.notification-wrapper .badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: var(--luxury-gold);
+    color: var(--bg-dark-teal);
+    font-size: 0.65rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--bg-dark-teal);
+}
+
+/* CONTEXTUAL DROPDOWN CONSOLE BLOCKS */
+.dropdown-panel {
+    position: absolute;
+    top: 56px;
+    background-color: var(--sidebar-teal);
+    border: 1px solid rgba(255, 207, 135, 0.2);
+    border-radius: 6px;
+    width: 280px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 250;
+}
+.dropdown-panel.show-dropdown {
+    display: flex;
+    animation: dropdownSlideUp 0.25s ease-out;
+}
+@keyframes dropdownSlideUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.dropdown-right {
+    right: 0;
+}
+.dropdown-header {
+    padding: 14px 18px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--luxury-gold);
+    background-color: rgba(5, 20, 17, 0.5);
+    border-bottom: 1px solid rgba(255, 207, 135, 0.1);
+}
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background var(--transition-speed);
+}
+.dropdown-item:hover {
+    background-color: rgba(5, 20, 17, 0.6);
+    color: var(--luxury-gold);
+}
+.dropdown-item i {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+}
+.dropdown-item:hover i {
+    color: var(--luxury-gold);
+}
+.dropdown-divider {
+    border: 0;
+    height: 1px;
+    background-color: rgba(110, 140, 133, 0.15);
+    margin: 4px 0;
+}
+.logout-link:hover { color: #ff7676; }
+.logout-link:hover i { color: #ff7676; }
+.time-stamp {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+/* CARDS AND MAIN DISPLAY VIEWPORTS */
+.content-viewport {
+    padding: 40px;
+    flex: 1;
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+.jewelry-card {
+    background-color: var(--sidebar-teal);
+    border: 1px solid rgba(255, 207, 135, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform var(--transition-speed), border-color var(--transition-speed);
+}
+.jewelry-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--luxury-gold);
+}
+.card-img-placeholder {
+    height: 180px;
+    background-color: rgba(5, 20, 17, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 207, 135, 0.05);
+}
+.card-img-placeholder i {
+    font-size: 2.8rem;
+    color: rgba(255, 207, 135, 0.25);
+}
+.card-body { padding: 20px; }
+.card-body h4 { color: var(--luxury-gold); font-weight: 500; margin-bottom: 8px; font-size: 1rem; }
+.card-body p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+
+/* DATA MATRIX TABLES */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    background-color: var(--sidebar-teal);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 207, 135, 0.1);
+}
+.luxury-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+.luxury-table th {
+    padding: 16px 20px;
+    color: var(--luxury-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 207, 135, 0.15);
+}
+.luxury-table td {
+    padding: 16px 20px;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(110, 140, 133, 0.1);
+}
+.luxury-table tr:hover td { background-color: rgba(5, 20, 17, 0.4); }
+
+/* BADGES DEFINITIONS */
+.badge-status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.badge-status.pending { background: rgba(255, 207, 135, 0.15); color: var(--luxury-gold); }
+.badge-status.progress { background: rgba(0, 123, 255, 0.15); color: #70b5ff; }
+.badge-status.completed { background: rgba(40, 167, 69, 0.15); color: #63c979; }
+
+/* EARNINGS METRIC PANEL STYLES */
+.metric-card { padding: 25px; text-align: center; }
+.metric-label { color: var(--text-muted); font-size: 0.75rem; letter-spacing: 1px; }
+.metric-value { color: var(--luxury-gold); font-size: 2.2rem; margin: 12px 0; font-weight: 500; }
+.metric-value-white { color: var(--text-light); font-size: 2.2rem; margin: 12px 0; font-weight: 500; }
+.metric-trend.positive { color: #63c979; font-size: 0.8rem; }
+.metric-subtext { color: var(--text-muted); font-size: 0.8rem; }
+
+/* CONFIG PANEL BLOCKS */
+.settings-box { padding: 30px; background-color: var(--sidebar-teal); border-radius: 6px; border: 1px solid rgba(255, 207, 135, 0.1); }
+.settings-box h3 { color: var(--luxury-gold); font-weight: 400; margin-bottom: 12px; }
+.settings-box p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 25px; max-width: 600px; line-height: 1.5; }
+.gold-btn { background: none; border: 1px solid var(--luxury-gold); color: var(--luxury-gold); padding: 12px 24px; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 0.75rem; letter-spacing: 1px; transition: all var(--transition-speed); }
+.gold-btn:hover { background-color: var(--luxury-gold); color: var(--bg-dark-teal); }
+
+/* SYSTEM RESPONSIVE SCALING */
+@media (max-width: 992px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main-container { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .header { padding: 0 24px; background-color: var(--sidebar-teal); border-bottom: 1px solid rgba(255, 207, 135, 0.05); }
+    .content-viewport { padding: 24px; }
+}
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.getElementById("sidebar");
+    const menuToggle = document.getElementById("menuToggle");
+    const menuItems = document.querySelectorAll(".sidebar-menu li");
+    const sections = document.querySelectorAll(".page-section");
+
+    // Header Trigger Components
+    const profileBtn = document.getElementById("profileBtn");
+    const profileDropdown = document.getElementById("profileDropdown");
+    const notificationBtn = document.getElementById("notificationBtn");
+    const notificationDropdown = document.getElementById("notificationDropdown");
+
+    // Toggle Profile Panel View
+    profileBtn.addEventListener("click", (e) => {
+        notificationDropdown.classList.remove("show-dropdown"); // Close competing menus
+        profileDropdown.classList.toggle("show-dropdown");
+        e.stopPropagation();
+    });
+
+    // Toggle Notification Tray View
+    notificationBtn.addEventListener("click", (e) => {
+        profileDropdown.classList.remove("show-dropdown"); // Close competing menus
+        notificationDropdown.classList.toggle("show-dropdown");
+        e.stopPropagation();
+    });
+
+    // Toggle Responsive Mobile Drawer Panel
+    menuToggle.addEventListener("click", (e) => {
+        sidebar.classList.toggle("open");
+        e.stopPropagation();
+    });
+
+    // Universal Document Listener to collapse menus cleanly upon outer tap
+    document.addEventListener("click", (e) => {
+        if (!sidebar.contains(e.target)) {
+            sidebar.classList.remove("open");
+        }
+        if (!profileBtn.contains(e.target)) {
+            profileDropdown.classList.remove("show-dropdown");
+        }
+        if (!notificationBtn.contains(e.target)) {
+            notificationDropdown.classList.remove("show-dropdown");
+        }
+    });
+
+    // Handle Active Content Viewport Tab Switching Logic
+    menuItems.forEach(item => {
+        item.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            menuItems.forEach(i => i.classList.remove("active"));
+            this.classList.add("active");
+            
+            const targetPageKey = this.querySelector('a').getAttribute('data-page');
+            
+            sections.forEach(section => {
+                section.classList.remove('active-page');
+                if(section.getAttribute('id') === `page-${targetPageKey}`) {
+                    section.classList.add('active-page');
+                }
+            });
+            
+            // Instantly contract mobile navigation panel drawer layout 
+            if(window.innerWidth <= 992) {
+                sidebar.classList.remove("open");
+            }
+        });
+    });
+});
+
+</script>
