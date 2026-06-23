@@ -110,7 +110,7 @@
             <a href="collections-rings.html" class="nav-link active">Bespoke Rings</a>
             <a href="high-jewellery.html" class="nav-link">High Jewellery</a>
             <a href="ouratelier.html" class="nav-link">Our Atelier</a>
-            <a href="404.html" class="nav-link">Contact Us</a>
+            <a href="contact.html" class="nav-link">Contact Us</a>
         </nav>
 
         <!-- Global Action Utilities Panel -->
@@ -223,8 +223,8 @@
             <a href="index.html" class="drawer-link">Home</a>
             <a href="collections-rings.html" class="drawer-link">Bespoke Rings</a>
             <a href="high-jewellery.html" class="drawer-link">High Jewellery</a>
-            <a href="404.html" class="drawer-link">Our Atelier</a>
-            <a href="404.html" class="drawer-link">Contact Us</a>
+            <a href="ouratelier.html" class="drawer-link">Our Atelier</a>
+            <a href="contact.html" class="drawer-link">Contact Us</a>
         </nav>
 
         <!-- Professional Stacked Mobile Authentication Buttons with Spacing -->
@@ -370,6 +370,7 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
 }
 
 
+    
     /* ==========================================================================
        4. GLOBAL DROPDOWN INTERFACE CONTROLLERS & OUTSIDE CLICK HANDLERS
        ========================================================================== */
@@ -405,46 +406,52 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
     /* ==========================================================================
        5. REAL-TIME SEARCH FILTER SYSTEM
        ========================================================================== */
-    const catalogData = [
-        { id: 1, name: "Solitaire Diamond Ring", category: "Bespoke Rings", price: 2450 },
-        { id: 2, name: "Helios Archway Pendant", category: "High Jewellery", price: 1850 },
-        { id: 3, name: "Marquise Cut Emerald Studs", category: "Collections", price: 3100 }
-    ];
+ /* ==========================================================================
+   SEARCH MENU NAVIGATION
+   ========================================================================== */
 
-    if (searchInput && searchPanel && searchContent) {
-        searchInput.addEventListener("input", (e) => {
-            const queryText = e.target.value.trim().toLowerCase();
-            
-            if (queryText.length === 0) {
-                searchPanel.classList.remove("is-active");
-                return;
-            }
+const menuPages = {
+    "home": "index.html",
 
-            const matches = catalogData.filter(item => 
-                item.name.toLowerCase().includes(queryText) || 
-                item.category.toLowerCase().includes(queryText)
+    "ring": "collections-rings.html",
+    "rings": "collections-rings.html",
+    "bespoke": "collections-rings.html",
+    "bespoke rings": "collections-rings.html",
+
+    "high": "high-jewellery.html",
+    "jewellery": "high-jewellery.html",
+    "high jewellery": "high-jewellery.html",
+
+    "atelier": "ouratelier.html",
+    "our atelier": "ouratelier.html",
+
+    "contact": "contact.html",
+    "contact us": "contact.html"
+};
+
+if (searchInput) {
+
+    searchInput.addEventListener("keydown", function (e) {
+
+        if (e.key !== "Enter") return;
+
+        const query = this.value.trim().toLowerCase();
+
+        if (menuPages[query]) {
+
+            window.location.href = menuPages[query];
+
+        } else {
+
+            alert(
+                "Try: Home, Bespoke Rings, High Jewellery, Our Atelier, Contact Us"
             );
 
-            closeAllActiveDropdowns();
-            searchPanel.classList.add("is-active");
+        }
 
-            if (matches.length === 0) {
-                searchContent.innerHTML = `<div class="search-no-match-message">No creations match "${e.target.value}"</div>`;
-                return;
-            }
+    });
 
-            searchContent.innerHTML = matches.map(match => `
-                <a href="#" class="search-result-item-link" style="display: flex; justify-content: space-between; padding: 0.6rem; text-decoration: none; color: white;">
-                    <div>
-                        <div style="font-size: 0.8rem; font-family: serif;">${match.name}</div>
-                        <div style="font-size: 0.6rem; color: #8FA39E; text-transform: uppercase;">${match.category}</div>
-                    </div>
-                    <div style="font-size: 0.72rem; color: #DFB76C;">$${match.price.toLocaleString()}</div>
-                </a>
-            `).join('');
-        });
-    }
-
+}
     /* ==========================================================================
        6. DESKTOP ACCENT SCROLL OBSERVER
        ========================================================================== */
@@ -456,6 +463,7 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
         }
     });
 });
+
 
 </script>
 
@@ -491,10 +499,10 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
 
                 <!-- High-Contrast Action Controls -->
                 <div class="rings-hero-button-group">
-                    <a href="#rings-catalog-view" class="rings-hero-primary-btn" title="Browse Custom Diamond Rings Catalog">
+                    <a href="collections-rings.html" class="rings-hero-primary-btn" title="Browse Custom Diamond Rings Catalog">
                         <span>Explore Collection</span>
                     </a>
-                    <a href="404.html" class="rings-hero-secondary-btn" title="Book a private custom ring consultation">
+                    <a href="contact.html" class="rings-hero-secondary-btn" title="Book a private custom ring consultation">
                         <span>Bespoke Design Consultation</span>
                         <svg class="cta-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
@@ -803,7 +811,7 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
             <div class="item-acquisition-row">
                 <span class="item-display-price">$2,450.00</span>
                 <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="404.html" 
+                <a href="high-jewellery.html" 
                    class="magazine-acquire-btn" 
                    onclick="window.executeAddToBag(this, 'Aura Round Brilliant Band', 2450.00)">Explore</a>
             </div>
@@ -823,7 +831,7 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
             <div class="item-acquisition-row">
                 <span class="item-display-price">$1,850.00</span>
                 <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="404.html" 
+                <a href="collections-rings.html" 
                    class="magazine-acquire-btn" 
                    onclick="window.executeAddToBag(this, 'Helios Oval Solitaire', 1850.00)">Explore</a>
             </div>
@@ -843,7 +851,7 @@ if (drawerCloseTrigger && menuTrigger && mobileDrawer) {
             <div class="item-acquisition-row">
                 <span class="item-display-price">$3,100.00</span>
                 <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="404.html" 
+                <a href="index.html" 
                    class="magazine-acquire-btn" 
                    onclick="window.executeAddToBag(this, 'Marquise Emerald Cluster', 3100.00)">Explore</a>
             </div>
@@ -2618,7 +2626,7 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
                     <h3 class="portfolio-item-title">High Jewellery Necklaces</h3>
                     <p class="portfolio-seo-desc">Explore our signature matching diamond pendants, emerald neckwear collages, and raw gold traces designed to align with your ring's reflection index.</p>
                     <div class="portfolio-action-row">
-                        <a href="404.html" class="portfolio-discover-link" title="Explore High Jewellery Necklaces Catalog">
+                        <a href="collections-rings.html" class="portfolio-discover-link" title="Explore High Jewellery Necklaces Catalog">
                             <span>Explore Gallery</span>
                             <svg class="nav-arrow-vector" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
@@ -2811,7 +2819,7 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
 
       <!-- High Contrast Liquid Metal Action Button Wrapper -->
       <div class="cta-action-group">
-        <a href="javascript:void(0)" class="liquid-neon-gold-btn" onclick="window.triggerSchemeEnquiry('Sovereign Rate Lock Banner')" title="Secure current gold rate lock valuation now">
+        <a href="contact.html" class="liquid-neon-gold-btn" onclick="window.triggerSchemeEnquiry('Sovereign Rate Lock Banner')" title="Secure current gold rate lock valuation now">
           <span class="btn-text-layer">Lock Rate Now</span>
           <span class="btn-icon-layer">
             <svg class="btn-arrow-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -3040,12 +3048,16 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
                     <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on X / Twitter">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
-                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on LinkedIn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </a>
-                    <a href="404.html" class="social-glow-circle-link" aria-label="Follow Stackly on GitHub">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                    </a>
+                            <a href="404.html" class="social-glow-circle-link" aria-label="Follow Lumière on Facebook" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M22.675 0h-21.35C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.326 24H12.82v-9.294H9.692V11.08h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24h-1.918c-1.504 0-1.795.715-1.795 1.763v2.31h3.587l-.467 3.626h-3.12V24h6.114C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.407 0 22.675 0z"/>
+    </svg>
+</a>
+<a href="404.html" class="social-glow-circle-link" aria-label="Follow Lumière on Instagram" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5zm0 1.8h8.5c2.182 0 3.95 1.768 3.95 3.95v8.5c0 2.182-1.768 3.95-3.95 3.95h-8.5c-2.182 0-3.95-1.768-3.95-3.95v-8.5c0-2.182 1.768-3.95 3.95-3.95zm9.15 1.35a1.05 1.05 0 100 2.1 1.05 1.05 0 000-2.1zm-4.9 1.3a5.55 5.55 0 100 11.1 5.55 5.55 0 000-11.1zm0 1.8a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5z"/>
+    </svg>
+</a>
                 </div>
             </div>
 
@@ -3053,10 +3065,10 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
             <div class="footer-links-column">
                 <h3 class="footer-group-title">The Collections</h3>
                 <ul class="footer-links-stack">
-                    <li><a href="collections.html#rings" class="footer-nav-hover-link">Bespoke Diamond Rings</a></li>
-                    <li><a href="collections.html#necklaces" class="footer-nav-hover-link">High Jewellery Necklaces</a></li>
-                    <li><a href="collections.html#bangles" class="footer-nav-hover-link">Stunning Gold Bangles</a></li>
-                    <li><a href="collections.html#earrings" class="footer-nav-hover-link">Fine Cluster Earrings</a></li>
+                    <li><a href="collections-rings.html" class="footer-nav-hover-link">Bespoke Diamond Rings</a></li>
+                    <li><a href="high-jewellery.html" class="footer-nav-hover-link">High Jewellery Necklaces</a></li>
+                    <li><a href="index.html" class="footer-nav-hover-link">Stunning Gold Bangles</a></li>
+                    <li><a href="index.html" class="footer-nav-hover-link">Fine Cluster Earrings</a></li>
                 </ul>
             </div>
 
@@ -3065,9 +3077,9 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
                 <h3 class="footer-group-title">Elite Services</h3>
                 <ul class="footer-links-stack">
                     <li><a href="index.html#investment-schemes-view" class="footer-nav-hover-link">Gold Savings Schemes</a></li>
-                    <li><a href="404.html" class="footer-nav-hover-link">Sovereign Rate Booking</a></li>
-                    <li><a href="404.html" class="footer-nav-hover-link">Bespoke Consultations</a></li>
-                    <li><a href="404.html" class="footer-nav-hover-link">Insured Vault Valuations</a></li>
+                    <li><a href="signup.html" class="footer-nav-hover-link">Sovereign Rate Booking</a></li>
+                    <li><a href="contact.html" class="footer-nav-hover-link">Bespoke Consultations</a></li>
+                    <li><a href="signup.html" class="footer-nav-hover-link">Insured Vault Valuations</a></li>
                 </ul>
             </div>
 
@@ -3098,9 +3110,9 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
         <div class="footer-baseline-strip">
             <p class="footer-copyright-text">&copy; 2026 STACKLY Fine Jewellery. All rights reserved.</p>
             <div class="footer-legal-inline-menu">
-                <a href="javascript:void(0)" class="footer-nav-hover-link">Privacy Policy</a>
-                <a href="javascript:void(0)" class="footer-nav-hover-link">Terms of Service</a>
-                <a href="javascript:void(0)" class="footer-nav-hover-link">Cookie Policy</a>
+                <a href="404.html" class="footer-nav-hover-link">Privacy Policy</a>
+                <a href="404.html" class="footer-nav-hover-link">Terms of Service</a>
+                <a href="404.html" class="footer-nav-hover-link">Cookie Policy</a>
             </div>
         </div>
 
