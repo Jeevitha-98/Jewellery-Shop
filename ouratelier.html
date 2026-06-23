@@ -97,7 +97,7 @@
             <div class="logo-interaction-group">
                 <a href="javascript:void(0);" onclick="window.location.reload();" class="brand-logo-wrapper" id="logo-refresh-link" title="Click to Refresh Page">
                     <div class="logo-slot-render">
-                        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
+                        <img src="./Assests/stackly-logo-final (1).webp" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
                     </div>
                 </a>
             </div>
@@ -205,18 +205,7 @@
             </button>
         </div>
 
-        <!-- Professional Capsule Mobile Search Bar Wrapper -->
-        <div class="mobile-search-wrapper">
-            <div class="mobile-search-inner-box">
-                <input type="text" class="mobile-search-input" placeholder="Search our creations...">
-                <button class="mobile-search-submit-btn" aria-label="Search">
-                    <svg class="mobile-search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
+       
         
         <!-- Mobile Navigation Menu Links -->
         <nav class="mobile-drawer-links">
@@ -1811,6 +1800,8 @@ if (searchInput) {
 </style>
 
 <script>
+
+    
     document.addEventListener("DOMContentLoaded", () => {
     
     const slotsCounterNode = document.getElementById("live-slots-counter");
@@ -1840,6 +1831,15 @@ if (searchInput) {
         setInterval(runLiveCounterSimulationClock, 25000);
     }
 });
+
+window.executeVaultBookingFormSubmit = function(event) {
+    event.preventDefault();
+
+    alert("Thank you for your submission. Our team will reach you shortly.");
+
+    // Clear all form fields
+    event.target.reset();
+};
 </script>
 
 <section class="bright-cta-banner" aria-label="Exclusive Acquisition Privilege">

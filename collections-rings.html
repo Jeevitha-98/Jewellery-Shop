@@ -97,7 +97,7 @@
             <div class="logo-interaction-group">
                 <a href="javascript:void(0);" onclick="window.location.reload();" class="brand-logo-wrapper" id="logo-refresh-link" title="Click to Refresh Page">
                     <div class="logo-slot-render">
-                        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
+                        <img src="./Assests/stackly-logo-final (1).webp" alt="STACKLY Fine Jewellery Logo" class="brand-logo-image">
                     </div>
                 </a>
             </div>
@@ -205,18 +205,7 @@
             </button>
         </div>
 
-        <!-- Professional Capsule Mobile Search Bar Wrapper -->
-        <div class="mobile-search-wrapper">
-            <div class="mobile-search-inner-box">
-                <input type="text" class="mobile-search-input" placeholder="Search our creations...">
-                <button class="mobile-search-submit-btn" aria-label="Search">
-                    <svg class="mobile-search-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
+       
         
         <!-- Mobile Navigation Menu Links -->
         <nav class="mobile-drawer-links">
@@ -811,10 +800,7 @@ if (searchInput) {
             <div class="item-acquisition-row">
                 <span class="item-display-price">$2,450.00</span>
                 <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="high-jewellery.html" 
-                   class="magazine-acquire-btn" 
-                   onclick="window.executeAddToBag(this, 'Aura Round Brilliant Band', 2450.00)">Explore</a>
-            </div>
+             
         </div>
     </article>
 
@@ -831,10 +817,7 @@ if (searchInput) {
             <div class="item-acquisition-row">
                 <span class="item-display-price">$1,850.00</span>
                 <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="collections-rings.html" 
-                   class="magazine-acquire-btn" 
-                   onclick="window.executeAddToBag(this, 'Helios Oval Solitaire', 1850.00)">Explore</a>
-            </div>
+               
         </div>
     </article>
 
@@ -850,11 +833,7 @@ if (searchInput) {
             <p class="item-display-desc">A deep architectural emerald cut stone centered between clean stepped baguette-cut diamonds in raw, solid platinum.</p>
             <div class="item-acquisition-row">
                 <span class="item-display-price">$3,100.00</span>
-                <!-- 🛒 WIRED NATIVE BUTTON: Pushes item to storage bag array loop tracker functions -->
-                <a href="index.html" 
-                   class="magazine-acquire-btn" 
-                   onclick="window.executeAddToBag(this, 'Marquise Emerald Cluster', 3100.00)">Explore</a>
-            </div>
+              
         </div>
     </article>
 
@@ -1475,7 +1454,7 @@ window.addConfiguredRingToBag = function() {
   // Push object data safely using pre-existing core global array state synchronizer loops functions
   if (typeof window.addToCart === 'function') {
     window.addToCart(customConfiguredProductPayload);
-    alert(`Your Custom ${finalCaratVal} Ct Solitaire Creation has been successfully added to your Selection Bag.`);
+    alert(`Your Custom ${finalCaratVal} Ct Solitaire Creation has been successfully added. Our team will connect with you shortly.`);
   } else {
     // Fallback script inline array mapping commit if window wrappers load asynchronously
     let currentLocalBag = JSON.parse(localStorage.getItem('stackly_cart')) || [];
@@ -1819,9 +1798,10 @@ window.addConfiguredRingToBag = function() {
             <div class="showcase-action-row">
                 <span class="showcase-item-price">$950.00</span>
                 <!-- FIXED CART ONCLICK INLINE INTERCEPT -->
-                <button class="showcase-add-cart-btn" onclick="window.executeAddToBag(this, 'Sovereign Classic Gold Band', 950.00)">
-                    <span>Acquire Piece</span>
-                </button>
+             <button class="showcase-add-cart-btn"
+        onclick="window.location.href='contact.html'">
+    <span>Acquire Piece</span>
+</button>
             </div>
         </div>
     </article>
@@ -1842,9 +1822,10 @@ window.addConfiguredRingToBag = function() {
             <p class="showcase-seo-desc">A magnificent GIA certified 1.50 carat VVS1 round brilliant diamond crown set inside flawless micro-pavé structural rails.</p>
             <div class="showcase-action-row">
                 <span class="showcase-item-price">$2,950.00</span>
-                <button class="showcase-add-cart-btn" onclick="window.executeAddToBag(this, 'Eternal Flame Solitaire Ring', 2950.00)">
-                    <span>Acquire Piece</span>
-                </button>
+               <button class="showcase-add-cart-btn"
+        onclick="window.location.href='contact.html'">
+    <span>Acquire Piece</span>
+</button>
             </div>
         </div>
     </article>
@@ -1865,9 +1846,10 @@ window.addConfiguredRingToBag = function() {
             <p class="showcase-seo-desc">Hand-sculpted 925 fine sterling silver eternity loop, layered in thick volcanic anti-tarnish premium liquid rhodium sheets.</p>
             <div class="showcase-action-row">
                 <span class="showcase-item-price">$450.00</span>
-                <button class="showcase-add-cart-btn" onclick="window.executeAddToBag(this, 'Luna Rhodium Eternity Ring', 450.00)">
-                    <span>Acquire Piece</span>
-                </button>
+                <button class="showcase-add-cart-btn"
+        onclick="window.location.href='contact.html'">
+    <span>Acquire Piece</span>
+</button>
             </div>
         </div>
     </article>
@@ -2626,7 +2608,7 @@ window.toggleFaqAccordionRow = function(clickedItemElement) {
                     <h3 class="portfolio-item-title">High Jewellery Necklaces</h3>
                     <p class="portfolio-seo-desc">Explore our signature matching diamond pendants, emerald neckwear collages, and raw gold traces designed to align with your ring's reflection index.</p>
                     <div class="portfolio-action-row">
-                        <a href="collections-rings.html" class="portfolio-discover-link" title="Explore High Jewellery Necklaces Catalog">
+                        <a href="high-jewellery.html" class="portfolio-discover-link" title="Explore High Jewellery Necklaces Catalog">
                             <span>Explore Gallery</span>
                             <svg class="nav-arrow-vector" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>

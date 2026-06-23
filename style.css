@@ -450,24 +450,9 @@ body {
 }
 
 
-.hidden-file-input {
-    display: none !important;
-}
 
-.logo-reset-trigger {
-    background: transparent;
-    border: none;
-    color: var(--theme-text-muted);
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0.8);
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
+
+
 
 .logo-interaction-group:hover .logo-reset-trigger.has-custom-logo {
     opacity: 1;
@@ -476,7 +461,7 @@ body {
 }
 
 .logo-reset-trigger:hover { color: #F87171; }
-.refresh-svg-vector { width: 13px; height: 13px; stroke-width: 2.5; }
+
 
 .brand-sub {
     font-size: 0.55rem;
@@ -575,22 +560,7 @@ body {
     justify-content: center;
 }
 
-.search-results-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 320px;
-    background: rgba(5, 20, 16, 0.98);
-    border: 1px solid rgba(223, 183, 108, 0.15);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    margin-top: 15px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 450;
-}
+
 
 .search-results-dropdown.is-active {
     opacity: 1;
@@ -598,11 +568,7 @@ body {
     transform: translateY(0);
 }
 
-.results-scroll-container {
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 0.5rem;
-}
+
 
 /* 7. Action Credentials Buttons Layout */
 .auth-btn {
@@ -845,20 +811,7 @@ body {
 
 .summary-total-row span:last-child { color: var(--theme-gold); font-weight: 600; }
 
-.dropdown-checkout-btn {
-    width: 100%;
-    background-color: var(--theme-gold);
-    color: var(--theme-emerald-dark);
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-weight: 500;
-    padding: 0.85rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+
 /* ==========================================================================
    OPTlMIZED SPATIAL HEADER ALIGNMENTS (COMPACT GRID SPACE)
    ========================================================================== */
@@ -1013,209 +966,78 @@ body {
 /* ==========================================================================
    FIXED RESPONSIVE BREAKPOINT SYSTEM - ALL FIXES INCLUDED
    ========================================================================== */
-@media screen and (max-width: 820px) {
-    
-    /* 1. Force hide desktop navigation elements on small viewports */
-    .desktop-navigation, 
-    .desktop-search-wrapper, 
-    .header-actions .auth-btn,
-    .utility-dropdown-wrapper { 
-        display: none !important; 
+@media (max-width: 820px){
+
+    /* Hide desktop elements */
+    .desktop-navigation,
+    .header-actions{
+        display:none !important;
     }
 
-    /* 2. Format a compact, non-overflowing container for mobile screens */
-    .header-container {
-        height: 75px !important;
-        padding: 0 1rem !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
+    /* Header */
+    .header-container{
+        height:70px;
+        padding:0 16px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
     }
 
-    .header-branding {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        margin-right: auto !important;
+    .mobile-nav-toggle{
+        display:flex !important;
     }
 
-    .brand-logo-wrapper {
-        height: 25px !important;
-        width: auto !important;
-        display: block !important;
+    /* Drawer */
+    .mobile-drawer-overlay{
+        position:fixed;
+        top: 112px;               /* below header */
+        left:0;
+        width:250px;
+        height:calc(100vh - 70px);
+        background:#051410;
+        z-index:99999;
+        transform:translateX(-100%);
+        transition:transform .3s ease;
+        overflow-y:auto;
     }
 
-    .brand-logo-image {
-        height: 100% !important;
-        width: auto !important;
-        object-fit: contain !important;
+    .mobile-drawer-overlay.active{
+        transform:translateX(0);
     }
 
-    .brand-sub {
-        font-size: 0.48rem !important;
-        letter-spacing: 0.3em !important;
-        margin-top: 0.15rem !important;
+    .drawer-content-box{
+        width:100%;
+        padding:25px;
     }
 
-    .mobile-nav-toggle {
-        display: flex !important;
-        width: 22px !important;
-        height: 20px !important;
+    /* Remove top menu bar */
+    .drawer-top-bar{
+        display:none;
     }
 
-    /* 3. Sliding Side panel Canvas Container */
-    .mobile-drawer-overlay {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 250px !important; /* Compact premium width parameter */
-        height: 100vh !important;
-        background-color: #051410 !important; /* Dark Jade Theme Accent */
-        z-index: 2000 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 2rem 1.5rem 2.5rem 1.5rem !important;
-        transform: translate3d(-100%, 0, 0) !important; /* Hides menu off-screen by default */
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
-        box-shadow: 15px 0 40px rgba(0, 0, 0, 0.5) !important;
+    /* Navigation links */
+    .mobile-drawer-links{
+        display:flex;
+        flex-direction:column;
+        gap:24px;
     }
 
-    .mobile-drawer-overlay.active {
-        transform: translate3d(0, 0, 0) !important;
+    .drawer-link{
+        font-size:1.4rem;
+        color:#fff;
+        text-decoration:none;
+        font-family:'Playfair Display', serif;
     }
 
-    /* Top Bar Close Panel Controls */
-    .drawer-top-bar {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        padding-bottom: 1rem !important;
-        margin-bottom: 1.5rem !important;
-        border-bottom: 1px solid rgba(250, 250, 247, 0.08) !important;
+    /* Auth buttons */
+    .drawer-auth-footer{
+        margin-top:40px;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
     }
 
-    .drawer-brand-heading {
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 0.7rem !important;
-        font-weight: 500 !important;
-        letter-spacing: 0.25em !important;
-        color: var(--theme-gold) !important;
-    }
-
-    .drawer-close-btn {
-        background: transparent !important;
-        border: none !important;
-        color: var(--theme-white) !important;
-        cursor: pointer !important;
-        padding: 4px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    .close-svg-icon { width: 18px; height: 18px; }
-
-    /* 4. Professional Capsule Rounded Search Box Design */
-    .mobile-search-wrapper {
-        display: block !important;
-        width: 100% !important;
-        margin-bottom: 1.75rem !important;
-    }
-
-    .mobile-search-inner-box {
-        position: relative !important;
-        display: flex !important;
-        align-items: center !important;
-        background: rgba(250, 250, 247, 0.04) !important; /* Premium glass backdrop filter transparent alpha */
-        border: 1px solid rgba(250, 250, 247, 0.12) !important;
-        border-radius: 40px !important; /* Forces perfect professional capsule rounding */
-        padding: 2px 4px 2px 14px !important;
-    }
-
-    .mobile-search-input {
-        width: 100% !important;
-        background: transparent !important;
-        border: none !important;
-        outline: none !important;
-        color: var(--theme-white) !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 0.8rem !important;
-        padding: 0.5rem 0 !important;
-    }
-
-    .mobile-search-submit-btn {
-        background: transparent !important;
-        border: none !important;
-        color: rgba(250, 250, 247, 0.4) !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0.5rem !important;
-    }
-
-    .mobile-search-svg-icon { width: 15px; height: 15px; }
-
-    /* 5. Luxury Typography Spacing Links */
-    .mobile-drawer-links {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 1.4rem !important;
-    }
-    
-    .drawer-link {
-        display: block !important;
-        font-family: 'Playfair Display', serif !important;
-        font-size: 1.35rem !important;
-        color: var(--theme-white) !important;
-        text-decoration: none !important;
-        letter-spacing: 0.02em !important;
-        font-weight: 400 !important;
-    }
-
-    /* 6. Clean Authentication Spacing Controls & Outline Buttons Design */
-    .drawer-auth-footer {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0.75rem !important; /* Uniform spacing given between authentication components */
-        margin-top: auto !important; /* Snaps buttons perfectly flush with bottom edge */
-        padding-top: 1.5rem !important;
-        border-top: 1px solid rgba(250, 250, 247, 0.06) !important;
-    }
-
-    .btn-mobile-login {
-        width: 100% !important;
-        background: transparent !important;
-        color: var(--theme-white) !important;
-        border: 1px solid rgba(250, 250, 247, 0.2) !important; /* Minimal luxury outline format */
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 0.7rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.15em !important;
-        font-weight: 500 !important;
-        padding: 0.85rem !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .btn-mobile-login:hover {
-        border-color: var(--theme-gold) !important;
-        color: var(--theme-gold) !important;
-    }
-
-    .btn-mobile-signup {
-        width: 100% !important;
-        background-color: var(--theme-gold) !important;
-        color: #051410 !important;
-        border: 1px solid var(--theme-gold) !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 0.7rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.15em !important;
-        font-weight: 500 !important;
-        padding: 0.85rem !important;
-        cursor: pointer !important;
+    .drawer-auth-footer .auth-btn{
+        width:100%;
     }
 }
