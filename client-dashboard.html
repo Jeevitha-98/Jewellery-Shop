@@ -267,8 +267,102 @@ html,body{width:100%;min-height:100vh;background-color:#030F07;color:#F5F0E8;fon
         <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1A5C2A,#0B3D1C);border:1px solid rgba(212,175,55,0.4);display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;color:#D4AF37">EV</div>
         <div class="profile-online-ring-glow"></div>
       </div>
-    </div>
-  </header>
+      <div class="username-badge-box">
+  <span id="header-username">Loading...</span>
+</div>
+
+
+      </div>
+    </header>
+    <style>
+      /* Responsive Mobile Optimization Overrides */
+@media (max-width: 768px) {
+  /* 1. Ensure the parent container can stretch its height automatically */
+  .header-profile-container, 
+  .user-profile-section,
+  header {
+    height: auto !important;
+    min-height: 60px;
+    display: flex !important;
+    flex-wrap: wrap !important; /* Permits wrap if space gets critically tight */
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;       /* Reduces large item gaps on tiny panels */
+    padding: 8px 12px !important;
+  }
+
+  /* 2. Scale down padding on your username border rectangle box */
+  .username-badge-box {
+    padding: 4px 8px !important; /* Slimmer inner spacing for a lower profile */
+    max-width: 120px !important; /* Clamp the width so long names don't bust layouts */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; /* Clips excessive long names neatly with '...' */
+  }
+
+  /* 3. Drop down font-size slightly to prioritize workspace space */
+  #header-username {
+    font-size: 11px !important;
+  }
+
+  /* 4. Downscale profile avatar and notification graphics proportionately */
+  .avatar-icon, .avatar-circle, .EV-avatar {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 11px !important;
+  }
+}
+
+      .username-badge-box {
+  display: inline-block;
+  padding: 6px 16px;          /* Vertical and horizontal spacing inside the box */
+  background-color: #172B21;   /* Dark green background matching your layout sidebar */
+  border: 1px solid #E2B241;   /* Solid gold border accent */
+  border-radius: 4px;          /* Minimal radius for a clean rectangle look */
+}
+
+#header-username {
+  color: #E2B241;              /* Gold color matching your dashboard typography */
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;            /* Semi-bold text structure */
+  letter-spacing: 0.5px;       /* Slightly spaced out for modern readability */
+}
+
+    </style>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Fetch the value from browser storage
+    const storedEmail = localStorage.getItem("userEmailAddress");
+    const usernameDisplay = document.getElementById("header-username");
+
+    // Exit cleanly if your HTML display element doesn't exist
+    if (!usernameDisplay) return; 
+
+    // 2. Validation fallback if empty or missing the standard '@' sign
+    if (!storedEmail || !storedEmail.includes('@')) {
+        usernameDisplay.textContent = "GUEST";
+        return;
+    }
+
+    // 3. FIXED: Extract the first item [0] of the split array to isolate the string
+    let username = storedEmail.split('@')[0];
+
+    // 4. Clean punctuation (replace dots, underscores, or dashes with empty spaces)
+    username = username.replace(/[._-]/g, ' '); 
+    
+    // 5. Format and capitalize names beautifully (e.g., 'mani.kumar' -> 'Mani Kumar')
+    const formattedName = username
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+
+    // 6. Push the cleaned string directly into your rectangle border box
+    usernameDisplay.textContent = formattedName;
+});
+
+    </script>
+   
 
   <main class="dash-content-viewport-canvas">
 
@@ -449,9 +543,18 @@ html,body{width:100%;min-height:100vh;background-color:#030F07;color:#F5F0E8;fon
               </div>
             </div>
             <div class="mini-tasting-actions">
-              <button type="button" class="mini-tasting-btn-link" onclick="alert('Opening your gemstone preview catalogue...')">View Stone Catalogue</button>
-              <button type="button" class="mini-tasting-btn-pill" onclick="alert('Showroom Suite initialized. Welcome to Lumière Atelier.')">Enter Virtual Showroom</button>
-            </div>
+    <button type="button"
+            class="mini-tasting-btn-link"
+            onclick="window.location.href='404.html'">
+        View Stone Catalogue
+    </button>
+
+    <button type="button"
+            class="mini-tasting-btn-pill"
+            onclick="window.location.href='404.html'">
+        Enter Virtual Showroom
+    </button>
+</div>
           </div>
         </article>
         <article class="minimal-tasting-card">

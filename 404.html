@@ -19,11 +19,11 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--theme-emerald-dark);
             color: var(--theme-white);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             text-align: center;
             padding: 2rem;
         }
@@ -63,24 +63,63 @@
             letter-spacing: 0.02em;
         }
 
-        .error-return-home-link {
+        /* Container grouping both actions horizontally */
+        .error-actions-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Base styles for both action items */
+        .error-btn {
             display: inline-block;
-            background-color: var(--theme-gold);
-            color: #051410;
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-weight: 500;
-            padding: 1.1rem 2.5rem;
+            padding: 1.1rem 2rem;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(223, 183, 108, 0.15);
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Primary Action: Gold Button */
+        .error-return-home-link {
+            background-color: var(--theme-gold);
+            color: #051410;
+            box-shadow: 0 4px 15px rgba(223, 183, 108, 0.15);
         }
 
         .error-return-home-link:hover {
             background-color: var(--theme-white);
             box-shadow: 0 0 25px rgba(250, 250, 247, 0.4);
             transform: translate3d(0, -2px, 0);
+        }
+
+        /* Secondary Action: Styled Back Button with a Gold Border */
+        .error-back-btn {
+            background-color: transparent;
+            color: var(--theme-gold);
+            border: 1px solid var(--theme-gold);
+        }
+
+        .error-back-btn:hover {
+            background-color: rgba(223, 183, 108, 0.08);
+            transform: translate3d(0, -2px, 0);
+        }
+
+        /* Responsive stack for smaller screen viewports */
+        @media (max-width: 500px) {
+            .error-actions-container {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .error-btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -93,10 +132,19 @@
         <p class="error-summary-desc">
             The seasonal creation lookbook or collection item partition path you are exploring is currently locked, archived, or undergoing algorithmic maintenance inside our digital atelier catalogs.
         </p>
-        <a href="index.html" class="error-return-home-link">
-            Return To Main Site
-        </a>
+        
+        <!-- Button Wrapper Container -->
+        <div class="error-actions-container">
+            <!-- Native JavaScript back function triggered on click -->
+            <button onclick="history.back()" class="error-btn error-back-btn">
+                Go Back
+            </button>
+            <a href="index.html" class="error-btn error-return-home-link">
+                Return To Main Site
+            </a>
+        </div>
     </main>
 
 </body>
 </html>
+

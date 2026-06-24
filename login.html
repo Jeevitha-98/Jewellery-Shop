@@ -352,32 +352,6 @@ window.selectPlatformRole = function(targetRoleKey) {
 /**
  * 2. SECURE PASSWORD EYE MASK TOGGLE UTILITY
  */
-window.toggleLoginPassword = function(inputFieldId, buttonNode) {
-  const passwordField = document.getElementById(inputFieldId);
-  if (!passwordField) return;
-
-  const currentType = passwordField.getAttribute('type');
-  const eyeSvg = buttonNode.querySelector('svg');
-
-  if (currentType === 'password') {
-    passwordField.setAttribute('type', 'text');
-    if (eyeSvg) {
-      eyeSvg.innerHTML = `
-        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-        <line x1="1" y1="1" x2="23" y2="23"></line>
-      `;
-    }
-  } else {
-    passwordField.setAttribute('type', 'password');
-    if (eyeSvg) {
-      eyeSvg.innerHTML = `
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      `;
-    }
-  }
-};
-
 /**
  * 3. DYNAMIC DASHBOARD ROUTER SUBMISSION PIPELINE (FIXED TARGET REDIRECTIONS)
  * Catches user parameters, checks memory checkboxes, and flashes corresponding custom routing alerts
@@ -386,11 +360,19 @@ window.handleUserLogin = function(submitEvent) {
   // Prevent default browser refresh routes behavior
   submitEvent.preventDefault();
 
+  // 1. Get the email from your actual field ID ('log-email')
   const userEmail = document.getElementById('log-email')?.value.trim();
   const isRememberChecked = document.getElementById('log-remember')?.checked;
   
+  // 2. CRITICAL FIX: Save the dynamic email into storage right here so the dashboard can read it!
+  if (userEmail) {
+    localStorage.setItem("userEmailAddress", userEmail);
+  }
+  
   // Custom luxury routing declaration output strings
-  const successLoginMessage = `Access Granted Securely!\n\nWelcome back to the STACKLY Atelier network.\n\n[Identity Profile]: ${userEmail}\n[Persistent Memory]: ${isRememberChecked ? "Enabled on this machine" : "Disabled"}\n\nClick OK to initialize your customized ${selectedPlatformRole.toUpperCase()} Management Dashboard Workspace.`;
+  const successLoginMessage = `Access Granted Securely!\n\nWelcome back to the STACKLY Atelier network.\n\n[Identity Profile]:
+   ${userEmail}\n[Persistent Memory]: ${isRememberChecked ? "Enabled on this machine" : "Disabled"}
+   \n\nClick OK to initialize your customized ${selectedPlatformRole.toUpperCase()} Management Dashboard Workspace.`;
   
   alert(successLoginMessage);
 
@@ -403,7 +385,6 @@ window.handleUserLogin = function(submitEvent) {
     window.location.href = "client-dashboard.html";
   }
 };
-
-  </script>
+</script>
 </body>
 </html>
