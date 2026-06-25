@@ -29,24 +29,19 @@
 
     <!-- Lifecycle Timing Logic System -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Target animation lock: 3.5 seconds
-            const preloaderDuration = 3500; 
+      document.addEventListener("DOMContentLoaded", () => {
+    const preloaderDuration = 3500;
 
-            setTimeout(() => {
-                const preloader = document.getElementById('luxury-preloader');
-                const content = document.getElementById('main-site-content');
+    setTimeout(() => {
+        const preloader = document.getElementById('luxury-preloader');
 
-                // Trigger smooth CSS slide-up transition layout
-                preloader.classList.add('preloader-hidden');
-                
-                // Restore client window interaction states
-                document.body.style.overflow = 'visible';
+        if (preloader) {
+            preloader.classList.add('preloader-hidden');
+        }
 
-                // Fade home container fluidly into viewport context
-                content.classList.add('content-visible');
-            }, preloaderDuration);
-        });
+        document.body.style.overflow = 'visible';
+    }, preloaderDuration);
+});
     </script>
 
     
@@ -4399,7 +4394,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="footer-brand-column">
     <!-- 🏷️ CLICKABLE BRAND LOGO CONTAINER -->
     <div class="footer-logo-box" onclick="window.scrollToTopEngine()" style="cursor: pointer;" title="Scroll back to top of page">
-        <img src="./Assests/stackly-logo-final (1).png" alt="STACKLY Fine Jewellery Logo" class="footer-brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img src="./Assests/stackly-logo-final (1).webp" alt="STACKLY Fine Jewellery Logo" class="footer-brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <h2 id="footer-brand-heading" class="footer-logo-fallback-text" style="display:none;">STACKLY</h2>
     </div>
     <p class="footer-brand-seo-statement">
